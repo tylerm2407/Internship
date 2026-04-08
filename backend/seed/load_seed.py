@@ -19,7 +19,7 @@ from pathlib import Path
 backend_dir = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(backend_dir))
 
-from app.db import bulk_insert_firms, bulk_insert_postings
+from app.db import bulk_insert_firms, bulk_insert_postings, get_service_client
 
 
 def main() -> None:
@@ -51,6 +51,17 @@ def main() -> None:
     print(f"Loading {len(postings)} postings...")
     bulk_insert_postings(postings)
     print(f"  Done. {len(postings)} postings seeded.")
+
+    # Load alumni
+    alumni_path = seed_dir / "alumni.json"
+    if alumni_path.exists():
+        with open(alumni_path, "r", encoding="utf-8") as f:
+            alumni = json.load(f)
+
+        print(f"Loading {len(alumni)} alumni...")
+        client = get_service_client()
+        client.table("alumni").upsert(alumni, on_conflict="id").execute()
+        print(f"  Done. {len(alumni)} alumni seeded.")
 
     print("\nSeed complete.")
 

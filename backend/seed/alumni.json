@@ -1,0 +1,222 @@
+[
+  {
+    "id": "20000000-0000-4000-a000-000000000001",
+    "name": "Sarah Chen",
+    "firm_id": "00000000-0000-4000-a000-000000000001",
+    "current_role": "Vice President",
+    "division": "Investment Banking",
+    "graduation_year": 2021,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Finance Society", "SMIF member", "Dean's List"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000002",
+    "name": "Michael Torres",
+    "firm_id": "00000000-0000-4000-a000-000000000001",
+    "current_role": "Analyst",
+    "division": "Securities",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Finance Society", "Archway Investment Fund"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000003",
+    "name": "Emily Park",
+    "firm_id": "00000000-0000-4000-a000-000000000002",
+    "current_role": "Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Women in Business", "Finance Society"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000004",
+    "name": "James Wilson",
+    "firm_id": "00000000-0000-4000-a000-000000000002",
+    "current_role": "Analyst",
+    "division": "Markets",
+    "graduation_year": 2025,
+    "school": "Bryant University",
+    "major": "Applied Mathematics",
+    "connection_hooks": ["SMIF member", "Math Club"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000005",
+    "name": "Jessica Rodriguez",
+    "firm_id": "00000000-0000-4000-a000-000000000003",
+    "current_role": "Associate",
+    "division": "Capital Markets",
+    "graduation_year": 2021,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Finance Society", "Dean's List", "Hispanic Business Association"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000006",
+    "name": "David Kim",
+    "firm_id": "00000000-0000-4000-a000-000000000004",
+    "current_role": "Vice President",
+    "division": "Global Banking",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["SMIF member", "Finance Society", "Korean Student Association"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000007",
+    "name": "Amanda Foster",
+    "firm_id": "00000000-0000-4000-a000-000000000005",
+    "current_role": "Analyst",
+    "division": "Investment Banking",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Women in Business", "Archway Investment Fund"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000008",
+    "name": "Robert Chang",
+    "firm_id": "00000000-0000-4000-a000-000000000006",
+    "current_role": "Analyst",
+    "division": "Advisory",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Finance Society", "Case Competition Team"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000009",
+    "name": "Lauren Mitchell",
+    "firm_id": "00000000-0000-4000-a000-000000000007",
+    "current_role": "Associate",
+    "division": "Restructuring",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": ["Accounting Association", "Finance Society"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000010",
+    "name": "Kevin Patel",
+    "firm_id": "00000000-0000-4000-a000-000000000008",
+    "current_role": "Analyst",
+    "division": "M&A Advisory",
+    "graduation_year": 2025,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["SMIF member", "South Asian Student Association"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000011",
+    "name": "Nicole Adams",
+    "firm_id": "00000000-0000-4000-a000-000000000014",
+    "current_role": "Vice President",
+    "division": "Financial Sponsors",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Finance Society", "Women in Business", "Dean's List"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000012",
+    "name": "Tyler Brooks",
+    "firm_id": "00000000-0000-4000-a000-000000000015",
+    "current_role": "Analyst",
+    "division": "Investment Banking",
+    "graduation_year": 2025,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Finance Society", "Archway Investment Fund", "Club Baseball"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000013",
+    "name": "Sophia Nguyen",
+    "firm_id": "00000000-0000-4000-a000-000000000015",
+    "current_role": "Associate",
+    "division": "Healthcare",
+    "graduation_year": 2023,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Women in Business", "Pre-Med Club", "Finance Society"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000014",
+    "name": "Chris Martinez",
+    "firm_id": "00000000-0000-4000-a000-000000000017",
+    "current_role": "Analyst",
+    "division": "Leveraged Finance",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Finance Society", "Intramural Basketball"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000015",
+    "name": "Rachel Thompson",
+    "firm_id": "00000000-0000-4000-a000-000000000017",
+    "current_role": "Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": ["Accounting Association", "Case Competition Team", "Dean's List"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000016",
+    "name": "Andrew Lee",
+    "firm_id": "00000000-0000-4000-a000-000000000009",
+    "current_role": "Vice President",
+    "division": "Advisory",
+    "graduation_year": 2018,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["SMIF member", "Finance Society", "Asian Student Union"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000017",
+    "name": "Hannah Davis",
+    "firm_id": "00000000-0000-4000-a000-000000000011",
+    "current_role": "Analyst",
+    "division": "Restructuring",
+    "graduation_year": 2025,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Women in Business", "Finance Society"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000018",
+    "name": "Brian O'Connor",
+    "firm_id": "00000000-0000-4000-a000-000000000016",
+    "current_role": "Analyst",
+    "division": "Investment Banking",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": ["Archway Investment Fund", "Club Hockey"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000019",
+    "name": "Aisha Johnson",
+    "firm_id": "00000000-0000-4000-a000-000000000022",
+    "current_role": "Quantitative Researcher",
+    "division": "Equities",
+    "graduation_year": 2023,
+    "school": "Bryant University",
+    "major": "Applied Mathematics",
+    "connection_hooks": ["Math Club", "SMIF member", "Black Student Union"]
+  },
+  {
+    "id": "20000000-0000-4000-a000-000000000020",
+    "name": "Matt Sullivan",
+    "firm_id": "00000000-0000-4000-a000-000000000024",
+    "current_role": "Trading Intern",
+    "division": null,
+    "graduation_year": 2025,
+    "school": "Bryant University",
+    "major": "Applied Mathematics",
+    "connection_hooks": ["Math Club", "Coding Club", "SMIF member"]
+  }
+]
