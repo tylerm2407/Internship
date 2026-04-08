@@ -442,6 +442,21 @@ async def get_opportunities(
     }
 
 
+@app.get("/api/firms")
+async def list_firms() -> dict:
+    """Return all firms in the registry.
+
+    Returns:
+        Dictionary with firms list.
+    """
+    try:
+        firms = db.get_all_firms()
+        return {"firms": firms}
+    except Exception:
+        logger.error("firms.list.error", extra={"traceback": traceback.format_exc()})
+        raise HTTPException(status_code=500, detail="Failed to retrieve firms")
+
+
 @app.get("/api/firms/{firm_id}")
 async def get_firm(firm_id: UUID) -> dict:
     """Return a single firm with its open postings.

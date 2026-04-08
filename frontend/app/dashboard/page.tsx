@@ -43,30 +43,35 @@ const FEATURES = [
     title: "Fit Scoring",
     description: "6-factor scoring engine ranks every open posting against your profile.",
     available: true,
+    href: "/dashboard",
   },
   {
     icon: CalendarBlank,
     title: "Recruiting Timeline",
     description: "Personalized calendar with deadlines, prep milestones, and application windows.",
-    available: false,
+    available: true,
+    href: "/timeline",
   },
   {
     icon: Target,
     title: "Application Tracker",
     description: "Track every application from submitted through final round in one place.",
-    available: false,
+    available: true,
+    href: "/applications",
   },
   {
     icon: Users,
     title: "Networking Radar",
     description: "Find alumni at your target firms with AI-drafted outreach messages.",
-    available: false,
+    available: true,
+    href: "/alumni",
   },
   {
     icon: FileText,
     title: "Interview Prep",
     description: "Firm-specific practice questions with AI-evaluated answers.",
-    available: false,
+    available: true,
+    href: "/prep",
   },
 ];
 
@@ -242,34 +247,24 @@ export default function DashboardPage() {
             <EyebrowLabel>Features</EyebrowLabel>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
               {FEATURES.map((feature) => (
-                <div
+                <Link
                   key={feature.title}
-                  className={`bg-surface border border-surface-border rounded-lg p-5 flex flex-col gap-3 ${
-                    feature.available
-                      ? "hover:bg-surface-hover transition-colors cursor-pointer"
-                      : "opacity-60"
-                  }`}
+                  href={feature.href}
+                  className="bg-surface border border-surface-border rounded-lg p-5 flex flex-col gap-3 hover:bg-surface-hover transition-colors"
                 >
                   <div className="flex items-center justify-between">
                     <feature.icon
                       size={24}
                       weight="regular"
-                      className={feature.available ? "text-accent" : "text-ink-tertiary"}
+                      className="text-accent"
                     />
-                    {!feature.available && (
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-ink-tertiary border border-surface-border rounded px-1.5 py-0.5">
-                        Coming soon
-                      </span>
-                    )}
-                    {feature.available && (
-                      <ArrowRight size={16} className="text-ink-tertiary" />
-                    )}
+                    <ArrowRight size={16} className="text-ink-tertiary" />
                   </div>
                   <h3 className="font-sans text-sm font-semibold">{feature.title}</h3>
                   <p className="text-xs text-ink-secondary leading-relaxed">
                     {feature.description}
                   </p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

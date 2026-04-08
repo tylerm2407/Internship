@@ -11,10 +11,10 @@
 |---|------|--------|--------|
 | E1 | Foundation & Onboarding | Done | Sprint 1 |
 | E2 | Fit Scoring & Dashboard | Done | Sprint 1 |
-| E3 | Recruiting Timeline | Backend done, Frontend needed | Sprint 2 |
-| E4 | Application Tracker | Backend done, Frontend needed | Sprint 2 |
-| E5 | Networking Radar | Backend done, Frontend needed | Sprint 3 |
-| E6 | Interview Prep Coach | Backend done, Frontend needed | Sprint 3 |
+| E3 | Recruiting Timeline | Done | Sprint 2 |
+| E4 | Application Tracker | Done | Sprint 2 |
+| E5 | Networking Radar | Done | Sprint 3 |
+| E6 | Interview Prep Coach | Done | Sprint 3 |
 | E7 | Scraping Pipeline | Not started | Sprint 4 |
 | E8 | Polish & Launch Prep | Not started | Sprint 5 |
 
@@ -85,7 +85,7 @@
 | US-306 | As a student, I can add custom events to my timeline | POST /api/timeline/events creates custom event | Backend done |
 | US-307 | As a student, I can mark timeline items complete | PATCH /api/timeline/events/{id} with completed=true | Backend done |
 | US-308 | As a student, I see my current phase with progress indicator | get_current_phase() returns phase_name, description, progress_pct | Backend done |
-| US-309 | **FRONTEND:** As a student, I see the /timeline page | Phase view + weekly summary + event list rendered in Next.js | **To do** |
+| US-309 | **FRONTEND:** As a student, I see the /timeline page | Phase view + weekly summary + event list rendered in Next.js | Done |
 
 ### Backend Artifacts
 - `timeline_builder.py` — PHASE_TEMPLATES, generate_timeline_events(), get_current_phase(), build_weekly_summary()
@@ -111,7 +111,7 @@
 | US-405 | As a student, I can set next actions and deadlines | next_action + next_action_date fields on each application | Backend done |
 | US-406 | As a student, I can track which resume version I used | resume_version field per application | Backend done |
 | US-407 | As a student, I see summary stats | GET /api/applications/stats — count by status, by firm tier | Backend done |
-| US-408 | **FRONTEND:** As a student, I see the /applications page | Table view + Kanban toggle + stats bar rendered in Next.js | **To do** |
+| US-408 | **FRONTEND:** As a student, I see the /applications page | Table view + stats bar rendered in Next.js | Done |
 
 ### Backend Artifacts
 - `models.py` — Application, ApplicationCreate, ApplicationUpdate, StatusChange
@@ -137,7 +137,7 @@
 | US-506 | As a student, I get thank-you note reminders within 24 hours | Contacts with call_completed but no thank_you within 48h flagged | Backend done |
 | US-507 | As a student, referral chains are tracked | referred_by_id links contacts: "Sarah suggested I talk to Mike" | Backend done |
 | US-508 | As a student, no email addresses or LinkedIn URLs are stored | Privacy-safe: only name, firm, role, grad year, connection hooks | Backend done |
-| US-509 | **FRONTEND:** As a student, I see the /alumni page | Alumni cards + outreach drafting + contact CRM rendered in Next.js | **To do** |
+| US-509 | **FRONTEND:** As a student, I see the /alumni page | Alumni cards + outreach drafting + contact CRM rendered in Next.js | Done |
 
 ### Backend Artifacts
 - `alumni_finder.py` — find_alumni_at_firm(), prioritize_contacts(), generate_outreach_drafts(), generate_thank_you_draft(), generate_follow_up_draft(), get_stale_contacts(), get_contacts_needing_thank_you()
@@ -164,7 +164,7 @@
 | US-606 | As a student, I get "Why this firm?" talking points | POST /api/prep/why-firm returns 3-5 personalized talking points | Backend done |
 | US-607 | As a student, my prep history is preserved across sessions | GET /api/prep/history returns past sessions with scores | Backend done |
 | US-608 | As a student, I see overall readiness percentage | get_overall_readiness() returns weighted average across categories | Backend done |
-| US-609 | **FRONTEND:** As a student, I see the /prep page | Session starter + question loop + evaluation panel + readiness dashboard in Next.js | **To do** |
+| US-609 | **FRONTEND:** As a student, I see the /prep page | Session starter + question loop + evaluation panel + readiness dashboard in Next.js | Done |
 
 ### Backend Artifacts
 - `prep_coach.py` — QUESTION_BANK (46 questions, 7 categories), select_questions(), evaluate_answer(), update_readiness_scores(), get_overall_readiness(), generate_why_firm_talking_points()

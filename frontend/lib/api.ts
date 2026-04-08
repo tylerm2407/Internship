@@ -238,7 +238,7 @@ export async function getWhyFirm(
 // ============================================================
 
 export async function getTimelineEvents(): Promise<TimelineEvent[]> {
-  const data = await apiFetch<{ events: TimelineEvent[] }>("/api/timeline/events");
+  const data = await apiFetch<{ events: TimelineEvent[] }>("/api/timeline");
   return data.events;
 }
 
