@@ -36,6 +36,325 @@ import type {
   EventPriority,
 } from "../../lib/types";
 
+// ── Preset freshman IB timeline ──
+
+function daysFromNow(days: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString();
+}
+
+const PRESET_FRESHMAN_TIMELINE: TimelineEvent[] = [
+  {
+    id: "preset-01",
+    user_id: "preset",
+    event_type: "custom",
+    title: "Join Bryant Finance Society",
+    description: "Attend the first meeting of the semester. This is the #1 club for IB recruiting — attend every meeting, volunteer for events, and get on the board's radar.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(-14),
+    priority: "critical",
+    completed: true,
+    completed_at: daysFromNow(-14),
+    created_at: daysFromNow(-20),
+  },
+  {
+    id: "preset-02",
+    user_id: "preset",
+    event_type: "prep_milestone",
+    title: "Start reading Wall Street Journal daily",
+    description: "15 minutes every morning. Focus on M&A section and Deals & Dealmakers. When someone asks 'what\'s happening in markets?' you need a real answer.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(1),
+    priority: "medium",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-03",
+    user_id: "preset",
+    event_type: "custom",
+    title: "Set up LinkedIn profile (finance-optimized)",
+    description: "Professional headshot, headline: 'Finance Major at Bryant University | Aspiring Investment Banking Analyst'. Add coursework, Finance Society, any leadership.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(2),
+    priority: "high",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-3),
+  },
+  {
+    id: "preset-04",
+    user_id: "preset",
+    event_type: "custom",
+    title: "Apply for SMIF (Student Managed Investment Fund)",
+    description: "Applications for the Archway Investment Fund open in September. A SMIF seat is the single strongest resume line a Bryant freshman can get for IB recruiting.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(3),
+    priority: "critical",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-10),
+  },
+  {
+    id: "preset-05",
+    user_id: "preset",
+    event_type: "networking_task",
+    title: "Connect with Bryant Career Services — IB advisor",
+    description: "Schedule a meeting with your career advisor. Tell them you're targeting IB. Ask about alumni connections, mock interview slots, and any bank-specific recruiting events.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(5),
+    priority: "medium",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-06",
+    user_id: "preset",
+    event_type: "prep_milestone",
+    title: "Learn the 3 financial statements cold",
+    description: "Income statement, balance sheet, cash flow statement. Know how they link. This is the foundation of every IB technical interview — start now, not junior year.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(7),
+    priority: "critical",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-7),
+  },
+  {
+    id: "preset-07",
+    user_id: "preset",
+    event_type: "prep_milestone",
+    title: "Build v1 of your IB resume",
+    description: "One page. Finance-formatted (no color, no graphics). Include GPA if 3.5+, relevant coursework, Finance Society, any leadership. Visit Career Services for a review.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(8),
+    priority: "high",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-08",
+    user_id: "preset",
+    event_type: "prep_milestone",
+    title: "Read 'The Vault Guide to Investment Banking'",
+    description: "Chapters 1-6 cover what IB actually is, deal types, and career paths. Know this before your first networking call so you don't waste anyone's time.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(10),
+    priority: "high",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-3),
+  },
+  {
+    id: "preset-09",
+    user_id: "preset",
+    event_type: "networking_task",
+    title: "Send first 5 cold outreach emails to Bryant alumni in IB",
+    description: "Use LinkedIn to find Bryant grads at bulge bracket banks. Keep messages under 80 words. Ask for a 15-minute call, not a job. Reference Finance Society or a shared professor.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(12),
+    priority: "high",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-10",
+    user_id: "preset",
+    event_type: "networking_task",
+    title: "Attend Bryant Career Fair — finance firms",
+    description: "Prepare a 30-second elevator pitch. Bring 10 copies of your resume. Target: collect 3-5 business cards. Follow up within 24 hours.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(14),
+    priority: "high",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-10),
+  },
+  {
+    id: "preset-11",
+    user_id: "preset",
+    event_type: "prep_milestone",
+    title: "Master 'Walk me through your resume'",
+    description: "Practice your story: why Bryant, why finance, why IB. 90 seconds max. Record yourself and listen back. This is THE most common first question.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(15),
+    priority: "high",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-7),
+  },
+  {
+    id: "preset-12",
+    user_id: "preset",
+    event_type: "diversity_program",
+    title: "Goldman Sachs Possibilities Summit application",
+    description: "GS runs early-look programs for freshmen and sophomores. No finance experience required — they're looking for high-potential students. Apply even if you feel underqualified.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(18),
+    priority: "critical",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-10),
+  },
+  {
+    id: "preset-13",
+    user_id: "preset",
+    event_type: "networking_task",
+    title: "Schedule 2 informational calls with alumni",
+    description: "Goal: have 2 calls completed by end of month. Prepare 5 questions for each call. Take notes. Send thank-you within 24 hours.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(20),
+    priority: "high",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-14",
+    user_id: "preset",
+    event_type: "diversity_program",
+    title: "JPMorgan Launching Leaders application",
+    description: "Early insight program for freshmen. Focus your essay on intellectual curiosity about markets and client advisory, not on wanting to make money.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(21),
+    priority: "critical",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-10),
+  },
+  {
+    id: "preset-15",
+    user_id: "preset",
+    event_type: "custom",
+    title: "Research sophomore summer programs at top 10 banks",
+    description: "Goldman, JPM, Morgan Stanley, BofA, Citi, Evercore, Lazard, Moelis, Jefferies, Houlihan Lokey. Build a spreadsheet: firm, program name, deadline, requirements.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(22),
+    priority: "medium",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-16",
+    user_id: "preset",
+    event_type: "diversity_program",
+    title: "Morgan Stanley Early Insights deadline",
+    description: "2-day program in NYC for freshmen and sophomores. Competitive but worth applying — the name on your resume opens doors.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(25),
+    priority: "high",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-10),
+  },
+  {
+    id: "preset-17",
+    user_id: "preset",
+    event_type: "prep_milestone",
+    title: "Practice 'Why IB?' answer until it's natural",
+    description: "Write it out, then practice saying it without reading. Should sound conversational, not rehearsed. Reference specific experiences. Under 60 seconds.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(25),
+    priority: "medium",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-18",
+    user_id: "preset",
+    event_type: "custom",
+    title: "Attend Finance Society speaker event — alumni panel",
+    description: "Bryant alumni in IB panel discussion. Prepare 1 thoughtful question. Introduce yourself to at least 2 speakers after. This is networking in a low-pressure setting.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(28),
+    priority: "medium",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-19",
+    user_id: "preset",
+    event_type: "prep_milestone",
+    title: "Learn basic valuation concepts",
+    description: "Understand what a DCF is at a high level, comparable companies analysis, and precedent transactions. You won't be tested deeply as a freshman but knowing these shows initiative.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(30),
+    priority: "medium",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-20",
+    user_id: "preset",
+    event_type: "prep_milestone",
+    title: "Complete 'Accounting 101' on Wall Street Prep (free)",
+    description: "Free fundamentals course. Covers the basics you'll need for sophomore recruiting. Do this before winter break so you're ahead of the curve.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(35),
+    priority: "medium",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-21",
+    user_id: "preset",
+    event_type: "custom",
+    title: "Plan spring semester course load for IB",
+    description: "Prioritize: Financial Accounting, Corporate Finance, Statistics, Economics. If you can take Financial Modeling or Excel-heavy courses, do it. GPA matters — don't overload.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(50),
+    priority: "medium",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+  {
+    id: "preset-22",
+    user_id: "preset",
+    event_type: "custom",
+    title: "Winter break: read 'Monkey Business' or 'Liar's Poker'",
+    description: "Classic Wall Street books that give you cultural context for IB interviews. When an interviewer asks what you're reading, having a finance book ready shows genuine interest.",
+    firm_id: null,
+    posting_id: null,
+    event_date: daysFromNow(60),
+    priority: "low",
+    completed: false,
+    completed_at: null,
+    created_at: daysFromNow(-5),
+  },
+];
+
 // ── Constants ──
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -412,15 +731,17 @@ export default function TimelinePage() {
         getTimelineEvents(),
         getWeeklySummary(),
       ]);
-      if (eventsResult.status === "fulfilled") setEvents(eventsResult.value);
+
+      const apiEvents =
+        eventsResult.status === "fulfilled" ? eventsResult.value : [];
+
+      // Use preset freshman timeline when API returns no events
+      setEvents(apiEvents.length > 0 ? apiEvents : PRESET_FRESHMAN_TIMELINE);
+
       if (summaryResult.status === "fulfilled") setSummary(summaryResult.value);
-      if (eventsResult.status === "rejected" && summaryResult.status === "rejected") {
-        setError("Failed to load timeline data. Make sure you are logged in.");
-      }
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to load timeline"
-      );
+    } catch {
+      // API entirely unreachable — still show preset data
+      setEvents(PRESET_FRESHMAN_TIMELINE);
     } finally {
       setLoading(false);
     }
@@ -432,6 +753,17 @@ export default function TimelinePage() {
 
   const handleToggleComplete = useCallback(
     async (id: string, completed: boolean) => {
+      // Preset events toggle locally only (not persisted)
+      if (id.startsWith("preset-")) {
+        setEvents((prev) =>
+          prev.map((e) =>
+            e.id === id
+              ? { ...e, completed, completed_at: completed ? new Date().toISOString() : null }
+              : e
+          )
+        );
+        return;
+      }
       try {
         const updated = await updateTimelineEvent(id, { completed });
         setEvents((prev) =>
@@ -447,6 +779,11 @@ export default function TimelinePage() {
   );
 
   const handleDelete = useCallback(async (id: string) => {
+    // Preset events remove locally only
+    if (id.startsWith("preset-")) {
+      setEvents((prev) => prev.filter((e) => e.id !== id));
+      return;
+    }
     try {
       await deleteTimelineEvent(id);
       setEvents((prev) => prev.filter((e) => e.id !== id));
@@ -575,36 +912,26 @@ export default function TimelinePage() {
             </div>
           )}
 
-          {/* ── Empty State ── */}
-          {!loading && !error && events.length === 0 && !summary && (
-            <div className="bg-surface border border-surface-border rounded-lg p-12 text-center space-y-4">
-              <CalendarBlank
-                size={48}
-                weight="regular"
-                className="text-ink-tertiary mx-auto"
-              />
-              <p className="text-lg text-ink-secondary">
-                No timeline events yet.
-              </p>
-              <p className="text-sm text-ink-tertiary max-w-md mx-auto">
-                Upload your resume and let InternshipMatch build a personalized
-                recruiting calendar based on your class year and target roles.
-              </p>
-              <div className="flex items-center justify-center gap-3">
-                <PrimaryButton onClick={() => setShowAddForm(true)}>
-                  <Plus size={16} weight="regular" />
-                  Add your first event
-                </PrimaryButton>
-                <Link href="/upload">
-                  <SecondaryButton>Upload resume</SecondaryButton>
-                </Link>
-              </div>
-            </div>
-          )}
-
-          {/* ── Content (loaded, no error, has data) ── */}
-          {!loading && !error && (events.length > 0 || summary) && (
+          {/* ── Content ── */}
+          {!loading && events.length > 0 && (
             <>
+              {/* Preset data banner */}
+              {events.some((e) => e.id.startsWith("preset-")) && (
+                <Card className="border-accent/30 bg-accent/5">
+                  <div className="flex items-start gap-3">
+                    <BookOpen size={20} weight="regular" className="text-accent mt-0.5 shrink-0" />
+                    <div>
+                      <p className="text-sm font-medium text-ink-primary">
+                        Freshman IB recruiting roadmap
+                      </p>
+                      <p className="text-xs text-ink-secondary mt-0.5">
+                        This is your preset timeline for breaking into investment banking as a Bryant freshman. Check off items as you complete them, or upload your resume to generate a personalized timeline.
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              )}
+
               {/* Phase Indicator */}
               {summary && (
                 <Card>
