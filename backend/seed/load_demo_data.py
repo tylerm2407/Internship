@@ -565,6 +565,52 @@ def seed_demo_user(client, user_id: str) -> None:  # type: ignore[no-untyped-def
         ).execute()
 
 
+def seed_freshman_timeline(client, user_id: str) -> None:  # type: ignore[no-untyped-def]
+    """Seed freshman-specific timeline events for a given user ID.
+
+    Loads events from freshman_timeline.json. These are tailored for a
+    freshman at Bryant University who is starting their IB recruiting
+    journey — exploratory, foundational, and focused on building the
+    profile that will matter when sophomore programs open.
+
+    Args:
+        client: Supabase service role client.
+        user_id: The user's UUID as a string.
+    """
+    seed_dir = Path(__file__).resolve().parent
+    timeline_path = seed_dir / "freshman_timeline.json"
+
+    if not timeline_path.exists():
+        print(f"  ERROR: {timeline_path} not found")
+        return
+
+    with open(timeline_path, "r", encoding="utf-8") as f:
+        raw_events = json.load(f)
+
+    events = []
+    for event in raw_events:
+        days = event.pop("days_offset", 0)
+        completed = event.pop("completed", False)
+
+        event_data = {
+            "id": str(uuid4()),
+            "user_id": user_id,
+            "event_type": event["event_type"],
+            "title": event["title"],
+            "description": event.get("description"),
+            "firm_id": event.get("firm_id"),
+            "event_date": _days_ahead(days) if days >= 0 else _days_ago(abs(days)),
+            "priority": event.get("priority", "medium"),
+            "completed": completed,
+            "completed_at": _days_ago(abs(days)) if completed else None,
+            "created_at": _days_ago(max(abs(days) + 5, 1)),
+        }
+        events.append(event_data)
+
+    print(f"  Inserting {len(events)} freshman timeline events...")
+    client.table("timeline_events").upsert(events, on_conflict="id").execute()
+
+
 def main() -> None:
     """Load all demo data."""
     client = get_service_client()
@@ -596,15 +642,37 @@ def main() -> None:
             user_id = result.data[0]["id"]
 
     print(f"\nSeeding demo data for user {user_id}...")
-    seed_demo_user(client, user_id)
+
+    # Ask which timeline to load
+    print("\nTimeline options:")
+    print("  [1] Full demo (junior/senior — deep in recruiting cycle)")
+    print("  [2] Freshman IB timeline (building foundations, early programs)")
+    print("  [3] Both")
+
+    try:
+        timeline_choice = input("Select timeline (1/2/3, default 2): ").strip() or "2"
+    except (EOFError, KeyboardInterrupt):
+        timeline_choice = "2"
+
+    if timeline_choice in ("1", "3"):
+        seed_demo_user(client, user_id)
+    if timeline_choice in ("2", "3"):
+        seed_freshman_timeline(client, user_id)
+    if timeline_choice not in ("1", "2", "3"):
+        # Default: freshman + full demo
+        seed_demo_user(client, user_id)
+        seed_freshman_timeline(client, user_id)
 
     print("\nDemo data loaded successfully.")
-    print("  - 20 alumni across 14 firms")
-    print("  - 8 applications at various stages")
-    print("  - 6 networking contacts with outreach tracking")
-    print("  - 12 timeline events (deadlines, interviews, prep milestones)")
-    print("  - 3 prep sessions with feedback")
-    print("  - 7 readiness scores across all categories")
+    if timeline_choice in ("1", "3"):
+        print("  - 20 alumni across 14 firms")
+        print("  - 8 applications at various stages")
+        print("  - 6 networking contacts with outreach tracking")
+        print("  - 12 timeline events (deadlines, interviews, prep milestones)")
+        print("  - 3 prep sessions with feedback")
+        print("  - 7 readiness scores across all categories")
+    if timeline_choice in ("2", "3"):
+        print("  - 22 freshman IB timeline events (clubs, networking, prep, programs)")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,160 @@
+[
+  {
+    "event_type": "custom",
+    "title": "Join Bryant Finance Society",
+    "description": "Attend the first meeting of the semester. This is the #1 club for IB recruiting — attend every meeting, volunteer for events, and get on the board's radar.",
+    "priority": "critical",
+    "days_offset": -14,
+    "completed": true
+  },
+  {
+    "event_type": "custom",
+    "title": "Apply for SMIF (Student Managed Investment Fund)",
+    "description": "Applications for the Archway Investment Fund open in September. A SMIF seat is the single strongest resume line a Bryant freshman can get for IB recruiting.",
+    "priority": "critical",
+    "days_offset": 3
+  },
+  {
+    "event_type": "prep_milestone",
+    "title": "Learn the 3 financial statements cold",
+    "description": "Income statement, balance sheet, cash flow statement. Know how they link. This is the foundation of every IB technical interview — start now, not junior year.",
+    "priority": "critical",
+    "days_offset": 7
+  },
+  {
+    "event_type": "prep_milestone",
+    "title": "Read 'The Vault Guide to Investment Banking'",
+    "description": "Chapters 1-6 cover what IB actually is, deal types, and career paths. Know this before your first networking call so you don't waste anyone's time.",
+    "priority": "high",
+    "days_offset": 10
+  },
+  {
+    "event_type": "networking_task",
+    "title": "Attend Bryant Career Fair — finance firms",
+    "description": "Prepare a 30-second elevator pitch. Bring 10 copies of your resume. Target: collect 3-5 business cards from finance professionals. Follow up within 24 hours.",
+    "priority": "high",
+    "days_offset": 14
+  },
+  {
+    "event_type": "diversity_program",
+    "title": "Goldman Sachs Possibilities Summit application",
+    "description": "GS runs early-look programs for freshmen and sophomores. No finance experience required — they're looking for high-potential students. Apply even if you feel underqualified.",
+    "firm_id": "00000000-0000-4000-a000-000000000001",
+    "priority": "critical",
+    "days_offset": 18
+  },
+  {
+    "event_type": "diversity_program",
+    "title": "JPMorgan Launching Leaders application",
+    "description": "Early insight program for freshmen. Focus your essay on intellectual curiosity about markets and client advisory, not on wanting to make money.",
+    "firm_id": "00000000-0000-4000-a000-000000000002",
+    "priority": "critical",
+    "days_offset": 21
+  },
+  {
+    "event_type": "diversity_program",
+    "title": "Morgan Stanley Early Insights deadline",
+    "description": "2-day program in NYC for freshmen and sophomores. Competitive but worth applying — the name on your resume opens doors.",
+    "firm_id": "00000000-0000-4000-a000-000000000003",
+    "priority": "high",
+    "days_offset": 25
+  },
+  {
+    "event_type": "networking_task",
+    "title": "Send first 5 cold outreach emails to Bryant alumni in IB",
+    "description": "Use LinkedIn to find Bryant grads at bulge bracket banks. Keep messages under 80 words. Ask for a 15-minute call, not a job. Reference Finance Society or a shared professor.",
+    "priority": "high",
+    "days_offset": 12
+  },
+  {
+    "event_type": "networking_task",
+    "title": "Schedule 2 informational calls with alumni",
+    "description": "Goal: have 2 calls completed by end of month. Prepare 5 questions for each call. Take notes. Send thank-you within 24 hours.",
+    "priority": "high",
+    "days_offset": 20
+  },
+  {
+    "event_type": "prep_milestone",
+    "title": "Build v1 of your IB resume",
+    "description": "One page. Finance-formatted (no color, no graphics). Include GPA if 3.5+, relevant coursework, Finance Society, any leadership. Visit Career Services for a review.",
+    "priority": "high",
+    "days_offset": 8
+  },
+  {
+    "event_type": "prep_milestone",
+    "title": "Master 'Walk me through your resume'",
+    "description": "Practice your story: why Bryant, why finance, why IB. 90 seconds max. Record yourself and listen back. Eliminate filler words. This is THE most common first question.",
+    "priority": "high",
+    "days_offset": 15
+  },
+  {
+    "event_type": "prep_milestone",
+    "title": "Learn basic valuation concepts",
+    "description": "Understand what a DCF is at a high level, what comparable companies analysis means, and what precedent transactions are. You won't be tested deeply as a freshman but knowing these shows initiative.",
+    "priority": "medium",
+    "days_offset": 30
+  },
+  {
+    "event_type": "prep_milestone",
+    "title": "Start reading Wall Street Journal daily",
+    "description": "15 minutes every morning. Focus on M&A section and Deals & Dealmakers. When someone asks 'what's happening in markets?' you need a real answer, not 'stocks are up.'",
+    "priority": "medium",
+    "days_offset": 1
+  },
+  {
+    "event_type": "custom",
+    "title": "Research sophomore summer programs at top 10 banks",
+    "description": "Goldman, JPM, Morgan Stanley, BofA, Citi, Evercore, Lazard, Moelis, Jefferies, Houlihan Lokey. Build a spreadsheet: firm, program name, application deadline, requirements. You're building this pipeline for next fall.",
+    "priority": "medium",
+    "days_offset": 22
+  },
+  {
+    "event_type": "custom",
+    "title": "Attend Finance Society speaker event — alumni panel",
+    "description": "Bryant alumni in IB panel discussion. Prepare 1 thoughtful question to ask. Introduce yourself to at least 2 speakers after. This is networking in a low-pressure setting.",
+    "priority": "medium",
+    "days_offset": 28
+  },
+  {
+    "event_type": "prep_milestone",
+    "title": "Complete 'Accounting 101' on Wall Street Prep (free)",
+    "description": "Free fundamentals course. Covers the basics you'll need for sophomore recruiting. Do this before winter break so you're ahead of the curve.",
+    "priority": "medium",
+    "days_offset": 35
+  },
+  {
+    "event_type": "networking_task",
+    "title": "Connect with Bryant Career Services — IB advisor",
+    "description": "Schedule a meeting with your career advisor. Tell them you're targeting IB. Ask about alumni connections, mock interview slots, and any bank-specific recruiting events coming up.",
+    "priority": "medium",
+    "days_offset": 5
+  },
+  {
+    "event_type": "custom",
+    "title": "Set up LinkedIn profile (finance-optimized)",
+    "description": "Professional headshot, headline: 'Finance Major at Bryant University | Aspiring Investment Banking Analyst'. Add coursework, Finance Society, any leadership. Start connecting with Bryant alumni in finance.",
+    "priority": "high",
+    "days_offset": 2
+  },
+  {
+    "event_type": "prep_milestone",
+    "title": "Practice 'Why IB?' answer until it's natural",
+    "description": "Write it out, then practice saying it without reading. Should sound conversational, not rehearsed. Reference specific experiences (SMIF, coursework, a deal that interested you). Under 60 seconds.",
+    "priority": "medium",
+    "days_offset": 25
+  },
+  {
+    "event_type": "custom",
+    "title": "Winter break: read 'Monkey Business' or 'Liar's Poker'",
+    "description": "Classic Wall Street books that give you cultural context for IB interviews. When an interviewer asks what you're reading, having a finance book ready shows genuine interest.",
+    "priority": "low",
+    "days_offset": 60
+  },
+  {
+    "event_type": "custom",
+    "title": "Plan spring semester course load for IB",
+    "description": "Prioritize: Financial Accounting, Corporate Finance, Statistics, Economics. If you can take Financial Modeling or Excel-heavy courses, do it. GPA matters — don't overload.",
+    "priority": "medium",
+    "days_offset": 50
+  }
+]
