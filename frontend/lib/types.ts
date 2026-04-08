@@ -136,6 +136,10 @@ export interface Application {
   recruiter_email: string | null;
   created_at: string;
   updated_at: string;
+  /** Manual entry fields — used when the user types a firm name directly */
+  _firm_name?: string | null;
+  _position?: string | null;
+  _location?: string | null;
 }
 
 export interface ApplicationCreate {

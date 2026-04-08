@@ -139,14 +139,23 @@ export default function ApplicationsPage() {
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
   // New application form state
-  const [formFirmId, setFormFirmId] = useState("");
-  const [formPostingId, setFormPostingId] = useState("");
+  const [formFirmName, setFormFirmName] = useState("");
+  const [formPosition, setFormPosition] = useState("");
+  const [formLocation, setFormLocation] = useState("");
   const [formDivision, setFormDivision] = useState("");
+  const [formStatus, setFormStatus] = useState<ApplicationStatus>("researching");
   const [formNotes, setFormNotes] = useState("");
 
   // Lookup maps
   const firmMap = new Map(firms.map((f) => [f.id, f]));
   const postingMap = new Map(postings.map((o) => [o.posting.id, o]));
+
+  // Filter postings by selected firm (used for backend matching)
+  const firmPostings = formFirmName
+    ? postings.filter(
+        (o) => o.firm.name.toLowerCase() === formFirmName.trim().toLowerCase()
+      )
+    : [];
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -180,31 +189,74 @@ export default function ApplicationsPage() {
   }, [load]);
 
   const handleCreate = useCallback(async () => {
-    if (!formFirmId || !formPostingId) return;
+    if (!formFirmName.trim()) return;
     setSubmitting(true);
     try {
-      const body: ApplicationCreate = {
-        posting_id: formPostingId,
-        firm_id: formFirmId,
+      // Create a local-only application object for manual tracking
+      const newApp: Application = {
+        id: crypto.randomUUID(),
+        user_id: "",
+        posting_id: "",
+        firm_id: "",
+        status: formStatus,
         group_division: formDivision || null,
+        applied_at: formStatus === "applied" ? new Date().toISOString() : null,
         notes: formNotes,
+        next_action: null,
+        next_action_date: null,
+        resume_version: null,
+        recruiter_name: null,
+        recruiter_email: null,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        // Manual entry fields stored in the object for display
+        _firm_name: formFirmName.trim(),
+        _position: formPosition.trim() || null,
+        _location: formLocation.trim() || null,
       };
-      const newApp = await createApplication(body);
+
+      // Try to send to backend; if it fails, keep it local-only
+      try {
+        // Find matching firm from database if it exists
+        const matchedFirm = firms.find(
+          (f) => f.name.toLowerCase() === formFirmName.trim().toLowerCase()
+        );
+        if (matchedFirm) {
+          const body: ApplicationCreate = {
+            posting_id: firmPostings[0]?.posting.id || "",
+            firm_id: matchedFirm.id,
+            group_division: formDivision || null,
+            notes: formNotes,
+            status: formStatus,
+          };
+          if (body.posting_id) {
+            const serverApp = await createApplication(body);
+            newApp.id = serverApp.id;
+            newApp.firm_id = serverApp.firm_id;
+            newApp.posting_id = serverApp.posting_id;
+          }
+        }
+      } catch {
+        // Backend not available — app stays local-only, which is fine
+      }
+
       setApplications((prev) => [newApp, ...prev]);
       setStats((prev) =>
         prev ? { ...prev, total: prev.total + 1 } : prev
       );
       setShowForm(false);
-      setFormFirmId("");
-      setFormPostingId("");
+      setFormFirmName("");
+      setFormPosition("");
+      setFormLocation("");
       setFormDivision("");
+      setFormStatus("researching");
       setFormNotes("");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create application");
     } finally {
       setSubmitting(false);
     }
-  }, [formFirmId, formPostingId, formDivision, formNotes]);
+  }, [formFirmName, formPosition, formLocation, formDivision, formStatus, formNotes, firms, firmPostings]);
 
   const handleStatusChange = useCallback(
     async (appId: string, newStatus: ApplicationStatus) => {
@@ -233,11 +285,6 @@ export default function ApplicationsPage() {
   const offerCount = applications.filter((a) =>
     ["offer", "accepted"].includes(a.status)
   ).length;
-
-  // Filter postings by selected firm
-  const firmPostings = formFirmId
-    ? postings.filter((o) => o.firm.id === formFirmId)
-    : [];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -330,46 +377,43 @@ export default function ApplicationsPage() {
           {showForm && (
             <Card>
               <EyebrowLabel>Log new application</EyebrowLabel>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                 <div>
                   <label className="block text-sm font-medium text-ink-primary mb-1">
-                    Firm
+                    Firm name *
                   </label>
-                  <select
-                    value={formFirmId}
-                    onChange={(e) => {
-                      setFormFirmId(e.target.value);
-                      setFormPostingId("");
-                    }}
-                    className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent cursor-pointer"
-                  >
-                    <option value="">Select a firm</option>
-                    {firms.map((f) => (
-                      <option key={f.id} value={f.id}>
-                        {f.name}
-                      </option>
-                    ))}
-                  </select>
+                  <input
+                    type="text"
+                    value={formFirmName}
+                    onChange={(e) => setFormFirmName(e.target.value)}
+                    placeholder="e.g. Goldman Sachs, Evercore, Jefferies"
+                    className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent placeholder:text-ink-tertiary"
+                    autoFocus
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-ink-primary mb-1">
-                    Posting
+                    Position
                   </label>
-                  <select
-                    value={formPostingId}
-                    onChange={(e) => setFormPostingId(e.target.value)}
-                    disabled={!formFirmId}
-                    className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <option value="">
-                      {formFirmId ? "Select a posting" : "Select a firm first"}
-                    </option>
-                    {firmPostings.map((o) => (
-                      <option key={o.posting.id} value={o.posting.id}>
-                        {o.posting.title} — {o.posting.location}
-                      </option>
-                    ))}
-                  </select>
+                  <input
+                    type="text"
+                    value={formPosition}
+                    onChange={(e) => setFormPosition(e.target.value)}
+                    placeholder="e.g. Summer Analyst - IB"
+                    className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent placeholder:text-ink-tertiary"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-ink-primary mb-1">
+                    Location
+                  </label>
+                  <input
+                    type="text"
+                    value={formLocation}
+                    onChange={(e) => setFormLocation(e.target.value)}
+                    placeholder="e.g. New York, NY"
+                    className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent placeholder:text-ink-tertiary"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-ink-primary mb-1">
@@ -382,6 +426,22 @@ export default function ApplicationsPage() {
                     placeholder="e.g. TMT, Healthcare, M&A"
                     className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent placeholder:text-ink-tertiary"
                   />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-ink-primary mb-1">
+                    Status
+                  </label>
+                  <select
+                    value={formStatus}
+                    onChange={(e) => setFormStatus(e.target.value as ApplicationStatus)}
+                    className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent cursor-pointer"
+                  >
+                    {ALL_STATUSES.map((s) => (
+                      <option key={s} value={s}>
+                        {STATUS_LABELS[s]}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-ink-primary mb-1">
@@ -399,8 +459,8 @@ export default function ApplicationsPage() {
               <div className="flex items-center gap-3 mt-5">
                 <PrimaryButton
                   onClick={handleCreate}
-                  disabled={!formFirmId || !formPostingId || submitting}
-                  className={!formFirmId || !formPostingId || submitting ? "opacity-50 cursor-not-allowed" : ""}
+                  disabled={!formFirmName.trim() || submitting}
+                  className={!formFirmName.trim() || submitting ? "opacity-50 cursor-not-allowed" : ""}
                 >
                   {submitting ? "Saving..." : "Save application"}
                 </PrimaryButton>
@@ -509,6 +569,8 @@ export default function ApplicationsPage() {
                   {filtered.map((app) => {
                     const firm = firmMap.get(app.firm_id);
                     const posting = postingMap.get(app.posting_id);
+                    const displayFirmName = app._firm_name || firm?.name || "Unknown firm";
+                    const displayPosition = app._position || posting?.posting.title || null;
                     return (
                       <tr
                         key={app.id}
@@ -518,12 +580,12 @@ export default function ApplicationsPage() {
                           <div className="flex items-center gap-2">
                             <Briefcase size={16} weight="regular" className="text-ink-tertiary shrink-0" />
                             <span className="font-medium text-ink-primary">
-                              {firm?.name || "Unknown firm"}
+                              {displayFirmName}
                             </span>
                           </div>
                         </td>
                         <td className="px-4 py-4 text-ink-secondary">
-                          {posting?.posting.title || "—"}
+                          {displayPosition || "—"}
                         </td>
                         <td className="px-4 py-4">
                           <div className="relative inline-block">
