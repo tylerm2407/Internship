@@ -80,6 +80,14 @@ QUESTION_BANK: dict[str, list[dict]] = {
             "How does an inventory write-down affect the three statements?",
             "accounting", "hard", ["inventory", "write_down", "linking"],
         ),
+        _q(
+            "If depreciation increases by $10, what happens to each of the three financial statements? Walk through the full impact assuming a 40% tax rate.",
+            "accounting", "medium", ["depreciation", "linking", "tax_rate"],
+        ),
+        _q(
+            "A company collects $100 cash from a customer for a service it has not yet performed. Walk me through the three financial statements.",
+            "accounting", "medium", ["deferred_revenue", "linking"],
+        ),
     ],
     "valuation": [
         _q("Walk me through a DCF.", "valuation", "medium", ["dcf"]),
@@ -94,6 +102,14 @@ QUESTION_BANK: dict[str, list[dict]] = {
         _q(
             "How would you value a company with negative earnings?",
             "valuation", "hard", ["special_situations"],
+        ),
+        _q(
+            "Walk me through a DCF step by step. How do you get from revenue to unlevered free cash flow, and how do you discount it back?",
+            "valuation", "hard", ["dcf", "ufcf", "discount_rate"],
+        ),
+        _q(
+            "If you could only use one valuation methodology, which would you choose and why?",
+            "valuation", "medium", ["overview", "comps", "dcf"],
         ),
     ],
     "ma": [
@@ -112,6 +128,10 @@ QUESTION_BANK: dict[str, list[dict]] = {
             "How do you determine the purchase price in an acquisition?",
             "ma", "hard", ["valuation", "purchase_price"],
         ),
+        _q(
+            "Walk me through how goodwill is created in an acquisition and what happens if it becomes impaired.",
+            "ma", "hard", ["goodwill", "impairment", "purchase_price"],
+        ),
     ],
     "lbo": [
         _q("Walk me through a basic LBO model.", "lbo", "medium", ["lbo_model"]),
@@ -125,6 +145,10 @@ QUESTION_BANK: dict[str, list[dict]] = {
         _q(
             "Walk me through the sources and uses in an LBO.",
             "lbo", "hard", ["sources_uses", "lbo_model"],
+        ),
+        _q(
+            "A PE firm buys a company for $500M using 60% debt. EBITDA is $50M. Walk me through the key assumptions and how you would model returns over a 5-year hold.",
+            "lbo", "hard", ["lbo_model", "returns", "leverage", "case_study"],
         ),
     ],
     "behavioral": [
@@ -140,6 +164,14 @@ QUESTION_BANK: dict[str, list[dict]] = {
         _q(
             "Describe a time you had to persuade someone who disagreed with you.",
             "behavioral", "hard", ["persuasion", "conflict"],
+        ),
+        _q(
+            "Tell me about a time you had to work under a tight deadline. How did you prioritize and deliver?",
+            "behavioral", "medium", ["time_management", "pressure"],
+        ),
+        _q(
+            "Where do you see yourself in five years, and how does investment banking fit into that plan?",
+            "behavioral", "medium", ["career_goals", "motivation"],
         ),
     ],
     "firm_specific": [
