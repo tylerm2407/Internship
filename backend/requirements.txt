@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pydantic>=2.0
+anthropic
+python-dotenv
+python-multipart
+supabase
+httpx
+pytest

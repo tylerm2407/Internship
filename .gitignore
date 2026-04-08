@@ -1,0 +1,22 @@
+# Environment files
+.env
+.env.local
+.env.production
+backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+.next/
+.turbo/
+
+# IDE
+.vscode/
+.idea/
