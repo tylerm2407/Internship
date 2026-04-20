@@ -3,9 +3,12 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import {
+  ArrowRight,
   Briefcase,
   CaretDown,
   ClipboardText,
+  Clock,
+  MagnifyingGlass,
   Plus,
   X,
 } from "@phosphor-icons/react";
@@ -17,6 +20,7 @@ import {
   getAllFirms,
   getOpportunities,
 } from "../../lib/api";
+import { AuthGuard } from "../../components/AuthGuard";
 import { Card } from "../../components/Card";
 import { EyebrowLabel } from "../../components/EyebrowLabel";
 import { PrimaryButton } from "../../components/PrimaryButton";
@@ -109,6 +113,132 @@ function matchesFilter(status: ApplicationStatus, filter: FilterGroup): boolean 
   return true;
 }
 
+// ── Upcoming Deadlines ──
+
+function UpcomingDeadlines({
+  applications,
+  firmMap,
+}: {
+  applications: Application[];
+  firmMap: Map<string, Firm>;
+}) {
+  const now = new Date();
+  const sevenDaysOut = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+  const upcoming = applications
+    .filter((a) => {
+      if (!a.next_action_date) return false;
+      const d = new Date(a.next_action_date);
+      return d >= now && d <= sevenDaysOut;
+    })
+    .sort((a, b) => {
+      const da = new Date(a.next_action_date as string).getTime();
+      const db = new Date(b.next_action_date as string).getTime();
+      return da - db;
+    });
+
+  if (upcoming.length === 0) return null;
+
+  return (
+    <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 space-y-3">
+      <div className="flex items-center gap-2">
+        <Clock size={16} weight="regular" className="text-amber-700" />
+        <span className="font-mono text-xs uppercase tracking-wider text-amber-700">
+          Upcoming deadlines
+        </span>
+      </div>
+      <div className="space-y-2">
+        {upcoming.map((app) => {
+          const firm = firmMap.get(app.firm_id);
+          const displayName = app._firm_name || firm?.name || "Unknown firm";
+          const d = new Date(app.next_action_date as string);
+          const daysLeft = Math.ceil((d.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+          const urgentColor = daysLeft <= 2 ? "text-red-700" : "text-amber-700";
+
+          return (
+            <div
+              key={app.id}
+              className="flex items-center justify-between bg-white/60 rounded-md px-4 py-2.5"
+            >
+              <div className="flex items-center gap-3">
+                <span className="font-medium text-sm text-ink-primary">
+                  {displayName}
+                </span>
+                {app.next_action && (
+                  <span className="text-xs text-ink-secondary">
+                    {app.next_action}
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs text-ink-secondary">
+                  {d.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                </span>
+                <span className={`font-mono text-xs font-medium ${urgentColor}`}>
+                  {daysLeft === 0 ? "Today" : daysLeft === 1 ? "Tomorrow" : `${daysLeft}d`}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Conversion Funnel ──
+
+function ConversionFunnel({ stats }: { stats: ApplicationStats }) {
+  const applied = stats.by_status["applied"] || 0;
+  const interviewing =
+    (stats.by_status["hirevue"] || 0) +
+    (stats.by_status["phone_screen"] || 0) +
+    (stats.by_status["first_round"] || 0) +
+    (stats.by_status["superday"] || 0);
+  const offers =
+    (stats.by_status["offer"] || 0) + (stats.by_status["accepted"] || 0);
+
+  const rates = stats.conversion_rates;
+
+  const stages = [
+    { label: "Applied", count: applied },
+    { label: "Interviewing", count: interviewing },
+    { label: "Offers", count: offers },
+  ];
+
+  return (
+    <div className="bg-surface border border-surface-border rounded-lg p-5">
+      <p className="font-mono text-xs uppercase tracking-wider text-ink-secondary mb-4">
+        Pipeline funnel
+      </p>
+      <div className="flex items-center justify-center gap-2">
+        {stages.map((stage, i) => (
+          <div key={stage.label} className="flex items-center gap-2">
+            <div className="text-center">
+              <p className="font-mono text-2xl font-medium text-accent tabular-nums">
+                {stage.count}
+              </p>
+              <p className="text-xs text-ink-secondary mt-0.5">{stage.label}</p>
+            </div>
+            {i < stages.length - 1 && (
+              <div className="flex flex-col items-center mx-2">
+                <ArrowRight size={16} weight="regular" className="text-ink-tertiary" />
+                {rates && (
+                  <span className="font-mono text-[10px] text-ink-tertiary mt-0.5">
+                    {i === 0
+                      ? `${Math.round(rates.applied_to_interview * 100)}%`
+                      : `${Math.round(rates.interview_to_offer * 100)}%`}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Skeleton ──
 
 function SkeletonRow() {
@@ -134,6 +264,8 @@ export default function ApplicationsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<FilterGroup>("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState<"updated" | "firm" | "status" | "deadline">("updated");
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
@@ -275,7 +407,36 @@ export default function ApplicationsPage() {
     []
   );
 
-  const filtered = applications.filter((a) => matchesFilter(a.status, filter));
+  const filtered = applications
+    .filter((a) => matchesFilter(a.status, filter))
+    .filter((a) => {
+      if (!searchQuery.trim()) return true;
+      const q = searchQuery.toLowerCase();
+      const firmName = (a._firm_name || firmMap.get(a.firm_id)?.name || "").toLowerCase();
+      const position = (a._position || postingMap.get(a.posting_id)?.posting.title || "").toLowerCase();
+      const division = (a.group_division || "").toLowerCase();
+      return firmName.includes(q) || position.includes(q) || division.includes(q);
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "firm": {
+          const nameA = (a._firm_name || firmMap.get(a.firm_id)?.name || "").toLowerCase();
+          const nameB = (b._firm_name || firmMap.get(b.firm_id)?.name || "").toLowerCase();
+          return nameA.localeCompare(nameB);
+        }
+        case "status": {
+          return ALL_STATUSES.indexOf(a.status) - ALL_STATUSES.indexOf(b.status);
+        }
+        case "deadline": {
+          const dateA = a.next_action_date ? new Date(a.next_action_date).getTime() : Infinity;
+          const dateB = b.next_action_date ? new Date(b.next_action_date).getTime() : Infinity;
+          return dateA - dateB;
+        }
+        case "updated":
+        default:
+          return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+      }
+    });
 
   // Compute stat counts
   const activeInterviewing = applications.filter((a) =>
@@ -287,6 +448,7 @@ export default function ApplicationsPage() {
   ).length;
 
   return (
+    <AuthGuard>
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
@@ -371,6 +533,16 @@ export default function ApplicationsPage() {
                 <p className="text-xs text-ink-secondary mt-1">Offers</p>
               </Card>
             </div>
+          )}
+
+          {/* ── Upcoming Deadlines ── */}
+          {!loading && applications.length > 0 && (
+            <UpcomingDeadlines applications={applications} firmMap={firmMap} />
+          )}
+
+          {/* ── Conversion Funnel ── */}
+          {!loading && stats && stats.total > 0 && (
+            <ConversionFunnel stats={stats} />
           )}
 
           {/* ── New Application Form ── */}
@@ -471,21 +643,61 @@ export default function ApplicationsPage() {
             </Card>
           )}
 
-          {/* ── Filter Pills ── */}
-          <div className="flex items-center gap-2 flex-wrap">
-            {FILTER_GROUPS.map((fg) => (
-              <button
-                key={fg.key}
-                onClick={() => setFilter(fg.key)}
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer ${
-                  filter === fg.key
-                    ? "bg-accent text-white"
-                    : "bg-surface border border-surface-border text-ink-secondary hover:bg-surface-hover"
-                }`}
-              >
-                {fg.label}
-              </button>
-            ))}
+          {/* ── Search, Filter, Sort ── */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              {/* Search */}
+              <div className="relative flex-1 max-w-sm">
+                <MagnifyingGlass
+                  size={16}
+                  weight="regular"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-tertiary"
+                />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search firm, position, or division..."
+                  className="w-full bg-surface border border-surface-border rounded-md pl-9 pr-3 py-2 text-sm focus:outline-none focus:border-accent placeholder:text-ink-tertiary"
+                />
+              </div>
+
+              {/* Sort */}
+              <div className="relative">
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+                  className="appearance-none bg-surface border border-surface-border rounded-md pl-3 pr-8 py-2 text-xs font-medium text-ink-secondary focus:outline-none focus:border-accent cursor-pointer"
+                >
+                  <option value="updated">Sort: Recent</option>
+                  <option value="firm">Sort: Firm</option>
+                  <option value="status">Sort: Status</option>
+                  <option value="deadline">Sort: Deadline</option>
+                </select>
+                <CaretDown
+                  size={12}
+                  weight="regular"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-ink-tertiary"
+                />
+              </div>
+            </div>
+
+            {/* Filter pills */}
+            <div className="flex items-center gap-2 flex-wrap">
+              {FILTER_GROUPS.map((fg) => (
+                <button
+                  key={fg.key}
+                  onClick={() => setFilter(fg.key)}
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer ${
+                    filter === fg.key
+                      ? "bg-accent text-white"
+                      : "bg-surface border border-surface-border text-ink-secondary hover:bg-surface-hover"
+                  }`}
+                >
+                  {fg.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* ── Loading ── */}
@@ -654,5 +866,6 @@ export default function ApplicationsPage() {
         </div>
       </main>
     </div>
+    </AuthGuard>
   );
 }

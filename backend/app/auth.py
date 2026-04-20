@@ -13,11 +13,26 @@ from uuid import UUID
 
 from dotenv import load_dotenv
 from fastapi import HTTPException, Request
-from supabase import create_client
+from supabase import Client, create_client
 
 load_dotenv()
 
 logger = logging.getLogger(__name__)
+
+# Module-level singleton — avoid creating a new client on every request
+_auth_client: Client | None = None
+
+
+def _get_auth_client():
+    """Return a cached Supabase client for auth verification."""
+    global _auth_client
+    if _auth_client is None:
+        url = os.getenv("SUPABASE_URL")
+        key = os.getenv("SUPABASE_ANON_KEY")
+        if not url or not key:
+            raise ValueError("SUPABASE_URL and SUPABASE_ANON_KEY must be set")
+        _auth_client = create_client(url, key)
+    return _auth_client
 
 
 async def get_current_user_id(request: Request) -> UUID:
@@ -41,17 +56,17 @@ async def get_current_user_id(request: Request) -> UUID:
 
     token = auth_header.removeprefix("Bearer ").strip()
 
-    url = os.getenv("SUPABASE_URL")
-    key = os.getenv("SUPABASE_ANON_KEY")
-    if not url or not key:
-        raise HTTPException(status_code=500, detail="Supabase configuration missing")
-
     try:
-        client = create_client(url, key)
+        client = _get_auth_client()
         user_response = client.auth.get_user(token)
         if user_response and user_response.user:
             return UUID(user_response.user.id)
         raise HTTPException(status_code=401, detail="Invalid token")
+    except HTTPException:
+        raise
+    except ValueError as e:
+        logger.error("auth.config_missing", extra={"error": str(e)})
+        raise HTTPException(status_code=500, detail="Supabase configuration missing")
     except Exception as e:
         logger.warning("auth.validation_failed", extra={"error": str(e)})
         raise HTTPException(status_code=401, detail="Authentication failed")

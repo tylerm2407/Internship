@@ -5,6 +5,7 @@ import { useUploadStore } from "../../lib/store";
 import { uploadResume } from "../../lib/api";
 import { UploadZone } from "../../components/UploadZone";
 import { PrimaryButton } from "../../components/PrimaryButton";
+import { AuthGuard } from "../../components/AuthGuard";
 
 export default function UploadPage() {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function UploadPage() {
   }
 
   return (
+    <AuthGuard>
     <div className="min-h-screen flex flex-col">
       {/* Header bar */}
       <header className="border-b border-surface-border">
@@ -63,7 +65,7 @@ export default function UploadPage() {
                 ))}
               </div>
               <p className="font-mono text-sm text-ink-secondary">
-                Parsing your resume with Claude Vision...
+                Analyzing your resume...
               </p>
             </div>
           ) : (
@@ -84,5 +86,6 @@ export default function UploadPage() {
         </div>
       </main>
     </div>
+    </AuthGuard>
   );
 }

@@ -10,9 +10,11 @@ prompt templates are finalized and tested against real student answers.
 
 from __future__ import annotations
 
+import json
 import logging
 import random
 from datetime import datetime, timezone, timedelta
+from pathlib import Path
 from typing import Literal
 from uuid import UUID
 
@@ -32,6 +34,9 @@ logger = logging.getLogger(__name__)
 QuestionCategory = Literal[
     "accounting", "valuation", "ma", "lbo",
     "behavioral", "firm_specific", "market_awareness",
+    "brain_teaser", "market_sizing", "pitch_a_stock", "restructuring",
+    "pe_operations", "st_markets", "er_analysis",
+    "quant_probability", "credit_analysis",
 ]
 
 QuestionDifficulty = Literal["easy", "medium", "hard"]
@@ -199,6 +204,47 @@ QUESTION_BANK: dict[str, list[dict]] = {
     ],
 }
 
+def _load_question_bank() -> dict[str, list[dict]]:
+    """Load questions from the external corpus file, falling back to built-in bank.
+
+    Looks for ``prep_corpus/questions.json`` relative to the backend root.
+    If the file is missing or malformed, returns the hardcoded ``QUESTION_BANK``.
+
+    Returns:
+        Dictionary mapping category names to lists of question dicts.
+    """
+    corpus_path = Path(__file__).parent.parent / "prep_corpus" / "questions.json"
+    if corpus_path.exists():
+        try:
+            with open(corpus_path, "r", encoding="utf-8") as f:
+                raw = json.load(f)
+            bank: dict[str, list[dict]] = {}
+            for category, questions in raw.items():
+                bank[category] = [
+                    _q(q["text"], category, q["difficulty"], q.get("tags", []))
+                    for q in questions
+                ]
+            logger.info(
+                "prep_coach.corpus_loaded",
+                extra={
+                    "path": str(corpus_path),
+                    "categories": len(bank),
+                    "total_questions": sum(len(qs) for qs in bank.values()),
+                },
+            )
+            return bank
+        except Exception as e:
+            logger.warning(
+                "prep_coach.corpus_load_failed_using_builtin",
+                extra={"error": str(e)},
+            )
+            return QUESTION_BANK
+    logger.warning("prep_coach.corpus_not_found_using_builtin")
+    return QUESTION_BANK
+
+
+LOADED_QUESTION_BANK: dict[str, list[dict]] = _load_question_bank()
+
 # Key terms the rules-based evaluator checks for in technical answers.
 _KEY_TERMS: dict[str, list[str]] = {
     "accounting": [
@@ -221,6 +267,47 @@ _KEY_TERMS: dict[str, list[str]] = {
         "interest rate", "fed", "gdp", "inflation", "sector",
         "valuation", "deal",
     ],
+    "brain_teaser": [
+        "estimate", "assume", "calculate", "approximate",
+        "approach", "framework",
+    ],
+    "market_sizing": [
+        "market", "revenue", "size", "estimate", "annual",
+        "customers", "penetration", "tam",
+    ],
+    "pitch_a_stock": [
+        "valuation", "catalyst", "upside", "risk", "thesis",
+        "multiple", "revenue", "growth",
+    ],
+    "restructuring": [
+        "creditor", "debtor", "chapter 11", "chapter 7", "waterfall",
+        "priority", "recovery", "covenant", "distressed",
+    ],
+    "pe_operations": [
+        "lbo", "leverage", "operating", "portfolio company", "irr",
+        "moic", "bolt-on", "platform", "ebitda", "margin expansion",
+        "due diligence", "deal sourcing",
+    ],
+    "st_markets": [
+        "greeks", "delta", "gamma", "vega", "options", "volatility",
+        "yield curve", "duration", "convexity", "market making",
+        "bid-ask", "spread", "futures", "swap",
+    ],
+    "er_analysis": [
+        "earnings model", "price target", "buy", "sell", "hold",
+        "revenue growth", "margin", "catalyst", "sector", "peer",
+        "initiating coverage", "valuation",
+    ],
+    "quant_probability": [
+        "probability", "expected value", "variance", "distribution",
+        "bayes", "conditional", "independent", "random variable",
+        "algorithm", "optimize", "regression", "hypothesis",
+    ],
+    "credit_analysis": [
+        "credit", "leverage", "coverage ratio", "covenant", "default",
+        "recovery", "capital structure", "rating", "high yield",
+        "investment grade", "spread", "maturity",
+    ],
 }
 
 _STAR_MARKERS: list[str] = ["situation", "task", "action", "result"]
@@ -234,6 +321,15 @@ _SESSION_TYPE_TO_CATEGORY: dict[str, str] = {
     "behavioral": "behavioral",
     "firm_specific": "firm_specific",
     "market_awareness": "market_awareness",
+    "brain_teaser": "brain_teaser",
+    "market_sizing": "market_sizing",
+    "pitch_a_stock": "pitch_a_stock",
+    "restructuring": "restructuring",
+    "technical_pe": "pe_operations",
+    "technical_st_markets": "st_markets",
+    "technical_er": "er_analysis",
+    "technical_quant": "quant_probability",
+    "technical_credit": "credit_analysis",
 }
 
 
@@ -241,11 +337,27 @@ _SESSION_TYPE_TO_CATEGORY: dict[str, str] = {
 # 1. Question Selection
 # ============================================================
 
+# Maps role_type to the question categories most relevant for that role.
+_ROLE_RELEVANT_CATEGORIES: dict[str, list[str]] = {
+    "investment_banking": ["accounting", "valuation", "ma", "lbo"],
+    "sales_and_trading": ["st_markets", "market_awareness", "brain_teaser"],
+    "private_equity": ["pe_operations", "lbo", "valuation", "accounting"],
+    "equity_research": ["er_analysis", "valuation", "market_awareness"],
+    "quant": ["quant_probability", "brain_teaser", "market_sizing"],
+    "restructuring": ["restructuring", "accounting", "credit_analysis"],
+    "credit_leveraged_finance": ["credit_analysis", "accounting", "valuation"],
+    "hedge_fund": ["quant_probability", "pitch_a_stock", "market_awareness"],
+    "asset_management": ["valuation", "pitch_a_stock", "market_awareness"],
+    "wealth_management": ["behavioral", "market_awareness", "valuation"],
+    "corporate_finance": ["accounting", "valuation", "behavioral"],
+    "risk_management": ["st_markets", "quant_probability", "market_awareness"],
+}
+
 
 def select_questions(
     session_type: str,
     firm: Firm | None,
-    _role_type: str,
+    role_type: str,
     readiness_scores: list[ReadinessScore],
     count: int = 5,
 ) -> list[dict]:
@@ -271,7 +383,7 @@ def select_questions(
         logger.warning("prep_coach.unknown_session_type", extra={"session_type": session_type})
         category = "behavioral"
 
-    pool = list(QUESTION_BANK.get(category, []))
+    pool = list(LOADED_QUESTION_BANK.get(category, []))
     if not pool:
         logger.error("prep_coach.empty_pool", extra={"category": category})
         return []
@@ -315,6 +427,11 @@ def select_questions(
             if rs.category == category and rs.needs_review:
                 w *= 1.5
                 break
+        # Boost questions from role-relevant categories
+        if role_type:
+            role_categories = _ROLE_RELEVANT_CATEGORIES.get(role_type.lower().replace(" ", "_"), [])
+            if q.get("category") in role_categories:
+                w *= 1.3
         weighted.append((q, w))
 
     # Weighted sample without replacement.
@@ -364,11 +481,8 @@ def evaluate_answer(
 ) -> dict:
     """Evaluate a student's answer to an interview question.
 
-    Uses a rules-based heuristic as a placeholder. Returns a score and
-    structured feedback.
-
-    TODO: Replace with Claude API call for nuanced, context-aware evaluation
-    once prompt templates are tested against real student answers.
+    Attempts Claude API evaluation first for nuanced, context-aware feedback.
+    Falls back to a rules-based heuristic if Claude is unavailable.
 
     Args:
         question: Question dict from the question bank (must have ``text``,
@@ -381,6 +495,22 @@ def evaluate_answer(
         A dict with keys ``score`` (0-100), ``feedback`` (str),
         ``strengths`` (list[str]), ``improvements`` (list[str]).
     """
+    # Try Claude first for higher-quality evaluation
+    try:
+        from app import claude_client
+        firm_name = firm.name if firm else None
+        result = claude_client.evaluate_prep_answer(
+            question=question["text"],
+            answer=user_answer,
+            category=question.get("category", "behavioral"),
+            firm_name=firm_name,
+        )
+        logger.info("prep_coach.answer_evaluated_by_claude", extra={"score": result.get("score")})
+        return result
+    except Exception as e:
+        logger.warning("prep_coach.claude_eval_failed_falling_back", extra={"error": str(e)})
+
+    # --- Rules-based fallback ---
     category: str = question.get("category", "behavioral")
     answer_lower = user_answer.lower().strip()
     word_count = len(user_answer.split())
@@ -573,17 +703,66 @@ def update_readiness_scores(
 
 # Weights for computing the overall readiness percentage.
 _CATEGORY_WEIGHTS: dict[str, float] = {
-    "accounting": 0.20,
-    "valuation": 0.20,
-    "ma": 0.15,
-    "lbo": 0.15,
-    "behavioral": 0.15,
-    "firm_specific": 0.05,
-    "market_awareness": 0.10,
+    "accounting": 0.16,
+    "valuation": 0.16,
+    "ma": 0.12,
+    "lbo": 0.12,
+    "behavioral": 0.12,
+    "firm_specific": 0.04,
+    "market_awareness": 0.08,
+    "brain_teaser": 0.05,
+    "market_sizing": 0.05,
+    "pitch_a_stock": 0.05,
+    "restructuring": 0.05,
+}
+
+_CATEGORY_WEIGHTS_BY_ROLE: dict[str, dict[str, float]] = {
+    "sales_and_trading": {
+        "st_markets": 0.25, "market_awareness": 0.15, "behavioral": 0.15,
+        "brain_teaser": 0.10, "accounting": 0.08, "valuation": 0.08,
+        "firm_specific": 0.04, "market_sizing": 0.05, "pitch_a_stock": 0.05,
+        "ma": 0.03, "lbo": 0.02,
+    },
+    "private_equity": {
+        "pe_operations": 0.20, "lbo": 0.20, "behavioral": 0.15,
+        "valuation": 0.15, "accounting": 0.10, "ma": 0.05,
+        "firm_specific": 0.04, "market_awareness": 0.05, "brain_teaser": 0.03,
+        "market_sizing": 0.02, "pitch_a_stock": 0.01,
+    },
+    "equity_research": {
+        "er_analysis": 0.25, "valuation": 0.20, "market_awareness": 0.15,
+        "accounting": 0.10, "pitch_a_stock": 0.10, "behavioral": 0.08,
+        "firm_specific": 0.04, "ma": 0.03, "lbo": 0.02,
+        "brain_teaser": 0.02, "market_sizing": 0.01,
+    },
+    "quant": {
+        "quant_probability": 0.30, "brain_teaser": 0.15, "market_awareness": 0.10,
+        "market_sizing": 0.10, "st_markets": 0.08, "behavioral": 0.08,
+        "valuation": 0.05, "accounting": 0.04, "firm_specific": 0.04,
+        "ma": 0.03, "lbo": 0.03,
+    },
+    "restructuring": {
+        "restructuring": 0.20, "credit_analysis": 0.15, "accounting": 0.15,
+        "valuation": 0.12, "behavioral": 0.10, "lbo": 0.08,
+        "ma": 0.05, "firm_specific": 0.04, "market_awareness": 0.05,
+        "brain_teaser": 0.03, "market_sizing": 0.03,
+    },
+    "credit_leveraged_finance": {
+        "credit_analysis": 0.25, "accounting": 0.15, "valuation": 0.12,
+        "lbo": 0.10, "behavioral": 0.10, "market_awareness": 0.08,
+        "restructuring": 0.05, "firm_specific": 0.04, "ma": 0.04,
+        "brain_teaser": 0.04, "market_sizing": 0.03,
+    },
+    "hedge_fund": {
+        "quant_probability": 0.15, "pitch_a_stock": 0.20, "market_awareness": 0.15,
+        "valuation": 0.12, "behavioral": 0.10, "er_analysis": 0.08,
+        "brain_teaser": 0.05, "accounting": 0.05, "firm_specific": 0.04,
+        "market_sizing": 0.03, "lbo": 0.03,
+    },
 }
 
 
-def get_overall_readiness(scores: list[ReadinessScore]) -> dict:
+def get_overall_readiness(scores: list[ReadinessScore], role_type: str | None = None) -> dict:
     """Compute an overall readiness summary from per-category mastery scores.
 
     Args:
@@ -606,7 +785,14 @@ def get_overall_readiness(scores: list[ReadinessScore]) -> dict:
     # Weighted average, treating missing categories as 0.
     weighted_sum = 0.0
     weight_total = 0.0
-    for cat, weight in _CATEGORY_WEIGHTS.items():
+    weights = _CATEGORY_WEIGHTS
+    if role_type:
+        normalized = role_type.lower().replace(" ", "_").replace("/", "_")
+        for key, val in _CATEGORY_WEIGHTS_BY_ROLE.items():
+            if key in normalized or normalized in key:
+                weights = val
+                break
+    for cat, weight in weights.items():
         weighted_sum += score_map.get(cat, 0.0) * weight
         weight_total += weight
 
@@ -662,9 +848,8 @@ def generate_why_firm_talking_points(
 ) -> list[str]:
     """Generate personalized "Why {firm}?" talking points.
 
-    Matches the student's profile against the firm's attributes to produce
-    3-5 concrete, non-generic talking points the student can use in a
-    "Why {firm_name}?" interview answer.
+    Attempts Claude API generation first for higher-quality personalization.
+    Falls back to template-based logic if Claude is unavailable.
 
     Args:
         profile: The student's parsed resume profile.
@@ -673,6 +858,23 @@ def generate_why_firm_talking_points(
     Returns:
         A list of 3-5 talking-point strings.
     """
+    # Try Claude first for higher-quality talking points
+    try:
+        from app import claude_client
+        result = claude_client.generate_why_firm_talking_points(
+            profile=profile,
+            firm=firm,
+        )
+        if result and len(result) >= 3:
+            logger.info(
+                "prep_coach.talking_points_generated_by_claude",
+                extra={"firm": firm.name, "points_count": len(result)},
+            )
+            return result
+    except Exception as e:
+        logger.warning("prep_coach.claude_talking_points_failed_falling_back", extra={"error": str(e)})
+
+    # --- Template-based fallback ---
     points: list[str] = []
 
     # --- Role alignment ---

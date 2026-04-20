@@ -234,8 +234,8 @@ def generate_outreach_drafts(
     Each draft is under 80 words, references specific connections, mentions
     the firm, and makes one clear ask (15-minute phone call).
 
-    TODO: Replace template engine with Claude API calls via claude_client.py
-    for higher-quality, context-aware personalization.
+    Attempts Claude API generation first for higher-quality personalization.
+    Falls back to template-based logic if Claude is unavailable.
 
     Args:
         profile: The student's parsed profile.
@@ -249,6 +249,46 @@ def generate_outreach_drafts(
     Raises:
         ValueError: If tone is not one of the supported values.
     """
+    # Try Claude first for higher-quality personalization
+    try:
+        from app import claude_client
+        drafts = claude_client.generate_outreach_message(
+            profile=profile,
+            alumnus_name=alumnus.name,
+            alumnus_role=alumnus.current_role,
+            firm_name=firm.name,
+            connection_hooks=alumnus.connection_hooks,
+            tone=tone,
+        )
+        # Build connection hooks used
+        connection_hooks_used: list[str] = []
+        if alumnus.school.lower() == profile.school.lower():
+            connection_hooks_used.append(f"Same school: {profile.school}")
+        if alumnus.major and alumnus.major.lower() == profile.major.lower():
+            connection_hooks_used.append(f"Same major: {profile.major}")
+        shared_clubs = _shared_items(alumnus.connection_hooks, profile.clubs)
+        for club in shared_clubs:
+            connection_hooks_used.append(f"Shared club: {club}")
+
+        logger.info(
+            "alumni_finder.generate_outreach_drafts_by_claude",
+            extra={
+                "alumnus_id": str(alumnus.id),
+                "firm_id": str(firm.id),
+                "tone": tone,
+                "drafts_generated": len(drafts),
+            },
+        )
+        return OutreachDraftResponse(
+            drafts=drafts,
+            contact_name=alumnus.name,
+            firm_name=firm.name,
+            connection_hooks_used=connection_hooks_used,
+        )
+    except Exception as e:
+        logger.warning("alumni_finder.claude_outreach_failed", extra={"error": str(e)})
+
+    # --- Template-based fallback ---
     templates = _OUTREACH_TEMPLATES.get(tone)
     if templates is None:
         raise ValueError(
@@ -312,9 +352,7 @@ def generate_thank_you_draft(
     """Generate a thank-you note draft (under 60 words) after a call.
 
     References call notes when available so the message feels personal
-    rather than generic.
-
-    TODO: Replace with Claude API call for higher-quality personalization.
+    rather than generic. Attempts Claude API first, falls back to template.
 
     Args:
         profile: The student's parsed profile.
@@ -324,6 +362,24 @@ def generate_thank_you_draft(
     Returns:
         A thank-you message string under 60 words.
     """
+    # Try Claude first for higher-quality personalization
+    try:
+        from app import claude_client
+        result = claude_client.generate_thank_you(
+            student_name=profile.name,
+            contact_name=contact.contact_name,
+            firm_name=firm.name,
+            call_notes=contact.call_notes,
+        )
+        logger.info(
+            "alumni_finder.generate_thank_you_draft_by_claude",
+            extra={"contact_id": str(contact.id), "firm_id": str(firm.id)},
+        )
+        return result
+    except Exception as e:
+        logger.warning("alumni_finder.claude_thank_you_failed", extra={"error": str(e)})
+
+    # --- Template-based fallback ---
     first_name = contact.contact_name.split()[0]
 
     if contact.call_notes:
@@ -366,7 +422,8 @@ def generate_follow_up_draft(
 ) -> str:
     """Generate a follow-up message (under 50 words) for unresponsive contacts.
 
-    TODO: Replace with Claude API call for higher-quality personalization.
+    Attempts Claude API first for higher-quality personalization.
+    Falls back to template-based logic if Claude is unavailable.
 
     Args:
         profile: The student's parsed profile.
@@ -377,6 +434,28 @@ def generate_follow_up_draft(
     Returns:
         A follow-up message string under 50 words.
     """
+    # Try Claude first for higher-quality personalization
+    try:
+        from app import claude_client
+        result = claude_client.generate_follow_up_message(
+            student_name=profile.name,
+            contact_name=contact.contact_name,
+            firm_name=firm.name,
+            days_since_outreach=days_since_outreach,
+        )
+        logger.info(
+            "alumni_finder.generate_follow_up_draft_by_claude",
+            extra={
+                "contact_id": str(contact.id),
+                "firm_id": str(firm.id),
+                "days_since_outreach": days_since_outreach,
+            },
+        )
+        return result
+    except Exception as e:
+        logger.warning("alumni_finder.claude_follow_up_failed", extra={"error": str(e)})
+
+    # --- Template-based fallback ---
     first_name = contact.contact_name.split()[0]
 
     draft = (

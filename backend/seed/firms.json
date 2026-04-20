@@ -3,9 +3,20 @@
     "id": "00000000-0000-4000-a000-000000000001",
     "name": "Goldman Sachs",
     "tier": "bulge_bracket",
-    "roles_offered": ["investment_banking", "sales_and_trading", "asset_management", "equity_research"],
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading",
+      "asset_management",
+      "equity_research"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London", "Hong Kong", "San Francisco", "Chicago"],
+    "offices": [
+      "NYC",
+      "London",
+      "Hong Kong",
+      "San Francisco",
+      "Chicago"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Recruits heavily from top 15 target schools with a highly structured summer analyst program serving as the primary pipeline to full-time offers. Applications typically open in late July/August for the following summer, with first-round interviews conducted on campus and via HireVue.",
     "careers_url": "https://www.goldmansachs.com/careers",
@@ -16,9 +27,20 @@
     "id": "00000000-0000-4000-a000-000000000002",
     "name": "JPMorgan Chase",
     "tier": "bulge_bracket",
-    "roles_offered": ["investment_banking", "sales_and_trading", "asset_management", "capital_markets"],
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading",
+      "asset_management",
+      "capital_markets"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London", "Hong Kong", "Chicago", "Houston"],
+    "offices": [
+      "NYC",
+      "London",
+      "Hong Kong",
+      "Chicago",
+      "Houston"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "One of the largest recruiters on campus at target and semi-target schools, running multiple summer analyst programs across divisions. Applications open in August with extensive use of Pymetrics assessments and HireVue video interviews in early rounds.",
     "careers_url": "https://careers.jpmorgan.com",
@@ -29,9 +51,19 @@
     "id": "00000000-0000-4000-a000-000000000003",
     "name": "Morgan Stanley",
     "tier": "bulge_bracket",
-    "roles_offered": ["investment_banking", "sales_and_trading", "asset_management", "equity_research"],
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading",
+      "asset_management",
+      "equity_research"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London", "Hong Kong", "San Francisco"],
+    "offices": [
+      "NYC",
+      "London",
+      "Hong Kong",
+      "San Francisco"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Recruits from a core set of 20+ target schools with a well-regarded summer analyst program across all major divisions. Applications open in August, and the firm places strong emphasis on networking and informational interviews prior to formal applications.",
     "careers_url": "https://www.morganstanley.com/careers",
@@ -42,9 +74,19 @@
     "id": "00000000-0000-4000-a000-000000000004",
     "name": "Bank of America",
     "tier": "bulge_bracket",
-    "roles_offered": ["investment_banking", "sales_and_trading", "capital_markets"],
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading",
+      "capital_markets"
+    ],
     "headquarters": "Charlotte, NC",
-    "offices": ["NYC", "Charlotte", "Chicago", "London", "Hong Kong"],
+    "offices": [
+      "NYC",
+      "Charlotte",
+      "Chicago",
+      "London",
+      "Hong Kong"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Runs a large-scale campus recruiting program across target and semi-target schools, with summer analyst cohorts in IB, S&T, and capital markets. Applications open in August with a multi-step process including online assessments and Superday interviews.",
     "careers_url": "https://campus.bankofamerica.com",
@@ -55,9 +97,18 @@
     "id": "00000000-0000-4000-a000-000000000005",
     "name": "Citigroup",
     "tier": "bulge_bracket",
-    "roles_offered": ["investment_banking", "sales_and_trading", "capital_markets"],
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading",
+      "capital_markets"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London", "Hong Kong", "Singapore"],
+    "offices": [
+      "NYC",
+      "London",
+      "Hong Kong",
+      "Singapore"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Recruits from a broad set of target and semi-target schools globally, with summer analyst programs across ICG divisions. Applications open in August, and the firm is known for being relatively more accessible compared to other bulge brackets for non-target candidates.",
     "careers_url": "https://jobs.citi.com",
@@ -68,9 +119,16 @@
     "id": "00000000-0000-4000-a000-000000000006",
     "name": "Evercore",
     "tier": "elite_boutique",
-    "roles_offered": ["investment_banking", "equity_research"],
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "Houston", "London"],
+    "offices": [
+      "NYC",
+      "Houston",
+      "London"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Highly selective recruiting from top 10-15 target schools with a lean summer analyst class known for exceptional deal exposure. Applications open in August, and networking with current analysts is considered critical to securing an interview.",
     "careers_url": "https://www.evercore.com/careers",
@@ -81,9 +139,17 @@
     "id": "00000000-0000-4000-a000-000000000007",
     "name": "Lazard",
     "tier": "elite_boutique",
-    "roles_offered": ["investment_banking", "asset_management"],
+    "roles_offered": [
+      "investment_banking",
+      "asset_management"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London", "Paris", "Chicago"],
+    "offices": [
+      "NYC",
+      "London",
+      "Paris",
+      "Chicago"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Recruits from top target schools with a strong emphasis on restructuring and M&A advisory experience. Summer analyst classes are small and highly competitive, with applications opening in August and a heavy focus on technical interview preparation.",
     "careers_url": "https://www.lazard.com/careers",
@@ -94,9 +160,15 @@
     "id": "00000000-0000-4000-a000-000000000008",
     "name": "Moelis & Company",
     "tier": "elite_boutique",
-    "roles_offered": ["investment_banking"],
+    "roles_offered": [
+      "investment_banking"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London", "Los Angeles"],
+    "offices": [
+      "NYC",
+      "London",
+      "Los Angeles"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Small, highly selective summer analyst program recruiting primarily from top 10 target schools. Known for intense deal exposure and lean teams, with applications opening in late summer and a culture that values entrepreneurial drive.",
     "careers_url": "https://www.moelis.com/careers",
@@ -107,9 +179,15 @@
     "id": "00000000-0000-4000-a000-000000000009",
     "name": "Centerview Partners",
     "tier": "elite_boutique",
-    "roles_offered": ["investment_banking"],
+    "roles_offered": [
+      "investment_banking"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London", "San Francisco"],
+    "offices": [
+      "NYC",
+      "London",
+      "San Francisco"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "One of the most selective firms on Wall Street, recruiting exclusively from top 5-10 target schools with an extremely small summer analyst class. Networking is essential, and the firm places heavy weight on prior finance internship experience and technical acumen.",
     "careers_url": "https://www.centerviewpartners.com/careers",
@@ -120,9 +198,16 @@
     "id": "00000000-0000-4000-a000-000000000010",
     "name": "Perella Weinberg Partners",
     "tier": "elite_boutique",
-    "roles_offered": ["investment_banking", "asset_management"],
+    "roles_offered": [
+      "investment_banking",
+      "asset_management"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "Houston", "London"],
+    "offices": [
+      "NYC",
+      "Houston",
+      "London"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Recruits selectively from top target schools with a small summer analyst class focused on M&A and restructuring advisory. Applications open in August, and the firm values candidates with strong technical skills and a demonstrated interest in complex advisory work.",
     "careers_url": "https://www.pwpartners.com/careers",
@@ -133,9 +218,14 @@
     "id": "00000000-0000-4000-a000-000000000011",
     "name": "PJT Partners",
     "tier": "elite_boutique",
-    "roles_offered": ["investment_banking"],
+    "roles_offered": [
+      "investment_banking"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London"],
+    "offices": [
+      "NYC",
+      "London"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Highly selective recruiting from top target schools with particular strength in restructuring and special situations advisory. Summer analyst program is small with high conversion rates to full-time, and applications typically open in August.",
     "careers_url": "https://www.pjtpartners.com/careers",
@@ -146,9 +236,16 @@
     "id": "00000000-0000-4000-a000-000000000012",
     "name": "Guggenheim Partners",
     "tier": "elite_boutique",
-    "roles_offered": ["investment_banking", "asset_management"],
+    "roles_offered": [
+      "investment_banking",
+      "asset_management"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "Chicago", "Los Angeles"],
+    "offices": [
+      "NYC",
+      "Chicago",
+      "Los Angeles"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Recruits from top target schools for a selective summer analyst program spanning investment banking and asset management. Applications open in late summer, and the firm is known for a more entrepreneurial culture with significant responsibility given to junior bankers.",
     "careers_url": "https://www.guggenheimpartners.com/careers",
@@ -159,9 +256,13 @@
     "id": "00000000-0000-4000-a000-000000000013",
     "name": "Qatalyst Partners",
     "tier": "elite_boutique",
-    "roles_offered": ["investment_banking"],
+    "roles_offered": [
+      "investment_banking"
+    ],
     "headquarters": "San Francisco, CA",
-    "offices": ["San Francisco"],
+    "offices": [
+      "San Francisco"
+    ],
     "gpa_floor_estimated": 3.7,
     "recruiting_profile": "Ultra-selective technology-focused advisory boutique with one of the smallest summer analyst classes on the Street. Recruits almost exclusively from top 5 target schools, with a strong preference for candidates with demonstrated interest in technology M&A.",
     "careers_url": "https://www.qatalyst.com/careers",
@@ -172,9 +273,17 @@
     "id": "00000000-0000-4000-a000-000000000014",
     "name": "Houlihan Lokey",
     "tier": "middle_market",
-    "roles_offered": ["investment_banking", "capital_markets"],
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
     "headquarters": "Los Angeles, CA",
-    "offices": ["NYC", "LA", "Chicago", "Minneapolis"],
+    "offices": [
+      "NYC",
+      "LA",
+      "Chicago",
+      "Minneapolis"
+    ],
     "gpa_floor_estimated": 3.5,
     "recruiting_profile": "Recruits from a broad mix of target and semi-target schools with a larger summer analyst class than most boutiques. Known as the top restructuring bank globally, applications open in August and the firm is more accessible to non-target school candidates than elite boutiques.",
     "careers_url": "https://hl.com/careers",
@@ -185,9 +294,17 @@
     "id": "00000000-0000-4000-a000-000000000015",
     "name": "William Blair",
     "tier": "middle_market",
-    "roles_offered": ["investment_banking", "equity_research", "asset_management"],
+    "roles_offered": [
+      "investment_banking",
+      "equity_research",
+      "asset_management"
+    ],
     "headquarters": "Chicago, IL",
-    "offices": ["Chicago", "NYC", "London"],
+    "offices": [
+      "Chicago",
+      "NYC",
+      "London"
+    ],
     "gpa_floor_estimated": 3.5,
     "recruiting_profile": "Strong Midwest recruiting presence, pulling from target and semi-target schools across the region. Summer analyst program offers exposure across IB, equity research, and asset management, with applications opening in August and a collaborative, less hierarchical culture.",
     "careers_url": "https://www.williamblair.com/careers",
@@ -198,9 +315,17 @@
     "id": "00000000-0000-4000-a000-000000000016",
     "name": "Baird",
     "tier": "middle_market",
-    "roles_offered": ["investment_banking", "capital_markets", "equity_research"],
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets",
+      "equity_research"
+    ],
     "headquarters": "Milwaukee, WI",
-    "offices": ["Milwaukee", "Chicago", "NYC"],
+    "offices": [
+      "Milwaukee",
+      "Chicago",
+      "NYC"
+    ],
     "gpa_floor_estimated": 3.5,
     "recruiting_profile": "Recruits heavily from Midwest target and semi-target schools with a well-regarded summer analyst program known for strong culture and work-life balance. Applications open in August, and the firm is consistently ranked as one of the best places to work in finance.",
     "careers_url": "https://www.rwbaird.com/careers",
@@ -211,9 +336,18 @@
     "id": "00000000-0000-4000-a000-000000000017",
     "name": "Jefferies",
     "tier": "middle_market",
-    "roles_offered": ["investment_banking", "sales_and_trading", "equity_research"],
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading",
+      "equity_research"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London", "Hong Kong", "Houston"],
+    "offices": [
+      "NYC",
+      "London",
+      "Hong Kong",
+      "Houston"
+    ],
     "gpa_floor_estimated": 3.5,
     "recruiting_profile": "Recruits from a wide range of target and semi-target schools with a growing summer analyst program across IB, S&T, and equity research. Applications open in August, and the firm has been expanding aggressively, offering more seats than traditional middle-market peers.",
     "careers_url": "https://www.jefferies.com/careers",
@@ -224,9 +358,16 @@
     "id": "00000000-0000-4000-a000-000000000018",
     "name": "Piper Sandler",
     "tier": "middle_market",
-    "roles_offered": ["investment_banking", "equity_research"],
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
     "headquarters": "Minneapolis, MN",
-    "offices": ["Minneapolis", "NYC", "Chicago"],
+    "offices": [
+      "Minneapolis",
+      "NYC",
+      "Chicago"
+    ],
     "gpa_floor_estimated": 3.5,
     "recruiting_profile": "Recruits from Midwest and national target/semi-target schools with a focused summer analyst program in investment banking and equity research. Applications open in August, and the firm is well-known for strength in healthcare and financial services verticals.",
     "careers_url": "https://www.pipersandler.com/careers",
@@ -237,9 +378,16 @@
     "id": "00000000-0000-4000-a000-000000000019",
     "name": "Raymond James",
     "tier": "middle_market",
-    "roles_offered": ["investment_banking", "capital_markets"],
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
     "headquarters": "St. Petersburg, FL",
-    "offices": ["St. Petersburg", "NYC", "Nashville"],
+    "offices": [
+      "St. Petersburg",
+      "NYC",
+      "Nashville"
+    ],
     "gpa_floor_estimated": 3.5,
     "recruiting_profile": "Recruits from a mix of target, semi-target, and Southeast regional schools with a growing summer analyst program. Applications open in August, and the firm is known for a supportive culture and strong deal flow in middle-market M&A.",
     "careers_url": "https://www.raymondjames.com/careers",
@@ -250,9 +398,15 @@
     "id": "00000000-0000-4000-a000-000000000020",
     "name": "Harris Williams",
     "tier": "middle_market",
-    "roles_offered": ["investment_banking"],
+    "roles_offered": [
+      "investment_banking"
+    ],
     "headquarters": "Richmond, VA",
-    "offices": ["Richmond", "NYC", "San Francisco"],
+    "offices": [
+      "Richmond",
+      "NYC",
+      "San Francisco"
+    ],
     "gpa_floor_estimated": 3.5,
     "recruiting_profile": "Recruits from a targeted set of East Coast and national semi-target schools for a focused summer analyst program in middle-market M&A. Applications open in August, and the firm is valued for high-quality deal experience and a tight-knit analyst class culture.",
     "careers_url": "https://www.harriswilliams.com/careers",
@@ -263,9 +417,15 @@
     "id": "00000000-0000-4000-a000-000000000021",
     "name": "Lincoln International",
     "tier": "middle_market",
-    "roles_offered": ["investment_banking"],
+    "roles_offered": [
+      "investment_banking"
+    ],
     "headquarters": "Chicago, IL",
-    "offices": ["Chicago", "NYC", "London"],
+    "offices": [
+      "Chicago",
+      "NYC",
+      "London"
+    ],
     "gpa_floor_estimated": 3.5,
     "recruiting_profile": "Recruits from Midwest and national target/semi-target schools with a structured summer analyst program in middle-market advisory. Applications open in late summer, and the firm is known for strong private equity relationships and a collaborative working environment.",
     "careers_url": "https://www.lincolninternational.com/careers",
@@ -276,9 +436,17 @@
     "id": "00000000-0000-4000-a000-000000000022",
     "name": "Citadel",
     "tier": "buy_side",
-    "roles_offered": ["quant", "sales_and_trading"],
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
     "headquarters": "Chicago, IL",
-    "offices": ["Chicago", "NYC", "London", "Hong Kong"],
+    "offices": [
+      "Chicago",
+      "NYC",
+      "London",
+      "Hong Kong"
+    ],
     "gpa_floor_estimated": 3.8,
     "recruiting_profile": "Recruits top quantitative talent from elite universities with strong STEM programs, running a highly competitive summer internship across trading, quant research, and engineering. Applications open in late summer with multiple rounds of technical interviews including probability, statistics, and coding challenges.",
     "careers_url": "https://www.citadel.com/careers",
@@ -289,9 +457,15 @@
     "id": "00000000-0000-4000-a000-000000000023",
     "name": "Two Sigma",
     "tier": "quant",
-    "roles_offered": ["quant"],
+    "roles_offered": [
+      "quant"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "Houston", "London"],
+    "offices": [
+      "NYC",
+      "Houston",
+      "London"
+    ],
     "gpa_floor_estimated": 3.8,
     "recruiting_profile": "Recruits heavily from top computer science, math, and engineering programs at elite universities for quantitative research and engineering internships. The interview process is highly technical with coding challenges, math puzzles, and research presentations, with applications opening in August.",
     "careers_url": "https://www.twosigma.com/careers",
@@ -302,9 +476,16 @@
     "id": "00000000-0000-4000-a000-000000000024",
     "name": "Jane Street",
     "tier": "quant",
-    "roles_offered": ["quant", "sales_and_trading"],
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
     "headquarters": "New York, NY",
-    "offices": ["NYC", "London", "Hong Kong"],
+    "offices": [
+      "NYC",
+      "London",
+      "Hong Kong"
+    ],
     "gpa_floor_estimated": 3.8,
     "recruiting_profile": "Recruits from top STEM programs with an intense focus on mathematical reasoning, probability, and problem-solving. Summer internships are highly sought after with a notoriously rigorous multi-round interview process featuring mental math, trading games, and logic puzzles, with applications opening in late summer.",
     "careers_url": "https://www.janestreet.com/join-jane-street",
@@ -315,12 +496,3189 @@
     "id": "00000000-0000-4000-a000-000000000025",
     "name": "AQR Capital Management",
     "tier": "buy_side",
-    "roles_offered": ["quant", "asset_management"],
+    "roles_offered": [
+      "quant",
+      "asset_management"
+    ],
     "headquarters": "Greenwich, CT",
-    "offices": ["Greenwich", "NYC", "London"],
+    "offices": [
+      "Greenwich",
+      "NYC",
+      "London"
+    ],
     "gpa_floor_estimated": 3.8,
     "recruiting_profile": "Recruits from top quantitative and economics programs for summer analyst roles in research, portfolio management, and engineering. Applications open in August, and the interview process emphasizes statistical reasoning, financial theory, and programming ability with a focus on systematic investing.",
     "careers_url": "https://www.aqr.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000026",
+    "name": "Deutsche Bank",
+    "tier": "bulge_bracket",
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London",
+      "Frankfurt"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from top target schools in the US and Europe with a structured summer analyst program across IB and S&T. Applications open in August, with HireVue interviews and a Superday process similar to other bulge brackets.",
+    "careers_url": "https://careers.db.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000027",
+    "name": "UBS",
+    "tier": "bulge_bracket",
+    "roles_offered": [
+      "investment_banking",
+      "wealth_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Zurich",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from target and semi-target schools globally with strong summer analyst programs in IB and wealth management. Applications open in August, and the firm is known for its global mobility and Swiss banking heritage.",
+    "careers_url": "https://www.ubs.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000028",
+    "name": "Barclays",
+    "tier": "bulge_bracket",
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from a broad set of US and UK target schools with summer analyst programs across IB and markets. Applications open in August with online assessments, video interviews, and assessment center Superdays.",
+    "careers_url": "https://home.barclays/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000029",
+    "name": "HSBC",
+    "tier": "bulge_bracket",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London",
+      "Hong Kong"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits globally from target and semi-target schools with summer analyst programs in IB and global banking. Applications open in August, and the firm is more accessible than other BBs with a strong Asia-Pacific presence.",
+    "careers_url": "https://www.hsbc.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000030",
+    "name": "Greenhill & Co",
+    "tier": "elite_boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from top target schools for a lean summer analyst class focused on M&A advisory. Applications open in August, and the firm is known for a pure advisory model with no underwriting or trading operations.",
+    "careers_url": "https://www.greenhill.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000031",
+    "name": "Rothschild & Co",
+    "tier": "elite_boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London",
+      "Paris"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from top target schools in the US and Europe with a global advisory summer analyst program. Applications open in late summer, and the firm emphasizes cross-border M&A expertise and its centuries-old institutional reputation.",
+    "careers_url": "https://www.rothschildandco.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000032",
+    "name": "Blackstone",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity",
+      "real_estate",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "One of the most selective buy-side internship programs, recruiting almost exclusively from top target schools and prior IB analyst experience. Applications open in late summer with multiple rounds of technical and behavioral interviews focusing on LBO modeling and deal judgment.",
+    "careers_url": "https://www.blackstone.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000033",
+    "name": "KKR",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Highly selective PE internship recruiting from top target schools, often requiring prior banking or consulting internship experience. Interview process focuses heavily on LBO modeling, deal case studies, and investment judgment.",
+    "careers_url": "https://www.kkr.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000034",
+    "name": "Apollo Global Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits selectively from top target schools for summer analyst roles across PE, credit, and real assets. Known for a rigorous interview process with heavy emphasis on credit analysis and distressed investing knowledge.",
+    "careers_url": "https://www.apollo.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000035",
+    "name": "Carlyle Group",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Washington, DC",
+    "offices": [
+      "DC",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from top target schools for a selective summer analyst program across multiple PE verticals. Applications open in late summer, with interviews focusing on LBO modeling, industry knowledge, and investment thesis development.",
+    "careers_url": "https://www.carlyle.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000036",
+    "name": "Bain Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Highly selective PE recruiting from top target schools with a preference for candidates with consulting or banking backgrounds. Interview process includes case studies, LBO modeling, and portfolio company analysis.",
+    "careers_url": "https://www.baincapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000037",
+    "name": "Silver Lake",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Menlo Park, CA",
+    "offices": [
+      "Menlo Park",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Ultra-selective technology-focused PE firm recruiting from top target schools for a very small summer analyst class. Strong preference for candidates with technology sector knowledge and prior IB or consulting experience.",
+    "careers_url": "https://www.silverlake.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000038",
+    "name": "Warburg Pincus",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from top target schools for a selective growth equity summer analyst program. Known for a longer-duration investment approach, with interviews focusing on growth investing frameworks and company evaluation.",
+    "careers_url": "https://www.warburgpincus.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000039",
+    "name": "TPG",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "San Francisco, CA",
+    "offices": [
+      "San Francisco",
+      "Fort Worth"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from top target schools for a selective summer analyst program across PE, growth, and impact investing. Interview process emphasizes LBO modeling, sector expertise, and fit with the firm's collaborative culture.",
+    "careers_url": "https://www.tpg.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000040",
+    "name": "Thoma Bravo",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago",
+      "San Francisco"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Leading software-focused PE firm recruiting from top target schools for a small summer analyst class. Interviews emphasize software business model analysis, recurring revenue metrics, and LBO modeling with a technology lens.",
+    "careers_url": "https://www.thomabravo.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000041",
+    "name": "Vista Equity Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Austin, TX",
+    "offices": [
+      "Austin",
+      "San Francisco"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Enterprise software-focused PE firm recruiting from top target schools for a selective summer analyst program. Known for operational value creation approach, with interviews focusing on software metrics, LBO modeling, and operational improvement frameworks.",
+    "careers_url": "https://www.vistaequitypartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000042",
+    "name": "D.E. Shaw",
+    "tier": "quant",
+    "roles_offered": [
+      "quant"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Recruits top quantitative talent from elite STEM programs for summer internships in systematic trading and quantitative research. Interview process is highly technical with probability puzzles, coding challenges, and mathematical reasoning tests.",
+    "careers_url": "https://www.deshaw.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000043",
+    "name": "Renaissance Technologies",
+    "tier": "quant",
+    "roles_offered": [
+      "quant"
+    ],
+    "headquarters": "East Setauket, NY",
+    "offices": [
+      "East Setauket"
+    ],
+    "gpa_floor_estimated": 3.9,
+    "recruiting_profile": "The most secretive and selective quant fund, recruiting almost exclusively PhDs and exceptional undergraduates from top math, physics, and CS programs. Extremely small class with a multi-round technical interview process focused on original research and mathematical problem-solving.",
+    "careers_url": "https://www.rentec.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000044",
+    "name": "Millennium Management",
+    "tier": "quant",
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Multi-strategy hedge fund recruiting from top quantitative programs for summer analyst roles across discretionary and systematic strategies. Interview process includes technical assessments, market knowledge tests, and portfolio construction exercises.",
+    "careers_url": "https://www.mlp.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000045",
+    "name": "Point72",
+    "tier": "buy_side",
+    "roles_offered": [
+      "quant",
+      "equity_research"
+    ],
+    "headquarters": "Stamford, CT",
+    "offices": [
+      "Stamford",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Recruits from top target schools for the Point72 Academy and summer analyst programs in fundamental L/S equity and systematic strategies. Known for its analyst development program, with interviews focusing on stock pitches, market knowledge, and quantitative reasoning.",
+    "careers_url": "https://careers.point72.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000046",
+    "name": "BlackRock",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "quant"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "San Francisco",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "The world's largest asset manager, recruiting from a broad set of target and semi-target schools for summer analyst programs across portfolio management, risk, and Aladdin technology. Applications open in August with a multi-step process including HireVue and case-based interviews.",
+    "careers_url": "https://careers.blackrock.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000047",
+    "name": "Vanguard",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "Malvern, PA",
+    "offices": [
+      "Malvern",
+      "Charlotte"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from a wide range of schools including semi-targets and non-targets for summer internships across investment management, financial planning, and operations. Known for a collaborative, client-first culture with a less competitive recruiting process than Wall Street peers.",
+    "careers_url": "https://www.vanguardjobs.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000048",
+    "name": "Fidelity Investments",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "equity_research"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from a broad set of schools for summer analyst programs in equity research, fixed income, and asset management. Applications open in August, and the firm is known for giving interns real research responsibilities and a strong mentorship culture.",
+    "careers_url": "https://jobs.fidelity.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000049",
+    "name": "T. Rowe Price",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "equity_research"
+    ],
+    "headquarters": "Baltimore, MD",
+    "offices": [
+      "Baltimore"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from target and semi-target schools for summer analyst programs in equity and fixed income research. Known for a rigorous fundamental research culture, with interviews focusing on stock pitches and investment analysis.",
+    "careers_url": "https://www.troweprice.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000050",
+    "name": "Wellington Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from top target schools for a selective summer analyst program in investment management and research. Known for a partnership structure and long-term investment approach, with interviews emphasizing analytical thinking and market knowledge.",
+    "careers_url": "https://www.wellington.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000051",
+    "name": "PIMCO",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "Newport Beach, CA",
+    "offices": [
+      "Newport Beach",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Recruits from top target schools for a selective summer analyst program focused on fixed income and macro investing. Interview process is rigorous with emphasis on macroeconomic analysis, bond math, and portfolio construction.",
+    "careers_url": "https://careers.pimco.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000052",
+    "name": "BMO Capital Markets",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "Toronto, ON",
+    "offices": [
+      "Toronto",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from US and Canadian target and semi-target schools for summer analyst programs in IB and capital markets. Applications open in August, and the firm offers strong deal flow in the middle market with good exposure to cross-border transactions.",
+    "careers_url": "https://jobs.bmo.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000053",
+    "name": "RBC Capital Markets",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading"
+    ],
+    "headquarters": "Toronto, ON",
+    "offices": [
+      "Toronto",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from a broad range of US and Canadian schools for summer analyst programs across IB and markets. Applications open in August, and the firm is one of the largest Canadian banks with a growing US presence and strong energy and mining practices.",
+    "careers_url": "https://www.rbc.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000054",
+    "name": "TD Securities",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading"
+    ],
+    "headquarters": "Toronto, ON",
+    "offices": [
+      "Toronto",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from US and Canadian target and semi-target schools for summer analyst programs in IB and markets. Known for a supportive culture and strong fixed income franchise, with applications opening in August.",
+    "careers_url": "https://jobs.td.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000055",
+    "name": "CIBC Capital Markets",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "Toronto, ON",
+    "offices": [
+      "Toronto",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from US and Canadian target schools for a summer analyst program focused on M&A and capital markets advisory. Applications open in August, and the firm is known for strong Canadian market presence and growing US operations.",
+    "careers_url": "https://www.cibc.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000056",
+    "name": "Scotiabank Global Banking",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "Toronto, ON",
+    "offices": [
+      "Toronto",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from US and Canadian schools for summer analyst programs in IB and global markets. Known for strong Latin American and emerging markets expertise, with applications opening in August.",
+    "careers_url": "https://www.scotiabank.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000057",
+    "name": "Stifel",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
+    "headquarters": "St. Louis, MO",
+    "offices": [
+      "St. Louis",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from Midwest and national semi-target schools for summer analyst programs in IB and equity research. Applications open in August, and the firm has grown significantly through acquisitions with strong middle-market deal flow.",
+    "careers_url": "https://www.stifel.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000058",
+    "name": "Oppenheimer",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "wealth_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from a mix of target and semi-target schools for summer analyst positions in IB and wealth management. Known for a lean team structure that gives analysts significant responsibility, with applications opening in late summer.",
+    "careers_url": "https://www.oppenheimer.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000059",
+    "name": "KeyBanc Capital Markets",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "Cleveland, OH",
+    "offices": [
+      "Cleveland",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from Midwest semi-target schools for summer analyst programs in middle-market IB and capital markets. Known for strong relationships with middle-market companies and a collaborative culture, with applications opening in August.",
+    "careers_url": "https://www.key.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000060",
+    "name": "TD Cowen",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from target and semi-target schools for summer analyst programs in IB and equity research, with particular strength in healthcare and technology sectors. Applications open in August with a focus on sector knowledge and analytical skills.",
+    "careers_url": "https://www.td.com/us/en/securities/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000061",
+    "name": "Nomura",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Tokyo",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from target and semi-target schools globally for summer analyst programs across IB and markets. Known for strong Asia-Pacific connectivity, with applications opening in August and a multi-round interview process.",
+    "careers_url": "https://www.nomura.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000062",
+    "name": "Mizuho",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from target and semi-target schools for summer analyst programs in IB and debt capital markets. Growing US presence with strong Japanese corporate client relationships, with applications opening in August.",
+    "careers_url": "https://www.mizuhoamericas.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000063",
+    "name": "BNP Paribas",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Paris",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from US and European target schools for summer analyst programs in IB and global markets. One of the largest European banks with strong fixed income and derivatives franchises, with applications opening in August.",
+    "careers_url": "https://careers.bnpparibas.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000064",
+    "name": "Societe Generale",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Paris",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from US and European target schools for summer analyst programs in IB and markets. Known for strong structured products and derivatives expertise, with applications opening in August.",
+    "careers_url": "https://careers.societegenerale.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000065",
+    "name": "Credit Agricole",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Paris"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from target and semi-target schools for summer analyst programs in IB and capital markets. Strong European franchise with growing US presence, with applications opening in August and a focus on structured finance.",
+    "careers_url": "https://careers.credit-agricole.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000066",
+    "name": "Macquarie",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Sydney"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from target and semi-target schools for summer analyst programs in IB, infrastructure, and commodities. Known for strong infrastructure advisory and a global platform, with applications opening in August.",
+    "careers_url": "https://www.macquarie.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000067",
+    "name": "FT Partners",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "San Francisco, CA",
+    "offices": [
+      "San Francisco"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "The leading fintech-focused advisory boutique recruiting from target and semi-target schools for a small summer analyst class. Interviews emphasize fintech industry knowledge and M&A technical skills, with applications opening in late summer.",
+    "careers_url": "https://www.ftpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000068",
+    "name": "LionTree",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Ultra-selective TMT advisory boutique recruiting from top target schools for a very small summer analyst class. Known for advising on landmark media and telecom deals, with interviews emphasizing TMT sector knowledge and deal judgment.",
+    "careers_url": "https://www.liontree.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000069",
+    "name": "Allen & Company",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Highly exclusive TMT advisory firm known for hosting the annual Sun Valley conference. Recruiting is extremely selective from top target schools, with a tiny analyst class and heavy emphasis on relationships and media industry knowledge.",
+    "careers_url": "https://www.allenco.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000070",
+    "name": "Ducera Partners",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking",
+      "restructuring"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Restructuring-focused advisory boutique recruiting from target schools for a small summer analyst class. Founded by former Lazard professionals, with interviews emphasizing restructuring concepts, credit analysis, and financial modeling.",
+    "careers_url": "https://www.ducerapartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000071",
+    "name": "Greentech Capital Advisors",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Clean energy and sustainability-focused advisory boutique recruiting from target and semi-target schools. Small summer analyst class with interviews emphasizing knowledge of energy transition, renewables, and ESG-related M&A.",
+    "careers_url": "https://www.greentechcapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000072",
+    "name": "Leerink Partners",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Leading healthcare-focused investment bank recruiting from target and semi-target schools for a small summer analyst class. Interviews emphasize healthcare industry knowledge, biotech valuation, and sector-specific financial modeling.",
+    "careers_url": "https://www.leerink.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000073",
+    "name": "Canaccord Genuity",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Toronto"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from target and semi-target schools in the US and Canada for summer analyst programs in IB and capital markets. Known for mid-market deal flow with strength in technology and healthcare sectors.",
+    "careers_url": "https://www.canaccordgenuity.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000074",
+    "name": "Ladenburg Thalmann",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking",
+      "wealth_management"
+    ],
+    "headquarters": "Miami, FL",
+    "offices": [
+      "Miami",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from Southeast and national semi-target schools for summer analyst positions in IB and wealth management. Smaller analyst class with good deal exposure for interns, with applications opening in late summer.",
+    "careers_url": "https://www.ladenburg.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000075",
+    "name": "Stephens Inc",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "Little Rock, AR",
+    "offices": [
+      "Little Rock"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from Southeast and national semi-target schools for a summer analyst program in middle-market IB. Family-owned firm with strong deal flow in consumer, healthcare, and industrials, with applications opening in August.",
+    "careers_url": "https://www.stephens.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000076",
+    "name": "D.A. Davidson",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
+    "headquarters": "Great Falls, MT",
+    "offices": [
+      "Great Falls",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from national and regional semi-target schools for summer analyst programs in IB and equity research. Known for strong middle-market presence in the Western US, with applications opening in August.",
+    "careers_url": "https://www.dadavidson.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000077",
+    "name": "Truist Securities",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "Atlanta, GA",
+    "offices": [
+      "Atlanta",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from Southeast target and semi-target schools for summer analyst programs in IB and capital markets. Growing IB platform after the BB&T-SunTrust merger, with applications opening in August.",
+    "careers_url": "https://careers.truist.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000078",
+    "name": "Wells Fargo Securities",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "Charlotte, NC",
+    "offices": [
+      "Charlotte",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from a broad set of target and semi-target schools for summer analyst programs in IB and capital markets. Growing investment banking platform with strong commercial banking relationships feeding deal flow, with applications opening in August.",
+    "careers_url": "https://www.wellsfargojobs.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000079",
+    "name": "MUFG Securities",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from target and semi-target schools for summer analyst programs in IB and capital markets. Japanese parent bank provides strong corporate client relationships, with applications opening in August and a growing US presence.",
+    "careers_url": "https://careers.mufgamericas.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000080",
+    "name": "Solomon Partners",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "TMT-focused advisory boutique recruiting from target and semi-target schools for a small summer analyst class. Known for deep expertise in media, entertainment, and technology transactions, with applications opening in late summer.",
+    "careers_url": "https://solomonpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000081",
+    "name": "Bridgewater Associates",
+    "tier": "buy_side",
+    "roles_offered": [
+      "quant",
+      "asset_management"
+    ],
+    "headquarters": "Westport, CT",
+    "offices": [
+      "Westport"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "The world's largest hedge fund recruits from top target schools for a unique summer associate program emphasizing radical transparency and systematic macro investing. Interview process is culture-heavy with case studies on economic principles and original thinking.",
+    "careers_url": "https://www.bridgewater.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000082",
+    "name": "Citadel Securities",
+    "tier": "quant",
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Chicago"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Leading market maker recruiting top quantitative and engineering talent from elite STEM programs. Interview process is highly technical with probability, statistics, and coding challenges, distinct from Citadel's hedge fund recruiting.",
+    "careers_url": "https://www.citadelsecurities.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000083",
+    "name": "Baupost Group",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Ultra-selective value investing hedge fund with a very small summer analyst class recruited from top target schools. Known for Seth Klarman's deep value approach, with interviews emphasizing fundamental analysis, contrarian thinking, and investment judgment.",
+    "careers_url": "https://www.baupost.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000084",
+    "name": "Elliott Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Leading activist hedge fund recruiting from top target schools for a small summer analyst program. Known for aggressive activism campaigns, with interviews focusing on event-driven investing, corporate governance analysis, and financial modeling.",
+    "careers_url": "https://www.elliottmgmt.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000085",
+    "name": "Tiger Global Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity",
+      "asset_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Prominent technology-focused crossover fund with an extremely selective recruiting process from top target schools. Known for rapid-fire growth investing, with interviews emphasizing tech sector knowledge, growth metrics analysis, and investment judgment.",
+    "careers_url": "https://www.tigerglobal.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000086",
+    "name": "Ares Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity",
+      "capital_markets"
+    ],
+    "headquarters": "Los Angeles, CA",
+    "offices": [
+      "Los Angeles",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from target and semi-target schools for summer analyst programs across credit, PE, and real estate. One of the largest alternative asset managers, with interviews focusing on credit analysis, LBO modeling, and portfolio construction.",
+    "careers_url": "https://www.aresmgmt.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000087",
+    "name": "Oaktree Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "Los Angeles, CA",
+    "offices": [
+      "Los Angeles"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Leading distressed debt investor recruiting from target and semi-target schools for a selective summer analyst program. Known for Howard Marks' investment philosophy, with interviews emphasizing credit analysis, distressed situations, and risk assessment.",
+    "careers_url": "https://www.oaktreecapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000088",
+    "name": "Man Group",
+    "tier": "quant",
+    "roles_offered": [
+      "quant"
+    ],
+    "headquarters": "London, UK",
+    "offices": [
+      "London",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "One of the world's largest publicly traded hedge funds recruiting from top quantitative programs for summer analyst roles in systematic trading and machine learning research. Interview process is technical with emphasis on statistics, programming, and quantitative reasoning.",
+    "careers_url": "https://www.man.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000089",
+    "name": "Balyasny Asset Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "quant",
+      "equity_research"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Multi-strategy hedge fund recruiting from top target schools for summer analyst programs across fundamental equity, macro, and quantitative strategies. Known for a pod-based structure, with interviews focusing on market knowledge and analytical skills.",
+    "careers_url": "https://www.balyasny.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000090",
+    "name": "General Atlantic",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Leading growth equity firm recruiting from top target schools for a selective summer analyst program. Known for later-stage growth investments across technology, healthcare, and financial services, with interviews focusing on growth investing frameworks and company evaluation.",
+    "careers_url": "https://www.generalatlantic.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000091",
+    "name": "Insight Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Software-focused growth equity firm recruiting from top target schools for a small summer analyst class. Known for a data-driven investment approach, with interviews emphasizing SaaS metrics, software business models, and growth equity valuation.",
+    "careers_url": "https://www.insightpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000092",
+    "name": "TA Associates",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Growth-focused PE firm recruiting from target and semi-target schools for summer analyst programs. One of the oldest growth equity firms with strong deal flow in technology, healthcare, and financial services, with applications opening in late summer.",
+    "careers_url": "https://www.ta.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000093",
+    "name": "Summit Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Growth equity firm recruiting from target and semi-target schools for a summer analyst program focused on growth-stage investments. Known for a collaborative culture and cross-sector deal flow, with applications opening in late summer.",
+    "careers_url": "https://www.summitpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000094",
+    "name": "Francisco Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "San Francisco, CA",
+    "offices": [
+      "San Francisco"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Technology-focused PE firm recruiting from top target schools for a selective summer analyst class. Known for complex technology buyouts and carve-outs, with interviews emphasizing technology sector knowledge, LBO modeling, and deal structuring.",
+    "careers_url": "https://www.franciscopartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000095",
+    "name": "Cowen Healthcare",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Healthcare-focused investment bank recruiting from target and semi-target schools for summer analyst programs in healthcare IB and equity research. Strong in biotech and medtech advisory, with applications opening in August.",
+    "careers_url": "https://www.td.com/us/en/securities/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000096",
+    "name": "Guggenheim Securities",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Chicago"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Recruits from target and semi-target schools for summer analyst programs in IB advisory and capital markets. Known for growing deal flow and a strong senior banker network, with applications opening in August.",
+    "careers_url": "https://www.guggenheimpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000097",
+    "name": "Lazard Freres",
+    "tier": "elite_boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Paris"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "The advisory arm of Lazard recruiting selectively from top target schools for summer analyst positions in M&A and restructuring advisory. Known for its French banking heritage and global advisory capabilities.",
+    "careers_url": "https://www.lazard.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000098",
+    "name": "Rothschild North America",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "North American advisory arm recruiting from top target schools for a selective summer analyst class focused on cross-border M&A. Strong European connectivity and a reputation for discreet, high-profile transactions.",
+    "careers_url": "https://www.rothschildandco.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000099",
+    "name": "Duff & Phelps",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Chicago",
+      "LA"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Recruits from target and semi-target schools for summer analyst programs in valuation advisory, restructuring, and transaction opinions. Known as a leading independent valuation firm, with applications opening in late summer.",
+    "careers_url": "https://www.kroll.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000100",
+    "name": "Greenhill Advisors",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Pure advisory boutique recruiting from target schools for a small analyst class focused on global M&A. Known for senior banker involvement and lean deal teams, with applications opening in August.",
+    "careers_url": "https://www.greenhill.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000101",
+    "name": "Citadel Global Equities",
+    "tier": "buy_side",
+    "roles_offered": [
+      "equity_research"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "The fundamental equity arm of Citadel recruiting from top target schools for summer analyst programs in long/short equity research. Interviews focus on stock pitches, financial modeling, and sector-specific knowledge.",
+    "careers_url": "https://www.citadel.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000102",
+    "name": "Sculptor Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Multi-strategy hedge fund recruiting from target and semi-target schools for summer analyst programs across credit, equity, and real estate. Known for a diversified investment platform, with applications opening in late summer.",
+    "careers_url": "https://www.sculptor.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000103",
+    "name": "Pershing Square Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Bill Ackman's concentrated activist fund with an extremely selective recruiting process from top target schools. Very small analyst class with interviews focused on deep fundamental analysis, activist thesis development, and investment conviction.",
+    "careers_url": "https://www.pershingsquareholdings.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000104",
+    "name": "Third Point",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Activist hedge fund recruiting from top target schools for a small summer analyst program. Known for Dan Loeb's event-driven approach, with interviews emphasizing catalyst identification, corporate governance analysis, and financial modeling.",
+    "careers_url": "https://www.thirdpoint.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000105",
+    "name": "Viking Global Investors",
+    "tier": "buy_side",
+    "roles_offered": [
+      "equity_research"
+    ],
+    "headquarters": "Greenwich, CT",
+    "offices": [
+      "Greenwich"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Tiger cub hedge fund recruiting from top target schools for a selective summer analyst program in fundamental long/short equity. Known for deep sector research, with interviews focusing on stock pitches and investment judgment.",
+    "careers_url": "https://www.vikingglobal.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000106",
+    "name": "Lone Pine Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "equity_research"
+    ],
+    "headquarters": "Greenwich, CT",
+    "offices": [
+      "Greenwich"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Tiger cub long/short equity fund recruiting from top target schools for a very small summer analyst class. Known for concentrated positions and deep fundamental research, with interviews focused on stock pitches and analytical rigor.",
+    "careers_url": "https://www.lonepinecapital.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000107",
+    "name": "Coatue Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "equity_research",
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Technology-focused crossover fund recruiting from top target schools for summer analyst programs in public equity and venture/growth investments. Known for data-driven tech investing, with interviews emphasizing technology sector analysis.",
+    "careers_url": "https://www.coatue.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000108",
+    "name": "Marshall Wace",
+    "tier": "quant",
+    "roles_offered": [
+      "quant",
+      "equity_research"
+    ],
+    "headquarters": "London, UK",
+    "offices": [
+      "London",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Systematic and fundamental equity hedge fund recruiting from top programs for summer analyst roles. Known for its TOPS platform that crowdsources trade ideas, with interviews focusing on quantitative skills and investment analysis.",
+    "careers_url": "https://www.mwam.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000109",
+    "name": "Schonfeld Strategic Advisors",
+    "tier": "buy_side",
+    "roles_offered": [
+      "quant",
+      "equity_research"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Multi-strategy hedge fund recruiting from target schools for summer analyst programs across fundamental equity, quantitative, and macro strategies. Pod-based structure offering significant responsibility to junior team members.",
+    "careers_url": "https://www.schonfeld.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000110",
+    "name": "ExodusPoint Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "quant"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Multi-strategy hedge fund recruiting from top quantitative and target business programs for summer analyst roles. Known for systematic and discretionary strategies, with a technical interview process emphasizing quantitative reasoning.",
+    "careers_url": "https://www.exoduspoint.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000111",
+    "name": "Hellman & Friedman",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "San Francisco, CA",
+    "offices": [
+      "San Francisco"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Highly selective PE firm recruiting from top target schools for a very small summer analyst class. Known for large-cap buyouts in software, financial services, and healthcare, with interviews emphasizing LBO modeling and sector expertise.",
+    "careers_url": "https://www.hf.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000112",
+    "name": "Advent International",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Global PE firm recruiting from top target schools for summer analyst programs with strong international deal flow. Known for cross-border buyouts and sector specialization, with interviews focusing on LBO modeling and international business knowledge.",
+    "careers_url": "https://www.adventinternational.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000113",
+    "name": "Permira",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "European-origin PE firm with growing US presence recruiting from top target schools for summer analyst roles. Known for technology, consumer, and healthcare buyouts, with interviews emphasizing LBO modeling and sector-specific due diligence.",
+    "careers_url": "https://www.permira.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000114",
+    "name": "Apax Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Global PE firm recruiting from top target schools for summer analyst positions across technology, healthcare, and services buyouts. Known for its operating partner model, with interviews emphasizing LBO modeling and operational improvement analysis.",
+    "careers_url": "https://www.apax.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000115",
+    "name": "Leonard Green & Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Los Angeles, CA",
+    "offices": [
+      "Los Angeles"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Consumer and services-focused PE firm recruiting from top target schools for a small summer analyst class. Known for retail and consumer buyouts, with interviews focusing on consumer sector analysis and LBO modeling.",
+    "careers_url": "https://www.leonardgreen.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000116",
+    "name": "Clayton Dubilier & Rice",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Operations-focused PE firm recruiting from top target schools for a selective summer analyst program. One of the oldest PE firms, known for operational value creation in industrial and healthcare companies.",
+    "careers_url": "https://www.cdr-inc.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000117",
+    "name": "Welsh Carson Anderson & Stowe",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Healthcare and technology-focused PE firm recruiting from top target schools for a small summer analyst class. Known for sector-specialized buyouts and long hold periods, with interviews emphasizing healthcare or tech sector knowledge.",
+    "careers_url": "https://www.welshcarson.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000118",
+    "name": "GTCR",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Chicago-based PE firm recruiting from top target schools for summer analyst programs. Known for the Leaders Strategy approach to PE investing, with interviews focusing on LBO modeling, management assessment, and sector expertise.",
+    "careers_url": "https://www.gtcr.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000119",
+    "name": "Madison Dearborn Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Leading Chicago-based PE firm recruiting from top target and Midwest semi-target schools for a summer analyst program. Known for TMT, healthcare, and financial services buyouts, with interviews emphasizing LBO modeling and deal judgment.",
+    "careers_url": "https://www.mdcp.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000120",
+    "name": "Veritas Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Government services and technology-focused PE firm recruiting from top target schools for a small summer analyst class. Known for defense and healthcare IT buyouts, with interviews emphasizing sector knowledge and LBO modeling.",
+    "careers_url": "https://www.veritascapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000121",
+    "name": "Moelis Australia",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "Sydney, Australia",
+    "offices": [
+      "Sydney"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Australian advisory arm of Moelis recruiting from top Australian and international universities for summer analyst programs in M&A and restructuring advisory across the Asia-Pacific region.",
+    "careers_url": "https://www.moelis.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000122",
+    "name": "Wedbush Securities",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
+    "headquarters": "Los Angeles, CA",
+    "offices": [
+      "Los Angeles",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "West Coast-focused investment bank recruiting from national and regional semi-target schools for summer analyst programs in IB and equity research. Known for technology sector coverage, with applications opening in late summer.",
+    "careers_url": "https://www.wedbush.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000123",
+    "name": "Craig-Hallum Capital Group",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
+    "headquarters": "Minneapolis, MN",
+    "offices": [
+      "Minneapolis"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Midwest-based investment bank recruiting from regional and national semi-target schools for summer analyst programs in IB and equity research. Known for growth company advisory and strong Midwest presence.",
+    "careers_url": "https://www.craig-hallum.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000124",
+    "name": "Maxim Group",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "NYC-based investment bank recruiting from semi-target and non-target schools for summer analyst programs in IB and equity research. More accessible recruiting process, with applications opening in late summer.",
+    "careers_url": "https://www.maximgrp.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000125",
+    "name": "B. Riley Financial",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
+    "headquarters": "Los Angeles, CA",
+    "offices": [
+      "Los Angeles",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "West Coast investment bank recruiting from national semi-target schools for summer analyst programs in IB, equity research, and capital markets. Growing platform through acquisitions with strong middle-market deal flow.",
+    "careers_url": "https://www.brileyfin.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000126",
+    "name": "Janney Montgomery Scott",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "wealth_management"
+    ],
+    "headquarters": "Philadelphia, PA",
+    "offices": [
+      "Philadelphia"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Philadelphia-based investment bank recruiting from Mid-Atlantic semi-target schools for summer analyst programs in IB and wealth management. Strong regional presence with good middle-market deal flow.",
+    "careers_url": "https://www.janney.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000127",
+    "name": "Sandler ONeill (now Piper Sandler)",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Financial services-focused IB now part of Piper Sandler, recruiting from target and semi-target schools. Known as the leading bank advisory franchise, with applications through the Piper Sandler platform.",
+    "careers_url": "https://www.pipersandler.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000128",
+    "name": "Keefe Bruyette & Woods",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking",
+      "equity_research"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Financial institutions-focused boutique recruiting from target and semi-target schools for summer analyst programs in bank M&A and equity research. Known as the top FIG advisory franchise, with interviews emphasizing financial services sector knowledge.",
+    "careers_url": "https://www.kbw.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000129",
+    "name": "Lazard Asset Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "The asset management arm of Lazard recruiting from target and semi-target schools for summer analyst programs in equity and fixed income research. Known for fundamental active management with a global research platform.",
+    "careers_url": "https://www.lazardassetmanagement.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000130",
+    "name": "Neuberger Berman",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Independent asset manager recruiting from target and semi-target schools for summer analyst programs in equities, fixed income, and alternatives. Employee-owned firm known for a collaborative culture and long-term investment approach.",
+    "careers_url": "https://www.nb.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000131",
+    "name": "AllianceBernstein",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "equity_research"
+    ],
+    "headquarters": "Nashville, TN",
+    "offices": [
+      "Nashville",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Global asset manager recently relocated to Nashville, recruiting from target and semi-target schools for summer analyst programs in research and portfolio management. Known for fundamental equity research and a blend of active and systematic strategies.",
+    "careers_url": "https://www.alliancebernstein.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000132",
+    "name": "Invesco",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "Atlanta, GA",
+    "offices": [
+      "Atlanta",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Global asset manager recruiting from a broad set of schools for summer analyst programs in investment management and distribution. One of the largest independent investment managers, with applications opening in August.",
+    "careers_url": "https://www.invesco.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000133",
+    "name": "Nuveen",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "real_estate"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "TIAA's asset management arm recruiting from target and semi-target schools for summer analyst programs in fixed income, real estate, and responsible investing. Known for ESG integration and real assets expertise.",
+    "careers_url": "https://www.nuveen.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000134",
+    "name": "Prudential Financial",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management"
+    ],
+    "headquarters": "Newark, NJ",
+    "offices": [
+      "Newark",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Major financial services firm recruiting from a broad set of schools for summer analyst programs in investment management, insurance, and retirement. Known for a comprehensive internship program with multiple rotational tracks.",
+    "careers_url": "https://jobs.prudential.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000135",
+    "name": "State Street Global Advisors",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "quant"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "One of the world's largest asset managers recruiting from target and semi-target schools for summer analyst programs in index, active, and ETF management. Creator of the SPDR ETF franchise, with applications opening in August.",
+    "careers_url": "https://careers.statestreet.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000136",
+    "name": "Northern Trust",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "wealth_management"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Wealth management and asset servicing firm recruiting from Midwest target and semi-target schools for summer analyst programs. Known for ultra-high-net-worth wealth management and institutional asset servicing.",
+    "careers_url": "https://www.northerntrust.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000137",
+    "name": "BNY Mellon",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Pittsburgh"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "One of the world's largest custodian banks recruiting from a broad set of schools for summer analyst programs in asset servicing, investment management, and markets. Applications open in August with a structured internship program.",
+    "careers_url": "https://www.bnymellon.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000138",
+    "name": "CVC Capital Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "One of the world's largest PE firms by AUM recruiting from top target schools for summer analyst programs. European-origin firm with growing US presence, known for large-cap buyouts across industrials, consumer, and TMT.",
+    "careers_url": "https://www.cvc.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000139",
+    "name": "EQT Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Stockholm"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Nordic-origin PE firm recruiting from top target schools for summer analyst roles. Known for its thematic investment approach and purpose-driven investing philosophy, with interviews focusing on LBO modeling and sector expertise.",
+    "careers_url": "https://www.eqtgroup.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000140",
+    "name": "Cinven",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "London, UK",
+    "offices": [
+      "London",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "European PE firm with selective US recruiting from top target schools for summer analyst positions. Known for healthcare, TMT, and financial services buyouts, with interviews emphasizing LBO modeling and European market knowledge.",
+    "careers_url": "https://www.cinven.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000141",
+    "name": "Platinum Equity",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Beverly Hills, CA",
+    "offices": [
+      "Beverly Hills"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "M&A and operations-focused PE firm recruiting from target and West Coast semi-target schools for summer analyst programs. Known for complex corporate divestitures and carve-outs, with interviews focusing on operational turnaround analysis.",
+    "careers_url": "https://www.platinumequity.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000142",
+    "name": "New Mountain Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Defensive growth PE firm recruiting from top target schools for a selective summer analyst class. Known for investing in resilient business models and defensive industries, with interviews emphasizing sector analysis and growth investing.",
+    "careers_url": "https://www.newmountaincapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000143",
+    "name": "Genstar Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "San Francisco, CA",
+    "offices": [
+      "San Francisco"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Middle-market PE firm recruiting from top target and West Coast semi-target schools for a summer analyst program. Known for financial services, healthcare, and software buyouts with a collaborative culture.",
+    "careers_url": "https://www.genstarcapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000144",
+    "name": "Clearlake Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Santa Monica, CA",
+    "offices": [
+      "Santa Monica"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Technology and industrials-focused PE firm recruiting from target and semi-target schools for summer analyst programs. Known for software and technology-enabled services buyouts, with interviews emphasizing operational analysis.",
+    "careers_url": "https://www.clearlake.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000145",
+    "name": "Roark Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Atlanta, GA",
+    "offices": [
+      "Atlanta"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Franchise and restaurant-focused PE firm recruiting from Southeast and national target schools for a summer analyst program. Known for owning major franchise brands, with interviews emphasizing consumer sector and franchise business model analysis.",
+    "careers_url": "https://www.roarkcapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000146",
+    "name": "Susquehanna International Group",
+    "tier": "quant",
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
+    "headquarters": "Bala Cynwyd, PA",
+    "offices": [
+      "Bala Cynwyd",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Major quantitative trading firm recruiting from top STEM and target business programs for summer internships in trading, quantitative research, and technology. Known for a game-theory-based interview process with poker and mental math components.",
+    "careers_url": "https://sig.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000147",
+    "name": "Virtu Financial",
+    "tier": "quant",
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Leading electronic market maker recruiting from top STEM programs for summer internships in trading, quantitative research, and engineering. Interview process emphasizes probability, coding, and market microstructure knowledge.",
+    "careers_url": "https://www.virtu.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000148",
+    "name": "Hudson River Trading",
+    "tier": "quant",
+    "roles_offered": [
+      "quant"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "Quantitative trading firm recruiting from top STEM programs for summer internships in algorithmic trading and research. Known for a flat organizational structure, with interviews featuring probability puzzles, coding challenges, and systems design.",
+    "careers_url": "https://www.hudsonrivertrading.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000149",
+    "name": "Optiver",
+    "tier": "quant",
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago",
+      "Amsterdam"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Global market maker recruiting from top STEM programs for summer internships in trading, quantitative research, and engineering. Known for mental math speed tests and probability-focused interview rounds.",
+    "careers_url": "https://optiver.com/working-at-optiver/career-opportunities",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000150",
+    "name": "IMC Trading",
+    "tier": "quant",
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago",
+      "Amsterdam"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Global market maker recruiting from top STEM programs for summer internships in trading and quantitative research. Interview process includes mental math, probability puzzles, and trading simulations.",
+    "careers_url": "https://www.imc.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000151",
+    "name": "Akuna Capital",
+    "tier": "quant",
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Options-focused trading firm recruiting from STEM and target business programs for summer internships in trading, quantitative research, and development. More accessible than larger quant firms, with interviews featuring probability and coding challenges.",
+    "careers_url": "https://akunacapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000152",
+    "name": "DRW",
+    "tier": "quant",
+    "roles_offered": [
+      "quant",
+      "sales_and_trading"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Diversified trading firm recruiting from top STEM and business programs for summer internships in trading, quantitative research, and technology. Known for a collaborative culture and exposure to multiple asset classes.",
+    "careers_url": "https://drw.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000153",
+    "name": "Jump Trading",
+    "tier": "quant",
+    "roles_offered": [
+      "quant"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago"
+    ],
+    "gpa_floor_estimated": 3.8,
+    "recruiting_profile": "High-frequency trading firm recruiting from top STEM programs for summer internships in quantitative research, algorithm development, and systems engineering. Known for extreme secrecy and a highly technical interview process.",
+    "careers_url": "https://www.jumptrading.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000154",
+    "name": "Mizuho Securities",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Tokyo"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Japanese investment bank recruiting from target and semi-target schools for summer analyst programs in IB and markets. Strong in leveraged finance and cross-border transactions with Japanese corporates.",
+    "careers_url": "https://www.mizuhoamericas.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000155",
+    "name": "Natixis",
+    "tier": "middle_market",
+    "roles_offered": [
+      "capital_markets",
+      "asset_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Paris"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "French corporate and investment bank recruiting from target and semi-target schools for summer analyst programs in structured finance and capital markets. Known for derivatives and structured products expertise.",
+    "careers_url": "https://www.natixis.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000156",
+    "name": "SMBC Nikko Securities",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Tokyo"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Japanese investment bank recruiting from target and semi-target schools for summer analyst programs in IB and capital markets. Growing US presence with strong connections to SMBC's commercial banking franchise.",
+    "careers_url": "https://www.smbcnikko-si.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000157",
+    "name": "ING",
+    "tier": "middle_market",
+    "roles_offered": [
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Amsterdam"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Dutch bank recruiting from target and semi-target schools for summer analyst programs in lending, structured finance, and capital markets. Known for strong European franchise and sustainability-linked finance.",
+    "careers_url": "https://www.ing.jobs",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000158",
+    "name": "Standard Chartered",
+    "tier": "middle_market",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London",
+      "Singapore"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Emerging markets-focused bank recruiting from target and semi-target schools globally for summer analyst programs in IB and markets. Known for strong Africa, Asia, and Middle East presence.",
+    "careers_url": "https://www.sc.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000159",
+    "name": "Evercore ISI",
+    "tier": "elite_boutique",
+    "roles_offered": [
+      "equity_research"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Evercore's equity research arm recruiting from target schools for summer analyst programs in institutional equity research. One of the top-ranked independent research platforms, known for macro and sector coverage.",
+    "careers_url": "https://www.evercore.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000160",
+    "name": "Wolfe Research",
+    "tier": "boutique",
+    "roles_offered": [
+      "equity_research"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Independent equity research firm recruiting from target and semi-target schools for summer analyst programs in sector-specific equity research. Known for differentiated quantitative and fundamental research products.",
+    "careers_url": "https://www.wolferesearch.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000161",
+    "name": "Bernstein Research",
+    "tier": "boutique",
+    "roles_offered": [
+      "equity_research"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Top-ranked independent research platform recruiting from target and semi-target schools for summer analyst programs in equity research. Known for deep sector expertise and influential research publications.",
+    "careers_url": "https://www.alliancebernstein.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000162",
+    "name": "Morningstar",
+    "tier": "buy_side",
+    "roles_offered": [
+      "equity_research",
+      "asset_management"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Investment research firm recruiting from a broad set of schools for summer analyst programs in equity research, manager research, and data analytics. Known for its mutual fund ratings and independent research, with a more accessible recruiting process.",
+    "careers_url": "https://www.morningstar.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000163",
+    "name": "Lazard Growth Acquisition Corp",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Lazard's growth advisory practice recruiting from target schools for summer analyst positions focused on growth-stage company advisory and capital raising. Interviews emphasize knowledge of technology growth companies and private capital markets.",
+    "careers_url": "https://www.lazard.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000164",
+    "name": "Centerview Technology Partners",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "San Francisco, CA",
+    "offices": [
+      "San Francisco"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Centerview's West Coast technology advisory team recruiting from top target schools for a small summer analyst class. Ultra-selective with heavy emphasis on technology M&A knowledge and deal structuring capabilities.",
+    "careers_url": "https://www.centerviewpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000165",
+    "name": "PJT Camberview",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "PJT Partners' shareholder advisory arm recruiting from top target schools for summer analyst positions in activism defense, proxy fights, and corporate governance advisory. Unique niche within IB advisory.",
+    "careers_url": "https://www.pjtpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000166",
+    "name": "Evercore Wealth Management",
+    "tier": "boutique",
+    "roles_offered": [
+      "wealth_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Evercore's wealth management arm recruiting from target and semi-target schools for summer analyst programs in UHNW wealth advisory. Known for sophisticated investment solutions for high-net-worth families and institutions.",
+    "careers_url": "https://www.evercore.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000167",
+    "name": "Brown Brothers Harriman",
+    "tier": "boutique",
+    "roles_offered": [
+      "wealth_management",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Boston",
+      "Philadelphia"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "The oldest and largest private bank in the US recruiting from target and semi-target schools for summer analyst programs in private banking, investor services, and capital markets. Partnership structure with a long-term orientation.",
+    "careers_url": "https://www.bbh.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000168",
+    "name": "Greenhill & Co Australia",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "Sydney, Australia",
+    "offices": [
+      "Sydney"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Greenhill's Australian advisory arm recruiting from top Australian universities for summer analyst programs in M&A advisory. Strong presence in Australian cross-border and domestic M&A transactions.",
+    "careers_url": "https://www.greenhill.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000169",
+    "name": "Centerview Partners London",
+    "tier": "elite_boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "London, UK",
+    "offices": [
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Centerview's London office recruiting from top European target schools for summer analyst positions in cross-border M&A advisory. Same ultra-selective standards as the NYC office with a European deal focus.",
+    "careers_url": "https://www.centerviewpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000170",
+    "name": "Rothschild Financial Advisory",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "North American financial advisory practice recruiting from target schools for summer analyst positions in M&A and restructuring advisory. Focus on cross-border transactions with European connectivity.",
+    "careers_url": "https://www.rothschildandco.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000171",
+    "name": "Compass Point Research",
+    "tier": "boutique",
+    "roles_offered": [
+      "equity_research"
+    ],
+    "headquarters": "Washington, DC",
+    "offices": [
+      "DC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Independent research firm focused on financial services and real estate sectors, recruiting from semi-target schools for summer analyst programs in equity research. Known for deep FIG and REIT coverage.",
+    "careers_url": "https://www.compasspointllc.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000172",
+    "name": "Gilman Ciocia",
+    "tier": "regional",
+    "roles_offered": [
+      "wealth_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.0,
+    "recruiting_profile": "Regional wealth management firm recruiting from a broad set of schools including non-targets for summer analyst programs in financial planning and client advisory. More accessible entry point into finance.",
+    "careers_url": "https://www.gilmanciocia.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000173",
+    "name": "Brookfield Asset Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "real_estate",
+      "private_equity",
+      "asset_management"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "Toronto"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "One of the world's largest alternative asset managers recruiting from target and semi-target schools for summer analyst programs in real estate, infrastructure, and renewable energy investing. Known for its real assets expertise.",
+    "careers_url": "https://www.brookfield.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000174",
+    "name": "Starwood Capital Group",
+    "tier": "buy_side",
+    "roles_offered": [
+      "real_estate"
+    ],
+    "headquarters": "Miami Beach, FL",
+    "offices": [
+      "Miami Beach",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Leading real estate investment firm recruiting from target and semi-target schools for summer analyst programs in real estate PE and REIT management. Known for hospitality and residential real estate investing.",
+    "careers_url": "https://starwoodcapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000175",
+    "name": "Fortress Investment Group",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity",
+      "real_estate"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Diversified alternative asset manager recruiting from target and semi-target schools for summer analyst programs in PE, credit, and real estate. Known for opportunistic investing across multiple asset classes.",
+    "careers_url": "https://www.fortress.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000176",
+    "name": "Angelo Gordon",
+    "tier": "buy_side",
+    "roles_offered": [
+      "asset_management",
+      "real_estate"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Credit and real estate-focused alternative asset manager recruiting from target and semi-target schools for summer analyst programs. Known for distressed debt, real estate, and private credit investing.",
+    "careers_url": "https://www.angelogordon.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000177",
+    "name": "Cerberus Capital Management",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Private investment firm recruiting from target and semi-target schools for summer analyst programs in distressed investing, PE, and lending. Known for turnaround and distressed situations investing.",
+    "careers_url": "https://www.cerberuscapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000178",
+    "name": "HIG Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Miami, FL",
+    "offices": [
+      "Miami",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Middle-market PE and credit firm recruiting from target and semi-target schools for summer analyst programs. Known for small and mid-cap buyouts across industrials, healthcare, and technology.",
+    "careers_url": "https://www.higcapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000179",
+    "name": "American Securities",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Middle-market PE firm recruiting from top target schools for a selective summer analyst class. Known for operationally-focused buyouts in industrials, consumer, and healthcare with a long-duration investment approach.",
+    "careers_url": "https://www.americansecurities.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000180",
+    "name": "Audax Group",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Boston, MA",
+    "offices": [
+      "Boston"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Middle-market PE and private debt firm recruiting from target and semi-target schools for summer analyst programs. Known for buy-and-build strategies in the lower middle market, with strong add-on acquisition expertise.",
+    "careers_url": "https://www.audaxgroup.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000181",
+    "name": "Stone Point Capital",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Greenwich, CT",
+    "offices": [
+      "Greenwich"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Financial services-focused PE firm recruiting from top target schools for a small summer analyst class. Known for deep expertise in insurance, banking, and asset management buyouts.",
+    "careers_url": "https://www.stonepoint.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000182",
+    "name": "GI Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity",
+      "real_estate"
+    ],
+    "headquarters": "San Francisco, CA",
+    "offices": [
+      "San Francisco"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Data infrastructure and healthcare-focused PE firm recruiting from target and West Coast semi-target schools for summer analyst programs. Known for niche sector expertise in data centers and healthcare services.",
+    "careers_url": "https://www.gipartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000183",
+    "name": "Trilantic Capital Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Mid-cap PE firm recruiting from top target schools for a small summer analyst class. Former Lehman Brothers merchant banking spinoff, known for consumer, industrials, and business services buyouts.",
+    "careers_url": "https://www.trilanticnorthamerica.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000184",
+    "name": "Harvest Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Middle-market PE firm recruiting from target and semi-target schools for summer analyst programs. Known for partnering with family-owned and founder-led businesses across industrials and services sectors.",
+    "careers_url": "https://www.harvestpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000185",
+    "name": "Sun Capital Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "Boca Raton, FL",
+    "offices": [
+      "Boca Raton"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Operations-focused PE firm recruiting from target and semi-target schools for summer analyst programs. Known for retail, consumer, and industrial turnarounds with a strong operational improvement approach.",
+    "careers_url": "https://www.suncappart.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000186",
+    "name": "Centre Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Lower middle-market PE firm recruiting from target and semi-target schools for summer analyst programs. Known for consumer, distribution, and specialty manufacturing investments with a collaborative team culture.",
+    "careers_url": "https://www.centrepartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000187",
+    "name": "Sentinel Capital Partners",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Lower middle-market PE firm recruiting from target and semi-target schools for summer analyst programs. Known for healthcare, business services, and consumer investments with strong management partnerships.",
+    "careers_url": "https://www.sentinelpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000188",
+    "name": "Atlas Merchant Capital",
+    "tier": "boutique",
+    "roles_offered": [
+      "investment_banking",
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Merchant banking firm focused on financial services, recruiting from target and semi-target schools for a small summer analyst class. Known for principal investing and advisory in financial institutions.",
+    "careers_url": "https://www.atlasmcap.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000189",
+    "name": "Rothschild Merchant Banking",
+    "tier": "buy_side",
+    "roles_offered": [
+      "private_equity"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Rothschild's direct investing arm recruiting from top target schools for a small summer analyst class. Known for European mid-market buyouts with proprietary deal flow from the advisory business.",
+    "careers_url": "https://www.rothschildandco.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000190",
+    "name": "Deutsche Bank Securities",
+    "tier": "bulge_bracket",
+    "roles_offered": [
+      "sales_and_trading",
+      "equity_research"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Deutsche Bank's US securities arm recruiting from target and semi-target schools for summer analyst programs in markets and research. Known for strong European rates and FX franchises with growing US equities presence.",
+    "careers_url": "https://careers.db.com",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000191",
+    "name": "UBS Investment Bank",
+    "tier": "bulge_bracket",
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "UBS's investment banking division recruiting from top target schools for summer analyst programs across M&A, leveraged finance, and markets. Known for strong European and Swiss deal connectivity.",
+    "careers_url": "https://www.ubs.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000192",
+    "name": "Barclays Investment Bank",
+    "tier": "bulge_bracket",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Barclays' CIB division recruiting from target schools for summer analyst programs in IB, credit, and equity capital markets. Known for strength in leveraged finance and high yield origination.",
+    "careers_url": "https://home.barclays/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000193",
+    "name": "Credit Suisse (now UBS)",
+    "tier": "bulge_bracket",
+    "roles_offered": [
+      "investment_banking",
+      "sales_and_trading"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Former Credit Suisse teams now integrated into UBS, recruiting through the UBS platform for summer analyst programs. Legacy CS teams maintain expertise in leveraged finance, M&A, and equity capital markets.",
+    "careers_url": "https://www.ubs.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000194",
+    "name": "Cowen Prime Brokerage",
+    "tier": "boutique",
+    "roles_offered": [
+      "sales_and_trading",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Prime brokerage and execution services division now part of TD Securities, recruiting from target and semi-target schools for summer analyst programs in prime services and electronic trading.",
+    "careers_url": "https://www.td.com/us/en/securities/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000195",
+    "name": "Drexel Hamilton",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Veteran-owned investment bank recruiting from a broad set of schools including non-targets for summer analyst programs in IB and capital markets. Known for its mission-driven culture and veteran hiring commitment.",
+    "careers_url": "https://www.drexelhamilton.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000196",
+    "name": "Loop Capital Markets",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking",
+      "capital_markets"
+    ],
+    "headquarters": "Chicago, IL",
+    "offices": [
+      "Chicago",
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Minority-owned investment bank recruiting from a broad set of schools for summer analyst programs in IB, capital markets, and municipal finance. Known for public finance and corporate advisory with a diverse culture.",
+    "careers_url": "https://www.loopcapital.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000197",
+    "name": "Sievert Larsen & Associates",
+    "tier": "regional",
+    "roles_offered": [
+      "investment_banking"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.3,
+    "recruiting_profile": "Boutique advisory firm recruiting from semi-target and regional schools for summer analyst programs in middle-market M&A advisory. Lean team structure providing significant deal exposure for interns.",
+    "careers_url": "https://www.sievertlarsen.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000198",
+    "name": "Houlihan Lokey Financial Restructuring",
+    "tier": "middle_market",
+    "roles_offered": [
+      "restructuring"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "LA"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Houlihan Lokey's top-ranked restructuring practice recruiting from target and semi-target schools for summer analyst positions focused on distressed advisory. The number one restructuring bank globally by deal count.",
+    "careers_url": "https://hl.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000199",
+    "name": "Greenhill Restructuring",
+    "tier": "boutique",
+    "roles_offered": [
+      "restructuring"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Greenhill's restructuring advisory practice recruiting from target schools for summer analyst positions in distressed M&A and restructuring. Known for creditor-side and debtor-side advisory mandates.",
+    "careers_url": "https://www.greenhill.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000200",
+    "name": "Perella Weinberg Restructuring",
+    "tier": "boutique",
+    "roles_offered": [
+      "restructuring"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "PWP's restructuring advisory group recruiting from top target schools for summer analyst positions. Known for complex liability management and distressed situations advisory with lean deal teams.",
+    "careers_url": "https://www.pwpartners.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000201",
+    "name": "Willkie Farr Advisory",
+    "tier": "boutique",
+    "roles_offered": [
+      "restructuring"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC"
+    ],
+    "gpa_floor_estimated": 3.5,
+    "recruiting_profile": "Advisory practice affiliated with the law firm, recruiting from target and semi-target schools for summer analyst programs in restructuring and special situations advisory. Unique legal-financial hybrid perspective.",
+    "careers_url": "https://www.willkie.com/careers",
+    "scraper_adapter": null,
+    "last_scraped_at": null
+  },
+  {
+    "id": "00000000-0000-4000-a000-000000000202",
+    "name": "Rothschild Restructuring",
+    "tier": "boutique",
+    "roles_offered": [
+      "restructuring"
+    ],
+    "headquarters": "New York, NY",
+    "offices": [
+      "NYC",
+      "London"
+    ],
+    "gpa_floor_estimated": 3.7,
+    "recruiting_profile": "Rothschild's global restructuring practice recruiting from top target schools for summer analyst positions in distressed advisory. Known for cross-border restructuring mandates with European connectivity.",
+    "careers_url": "https://www.rothschildandco.com/careers",
     "scraper_adapter": null,
     "last_scraped_at": null
   }

@@ -4,7 +4,7 @@ All Claude API interactions go through this module. Never call the Anthropic
 SDK directly from business logic — always go through these functions so that
 error handling, logging, and model selection are centralized.
 
-Model: claude-sonnet-4-5-20250514 for all calls.
+Model: claude-sonnet-4-20250514 (primary), claude-haiku-4-5-20251001 (fast/cheap).
 Temperature: 0.3 for scoring/evaluation, 0.7 for drafting messages.
 """
 
@@ -20,7 +20,7 @@ from typing import Any
 import anthropic
 from dotenv import load_dotenv
 
-from app.models import Posting, StudentProfile
+from app.models import Firm, Posting, StudentProfile
 from app.prompts import (
     FIT_SCORE_QUALITATIVE_PROMPT,
     PROFILE_REVIEW_PROMPT,
@@ -31,7 +31,8 @@ load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", "..", ".en
 
 logger = logging.getLogger(__name__)
 
-MODEL = "claude-sonnet-4-5-20250514"
+MODEL = "claude-sonnet-4-20250514"
+MODEL_FAST = "claude-haiku-4-5-20251001"
 _SCORE_TEMPERATURE = 0.3
 _DRAFT_TEMPERATURE = 0.7
 
@@ -422,7 +423,7 @@ Return a JSON array of 2-3 strings. Each string is one complete message draft. R
 
     try:
         response = client.messages.create(
-            model=MODEL,
+            model=MODEL_FAST,
             max_tokens=2048,
             temperature=_DRAFT_TEMPERATURE,
             messages=[{"role": "user", "content": prompt}],
@@ -495,7 +496,7 @@ Return ONLY the thank-you message text. No JSON, no quotes, no formatting."""
 
     try:
         response = client.messages.create(
-            model=MODEL,
+            model=MODEL_FAST,
             max_tokens=512,
             temperature=_DRAFT_TEMPERATURE,
             messages=[{"role": "user", "content": prompt}],
@@ -576,7 +577,7 @@ Be honest. A mediocre answer is a 40-60. A good answer is 70-85. Only 85+ for an
 
     try:
         response = client.messages.create(
-            model=MODEL,
+            model=MODEL_FAST,
             max_tokens=1024,
             temperature=_SCORE_TEMPERATURE,
             messages=[{"role": "user", "content": prompt}],
@@ -649,7 +650,7 @@ Return ONLY the summary text. No JSON, no formatting."""
 
     try:
         response = client.messages.create(
-            model=MODEL,
+            model=MODEL_FAST,
             max_tokens=512,
             temperature=_DRAFT_TEMPERATURE,
             messages=[{"role": "user", "content": prompt}],
@@ -664,6 +665,154 @@ Return ONLY the summary text. No JSON, no formatting."""
     except anthropic.APIError as exc:
         logger.error(
             "claude_client.generate_weekly_summary_text.api_error",
+            extra={"error": str(exc)},
+        )
+        raise
+
+
+# ------------------------------------------------------------------
+# 8. Follow-up message generation
+# ------------------------------------------------------------------
+
+
+def generate_follow_up_message(
+    student_name: str,
+    contact_name: str,
+    firm_name: str,
+    days_since_outreach: int,
+) -> str:
+    """Generate a follow-up message for an unresponsive networking contact.
+
+    Args:
+        student_name: The student's name.
+        contact_name: The contact who hasn't responded.
+        firm_name: The firm the contact works at.
+        days_since_outreach: Number of days since the initial outreach.
+
+    Returns:
+        A follow-up message string, under 50 words.
+
+    Raises:
+        anthropic.APIError: If the API call fails.
+    """
+    client = _get_client()
+    first_name = contact_name.split()[0]
+
+    prompt = f"""Write a short follow-up message from {student_name} to {first_name} at {firm_name}. It has been {days_since_outreach} days since the initial outreach with no response.
+
+RULES:
+1. Under 50 words.
+2. Acknowledge they are busy without being passive-aggressive.
+3. Restate the specific ask (a 15-minute call about {firm_name}).
+4. Sound like a real student — polite, direct, not desperate.
+5. No subject line — just the message body.
+
+Return ONLY the follow-up message text. No JSON, no quotes, no formatting."""
+
+    try:
+        response = client.messages.create(
+            model=MODEL_FAST,
+            max_tokens=512,
+            temperature=_DRAFT_TEMPERATURE,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        result = response.content[0].text.strip()
+        logger.info(
+            "claude_client.generate_follow_up_message.completed",
+            extra={"firm": firm_name, "days_since": days_since_outreach},
+        )
+        return result
+
+    except anthropic.APIError as exc:
+        logger.error(
+            "claude_client.generate_follow_up_message.api_error",
+            extra={"error": str(exc)},
+        )
+        raise
+
+
+# ------------------------------------------------------------------
+# 9. "Why {Firm}?" talking points generation
+# ------------------------------------------------------------------
+
+
+def generate_why_firm_talking_points(
+    profile: StudentProfile,
+    firm: Firm,
+) -> list[str]:
+    """Generate personalized 'Why {firm}?' talking points via Claude.
+
+    Args:
+        profile: The student's parsed profile.
+        firm: The target firm.
+
+    Returns:
+        A list of 3-5 talking-point strings.
+
+    Raises:
+        ValueError: If the response cannot be parsed as a JSON array.
+        anthropic.APIError: If the API call fails.
+    """
+    client = _get_client()
+
+    roles_str = ", ".join(firm.roles_offered[:3]) if firm.roles_offered else "various roles"
+    experience_str = "; ".join(
+        f"{exp.role} at {exp.organization}" for exp in profile.prior_experience[:3]
+    ) if profile.prior_experience else "no prior finance experience"
+
+    prompt = f"""You are an interview prep coach for undergraduate finance students. Generate 3-5 personalized "Why {firm.name}?" talking points.
+
+STUDENT PROFILE:
+- Name: {profile.name}
+- School: {profile.school}
+- Major: {profile.major}
+- GPA: {profile.gpa}
+- Target roles: {', '.join(profile.target_roles[:3])}
+- Prior experience: {experience_str}
+- Clubs: {', '.join(profile.clubs[:4])}
+- Technical skills: {', '.join(profile.technical_skills[:4])}
+
+FIRM PROFILE:
+- Name: {firm.name}
+- Tier: {firm.tier}
+- Headquarters: {firm.headquarters}
+- Roles offered: {roles_str}
+- Recruiting profile: {firm.recruiting_profile[:200]}
+
+RULES:
+1. Return 3-5 talking points.
+2. Each point should be 1-2 sentences.
+3. Be specific — reference the student's actual background and the firm's actual attributes.
+4. Never use generic filler like "great culture" or "learning opportunity" without specifics.
+5. At least one point should connect the student's experience to the firm's focus.
+6. At least one point should reference the firm's tier, deal type, or competitive position.
+
+Return a JSON array of 3-5 strings. Each string is one talking point. Return ONLY the JSON array."""
+
+    try:
+        response = client.messages.create(
+            model=MODEL_FAST,
+            max_tokens=1024,
+            temperature=_DRAFT_TEMPERATURE,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw_text = response.content[0].text
+        result = _extract_json_list(raw_text)
+        logger.info(
+            "claude_client.generate_why_firm_talking_points.completed",
+            extra={"firm": firm.name, "points_count": len(result)},
+        )
+        return result
+
+    except anthropic.APIError as exc:
+        logger.error(
+            "claude_client.generate_why_firm_talking_points.api_error",
+            extra={"error": str(exc)},
+        )
+        raise
+    except ValueError as exc:
+        logger.error(
+            "claude_client.generate_why_firm_talking_points.json_parse_error",
             extra={"error": str(exc)},
         )
         raise

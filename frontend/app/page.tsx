@@ -317,6 +317,14 @@ export default function HomePage() {
                     Privacy
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="/accessibility"
+                    className="hover:text-ink-primary transition-colors"
+                  >
+                    Accessibility
+                  </a>
+                </li>
               </ul>
             </div>
 

@@ -8,6 +8,8 @@ import type {
   ApplicationUpdate,
   ApplicationStats,
   Alumnus,
+  AlumniSearchParams,
+  AlumniImportResult,
   NetworkingContact,
   NetworkingContactCreate,
   OutreachDraftResponse,
@@ -20,20 +22,41 @@ import type {
   TimelineEvent,
   TimelineEventCreate,
   WeeklySummary,
+  Notification,
 } from "./types";
+import { getSupabaseBrowserClient } from "./supabase";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
+async function getAuthHeaders(): Promise<Record<string, string>> {
+  try {
+    const supabase = getSupabaseBrowserClient();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (session?.access_token) {
+      return { Authorization: `Bearer ${session.access_token}` };
+    }
+  } catch {
+    // No session available — continue without auth header
+  }
+  return {};
+}
+
 async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 3000);
+  const timeout = setTimeout(() => controller.abort(), 15000);
 
   try {
+    const authHeaders = await getAuthHeaders();
+    const isFormData = init?.body instanceof FormData;
     const res = await fetch(`${API_BASE}${path}`, {
       ...init,
       signal: controller.signal,
       headers: {
-        "Content-Type": "application/json",
+        // Skip Content-Type for FormData — browser sets multipart boundary automatically
+        ...(isFormData ? {} : { "Content-Type": "application/json" }),
+        ...authHeaders,
         ...init?.headers,
       },
     });
@@ -55,23 +78,39 @@ export async function uploadResume(
   const form = new FormData();
   form.append("file", file);
 
-  const res = await fetch(`${API_BASE}/api/resume/upload`, {
-    method: "POST",
-    body: form,
-  });
-
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({ detail: res.statusText }));
-    throw new Error(body.detail || `Upload failed: ${res.status}`);
+  const authHeaders = await getAuthHeaders();
+  if (!authHeaders.Authorization) {
+    throw new Error("Please sign in before uploading your resume.");
   }
 
-  return res.json();
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 60000); // 60s for resume parsing
+
+  try {
+    const res = await fetch(`${API_BASE}/api/resume/upload`, {
+      method: "POST",
+      body: form,
+      signal: controller.signal,
+      headers: {
+        ...authHeaders,
+      },
+    });
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new Error(body.detail || `Upload failed: ${res.status}`);
+    }
+
+    return res.json();
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 export async function saveProfile(
   profile: StudentProfile
 ): Promise<{ profile: StudentProfile; message: string }> {
-  return apiFetch("/api/resume/save", {
+  return apiFetch("/api/resume/confirm", {
     method: "POST",
     body: JSON.stringify(profile),
   });
@@ -155,6 +194,37 @@ export async function getAlumni(
   return apiFetch(`/api/alumni/${firmId}`);
 }
 
+export async function searchAlumni(
+  params: AlumniSearchParams
+): Promise<{ alumni: Alumnus[]; total: number }> {
+  const qs = new URLSearchParams();
+  if (params.school) qs.set("school", params.school);
+  if (params.company) qs.set("company", params.company);
+  if (params.name) qs.set("name", params.name);
+  if (params.graduation_year) qs.set("graduation_year", String(params.graduation_year));
+  if (params.limit) qs.set("limit", String(params.limit));
+  if (params.offset) qs.set("offset", String(params.offset));
+  return apiFetch(`/api/alumni/search?${qs.toString()}`);
+}
+
+export async function importAlumniCSV(file: File): Promise<AlumniImportResult> {
+  const formData = new FormData();
+  formData.append("file", file);
+  return apiFetch("/api/alumni/import-csv", {
+    method: "POST",
+    body: formData,
+  });
+}
+
+export async function createAlumnus(
+  data: Partial<Alumnus> & { name: string; graduation_year: number }
+): Promise<{ alumnus: Alumnus }> {
+  return apiFetch("/api/alumni", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
 export async function getNetworkingContacts(): Promise<NetworkingContact[]> {
   const data = await apiFetch<{ contacts: NetworkingContact[] }>("/api/networking/contacts");
   return data.contacts;
@@ -232,6 +302,12 @@ export async function getPrepHistory(): Promise<{ sessions: PrepSession[] }> {
   return apiFetch("/api/prep/history");
 }
 
+export async function getSessionAnswers(
+  sessionId: string
+): Promise<{ answers: PrepAnswer[] }> {
+  return apiFetch(`/api/prep/session/${sessionId}/answers`);
+}
+
 export async function getWhyFirm(
   firmId: string
 ): Promise<{ talking_points: string[]; firm_name: string }> {
@@ -273,6 +349,10 @@ export async function deleteTimelineEvent(id: string): Promise<void> {
   await apiFetch(`/api/timeline/events/${id}`, { method: "DELETE" });
 }
 
+export async function generateTimeline(): Promise<{ events_created: number; message: string }> {
+  return apiFetch("/api/timeline/generate", { method: "POST" });
+}
+
 export async function getWeeklySummary(): Promise<WeeklySummary> {
   return apiFetch("/api/timeline/weekly");
 }
@@ -280,4 +360,26 @@ export async function getWeeklySummary(): Promise<WeeklySummary> {
 export async function getAllFirms(): Promise<Firm[]> {
   const data = await apiFetch<{ firms: Firm[] }>("/api/firms");
   return data.firms;
+}
+
+// ============================================================
+// Notifications
+// ============================================================
+
+export async function getNotifications(): Promise<Notification[]> {
+  const data = await apiFetch<{ notifications: Notification[] }>("/api/notifications");
+  return data.notifications;
+}
+
+// ============================================================
+// Upcoming Applications
+// ============================================================
+
+export async function getUpcomingApplications(days?: number): Promise<Application[]> {
+  const params = new URLSearchParams();
+  if (days) params.set("days", String(days));
+  const query = params.toString();
+  const path = `/api/applications/upcoming${query ? `?${query}` : ""}`;
+  const data = await apiFetch<{ applications: Application[] }>(path);
+  return data.applications;
 }

@@ -7,3 +7,5 @@ python-multipart
 supabase
 httpx
 pytest
+slowapi
+ruff

@@ -85,6 +85,15 @@ export interface Posting {
   estimated_effort_minutes: number;
 }
 
+export interface ScoreBreakdown {
+  gpa: number;
+  class_year: number;
+  role_match: number;
+  coursework: number;
+  geography: number;
+  experience: number;
+}
+
 export interface FitScore {
   user_id: string;
   posting_id: string;
@@ -94,6 +103,7 @@ export interface FitScore {
   strengths: string[];
   gaps: string[];
   computed_at: string;
+  breakdown: ScoreBreakdown | null;
 }
 
 export interface OpportunityResponse {
@@ -165,6 +175,11 @@ export interface ApplicationStats {
   total: number;
   by_status: Record<string, number>;
   by_tier: Record<string, number>;
+  conversion_rates?: {
+    applied_to_interview: number;
+    interview_to_offer: number;
+    overall_to_offer: number;
+  };
 }
 
 // ============================================================
@@ -181,7 +196,27 @@ export interface Alumnus {
   school: string;
   major: string | null;
   connection_hooks: string[];
+  email: string | null;
+  linkedin_url: string | null;
+  current_company: string | null;
+  city: string | null;
+  source: "seed" | "csv_import" | "manual";
   created_at: string;
+}
+
+export interface AlumniSearchParams {
+  school?: string;
+  company?: string;
+  name?: string;
+  graduation_year?: number;
+  limit?: number;
+  offset?: number;
+}
+
+export interface AlumniImportResult {
+  imported: number;
+  skipped: number;
+  errors: string[];
 }
 
 export type ConnectionType =
@@ -261,7 +296,15 @@ export type PrepCategory =
   | "behavioral"
   | "firm_specific"
   | "market_awareness"
-  | "brain_teaser";
+  | "brain_teaser"
+  | "market_sizing"
+  | "pitch_a_stock"
+  | "restructuring"
+  | "pe_operations"
+  | "st_markets"
+  | "er_analysis"
+  | "quant_probability"
+  | "credit_analysis";
 
 export type SessionType =
   | "technical_accounting"
@@ -270,7 +313,16 @@ export type SessionType =
   | "technical_lbo"
   | "behavioral"
   | "firm_specific"
-  | "market_awareness";
+  | "market_awareness"
+  | "brain_teaser"
+  | "market_sizing"
+  | "pitch_a_stock"
+  | "restructuring"
+  | "technical_pe"
+  | "technical_st_markets"
+  | "technical_er"
+  | "technical_quant"
+  | "technical_credit";
 
 export interface PrepSession {
   id: string;
@@ -373,4 +425,25 @@ export interface WeeklySummary {
   overdue_items: TimelineEvent[];
   networking_nudges: string[];
   stats: Record<string, number>;
+}
+
+// ============================================================
+// Phase 4 — Notifications
+// ============================================================
+
+export type NotificationType =
+  | "deadline_approaching"
+  | "stale_contact"
+  | "thank_you_needed"
+  | "new_match"
+  | "prep_reminder";
+
+export interface Notification {
+  id: string;
+  notification_type: NotificationType;
+  title: string;
+  description: string;
+  priority: "critical" | "high" | "medium" | "low";
+  related_id: string | null;
+  created_at: string;
 }

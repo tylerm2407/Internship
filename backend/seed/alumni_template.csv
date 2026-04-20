@@ -1,0 +1,3 @@
+name,school,graduation_year,current_role,current_company,division,major,email,linkedin_url,city,connection_hooks
+John Doe,Bryant University,2023,Analyst,Goldman Sachs,IBD,Finance,john@example.com,https://linkedin.com/in/johndoe,New York,"Finance Society;Same major"
+Jane Smith,Bryant University,2024,Associate,Evercore,M&A,Finance,,https://linkedin.com/in/janesmith,New York,"SMIF member"

@@ -16,6 +16,8 @@ import {
   Trash,
   ArrowClockwise,
   Warning,
+  CaretLeft,
+  CaretRight,
 } from "@phosphor-icons/react";
 import {
   getTimelineEvents,
@@ -23,7 +25,10 @@ import {
   createTimelineEvent,
   updateTimelineEvent,
   deleteTimelineEvent,
+  getProfile,
+  generateTimeline,
 } from "../../lib/api";
+import { AuthGuard } from "../../components/AuthGuard";
 import { Card } from "../../components/Card";
 import { EyebrowLabel } from "../../components/EyebrowLabel";
 import { PrimaryButton } from "../../components/PrimaryButton";
@@ -36,324 +41,6 @@ import type {
   EventPriority,
 } from "../../lib/types";
 
-// ── Preset freshman IB timeline ──
-
-function daysFromNow(days: number): string {
-  const d = new Date();
-  d.setDate(d.getDate() + days);
-  return d.toISOString();
-}
-
-const PRESET_FRESHMAN_TIMELINE: TimelineEvent[] = [
-  {
-    id: "preset-01",
-    user_id: "preset",
-    event_type: "custom",
-    title: "Join Bryant Finance Society",
-    description: "Attend the first meeting of the semester. This is the #1 club for IB recruiting — attend every meeting, volunteer for events, and get on the board's radar.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(-14),
-    priority: "critical",
-    completed: true,
-    completed_at: daysFromNow(-14),
-    created_at: daysFromNow(-20),
-  },
-  {
-    id: "preset-02",
-    user_id: "preset",
-    event_type: "prep_milestone",
-    title: "Start reading Wall Street Journal daily",
-    description: "15 minutes every morning. Focus on M&A section and Deals & Dealmakers. When someone asks 'what\'s happening in markets?' you need a real answer.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(1),
-    priority: "medium",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-03",
-    user_id: "preset",
-    event_type: "custom",
-    title: "Set up LinkedIn profile (finance-optimized)",
-    description: "Professional headshot, headline: 'Finance Major at Bryant University | Aspiring Investment Banking Analyst'. Add coursework, Finance Society, any leadership.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(2),
-    priority: "high",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-3),
-  },
-  {
-    id: "preset-04",
-    user_id: "preset",
-    event_type: "custom",
-    title: "Apply for SMIF (Student Managed Investment Fund)",
-    description: "Applications for the Archway Investment Fund open in September. A SMIF seat is the single strongest resume line a Bryant freshman can get for IB recruiting.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(3),
-    priority: "critical",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-10),
-  },
-  {
-    id: "preset-05",
-    user_id: "preset",
-    event_type: "networking_task",
-    title: "Connect with Bryant Career Services — IB advisor",
-    description: "Schedule a meeting with your career advisor. Tell them you're targeting IB. Ask about alumni connections, mock interview slots, and any bank-specific recruiting events.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(5),
-    priority: "medium",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-06",
-    user_id: "preset",
-    event_type: "prep_milestone",
-    title: "Learn the 3 financial statements cold",
-    description: "Income statement, balance sheet, cash flow statement. Know how they link. This is the foundation of every IB technical interview — start now, not junior year.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(7),
-    priority: "critical",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-7),
-  },
-  {
-    id: "preset-07",
-    user_id: "preset",
-    event_type: "prep_milestone",
-    title: "Build v1 of your IB resume",
-    description: "One page. Finance-formatted (no color, no graphics). Include GPA if 3.5+, relevant coursework, Finance Society, any leadership. Visit Career Services for a review.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(8),
-    priority: "high",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-08",
-    user_id: "preset",
-    event_type: "prep_milestone",
-    title: "Read 'The Vault Guide to Investment Banking'",
-    description: "Chapters 1-6 cover what IB actually is, deal types, and career paths. Know this before your first networking call so you don't waste anyone's time.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(10),
-    priority: "high",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-3),
-  },
-  {
-    id: "preset-09",
-    user_id: "preset",
-    event_type: "networking_task",
-    title: "Send first 5 cold outreach emails to Bryant alumni in IB",
-    description: "Use LinkedIn to find Bryant grads at bulge bracket banks. Keep messages under 80 words. Ask for a 15-minute call, not a job. Reference Finance Society or a shared professor.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(12),
-    priority: "high",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-10",
-    user_id: "preset",
-    event_type: "networking_task",
-    title: "Attend Bryant Career Fair — finance firms",
-    description: "Prepare a 30-second elevator pitch. Bring 10 copies of your resume. Target: collect 3-5 business cards. Follow up within 24 hours.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(14),
-    priority: "high",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-10),
-  },
-  {
-    id: "preset-11",
-    user_id: "preset",
-    event_type: "prep_milestone",
-    title: "Master 'Walk me through your resume'",
-    description: "Practice your story: why Bryant, why finance, why IB. 90 seconds max. Record yourself and listen back. This is THE most common first question.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(15),
-    priority: "high",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-7),
-  },
-  {
-    id: "preset-12",
-    user_id: "preset",
-    event_type: "diversity_program",
-    title: "Goldman Sachs Possibilities Summit application",
-    description: "GS runs early-look programs for freshmen and sophomores. No finance experience required — they're looking for high-potential students. Apply even if you feel underqualified.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(18),
-    priority: "critical",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-10),
-  },
-  {
-    id: "preset-13",
-    user_id: "preset",
-    event_type: "networking_task",
-    title: "Schedule 2 informational calls with alumni",
-    description: "Goal: have 2 calls completed by end of month. Prepare 5 questions for each call. Take notes. Send thank-you within 24 hours.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(20),
-    priority: "high",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-14",
-    user_id: "preset",
-    event_type: "diversity_program",
-    title: "JPMorgan Launching Leaders application",
-    description: "Early insight program for freshmen. Focus your essay on intellectual curiosity about markets and client advisory, not on wanting to make money.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(21),
-    priority: "critical",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-10),
-  },
-  {
-    id: "preset-15",
-    user_id: "preset",
-    event_type: "custom",
-    title: "Research sophomore summer programs at top 10 banks",
-    description: "Goldman, JPM, Morgan Stanley, BofA, Citi, Evercore, Lazard, Moelis, Jefferies, Houlihan Lokey. Build a spreadsheet: firm, program name, deadline, requirements.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(22),
-    priority: "medium",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-16",
-    user_id: "preset",
-    event_type: "diversity_program",
-    title: "Morgan Stanley Early Insights deadline",
-    description: "2-day program in NYC for freshmen and sophomores. Competitive but worth applying — the name on your resume opens doors.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(25),
-    priority: "high",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-10),
-  },
-  {
-    id: "preset-17",
-    user_id: "preset",
-    event_type: "prep_milestone",
-    title: "Practice 'Why IB?' answer until it's natural",
-    description: "Write it out, then practice saying it without reading. Should sound conversational, not rehearsed. Reference specific experiences. Under 60 seconds.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(25),
-    priority: "medium",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-18",
-    user_id: "preset",
-    event_type: "custom",
-    title: "Attend Finance Society speaker event — alumni panel",
-    description: "Bryant alumni in IB panel discussion. Prepare 1 thoughtful question. Introduce yourself to at least 2 speakers after. This is networking in a low-pressure setting.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(28),
-    priority: "medium",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-19",
-    user_id: "preset",
-    event_type: "prep_milestone",
-    title: "Learn basic valuation concepts",
-    description: "Understand what a DCF is at a high level, comparable companies analysis, and precedent transactions. You won't be tested deeply as a freshman but knowing these shows initiative.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(30),
-    priority: "medium",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-20",
-    user_id: "preset",
-    event_type: "prep_milestone",
-    title: "Complete 'Accounting 101' on Wall Street Prep (free)",
-    description: "Free fundamentals course. Covers the basics you'll need for sophomore recruiting. Do this before winter break so you're ahead of the curve.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(35),
-    priority: "medium",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-21",
-    user_id: "preset",
-    event_type: "custom",
-    title: "Plan spring semester course load for IB",
-    description: "Prioritize: Financial Accounting, Corporate Finance, Statistics, Economics. If you can take Financial Modeling or Excel-heavy courses, do it. GPA matters — don't overload.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(50),
-    priority: "medium",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-  {
-    id: "preset-22",
-    user_id: "preset",
-    event_type: "custom",
-    title: "Winter break: read 'Monkey Business' or 'Liar's Poker'",
-    description: "Classic Wall Street books that give you cultural context for IB interviews. When an interviewer asks what you're reading, having a finance book ready shows genuine interest.",
-    firm_id: null,
-    posting_id: null,
-    event_date: daysFromNow(60),
-    priority: "low",
-    completed: false,
-    completed_at: null,
-    created_at: daysFromNow(-5),
-  },
-];
 
 // ── Constants ──
 
@@ -714,6 +401,238 @@ function AddEventForm({
   );
 }
 
+// ── Calendar View ──
+
+const DAYS_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
+
+const PRIORITY_DOT_COLORS: Record<EventPriority, string> = {
+  critical: "bg-red-500",
+  high: "bg-amber-500",
+  medium: "bg-blue-500",
+  low: "bg-gray-400",
+};
+
+function getDaysInMonth(year: number, month: number): number {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+function getFirstDayOfMonth(year: number, month: number): number {
+  return new Date(year, month, 1).getDay();
+}
+
+function formatCalendarMonthYear(year: number, month: number): string {
+  return new Date(year, month, 1).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+}
+
+function CalendarView({
+  events,
+  onToggleComplete,
+  onDelete,
+}: {
+  events: TimelineEvent[];
+  onToggleComplete: (id: string, completed: boolean) => void;
+  onDelete: (id: string) => void;
+}) {
+  const today = new Date();
+  const [calYear, setCalYear] = useState(today.getFullYear());
+  const [calMonth, setCalMonth] = useState(today.getMonth());
+  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+
+  const daysInMonth = getDaysInMonth(calYear, calMonth);
+  const firstDay = getFirstDayOfMonth(calYear, calMonth);
+
+  // Build a map of day -> events for the current month
+  const eventsByDay: Record<number, TimelineEvent[]> = {};
+  for (const event of events) {
+    const d = new Date(event.event_date);
+    if (d.getFullYear() === calYear && d.getMonth() === calMonth) {
+      const day = d.getDate();
+      if (!eventsByDay[day]) eventsByDay[day] = [];
+      eventsByDay[day].push(event);
+    }
+  }
+
+  const goToPrevMonth = () => {
+    if (calMonth === 0) {
+      setCalYear((y) => y - 1);
+      setCalMonth(11);
+    } else {
+      setCalMonth((m) => m - 1);
+    }
+    setSelectedDay(null);
+  };
+
+  const goToNextMonth = () => {
+    if (calMonth === 11) {
+      setCalYear((y) => y + 1);
+      setCalMonth(0);
+    } else {
+      setCalMonth((m) => m + 1);
+    }
+    setSelectedDay(null);
+  };
+
+  const goToToday = () => {
+    setCalYear(today.getFullYear());
+    setCalMonth(today.getMonth());
+    setSelectedDay(null);
+  };
+
+  const isToday = (day: number): boolean =>
+    calYear === today.getFullYear() &&
+    calMonth === today.getMonth() &&
+    day === today.getDate();
+
+  // Build grid cells: leading blanks + days
+  const cells: (number | null)[] = [];
+  for (let i = 0; i < firstDay; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+
+  const selectedEvents = selectedDay ? eventsByDay[selectedDay] || [] : [];
+
+  return (
+    <div className="space-y-4">
+      {/* Month navigation */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={goToPrevMonth}
+            className="p-1.5 rounded-md border border-surface-border hover:bg-surface-hover transition-colors cursor-pointer"
+            aria-label="Previous month"
+          >
+            <CaretLeft size={16} weight="bold" className="text-ink-primary" />
+          </button>
+          <button
+            onClick={goToNextMonth}
+            className="p-1.5 rounded-md border border-surface-border hover:bg-surface-hover transition-colors cursor-pointer"
+            aria-label="Next month"
+          >
+            <CaretRight size={16} weight="bold" className="text-ink-primary" />
+          </button>
+          <h3 className="font-serif text-lg ml-2">
+            {formatCalendarMonthYear(calYear, calMonth)}
+          </h3>
+        </div>
+        <button
+          onClick={goToToday}
+          className="text-xs font-mono text-accent hover:underline cursor-pointer"
+        >
+          Today
+        </button>
+      </div>
+
+      {/* Calendar grid */}
+      <div className="border border-surface-border rounded-lg overflow-hidden">
+        {/* Day-of-week headers */}
+        <div className="grid grid-cols-7 bg-surface border-b border-surface-border">
+          {DAYS_OF_WEEK.map((dow) => (
+            <div
+              key={dow}
+              className="py-2 text-center text-[11px] font-mono uppercase tracking-wider text-ink-tertiary"
+            >
+              {dow}
+            </div>
+          ))}
+        </div>
+
+        {/* Date cells */}
+        <div className="grid grid-cols-7">
+          {cells.map((day, idx) => {
+            if (day === null) {
+              return (
+                <div
+                  key={`blank-${idx}`}
+                  className="h-20 border-b border-r border-surface-border bg-surface/50"
+                />
+              );
+            }
+
+            const dayEvents = eventsByDay[day] || [];
+            const todayHighlight = isToday(day);
+            const isSelected = selectedDay === day;
+
+            return (
+              <button
+                key={day}
+                onClick={() => setSelectedDay(day === selectedDay ? null : day)}
+                className={`h-20 border-b border-r border-surface-border p-1.5 text-left transition-colors cursor-pointer ${
+                  isSelected
+                    ? "bg-blue-50/60"
+                    : "hover:bg-surface-hover"
+                }`}
+              >
+                <span
+                  className={`inline-flex items-center justify-center w-6 h-6 text-xs font-mono ${
+                    todayHighlight
+                      ? "bg-accent text-white rounded-md font-medium"
+                      : "text-ink-primary"
+                  }`}
+                >
+                  {day}
+                </span>
+                {dayEvents.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {dayEvents.slice(0, 4).map((ev) => (
+                      <span
+                        key={ev.id}
+                        className={`w-1.5 h-1.5 rounded-full ${PRIORITY_DOT_COLORS[ev.priority]}`}
+                        title={ev.title}
+                      />
+                    ))}
+                    {dayEvents.length > 4 && (
+                      <span className="text-[9px] font-mono text-ink-tertiary leading-none">
+                        +{dayEvents.length - 4}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Selected day detail panel */}
+      {selectedDay !== null && (
+        <Card>
+          <div className="flex items-center justify-between mb-3">
+            <EyebrowLabel>
+              {new Date(calYear, calMonth, selectedDay).toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </EyebrowLabel>
+            <span className="font-mono text-xs text-ink-tertiary">
+              {selectedEvents.length} event{selectedEvents.length !== 1 ? "s" : ""}
+            </span>
+          </div>
+          {selectedEvents.length === 0 ? (
+            <p className="text-sm text-ink-tertiary italic">
+              No events on this day.
+            </p>
+          ) : (
+            <div className="space-y-2">
+              {selectedEvents.map((event) => (
+                <EventRow
+                  key={event.id}
+                  event={event}
+                  onToggleComplete={onToggleComplete}
+                  onDelete={onDelete}
+                />
+              ))}
+            </div>
+          )}
+        </Card>
+      )}
+    </div>
+  );
+}
+
 // ── Main Page ──
 
 export default function TimelinePage() {
@@ -722,6 +641,9 @@ export default function TimelinePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
+  const [hasProfile, setHasProfile] = useState<boolean | null>(null);
+  const [generating, setGenerating] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -732,18 +654,23 @@ export default function TimelinePage() {
         getWeeklySummary(),
       ]);
 
-      const apiEvents =
-        eventsResult.status === "fulfilled" ? eventsResult.value : [];
-
-      // Use preset freshman timeline when API returns no events
-      setEvents(apiEvents.length > 0 ? apiEvents : PRESET_FRESHMAN_TIMELINE);
+      setEvents(
+        eventsResult.status === "fulfilled" ? eventsResult.value : []
+      );
 
       if (summaryResult.status === "fulfilled") setSummary(summaryResult.value);
     } catch {
-      // API entirely unreachable — still show preset data
-      setEvents(PRESET_FRESHMAN_TIMELINE);
+      setEvents([]);
     } finally {
       setLoading(false);
+    }
+
+    // Check if user has a profile
+    try {
+      const profile = await getProfile();
+      setHasProfile(profile !== null);
+    } catch {
+      setHasProfile(false);
     }
   }, []);
 
@@ -753,17 +680,6 @@ export default function TimelinePage() {
 
   const handleToggleComplete = useCallback(
     async (id: string, completed: boolean) => {
-      // Preset events toggle locally only (not persisted)
-      if (id.startsWith("preset-")) {
-        setEvents((prev) =>
-          prev.map((e) =>
-            e.id === id
-              ? { ...e, completed, completed_at: completed ? new Date().toISOString() : null }
-              : e
-          )
-        );
-        return;
-      }
       try {
         const updated = await updateTimelineEvent(id, { completed });
         setEvents((prev) =>
@@ -779,11 +695,6 @@ export default function TimelinePage() {
   );
 
   const handleDelete = useCallback(async (id: string) => {
-    // Preset events remove locally only
-    if (id.startsWith("preset-")) {
-      setEvents((prev) => prev.filter((e) => e.id !== id));
-      return;
-    }
     try {
       await deleteTimelineEvent(id);
       setEvents((prev) => prev.filter((e) => e.id !== id));
@@ -814,6 +725,18 @@ export default function TimelinePage() {
     []
   );
 
+  const handleGenerateTimeline = useCallback(async () => {
+    setGenerating(true);
+    try {
+      await generateTimeline();
+      await load();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to generate timeline");
+    } finally {
+      setGenerating(false);
+    }
+  }, [load]);
+
   const sortedEvents = [...events].sort(
     (a, b) =>
       new Date(a.event_date).getTime() - new Date(b.event_date).getTime()
@@ -824,6 +747,7 @@ export default function TimelinePage() {
   const totalCount = events.length;
 
   return (
+    <AuthGuard>
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
@@ -912,26 +836,43 @@ export default function TimelinePage() {
             </div>
           )}
 
+          {/* ── Empty State ── */}
+          {!loading && !error && events.length === 0 && (
+            <div className="bg-surface border border-surface-border rounded-lg p-12 text-center space-y-4">
+              <CalendarBlank size={32} weight="regular" className="text-ink-tertiary mx-auto" />
+              {hasProfile === null ? (
+                <p className="text-sm text-ink-secondary">Checking your profile...</p>
+              ) : hasProfile ? (
+                <>
+                  <p className="text-sm text-ink-secondary">
+                    Your profile is ready. Generate a personalized recruiting timeline based on your class year, target roles, and upcoming deadlines.
+                  </p>
+                  <PrimaryButton
+                    onClick={handleGenerateTimeline}
+                    disabled={generating}
+                    className="text-sm"
+                  >
+                    {generating ? "Generating timeline..." : "Generate my timeline"}
+                  </PrimaryButton>
+                </>
+              ) : (
+                <>
+                  <p className="text-sm text-ink-secondary">
+                    Upload your resume to generate a personalized recruiting timeline.
+                  </p>
+                  <Link href="/upload">
+                    <PrimaryButton className="text-sm">
+                      Upload resume
+                    </PrimaryButton>
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
+
           {/* ── Content ── */}
           {!loading && events.length > 0 && (
             <>
-              {/* Preset data banner */}
-              {events.some((e) => e.id.startsWith("preset-")) && (
-                <Card className="border-accent/30 bg-accent/5">
-                  <div className="flex items-start gap-3">
-                    <BookOpen size={20} weight="regular" className="text-accent mt-0.5 shrink-0" />
-                    <div>
-                      <p className="text-sm font-medium text-ink-primary">
-                        Freshman IB recruiting roadmap
-                      </p>
-                      <p className="text-xs text-ink-secondary mt-0.5">
-                        This is your preset timeline for breaking into investment banking as a Bryant freshman. Check off items as you complete them, or upload your resume to generate a personalized timeline.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              )}
-
               {/* Phase Indicator */}
               {summary && (
                 <Card>
@@ -1078,8 +1019,43 @@ export default function TimelinePage() {
                 )}
               </div>
 
+              {/* View Toggle */}
+              {events.length > 0 && (
+                <div className="flex items-center gap-1 border border-surface-border rounded-md w-fit">
+                  <button
+                    onClick={() => setViewMode("list")}
+                    className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider rounded-md transition-colors cursor-pointer ${
+                      viewMode === "list"
+                        ? "bg-accent text-white"
+                        : "text-ink-secondary hover:text-ink-primary"
+                    }`}
+                  >
+                    List
+                  </button>
+                  <button
+                    onClick={() => setViewMode("calendar")}
+                    className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider rounded-md transition-colors cursor-pointer ${
+                      viewMode === "calendar"
+                        ? "bg-accent text-white"
+                        : "text-ink-secondary hover:text-ink-primary"
+                    }`}
+                  >
+                    Calendar
+                  </button>
+                </div>
+              )}
+
+              {/* Calendar View */}
+              {viewMode === "calendar" && events.length > 0 && (
+                <CalendarView
+                  events={sortedEvents}
+                  onToggleComplete={handleToggleComplete}
+                  onDelete={handleDelete}
+                />
+              )}
+
               {/* Full Event List Grouped by Month */}
-              {Object.keys(monthGroups).length > 0 && (
+              {viewMode === "list" && Object.keys(monthGroups).length > 0 && (
                 <div className="space-y-8">
                   <EyebrowLabel>All events</EyebrowLabel>
                   {Object.entries(monthGroups).map(([month, monthEvents]) => (
@@ -1104,5 +1080,6 @@ export default function TimelinePage() {
         </div>
       </main>
     </div>
+    </AuthGuard>
   );
 }

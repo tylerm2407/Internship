@@ -1,0 +1,347 @@
+{
+  "Goldman Sachs": {
+    "firm_specific": [
+      {"q": "Why Goldman Sachs?", "d": "easy", "tags": ["why_gs"]},
+      {"q": "Goldman's culture is famously intense. Why are you a fit?", "d": "medium", "tags": ["culture"]},
+      {"q": "Walk me through the 14 Business Principles. Which resonates most?", "d": "medium", "tags": ["principles"]},
+      {"q": "What's your view on Goldman's push into consumer banking through Marcus and the subsequent wind-down?", "d": "hard", "tags": ["strategy"]},
+      {"q": "How does Goldman's asset and wealth management strategy differ from Morgan Stanley's?", "d": "hard", "tags": ["awm"]},
+      {"q": "Why Goldman IBD vs Goldman Markets?", "d": "medium", "tags": ["division"]},
+      {"q": "What's a recent Goldman deal you found compelling?", "d": "medium", "tags": ["deals"]},
+      {"q": "If you had to pick one Goldman group, which and why?", "d": "medium", "tags": ["group"]},
+      {"q": "Goldman is known for transaction banking as a newer initiative. What's your view?", "d": "hard", "tags": ["tx_banking"]},
+      {"q": "How has Goldman's compensation philosophy evolved?", "d": "hard", "tags": ["comp"]}
+    ]
+  },
+  "JPMorgan Chase": {
+    "firm_specific": [
+      {"q": "Why JPMorgan?", "d": "easy", "tags": ["why_jpm"]},
+      {"q": "JPMorgan's fortress balance sheet is often cited. How do you think it benefits clients?", "d": "medium", "tags": ["balance_sheet"]},
+      {"q": "Walk me through JPM's CIB structure.", "d": "medium", "tags": ["structure"]},
+      {"q": "How has the First Republic acquisition shaped JPM's private banking strategy?", "d": "hard", "tags": ["first_republic"]},
+      {"q": "What's your view on Jamie Dimon's leadership style and succession planning?", "d": "hard", "tags": ["leadership"]},
+      {"q": "Why JPMorgan IB vs competitors like Morgan Stanley?", "d": "medium", "tags": ["differentiation"]},
+      {"q": "Describe a recent JPM-led deal that caught your attention.", "d": "medium", "tags": ["deals"]},
+      {"q": "What role did JPM play in the 2023 regional bank crisis?", "d": "hard", "tags": ["regional_banks"]},
+      {"q": "How does JPM's universal banking model create edge in M&A?", "d": "hard", "tags": ["universal_bank"]}
+    ]
+  },
+  "Morgan Stanley": {
+    "firm_specific": [
+      {"q": "Why Morgan Stanley?", "d": "easy", "tags": ["why_ms"]},
+      {"q": "MS has pivoted toward wealth management. What's your view?", "d": "medium", "tags": ["wealth_management"]},
+      {"q": "Compare MS Wealth Management to Goldman's AWM.", "d": "hard", "tags": ["wealth_management"]},
+      {"q": "Morgan Stanley is strong in tech M&A. Why?", "d": "medium", "tags": ["tech_ma"]},
+      {"q": "Walk me through the E*TRADE and Eaton Vance acquisitions and what they did for MS.", "d": "hard", "tags": ["acquisitions"]},
+      {"q": "What's your take on Ted Pick taking over as CEO?", "d": "medium", "tags": ["leadership"]},
+      {"q": "How does MS's ISG business differ from JPM's CIB?", "d": "hard", "tags": ["isg"]},
+      {"q": "Tell me about a recent Morgan Stanley advised deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Bank of America": {
+    "firm_specific": [
+      {"q": "Why BofA?", "d": "easy", "tags": ["why_bofa"]},
+      {"q": "BofA has the largest US retail footprint. How does that help the investment bank?", "d": "medium", "tags": ["universal"]},
+      {"q": "Walk me through BofA's Global Corporate & Investment Banking structure.", "d": "medium", "tags": ["structure"]},
+      {"q": "How has the Merrill Lynch integration shaped BofA's current platform?", "d": "hard", "tags": ["merrill"]},
+      {"q": "What's your view on Brian Moynihan's leadership?", "d": "medium", "tags": ["leadership"]},
+      {"q": "BofA is strong in leveraged finance. Why?", "d": "medium", "tags": ["lev_fin"]},
+      {"q": "Describe a recent BofA-led deal you've followed.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Citigroup": {
+    "firm_specific": [
+      {"q": "Why Citi?", "d": "easy", "tags": ["why_citi"]},
+      {"q": "Citi has a uniquely global network. How is that an M&A advantage?", "d": "medium", "tags": ["global"]},
+      {"q": "Walk me through Jane Fraser's transformation plan for Citi.", "d": "hard", "tags": ["fraser", "transformation"]},
+      {"q": "Citi's Banamex divestiture has been a multi-year saga. What's your view?", "d": "hard", "tags": ["banamex"]},
+      {"q": "Tell me about Citi Services and why it matters.", "d": "medium", "tags": ["services"]},
+      {"q": "How does Citi's emerging markets franchise differentiate it from US peers?", "d": "medium", "tags": ["em"]},
+      {"q": "Describe a recent Citi advised transaction.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Evercore": {
+    "firm_specific": [
+      {"q": "Why Evercore?", "d": "easy", "tags": ["why_evr"]},
+      {"q": "Evercore has grown dramatically. What's driven that growth?", "d": "medium", "tags": ["growth"]},
+      {"q": "Who are Evercore's most well-known bankers and why?", "d": "medium", "tags": ["people"]},
+      {"q": "What's Evercore ISI and how does it complement the advisory business?", "d": "medium", "tags": ["isi"]},
+      {"q": "Evercore vs Centerview — how would you compare?", "d": "hard", "tags": ["comparison"]},
+      {"q": "Describe a recent Evercore advised deal.", "d": "medium", "tags": ["deals"]},
+      {"q": "What's the analyst experience like at Evercore compared to a BB?", "d": "medium", "tags": ["experience"]}
+    ]
+  },
+  "Lazard": {
+    "firm_specific": [
+      {"q": "Why Lazard?", "d": "easy", "tags": ["why_laz"]},
+      {"q": "Lazard has a strong restructuring practice. Walk me through why it's so respected.", "d": "medium", "tags": ["rx"]},
+      {"q": "How does Lazard's asset management business fit with financial advisory?", "d": "medium", "tags": ["am_fa"]},
+      {"q": "Describe Lazard's sovereign advisory work — what makes it unique?", "d": "hard", "tags": ["sovereign"]},
+      {"q": "Who are Lazard's senior dealmakers and what deals are they known for?", "d": "medium", "tags": ["people"]},
+      {"q": "Tell me about a recent Lazard-led M&A transaction.", "d": "medium", "tags": ["deals"]},
+      {"q": "What differentiates Lazard's European franchise from US competitors?", "d": "hard", "tags": ["europe"]}
+    ]
+  },
+  "Moelis & Company": {
+    "firm_specific": [
+      {"q": "Why Moelis?", "d": "easy", "tags": ["why_mc"]},
+      {"q": "How does Moelis position itself relative to Evercore and Centerview?", "d": "medium", "tags": ["positioning"]},
+      {"q": "Moelis has a strong restructuring practice. Tell me about a recent RX mandate.", "d": "medium", "tags": ["rx"]},
+      {"q": "What's Ken Moelis's background and how has it shaped the firm?", "d": "medium", "tags": ["leadership"]},
+      {"q": "Moelis has been aggressive in lateral hiring. Why?", "d": "hard", "tags": ["talent"]},
+      {"q": "Tell me about a recent Moelis advised deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Centerview Partners": {
+    "firm_specific": [
+      {"q": "Why Centerview?", "d": "easy", "tags": ["why_cvp"]},
+      {"q": "Centerview is known for high pay and long hours. How do you think about fit?", "d": "medium", "tags": ["fit"]},
+      {"q": "What makes Centerview's deal selection different from peers?", "d": "medium", "tags": ["selectivity"]},
+      {"q": "Who are Centerview's most well-known partners and what deals have they led?", "d": "medium", "tags": ["people"]},
+      {"q": "Centerview has a reputation for healthcare strength. Why?", "d": "medium", "tags": ["healthcare"]},
+      {"q": "Describe a recent Centerview advised transaction.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "PJT Partners": {
+    "firm_specific": [
+      {"q": "Why PJT?", "d": "easy", "tags": ["why_pjt"]},
+      {"q": "PJT has three main businesses — Strategic Advisory, Restructuring, and Park Hill. How do they complement each other?", "d": "medium", "tags": ["structure"]},
+      {"q": "PJT's restructuring practice is among the best on the street. Why?", "d": "medium", "tags": ["rx"]},
+      {"q": "What's Park Hill and how does it fit with PJT's advisory franchise?", "d": "medium", "tags": ["park_hill"]},
+      {"q": "Tell me about a recent PJT advised deal.", "d": "medium", "tags": ["deals"]},
+      {"q": "How has Paul Taubman shaped the firm's strategy?", "d": "hard", "tags": ["leadership"]}
+    ]
+  },
+  "Perella Weinberg Partners": {
+    "firm_specific": [
+      {"q": "Why Perella Weinberg?", "d": "easy", "tags": ["why_pwp"]},
+      {"q": "PWP has a strong restructuring practice. Tell me about it.", "d": "medium", "tags": ["rx"]},
+      {"q": "What's Perella's founding story and how does it shape the culture?", "d": "medium", "tags": ["history"]},
+      {"q": "Describe a recent PWP deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Guggenheim Partners": {
+    "firm_specific": [
+      {"q": "Why Guggenheim?", "d": "easy", "tags": ["why_guggenheim"]},
+      {"q": "Guggenheim has both investment banking and asset management. How do they relate?", "d": "medium", "tags": ["structure"]},
+      {"q": "Tell me about a recent Guggenheim Securities advised deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Qatalyst Partners": {
+    "firm_specific": [
+      {"q": "Why Qatalyst?", "d": "easy", "tags": ["why_qatalyst"]},
+      {"q": "Qatalyst is tech M&A focused. How does Frank Quattrone's legacy shape the firm?", "d": "medium", "tags": ["quattrone", "tech"]},
+      {"q": "Describe a recent Qatalyst sell-side tech deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Houlihan Lokey": {
+    "firm_specific": [
+      {"q": "Why Houlihan Lokey?", "d": "easy", "tags": ["why_hl"]},
+      {"q": "HL is #1 in fairness opinions. Why is that a moat?", "d": "medium", "tags": ["fairness_opinions"]},
+      {"q": "HL's financial restructuring group is top-tier. Walk me through why.", "d": "medium", "tags": ["rx"]},
+      {"q": "How does HL's middle market focus differ from a bulge bracket?", "d": "medium", "tags": ["mm"]},
+      {"q": "Tell me about a recent HL advised deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "William Blair": {
+    "firm_specific": [
+      {"q": "Why William Blair?", "d": "easy", "tags": ["why_wb"]},
+      {"q": "William Blair is employee-owned. How does that shape the culture?", "d": "medium", "tags": ["culture"]},
+      {"q": "How does WB's private partnership structure affect client service?", "d": "medium", "tags": ["structure"]},
+      {"q": "Tell me about a recent William Blair sell-side process.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Jefferies": {
+    "firm_specific": [
+      {"q": "Why Jefferies?", "d": "easy", "tags": ["why_jef"]},
+      {"q": "Jefferies has grown market share aggressively. How?", "d": "medium", "tags": ["growth"]},
+      {"q": "How has Rich Handler shaped Jefferies into its current form?", "d": "medium", "tags": ["leadership"]},
+      {"q": "Jefferies bridges BB and boutique. What's that experience like for an analyst?", "d": "medium", "tags": ["experience"]},
+      {"q": "Tell me about a recent Jefferies advised deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Baird": {
+    "firm_specific": [
+      {"q": "Why Baird?", "d": "easy", "tags": ["why_baird"]},
+      {"q": "Baird is employee-owned. How does that affect client experience?", "d": "medium", "tags": ["culture"]},
+      {"q": "Tell me about a recent Baird-led middle-market transaction.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Piper Sandler": {
+    "firm_specific": [
+      {"q": "Why Piper Sandler?", "d": "easy", "tags": ["why_piper"]},
+      {"q": "Piper has expanded heavily into healthcare and FIG. Why?", "d": "medium", "tags": ["sectors"]},
+      {"q": "Tell me about a recent Piper Sandler advised deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Citadel": {
+    "firm_specific": [
+      {"q": "Why Citadel?", "d": "easy", "tags": ["why_citadel"]},
+      {"q": "Citadel runs a multi-strategy, multi-manager model. Walk me through how that works.", "d": "medium", "tags": ["mm"]},
+      {"q": "How does Citadel Securities differ from Citadel the hedge fund?", "d": "medium", "tags": ["citadel_vs_citsec"]},
+      {"q": "What do you think of Ken Griffin's approach to building the firm?", "d": "hard", "tags": ["griffin"]},
+      {"q": "Citadel has outperformed benchmarks for years. What's the edge?", "d": "hard", "tags": ["edge"]}
+    ]
+  },
+  "Two Sigma": {
+    "firm_specific": [
+      {"q": "Why Two Sigma?", "d": "easy", "tags": ["why_2s"]},
+      {"q": "Two Sigma is engineering-led. How does that shape the research process?", "d": "medium", "tags": ["culture"]},
+      {"q": "What is Two Sigma's approach to machine learning in trading?", "d": "medium", "tags": ["ml"]},
+      {"q": "How do the founders' AI backgrounds influence strategy?", "d": "hard", "tags": ["ai"]}
+    ]
+  },
+  "Jane Street": {
+    "firm_specific": [
+      {"q": "Why Jane Street?", "d": "easy", "tags": ["why_js"]},
+      {"q": "Jane Street is famously secretive. What do you know about the strategies they run?", "d": "medium", "tags": ["secretive"]},
+      {"q": "Why is OCaml used for trading systems at Jane Street?", "d": "medium", "tags": ["ocaml"]},
+      {"q": "Jane Street is a major ETF liquidity provider. How does that business work?", "d": "hard", "tags": ["etf"]}
+    ]
+  },
+  "Blackstone": {
+    "firm_specific": [
+      {"q": "Why Blackstone?", "d": "easy", "tags": ["why_bx"]},
+      {"q": "Walk me through Blackstone's business segments.", "d": "medium", "tags": ["segments"]},
+      {"q": "How has Steve Schwarzman built Blackstone into the industry giant?", "d": "medium", "tags": ["leadership"]},
+      {"q": "What's BREIT and why did redemptions become a story?", "d": "hard", "tags": ["breit"]},
+      {"q": "Tell me about a recent Blackstone portfolio move you found interesting.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "KKR": {
+    "firm_specific": [
+      {"q": "Why KKR?", "d": "easy", "tags": ["why_kkr"]},
+      {"q": "KKR pioneered the LBO model. How has the firm evolved since RJR Nabisco?", "d": "medium", "tags": ["history"]},
+      {"q": "Walk me through KKR's Capstone group and operating partner model.", "d": "medium", "tags": ["capstone"]},
+      {"q": "Tell me about a recent KKR buyout.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Apollo Global Management": {
+    "firm_specific": [
+      {"q": "Why Apollo?", "d": "easy", "tags": ["why_apo"]},
+      {"q": "Apollo is known as a 'value' PE shop. What does that mean?", "d": "medium", "tags": ["philosophy"]},
+      {"q": "How does Athene and the insurance/credit flywheel drive Apollo's earnings?", "d": "hard", "tags": ["athene"]},
+      {"q": "Describe a recent Apollo deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Carlyle Group": {
+    "firm_specific": [
+      {"q": "Why Carlyle?", "d": "easy", "tags": ["why_cg"]},
+      {"q": "How has Carlyle's strategy shifted under recent leadership?", "d": "medium", "tags": ["strategy"]},
+      {"q": "Tell me about a recent Carlyle investment.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Bain Capital": {
+    "firm_specific": [
+      {"q": "Why Bain Capital?", "d": "easy", "tags": ["why_bc"]},
+      {"q": "Bain Capital comes from a consulting lineage. How does that shape the investment approach?", "d": "medium", "tags": ["consulting"]},
+      {"q": "Walk me through the different strategies at Bain Capital.", "d": "medium", "tags": ["strategies"]},
+      {"q": "Tell me about a recent Bain Capital investment.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Silver Lake": {
+    "firm_specific": [
+      {"q": "Why Silver Lake?", "d": "easy", "tags": ["why_sl"]},
+      {"q": "Silver Lake is tech-focused. What differentiates it from a generalist fund?", "d": "medium", "tags": ["tech_pe"]},
+      {"q": "Tell me about a recent Silver Lake investment.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Vista Equity Partners": {
+    "firm_specific": [
+      {"q": "Why Vista?", "d": "easy", "tags": ["why_vista"]},
+      {"q": "Vista specializes in enterprise software. Why is that a great PE sector?", "d": "medium", "tags": ["saas"]},
+      {"q": "Vista's operating playbook emphasizes best practices. Tell me what you know.", "d": "medium", "tags": ["playbook"]}
+    ]
+  },
+  "Thoma Bravo": {
+    "firm_specific": [
+      {"q": "Why Thoma Bravo?", "d": "easy", "tags": ["why_tb"]},
+      {"q": "Thoma Bravo has been the most prolific software PE firm. What's the thesis?", "d": "medium", "tags": ["software_pe"]},
+      {"q": "Tell me about a recent Thoma Bravo take-private.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "BlackRock": {
+    "firm_specific": [
+      {"q": "Why BlackRock?", "d": "easy", "tags": ["why_blk"]},
+      {"q": "Walk me through BlackRock's business segments.", "d": "medium", "tags": ["segments"]},
+      {"q": "What is Aladdin and why is it strategically important?", "d": "medium", "tags": ["aladdin"]},
+      {"q": "How is BlackRock positioned in private markets post-GIP acquisition?", "d": "hard", "tags": ["private_markets"]}
+    ]
+  },
+  "Bridgewater Associates": {
+    "firm_specific": [
+      {"q": "Why Bridgewater?", "d": "easy", "tags": ["why_bw"]},
+      {"q": "Walk me through Bridgewater's 'All Weather' strategy.", "d": "medium", "tags": ["all_weather"]},
+      {"q": "What is radical transparency and how does it work in practice?", "d": "medium", "tags": ["culture"]},
+      {"q": "What do you know about Dalio's economic framework?", "d": "hard", "tags": ["framework"]}
+    ]
+  },
+  "Deutsche Bank": {
+    "firm_specific": [
+      {"q": "Why Deutsche Bank?", "d": "easy", "tags": ["why_db"]},
+      {"q": "DB has gone through significant restructuring. Where is the IB today?", "d": "medium", "tags": ["restructuring"]},
+      {"q": "How has the Leveraged DCM franchise performed recently?", "d": "medium", "tags": ["ldcm"]}
+    ]
+  },
+  "UBS": {
+    "firm_specific": [
+      {"q": "Why UBS?", "d": "easy", "tags": ["why_ubs"]},
+      {"q": "What does the Credit Suisse acquisition mean for UBS's IB?", "d": "medium", "tags": ["cs_acquisition"]},
+      {"q": "UBS's strength is wealth management. How does that feed IB?", "d": "medium", "tags": ["wealth"]}
+    ]
+  },
+  "Barclays": {
+    "firm_specific": [
+      {"q": "Why Barclays?", "d": "easy", "tags": ["why_barclays"]},
+      {"q": "Barclays inherited Lehman's US platform. How has it shaped the firm?", "d": "medium", "tags": ["lehman"]},
+      {"q": "Tell me about a recent Barclays advised deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Wells Fargo Securities": {
+    "firm_specific": [
+      {"q": "Why Wells Fargo Securities?", "d": "easy", "tags": ["why_wfs"]},
+      {"q": "Wells Fargo has rebuilt its IB after the scandals. Where does it stand today?", "d": "medium", "tags": ["rebuild"]},
+      {"q": "Tell me about a recent Wells Fargo advised deal.", "d": "medium", "tags": ["deals"]}
+    ]
+  },
+  "Rothschild & Co": {
+    "firm_specific": [
+      {"q": "Why Rothschild?", "d": "easy", "tags": ["why_roth"]},
+      {"q": "Rothschild has deep European roots. How does that help US clients?", "d": "medium", "tags": ["europe"]},
+      {"q": "What's Rothschild's approach to advisory that differs from US elite boutiques?", "d": "medium", "tags": ["philosophy"]}
+    ]
+  },
+  "Greenhill & Co": {
+    "firm_specific": [
+      {"q": "Why Greenhill?", "d": "easy", "tags": ["why_gh"]},
+      {"q": "Greenhill was acquired by Mizuho. What does that change?", "d": "medium", "tags": ["mizuho"]}
+    ]
+  },
+  "Point72": {
+    "firm_specific": [
+      {"q": "Why Point72?", "d": "easy", "tags": ["why_p72"]},
+      {"q": "What's Point72 Academy and why was it created?", "d": "medium", "tags": ["academy"]},
+      {"q": "Walk me through the multi-manager model at Point72.", "d": "medium", "tags": ["mm"]}
+    ]
+  },
+  "Millennium Management": {
+    "firm_specific": [
+      {"q": "Why Millennium?", "d": "easy", "tags": ["why_mlp"]},
+      {"q": "How does Millennium's pod model work?", "d": "medium", "tags": ["pods"]},
+      {"q": "What are the risk management practices at Millennium?", "d": "hard", "tags": ["risk"]}
+    ]
+  },
+  "D.E. Shaw": {
+    "firm_specific": [
+      {"q": "Why D.E. Shaw?", "d": "easy", "tags": ["why_desh"]},
+      {"q": "D.E. Shaw pioneered systematic trading. How has the firm evolved?", "d": "medium", "tags": ["history"]}
+    ]
+  },
+  "Renaissance Technologies": {
+    "firm_specific": [
+      {"q": "Why Renaissance?", "d": "easy", "tags": ["why_rentec"]},
+      {"q": "Medallion is legendary but closed to outsiders. What do you know about it?", "d": "medium", "tags": ["medallion"]},
+      {"q": "What's special about RenTec's academic, PhD-heavy culture?", "d": "medium", "tags": ["culture"]}
+    ]
+  }
+}

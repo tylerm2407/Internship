@@ -27,7 +27,7 @@ from typing import Literal
 from uuid import UUID
 
 from app.claude_client import score_fit_qualitative
-from app.models import FitScore, Firm, Posting, StudentProfile
+from app.models import FitScore, Firm, Posting, ScoreBreakdown, StudentProfile
 
 logger = logging.getLogger(__name__)
 
@@ -52,14 +52,24 @@ HIGH_VALUE_KEYWORDS = {
 
 # Adjacent role mapping — partial credit for related roles
 ADJACENT_ROLES: dict[str, set[str]] = {
-    "investment_banking": {"investment_banking_mm", "capital_markets", "leveraged_finance"},
+    "investment_banking": {"investment_banking_mm", "capital_markets", "leveraged_finance", "restructuring"},
     "investment_banking_mm": {"investment_banking", "capital_markets"},
-    "sales_and_trading": {"capital_markets", "fixed_income", "equities"},
-    "private_equity": {"investment_banking", "investment_banking_mm"},
-    "equity_research": {"asset_management", "investment_banking"},
-    "asset_management": {"equity_research", "quant"},
-    "quant": {"asset_management", "sales_and_trading"},
+    "sales_and_trading": {"capital_markets", "fixed_income", "equities", "risk_management"},
+    "private_equity": {"investment_banking", "investment_banking_mm", "hedge_fund"},
+    "equity_research": {"asset_management", "investment_banking", "hedge_fund"},
+    "asset_management": {"equity_research", "quant", "wealth_management"},
+    "quant": {"asset_management", "sales_and_trading", "hedge_fund"},
     "capital_markets": {"investment_banking", "sales_and_trading"},
+    "restructuring": {"investment_banking", "credit_leveraged_finance", "private_equity"},
+    "wealth_management": {"asset_management", "corporate_finance"},
+    "real_estate": {"private_equity", "asset_management", "investment_banking_mm"},
+    "hedge_fund": {"asset_management", "quant", "equity_research"},
+    "credit_leveraged_finance": {"investment_banking", "restructuring", "sales_and_trading"},
+    "corporate_finance": {"investment_banking_mm", "asset_management", "wealth_management"},
+    "risk_management": {"sales_and_trading", "compliance", "quant"},
+    "consulting_finance": {"corporate_finance", "investment_banking"},
+    "compliance": {"risk_management", "corporate_finance"},
+    "insurance": {"risk_management", "asset_management", "compliance"},
 }
 
 # Geographic proximity groups
@@ -83,6 +93,81 @@ EXPECTED_COURSEWORK_BB = {
 EXPECTED_COURSEWORK_MM = {
     "financial accounting", "corporate finance", "investments",
     "financial management",
+}
+
+# Role-specific coursework expectations
+EXPECTED_COURSEWORK_BY_ROLE: dict[str, set[str]] = {
+    "investment_banking": EXPECTED_COURSEWORK_BB,
+    "investment_banking_mm": EXPECTED_COURSEWORK_MM,
+    "capital_markets": {"financial accounting", "corporate finance", "investments", "fixed income", "derivatives"},
+    "restructuring": {"financial accounting", "corporate finance", "credit analysis", "bankruptcy", "financial modeling"},
+    "sales_and_trading": {"derivatives", "fixed income", "statistics", "econometrics", "portfolio theory"},
+    "quant": {"statistics", "probability", "linear algebra", "stochastic calculus", "programming", "machine learning"},
+    "equity_research": {"financial accounting", "investments", "industry analysis", "financial modeling", "valuation"},
+    "asset_management": {"portfolio theory", "investments", "economics", "statistics", "financial accounting"},
+    "private_equity": EXPECTED_COURSEWORK_BB | {"private equity", "lbo modeling"},
+    "hedge_fund": {"investments", "statistics", "derivatives", "portfolio theory", "financial modeling"},
+    "wealth_management": {"investments", "financial planning", "economics", "portfolio theory"},
+    "real_estate": {"real estate finance", "financial accounting", "corporate finance", "investments"},
+    "credit_leveraged_finance": {"financial accounting", "corporate finance", "credit analysis", "fixed income", "derivatives"},
+    "corporate_finance": {"financial accounting", "corporate finance", "financial management", "economics"},
+    "risk_management": {"statistics", "derivatives", "financial accounting", "econometrics", "risk management"},
+    "consulting_finance": {"corporate finance", "financial accounting", "economics", "strategy"},
+    "compliance": {"financial accounting", "corporate finance", "business law", "economics"},
+    "insurance": {"statistics", "risk management", "financial accounting", "economics", "actuarial science"},
+}
+
+# Role-specific high-value experience keywords
+HIGH_VALUE_KEYWORDS_BY_ROLE: dict[str, set[str]] = {
+    "sales_and_trading": {
+        "options", "greeks", "delta", "volatility", "futures", "yield curve",
+        "bonds", "swaps", "market making", "trading", "fixed income",
+        "derivatives", "hedging", "risk", "p&l",
+    },
+    "quant": {
+        "backtesting", "python", "machine learning", "stochastic", "optimization",
+        "algorithm", "statistics", "probability", "monte carlo", "regression",
+        "signal", "alpha", "factor model",
+    },
+    "equity_research": {
+        "earnings model", "price target", "initiating coverage", "industry analysis",
+        "financial modeling", "valuation", "comps", "dcf", "sector",
+        "stock pitch", "buy rating", "sell rating",
+    },
+    "asset_management": {
+        "portfolio", "sharpe ratio", "alpha", "benchmark", "asset allocation",
+        "rebalancing", "risk-adjusted", "etf", "mutual fund", "aum",
+    },
+    "private_equity": {
+        "dcf", "lbo", "m&a", "merger", "acquisition", "valuation",
+        "financial modeling", "operating model", "bolt-on", "platform",
+        "portfolio company", "due diligence", "deal", "irr", "moic",
+    },
+    "restructuring": {
+        "distressed", "chapter 11", "dip financing", "covenant", "waterfall",
+        "recovery rate", "creditor", "debtor", "turnaround", "bankruptcy",
+        "credit analysis", "leverage",
+    },
+    "hedge_fund": {
+        "alpha", "portfolio", "long/short", "event-driven", "catalyst",
+        "risk management", "derivatives", "backtesting", "factor",
+    },
+    "credit_leveraged_finance": {
+        "credit analysis", "leverage", "covenant", "high yield", "leveraged loan",
+        "capital structure", "fixed income", "spread", "rating",
+    },
+    "wealth_management": {
+        "financial planning", "portfolio", "client", "asset allocation",
+        "estate planning", "retirement", "tax", "wealth",
+    },
+    "corporate_finance": {
+        "budgeting", "forecasting", "variance analysis", "financial planning",
+        "capital allocation", "working capital", "treasury",
+    },
+    "risk_management": {
+        "var", "stress test", "risk model", "hedging", "derivatives",
+        "regulatory", "compliance", "basel", "capital requirements",
+    },
 }
 
 
@@ -158,25 +243,36 @@ def _score_role_match(profile: StudentProfile, posting: Posting) -> float:
     return 0.0
 
 
-def _score_coursework(profile: StudentProfile, firm: Firm) -> float:
-    """Score coursework progression relative to firm tier expectations.
-
-    Bulge brackets and elite boutiques expect deeper coursework than
-    middle-market firms.
+def _score_coursework(profile: StudentProfile, firm: Firm, role_type: str | None = None) -> float:
+    """Score coursework progression relative to role and firm tier expectations.
 
     Args:
         profile: Student's profile with coursework lists.
         firm: The firm (used to determine tier expectations).
+        role_type: Optional role type for role-specific expectations.
 
     Returns:
         Score from 0.0 to 1.0.
     """
     all_courses = {c.lower() for c in profile.coursework_completed + profile.coursework_in_progress}
 
-    if firm.tier in ("bulge_bracket", "elite_boutique", "quant"):
-        expected = EXPECTED_COURSEWORK_BB
-    else:
-        expected = EXPECTED_COURSEWORK_MM
+    # Try role-specific expectations first, fall back to tier-based
+    expected = None
+    if role_type:
+        normalized = role_type.lower().replace(" ", "_").replace("/", "_").replace("&", "and")
+        expected = EXPECTED_COURSEWORK_BY_ROLE.get(normalized)
+        if expected is None:
+            # Try partial match
+            for key, val in EXPECTED_COURSEWORK_BY_ROLE.items():
+                if key in normalized or normalized in key:
+                    expected = val
+                    break
+
+    if not role_type or expected is None:
+        if firm.tier in ("bulge_bracket", "elite_boutique", "quant"):
+            expected = EXPECTED_COURSEWORK_BB
+        else:
+            expected = EXPECTED_COURSEWORK_MM
 
     if not expected:
         return 0.5
@@ -247,9 +343,18 @@ def _score_experience(profile: StudentProfile, posting: Posting) -> float:
 
     requirements_text = " ".join(posting.requirements).lower()
 
+    # Use role-specific keywords if available
+    keywords_to_check = HIGH_VALUE_KEYWORDS
+    if posting.role_type:
+        normalized_role = posting.role_type.lower().replace(" ", "_").replace("/", "_")
+        for key, val in HIGH_VALUE_KEYWORDS_BY_ROLE.items():
+            if key in normalized_role or normalized_role in key:
+                keywords_to_check = val
+                break
+
     # Count high-value keyword hits
     high_value_hits = 0
-    for keyword in HIGH_VALUE_KEYWORDS:
+    for keyword in keywords_to_check:
         if keyword in experience_text and keyword in requirements_text:
             high_value_hits += 1
         elif keyword in experience_text:
@@ -270,11 +375,11 @@ def score_posting_base(
     posting: Posting,
     firm: Firm,
     user_class_year: str,
-) -> int | None:
+) -> tuple[int, ScoreBreakdown] | None:
     """Compute the deterministic base fit score for a (profile, posting) pair.
 
     Returns None if the posting is filtered out by hard constraints (wrong
-    class year). Otherwise returns an integer from 0 to 100.
+    class year). Otherwise returns a tuple of (total_score, breakdown).
 
     Args:
         profile: The student's parsed profile.
@@ -283,7 +388,7 @@ def score_posting_base(
         user_class_year: The student's current class year.
 
     Returns:
-        Integer score 0-100, or None if hard-filtered.
+        Tuple of (integer score 0-100, ScoreBreakdown), or None if hard-filtered.
     """
     # Hard filter: class year must match
     if not _check_class_year_eligible(user_class_year, posting):
@@ -295,15 +400,24 @@ def score_posting_base(
 
     gpa_score = _score_gpa(profile, firm) * WEIGHT_GPA
     role_score = _score_role_match(profile, posting) * WEIGHT_ROLE_MATCH
-    coursework_score = _score_coursework(profile, firm) * WEIGHT_COURSEWORK
+    coursework_score = _score_coursework(profile, firm, posting.role_type) * WEIGHT_COURSEWORK
     geo_score = _score_geography(profile, posting) * WEIGHT_GEOGRAPHY
     experience_score = _score_experience(profile, posting) * WEIGHT_EXPERIENCE
 
     # Class year weight goes to full points since we passed the hard filter
     class_year_score = WEIGHT_CLASS_YEAR
 
+    breakdown = ScoreBreakdown(
+        gpa=round(gpa_score),
+        class_year=class_year_score,
+        role_match=round(role_score),
+        coursework=round(coursework_score),
+        geography=round(geo_score),
+        experience=round(experience_score),
+    )
+
     total = gpa_score + class_year_score + role_score + coursework_score + geo_score + experience_score
-    return max(0, min(100, round(total)))
+    return max(0, min(100, round(total))), breakdown
 
 
 def score_all_postings(
@@ -311,7 +425,7 @@ def score_all_postings(
     postings: list[Posting],
     firms: dict[UUID, Firm],
     user_class_year: str,
-) -> list[tuple[Posting, Firm, int]]:
+) -> list[tuple[Posting, Firm, int, ScoreBreakdown]]:
     """Score all postings and return sorted by score descending.
 
     Postings that are hard-filtered (wrong class year, closed) are excluded.
@@ -323,18 +437,19 @@ def score_all_postings(
         user_class_year: The student's current class year.
 
     Returns:
-        List of (Posting, Firm, base_score) tuples, sorted by score descending.
+        List of (Posting, Firm, base_score, ScoreBreakdown) tuples, sorted by score descending.
     """
-    results: list[tuple[Posting, Firm, int]] = []
+    results: list[tuple[Posting, Firm, int, ScoreBreakdown]] = []
 
     for posting in postings:
         firm = firms.get(posting.firm_id)
         if firm is None:
             continue
 
-        score = score_posting_base(profile, posting, firm, user_class_year)
-        if score is not None:
-            results.append((posting, firm, score))
+        result = score_posting_base(profile, posting, firm, user_class_year)
+        if result is not None:
+            score, breakdown = result
+            results.append((posting, firm, score, breakdown))
 
     results.sort(key=lambda x: x[2], reverse=True)
     return results
@@ -361,26 +476,27 @@ def compute_tier(score: int) -> Literal["strong_match", "reach", "long_shot", "n
 
 def apply_qualitative_pass(
     profile: StudentProfile,
-    top_postings: list[tuple[Posting, Firm, int]],
+    top_postings: list[tuple[Posting, Firm, int, ScoreBreakdown]],
     limit: int = 30,
 ) -> list[FitScore]:
     """Apply Claude's qualitative scoring pass to the top N deterministic matches.
 
     For each posting in the top N, calls Claude to get an adjustment (±15),
-    tier, rationale, strengths, and gaps. Returns the final FitScore objects.
+    tier, rationale, strengths, and gaps. Returns the final FitScore objects
+    with per-factor breakdowns attached.
 
     Args:
         profile: The student's parsed profile.
-        top_postings: List of (Posting, Firm, base_score) tuples, pre-sorted.
+        top_postings: List of (Posting, Firm, base_score, ScoreBreakdown) tuples, pre-sorted.
         limit: Number of top postings to run through Claude. Default 30.
 
     Returns:
-        List of FitScore objects with Claude-enhanced scoring.
+        List of FitScore objects with Claude-enhanced scoring and breakdowns.
     """
     fit_scores: list[FitScore] = []
     postings_to_score = top_postings[:limit]
 
-    for posting, firm, base_score in postings_to_score:
+    for posting, firm, base_score, breakdown in postings_to_score:
         try:
             result = score_fit_qualitative(profile, posting, base_score)
 
@@ -396,6 +512,7 @@ def apply_qualitative_pass(
                 rationale=result.get("rationale", ""),
                 strengths=result.get("strengths", []),
                 gaps=result.get("gaps", []),
+                breakdown=breakdown,
                 computed_at=datetime.now(timezone.utc),
             )
             fit_scores.append(fit_score)
@@ -428,6 +545,7 @@ def apply_qualitative_pass(
                 rationale=f"Base score {base_score}/100 based on GPA, coursework, and experience match. Qualitative review unavailable.",
                 strengths=["Deterministic scoring completed successfully"],
                 gaps=["Qualitative review could not be completed — retry later"],
+                breakdown=breakdown,
                 computed_at=datetime.now(timezone.utc),
             )
             fit_scores.append(fit_score)

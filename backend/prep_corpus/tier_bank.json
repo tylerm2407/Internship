@@ -1,0 +1,98 @@
+{
+  "bulge_bracket": {
+    "firm_specific": [
+      {"q": "Bulge brackets have global reach and large balance sheets. How would you think about a cross-border deal pitch at our firm?", "d": "medium", "tags": ["global"]},
+      {"q": "Why would a CEO choose a bulge bracket over an elite boutique for a sell-side M&A?", "d": "medium", "tags": ["positioning"]},
+      {"q": "Describe the sector coverage model in a bulge bracket. How do product and coverage groups interact?", "d": "medium", "tags": ["structure"]},
+      {"q": "If you had to pitch our platform to a Fortune 500 CFO, what would you lead with?", "d": "hard", "tags": ["pitch"]},
+      {"q": "How do bulge brackets differentiate themselves when all offer similar services?", "d": "hard", "tags": ["differentiation"]}
+    ],
+    "market_awareness": [
+      {"q": "How has regulatory scrutiny (Basel, Dodd-Frank) reshaped what bulge bracket banks can do on their balance sheet?", "d": "hard", "tags": ["regulation"]},
+      {"q": "What's the role of a bulge bracket in capital markets originations right now?", "d": "medium", "tags": ["capital_markets"]},
+      {"q": "How does fee compression in equity research affect bulge banks?", "d": "hard", "tags": ["research", "fees"]}
+    ]
+  },
+  "elite_boutique": {
+    "firm_specific": [
+      {"q": "Why are you interested in an elite boutique over a bulge bracket?", "d": "easy", "tags": ["why_boutique"]},
+      {"q": "What advantages do elite boutiques have in advisory work?", "d": "medium", "tags": ["advantages"]},
+      {"q": "How does our lean team model affect the experience for an analyst?", "d": "medium", "tags": ["experience"]},
+      {"q": "Elite boutiques have grown dramatically in M&A market share. Why?", "d": "medium", "tags": ["market_share"]},
+      {"q": "How do we compete for talent against bulge brackets?", "d": "hard", "tags": ["talent"]}
+    ],
+    "behavioral": [
+      {"q": "At an elite boutique you'll have more senior exposure early. Why are you ready for that?", "d": "medium", "tags": ["ownership"]},
+      {"q": "Smaller teams mean fewer places to hide. Tell me about a time you had to own a project end-to-end.", "d": "medium", "tags": ["ownership"]}
+    ]
+  },
+  "middle_market": {
+    "firm_specific": [
+      {"q": "What defines the middle market, and why do clients choose a middle-market bank?", "d": "easy", "tags": ["mm_basics"]},
+      {"q": "How does a middle-market sell-side process differ from a bulge bracket sell-side?", "d": "medium", "tags": ["process"]},
+      {"q": "Why middle-market over a bulge bracket?", "d": "medium", "tags": ["why_mm"]},
+      {"q": "What's our firm's sweet spot deal size, and who competes with us there?", "d": "medium", "tags": ["positioning"]}
+    ]
+  },
+  "boutique": {
+    "firm_specific": [
+      {"q": "Why a sector-focused boutique over a full-service firm?", "d": "medium", "tags": ["why_boutique"]},
+      {"q": "What's the advantage of specialization for bankers and clients?", "d": "medium", "tags": ["specialization"]},
+      {"q": "How do boutiques build and maintain client relationships without a balance sheet?", "d": "hard", "tags": ["relationships"]}
+    ]
+  },
+  "regional": {
+    "firm_specific": [
+      {"q": "What differentiates a regional bank from a national or global firm?", "d": "easy", "tags": ["regional"]},
+      {"q": "Why would a middle-market company hire a regional over a national bank?", "d": "medium", "tags": ["why_regional"]}
+    ]
+  },
+  "buy_side": {
+    "firm_specific": [
+      {"q": "Why the buy-side over the sell-side?", "d": "easy", "tags": ["why_bs"]},
+      {"q": "Walk me through a typical day at a PE or hedge fund analyst.", "d": "medium", "tags": ["day_in_life"]},
+      {"q": "What's your investment philosophy?", "d": "medium", "tags": ["philosophy"]},
+      {"q": "What makes a great investor vs a great banker?", "d": "medium", "tags": ["skills"]},
+      {"q": "Why our fund specifically?", "d": "medium", "tags": ["why_firm"]},
+      {"q": "Describe a company you'd want to invest in and why.", "d": "medium", "tags": ["thesis"]},
+      {"q": "What industries are you most interested in and why?", "d": "medium", "tags": ["sectors"]}
+    ],
+    "technical_lbo": [
+      {"q": "We focus on sponsor-driven LBOs. Walk me through the top three value creation levers in our strategy.", "d": "hard", "tags": ["value_creation"]},
+      {"q": "How would you diligence management in a take-private deal?", "d": "hard", "tags": ["management_diligence"]},
+      {"q": "Walk me through how we'd source a proprietary deal.", "d": "hard", "tags": ["sourcing"]}
+    ],
+    "pitch_a_stock": [
+      {"q": "Pitch me a public company you think we should take private.", "d": "hard", "tags": ["ptp"]},
+      {"q": "Pitch me a founder-led business with strong unit economics.", "d": "hard", "tags": ["unit_economics"]}
+    ]
+  },
+  "quant": {
+    "brain_teaser": [
+      {"q": "What is the expected value of the sum of two fair dice?", "d": "easy", "tags": ["expected_value"]},
+      {"q": "You flip a biased coin (p=0.6 heads) 10 times. What's the probability of exactly 7 heads?", "d": "medium", "tags": ["binomial"]},
+      {"q": "You have a deck of 52 cards. What's the probability that the top card is red and the second card is a face card?", "d": "medium", "tags": ["probability"]},
+      {"q": "What's the expected number of coin flips to get 3 consecutive heads?", "d": "hard", "tags": ["markov"]},
+      {"q": "Walk me through how you'd derive the Black-Scholes formula.", "d": "hard", "tags": ["black_scholes"]},
+      {"q": "What's the correlation between two random variables X and X²?", "d": "hard", "tags": ["correlation"]},
+      {"q": "Random walk: you're at 0. Each step is +1 or -1 with equal probability. What's the expected number of steps to reach +10?", "d": "hard", "tags": ["random_walk"]},
+      {"q": "A stock has a 60% daily chance of going up by $1 and 40% of going down by $1. After 100 days, what's the expected price and variance?", "d": "hard", "tags": ["variance"]},
+      {"q": "You draw 5 cards from a deck. What's the probability of getting a flush?", "d": "medium", "tags": ["combinatorics"]},
+      {"q": "Explain the difference between risk-neutral and physical probability measures.", "d": "hard", "tags": ["measures"]},
+      {"q": "You have a million uniform [0,1] random variables. What's the distribution of the maximum?", "d": "hard", "tags": ["order_statistics"]},
+      {"q": "Given a fair 6-sided die, how do you simulate a 7-sided die?", "d": "hard", "tags": ["simulation"]},
+      {"q": "How would you estimate pi using a Monte Carlo simulation?", "d": "medium", "tags": ["monte_carlo"]},
+      {"q": "Walk me through a basic mean-reversion strategy.", "d": "medium", "tags": ["mean_reversion"]},
+      {"q": "Explain Ito's Lemma in plain language.", "d": "hard", "tags": ["stochastic_calc"]},
+      {"q": "You're given 100 unsorted numbers. Find the median in expected linear time.", "d": "hard", "tags": ["algorithms"]}
+    ],
+    "firm_specific": [
+      {"q": "Why quant trading / research over discretionary?", "d": "easy", "tags": ["why_quant"]},
+      {"q": "What programming languages are you most comfortable with?", "d": "easy", "tags": ["languages"]},
+      {"q": "Walk me through a project where you applied statistics or ML to a real problem.", "d": "medium", "tags": ["project"]},
+      {"q": "How do you avoid overfitting in a model?", "d": "medium", "tags": ["ml"]},
+      {"q": "What's the Sharpe ratio and why is it a flawed single metric?", "d": "medium", "tags": ["sharpe"]},
+      {"q": "Explain bias-variance tradeoff.", "d": "medium", "tags": ["ml"]}
+    ]
+  }
+}

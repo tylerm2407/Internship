@@ -26,8 +26,15 @@ logger = logging.getLogger(__name__)
 # ============================================================
 
 
+_anon_client: Client | None = None
+_service_client: Client | None = None
+
+
 def get_client() -> Client:
-    """Create a Supabase client using the anon key.
+    """Return the shared Supabase client using the anon key.
+
+    Uses a module-level singleton to avoid creating a new TCP connection
+    on every call. The client is lazily initialized on first use.
 
     Returns:
         An authenticated Supabase client instance.
@@ -35,15 +42,21 @@ def get_client() -> Client:
     Raises:
         ValueError: If required environment variables are not set.
     """
-    url = os.getenv("SUPABASE_URL")
-    key = os.getenv("SUPABASE_ANON_KEY")
-    if not url or not key:
-        raise ValueError("SUPABASE_URL and SUPABASE_ANON_KEY must be set")
-    return create_client(url, key)
+    global _anon_client
+    if _anon_client is None:
+        url = os.getenv("SUPABASE_URL")
+        key = os.getenv("SUPABASE_ANON_KEY")
+        if not url or not key:
+            raise ValueError("SUPABASE_URL and SUPABASE_ANON_KEY must be set")
+        _anon_client = create_client(url, key)
+    return _anon_client
 
 
 def get_service_client() -> Client:
-    """Create a Supabase client using the service role key for admin ops.
+    """Return the shared Supabase client using the service role key for admin ops.
+
+    Uses a module-level singleton to avoid creating a new TCP connection
+    on every call. The client is lazily initialized on first use.
 
     Returns:
         A service-role Supabase client instance.
@@ -51,11 +64,14 @@ def get_service_client() -> Client:
     Raises:
         ValueError: If required environment variables are not set.
     """
-    url = os.getenv("SUPABASE_URL")
-    key = os.getenv("SUPABASE_SERVICE_KEY")
-    if not url or not key:
-        raise ValueError("SUPABASE_URL and SUPABASE_SERVICE_KEY must be set")
-    return create_client(url, key)
+    global _service_client
+    if _service_client is None:
+        url = os.getenv("SUPABASE_URL")
+        key = os.getenv("SUPABASE_SERVICE_KEY")
+        if not url or not key:
+            raise ValueError("SUPABASE_URL and SUPABASE_SERVICE_KEY must be set")
+        _service_client = create_client(url, key)
+    return _service_client
 
 
 def _get_user_client(token: str) -> Client:
@@ -445,6 +461,109 @@ def get_all_alumni(token: str) -> list[Any]:
         raise
 
 
+def search_alumni(
+    token: str,
+    school: str | None = None,
+    company: str | None = None,
+    name: str | None = None,
+    graduation_year: int | None = None,
+    limit: int = 50,
+    offset: int = 0,
+) -> tuple[list[Any], int]:
+    """Search alumni with case-insensitive partial matching.
+
+    Args:
+        token: The user's JWT bearer token.
+        school: Partial school name filter.
+        company: Partial company name filter (matches current_company).
+        name: Partial name filter.
+        graduation_year: Exact graduation year filter.
+        limit: Max results to return.
+        offset: Number of results to skip.
+
+    Returns:
+        Tuple of (alumni list, total count).
+    """
+    try:
+        client = _get_user_client(token)
+        query = client.table("alumni").select("*", count="exact")
+
+        if school:
+            query = query.ilike("school", f"%{school}%")
+        if company:
+            query = query.ilike("current_company", f"%{company}%")
+        if name:
+            query = query.ilike("name", f"%{name}%")
+        if graduation_year:
+            query = query.eq("graduation_year", graduation_year)
+
+        result = (
+            query
+            .order("name")
+            .range(offset, offset + limit - 1)
+            .execute()
+        )
+
+        logger.info("db.alumni.search", extra={
+            "school": school, "company": company, "name": name,
+            "results": len(result.data), "total": result.count,
+        })
+        return result.data, result.count or 0
+    except Exception as e:
+        logger.error("db.alumni.search.failed", extra={"error": str(e)})
+        raise
+
+
+def bulk_insert_alumni(alumni_rows: list[dict], token: str) -> int:
+    """Bulk insert alumni records, deduplicating by name + school + graduation_year.
+
+    Uses the service client for upsert. Sets added_by from the token user.
+
+    Args:
+        alumni_rows: List of alumni data dicts to insert.
+        token: The user's JWT bearer token (used for added_by context).
+
+    Returns:
+        Number of rows successfully inserted.
+    """
+    if not alumni_rows:
+        return 0
+    try:
+        client = get_service_client()
+        result = client.table("alumni").upsert(
+            alumni_rows,
+            on_conflict="name,school,graduation_year",
+        ).execute()
+        count = len(result.data) if result.data else 0
+        logger.info("db.alumni.bulk_inserted", extra={"count": count})
+        return count
+    except Exception as e:
+        logger.error("db.alumni.bulk_insert.failed", extra={"count": len(alumni_rows), "error": str(e)})
+        raise
+
+
+def insert_alumnus(alumnus_data: dict, token: str) -> Any:
+    """Insert a single alumnus record.
+
+    Args:
+        alumnus_data: The alumnus data dict.
+        token: The user's JWT bearer token.
+
+    Returns:
+        The created alumnus data dict.
+    """
+    try:
+        client = _get_user_client(token)
+        result = client.table("alumni").insert(alumnus_data).execute()
+        logger.info("db.alumnus.created", extra={"name": alumnus_data.get("name")})
+        if result.data:
+            return result.data[0]
+        return alumnus_data
+    except Exception as e:
+        logger.error("db.alumnus.create.failed", extra={"error": str(e)})
+        raise
+
+
 def get_networking_contacts(user_id: str, token: str) -> list[Any]:
     """Fetch all networking contacts for a user.
 
@@ -622,6 +741,33 @@ def create_prep_answer(answer_data: dict, token: str) -> Any:
         raise
 
 
+def get_session_answers(session_id: str, user_id: str, token: str) -> list[Any]:
+    """Fetch all answers for a specific prep session owned by the user.
+
+    Args:
+        session_id: The session's UUID as a string.
+        user_id: The user's UUID as a string.
+        token: The user's JWT bearer token.
+
+    Returns:
+        List of prep answer data dicts ordered by creation time.
+    """
+    try:
+        client = _get_user_client(token)
+        result = (
+            client.table("prep_answers")
+            .select("*")
+            .eq("session_id", session_id)
+            .eq("user_id", user_id)
+            .order("created_at")
+            .execute()
+        )
+        return result.data
+    except Exception as e:
+        logger.error("db.session_answers.fetch.failed", extra={"error": str(e), "session_id": session_id})
+        raise
+
+
 def get_readiness_scores(user_id: str, token: str) -> list[Any]:
     """Fetch readiness scores for a user across all categories.
 
@@ -762,6 +908,191 @@ def delete_timeline_event(event_id: str, token: str) -> None:
     except Exception as e:
         logger.error("db.timeline_event.delete.failed", extra={"event_id": event_id, "error": str(e)})
         raise
+
+
+# ============================================================
+# Audit Logging
+# ============================================================
+
+
+def log_audit_event(
+    user_id: str | None,
+    action: str,
+    resource_type: str,
+    resource_id: str | None = None,
+    ip_address: str | None = None,
+    institution_id: str | None = None,
+    metadata: dict | None = None,
+) -> None:
+    """Write an entry to the audit_log table.
+
+    Args:
+        user_id: The acting user's UUID (nullable for system events).
+        action: The action performed, e.g. 'profile.read', 'user.delete'.
+        resource_type: The type of resource affected, e.g. 'student_profile'.
+        resource_id: The ID of the affected resource.
+        ip_address: The request IP address.
+        institution_id: The institution context if applicable.
+        metadata: Additional JSON metadata.
+    """
+    try:
+        from uuid import uuid4
+        client = get_service_client()
+        entry = {
+            "id": str(uuid4()),
+            "user_id": user_id,
+            "institution_id": institution_id,
+            "action": action,
+            "resource_type": resource_type,
+            "resource_id": resource_id,
+            "ip_address": ip_address,
+            "metadata": metadata or {},
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        }
+        client.table("audit_log").insert(entry).execute()
+        logger.info("audit.logged", extra={"action": action, "user_id": user_id})
+    except Exception as e:
+        # Audit logging should never break the request
+        logger.warning("audit.log_failed", extra={"action": action, "error": str(e)})
+
+
+# ============================================================
+# User Data Deletion
+# ============================================================
+
+
+def delete_all_user_data(user_id: str) -> dict:
+    """Cascade-delete all data for a user across all tables.
+
+    Uses the service role client to ensure access to all tables.
+    Deletes in dependency order to respect foreign key constraints.
+
+    Args:
+        user_id: The user's UUID as a string.
+
+    Returns:
+        Dictionary with counts of deleted rows per table.
+    """
+    client = get_service_client()
+    counts: dict[str, int] = {}
+
+    tables_to_clear = [
+        "prep_answers",
+        "prep_sessions",
+        "readiness_scores",
+        "networking_contacts",
+        "status_changes",
+        "fit_scores",
+        "applications",
+        "timeline_events",
+        "student_profiles",
+    ]
+
+    for table in tables_to_clear:
+        try:
+            result = client.table(table).delete().eq("user_id", user_id).execute()
+            counts[table] = len(result.data) if result.data else 0
+        except Exception as e:
+            logger.warning(f"delete_user.{table}.failed", extra={"user_id": user_id, "error": str(e)})
+            counts[table] = 0
+
+    # Delete user row last
+    try:
+        result = client.table("users").delete().eq("id", user_id).execute()
+        counts["users"] = len(result.data) if result.data else 0
+    except Exception as e:
+        logger.warning("delete_user.users.failed", extra={"user_id": user_id, "error": str(e)})
+        counts["users"] = 0
+
+    logger.info("delete_user.completed", extra={"user_id": user_id, "counts": counts})
+    return counts
+
+
+# ============================================================
+# Admin Queries
+# ============================================================
+
+
+def get_users_by_institution(institution_id: str) -> list[Any]:
+    """Fetch all users belonging to an institution.
+
+    Args:
+        institution_id: The institution's UUID as a string.
+
+    Returns:
+        List of user data dicts (email, school, role, created_at — no sensitive data).
+    """
+    try:
+        client = get_service_client()
+        result = (
+            client.table("users")
+            .select("id,email,school,graduation_year,current_class_year,role,created_at")
+            .eq("institution_id", institution_id)
+            .order("created_at", desc=True)
+            .execute()
+        )
+        return result.data
+    except Exception as e:
+        logger.error("db.admin.users.failed", extra={"institution_id": institution_id, "error": str(e)})
+        raise
+
+
+def get_institution_stats(institution_id: str) -> dict:
+    """Compute usage statistics for an institution.
+
+    Args:
+        institution_id: The institution's UUID as a string.
+
+    Returns:
+        Dictionary with user counts, profile counts, application counts, and prep session counts.
+    """
+    client = get_service_client()
+
+    users = (
+        client.table("users")
+        .select("id", count="exact")
+        .eq("institution_id", institution_id)
+        .execute()
+    )
+    user_count = users.count or 0
+
+    # Get user IDs for this institution to query related tables
+    user_rows = (
+        client.table("users")
+        .select("id")
+        .eq("institution_id", institution_id)
+        .execute()
+    )
+    user_ids = [u["id"] for u in (user_rows.data or [])]
+
+    profile_count = 0
+    application_count = 0
+    prep_session_count = 0
+
+    if user_ids:
+        for uid in user_ids:
+            try:
+                profiles = client.table("student_profiles").select("user_id", count="exact").eq("user_id", uid).execute()
+                profile_count += profiles.count or 0
+            except Exception:
+                pass
+            try:
+                apps = client.table("applications").select("id", count="exact").eq("user_id", uid).execute()
+                application_count += apps.count or 0
+            except Exception:
+                pass
+            try:
+                sessions = client.table("prep_sessions").select("id", count="exact").eq("user_id", uid).execute()
+                prep_session_count += sessions.count or 0
+            except Exception:
+                pass
+
+    return {
+        "total_users": user_count,
+        "profiles_created": profile_count,
+        "applications_tracked": application_count,
+        "prep_sessions_completed": prep_session_count,
+    }
 
 
 # ============================================================

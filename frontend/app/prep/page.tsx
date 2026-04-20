@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   Brain,
@@ -11,23 +11,29 @@ import {
   ListNumbers,
   Play,
   CaretRight,
+  CaretDown,
+  CaretUp,
   ArrowLeft,
   Lightbulb,
 } from "@phosphor-icons/react";
 import {
   getAllFirms,
+  getProfile,
   startPrepSession,
   submitPrepAnswer,
   getPrepReadiness,
   getPrepHistory,
+  getSessionAnswers,
   getWhyFirm,
 } from "../../lib/api";
+import { AuthGuard } from "../../components/AuthGuard";
 import { Card } from "../../components/Card";
 import { EyebrowLabel } from "../../components/EyebrowLabel";
 import { PrimaryButton } from "../../components/PrimaryButton";
 import { SecondaryButton } from "../../components/SecondaryButton";
 import type {
   Firm,
+  StudentProfile,
   PrepSession,
   PrepQuestion,
   PrepAnswer,
@@ -46,6 +52,14 @@ const CATEGORY_LABELS: Record<string, string> = {
   firm_specific: "Firm-Specific",
   market_awareness: "Market Awareness",
   brain_teaser: "Brain Teaser",
+  market_sizing: "Market Sizing",
+  pitch_a_stock: "Pitch a Stock",
+  restructuring: "Restructuring",
+  pe_operations: "PE Operations",
+  st_markets: "S&T / Markets",
+  er_analysis: "Equity Research",
+  quant_probability: "Quant / Probability",
+  credit_analysis: "Credit Analysis",
 };
 
 const SESSION_TYPE_LABELS: Record<SessionType, string> = {
@@ -56,17 +70,80 @@ const SESSION_TYPE_LABELS: Record<SessionType, string> = {
   behavioral: "Behavioral",
   firm_specific: "Firm-Specific",
   market_awareness: "Market Awareness",
+  brain_teaser: "Brain Teaser",
+  market_sizing: "Market Sizing",
+  pitch_a_stock: "Pitch a Stock",
+  restructuring: "Restructuring",
+  technical_pe: "Technical: Private Equity",
+  technical_st_markets: "Technical: S&T / Markets",
+  technical_er: "Technical: Equity Research",
+  technical_quant: "Technical: Quant",
+  technical_credit: "Technical: Credit",
 };
 
-const SESSION_TYPES: SessionType[] = [
+const ALL_SESSION_TYPES: SessionType[] = [
   "technical_accounting",
   "technical_valuation",
   "technical_ma",
   "technical_lbo",
+  "technical_pe",
+  "technical_st_markets",
+  "technical_er",
+  "technical_quant",
+  "technical_credit",
+  "behavioral",
+  "firm_specific",
+  "market_awareness",
+  "brain_teaser",
+  "market_sizing",
+  "pitch_a_stock",
+  "restructuring",
+];
+
+// Universal session types shown to all users regardless of target role
+const UNIVERSAL_SESSION_TYPES: SessionType[] = [
   "behavioral",
   "firm_specific",
   "market_awareness",
 ];
+
+// Maps target roles to the session types most relevant for that role
+const ROLE_TO_SESSION_TYPES: Record<string, SessionType[]> = {
+  "Investment Banking": ["technical_accounting", "technical_valuation", "technical_ma", "technical_lbo", "restructuring"],
+  "Capital Markets": ["technical_accounting", "technical_valuation", "technical_ma", "market_sizing"],
+  "Restructuring": ["restructuring", "technical_accounting", "technical_credit", "technical_valuation"],
+  "Sales & Trading": ["technical_st_markets", "brain_teaser", "market_sizing"],
+  "Quant": ["technical_quant", "brain_teaser", "market_sizing"],
+  "Private Equity": ["technical_pe", "technical_lbo", "technical_valuation"],
+  "Hedge Fund": ["technical_quant", "pitch_a_stock", "technical_st_markets"],
+  "Asset Management": ["technical_valuation", "pitch_a_stock", "market_sizing"],
+  "Equity Research": ["technical_er", "technical_valuation", "pitch_a_stock"],
+  "Credit / Leveraged Finance": ["technical_credit", "technical_accounting", "technical_valuation"],
+  "Real Estate": ["technical_valuation", "technical_accounting", "technical_lbo"],
+  "Corporate Finance / FP&A": ["technical_accounting", "technical_valuation", "market_sizing"],
+  "Risk Management": ["technical_st_markets", "technical_quant", "brain_teaser"],
+  "Compliance": ["technical_accounting", "market_sizing"],
+  "Insurance": ["technical_accounting", "market_sizing", "brain_teaser"],
+  "Wealth Management": ["technical_valuation", "pitch_a_stock", "market_sizing"],
+  "Consulting (Finance)": ["technical_accounting", "technical_valuation", "market_sizing"],
+};
+
+function getSessionTypesForRoles(targetRoles: string[]): SessionType[] {
+  if (!targetRoles || targetRoles.length === 0) return ALL_SESSION_TYPES;
+  const roleSpecific = new Set<SessionType>();
+  for (const role of targetRoles) {
+    const types = ROLE_TO_SESSION_TYPES[role];
+    if (types) {
+      for (const t of types) roleSpecific.add(t);
+    }
+  }
+  // Always include universal types
+  for (const t of UNIVERSAL_SESSION_TYPES) roleSpecific.add(t);
+  // If no matches found, show all
+  if (roleSpecific.size <= UNIVERSAL_SESSION_TYPES.length) return ALL_SESSION_TYPES;
+  // Return in the same order as ALL_SESSION_TYPES
+  return ALL_SESSION_TYPES.filter((t) => roleSpecific.has(t));
+}
 
 function getMasteryColor(score: number): string {
   if (score >= 4) return "bg-green-100";
@@ -91,32 +168,6 @@ function formatDate(dateStr: string): string {
   });
 }
 
-// ── Preset sample data ────────────────────────────────────────
-
-const SAMPLE_FIRMS: Firm[] = [
-  { id: "f1", name: "Goldman Sachs", tier: "bulge_bracket", roles_offered: ["Investment Banking", "Sales & Trading"], headquarters: "New York, NY", offices: ["New York", "San Francisco", "London"], gpa_floor_estimated: 3.7, recruiting_profile: "Top-tier talent from target schools", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-  { id: "f2", name: "Morgan Stanley", tier: "bulge_bracket", roles_offered: ["Investment Banking", "Wealth Management"], headquarters: "New York, NY", offices: ["New York", "Houston"], gpa_floor_estimated: 3.6, recruiting_profile: "Well-rounded candidates with leadership", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-  { id: "f3", name: "Evercore", tier: "elite_boutique", roles_offered: ["Investment Banking Advisory"], headquarters: "New York, NY", offices: ["New York", "Houston"], gpa_floor_estimated: 3.7, recruiting_profile: "Strong attention to detail", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-  { id: "f4", name: "Jefferies", tier: "middle_market", roles_offered: ["Investment Banking", "Equity Research"], headquarters: "New York, NY", offices: ["New York", "Los Angeles"], gpa_floor_estimated: 3.4, recruiting_profile: "Entrepreneurial mindset", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-  { id: "f5", name: "Lazard", tier: "elite_boutique", roles_offered: ["Financial Advisory", "Asset Management"], headquarters: "New York, NY", offices: ["New York", "Chicago"], gpa_floor_estimated: 3.7, recruiting_profile: "Intellectually curious candidates", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-];
-
-const SAMPLE_READINESS: ReadinessScore[] = [
-  { user_id: "demo", category: "accounting", mastery_score: 3.2, questions_attempted: 12, last_practiced_at: "2026-04-05", needs_review: false },
-  { user_id: "demo", category: "valuation", mastery_score: 2.8, questions_attempted: 8, last_practiced_at: "2026-04-03", needs_review: false },
-  { user_id: "demo", category: "ma", mastery_score: 1.9, questions_attempted: 4, last_practiced_at: "2026-03-28", needs_review: true },
-  { user_id: "demo", category: "lbo", mastery_score: 1.4, questions_attempted: 3, last_practiced_at: "2026-03-25", needs_review: true },
-  { user_id: "demo", category: "behavioral", mastery_score: 3.8, questions_attempted: 15, last_practiced_at: "2026-04-07", needs_review: false },
-  { user_id: "demo", category: "firm_specific", mastery_score: 2.1, questions_attempted: 5, last_practiced_at: "2026-04-01", needs_review: true },
-  { user_id: "demo", category: "market_awareness", mastery_score: 2.5, questions_attempted: 6, last_practiced_at: "2026-04-02", needs_review: false },
-];
-
-const SAMPLE_PAST_SESSIONS: PrepSession[] = [
-  { id: "s1", user_id: "demo", firm_id: "f1", role_type: "investment_banking", session_type: "behavioral", questions_asked: 5, questions_correct: 4, overall_score: 3.8, claude_feedback: "Strong behavioral answers with good STAR structure.", duration_minutes: 18, created_at: "2026-04-07T14:30:00Z" },
-  { id: "s2", user_id: "demo", firm_id: "f3", role_type: "investment_banking", session_type: "technical_accounting", questions_asked: 5, questions_correct: 3, overall_score: 3.2, claude_feedback: "Solid grasp of the three statements. Work on linking questions.", duration_minutes: 22, created_at: "2026-04-05T10:00:00Z" },
-  { id: "s3", user_id: "demo", firm_id: "f2", role_type: "investment_banking", session_type: "technical_valuation", questions_asked: 5, questions_correct: 2, overall_score: 2.6, claude_feedback: "Review DCF mechanics and WACC calculation.", duration_minutes: 25, created_at: "2026-04-03T16:00:00Z" },
-  { id: "s4", user_id: "demo", firm_id: "f1", role_type: "investment_banking", session_type: "technical_ma", questions_asked: 3, questions_correct: 1, overall_score: 1.9, claude_feedback: "Needs more work on merger model mechanics and accretion/dilution.", duration_minutes: 15, created_at: "2026-03-28T11:00:00Z" },
-];
 
 const PRESET_QUESTIONS: Record<string, PrepQuestion[]> = {
   technical_accounting: [
@@ -183,6 +234,48 @@ const PRESET_QUESTIONS: Record<string, PrepQuestion[]> = {
     { question: "What sector would you invest in right now and why?", category: "market_awareness", difficulty: "hard" },
     { question: "Tell me about an IPO or M&A deal from the last six months.", category: "market_awareness", difficulty: "medium" },
   ],
+  technical_pe: [
+    { question: "Walk me through a leveraged buyout model.", category: "pe_operations", difficulty: "medium" },
+    { question: "What makes a good LBO candidate?", category: "pe_operations", difficulty: "medium" },
+    { question: "How do you calculate IRR and MOIC in a PE context?", category: "pe_operations", difficulty: "medium" },
+    { question: "What are the key value creation levers in a PE deal?", category: "pe_operations", difficulty: "medium" },
+    { question: "What is a bolt-on acquisition and why do PE firms pursue them?", category: "pe_operations", difficulty: "medium" },
+    { question: "How do PE firms generate alpha beyond financial engineering?", category: "pe_operations", difficulty: "hard" },
+    { question: "What due diligence would you perform on a target company?", category: "pe_operations", difficulty: "hard" },
+  ],
+  technical_st_markets: [
+    { question: "Explain the Greeks: delta, gamma, theta, vega.", category: "st_markets", difficulty: "medium" },
+    { question: "What is a yield curve and what does its shape tell you?", category: "st_markets", difficulty: "medium" },
+    { question: "How does a market maker make money?", category: "st_markets", difficulty: "medium" },
+    { question: "How would you hedge a long equity position?", category: "st_markets", difficulty: "medium" },
+    { question: "Explain put-call parity.", category: "st_markets", difficulty: "hard" },
+    { question: "If the Fed raises rates by 25 bps, what happens to bond prices?", category: "st_markets", difficulty: "easy" },
+    { question: "What is duration and why does it matter for bond portfolios?", category: "st_markets", difficulty: "medium" },
+  ],
+  technical_er: [
+    { question: "Walk me through how you would initiate coverage on a stock.", category: "er_analysis", difficulty: "hard" },
+    { question: "What goes into building an earnings model?", category: "er_analysis", difficulty: "medium" },
+    { question: "How do you derive a price target?", category: "er_analysis", difficulty: "medium" },
+    { question: "Pitch me a stock you're following.", category: "er_analysis", difficulty: "hard" },
+    { question: "What is a sum-of-the-parts valuation?", category: "er_analysis", difficulty: "medium" },
+    { question: "How do you identify catalysts for a stock?", category: "er_analysis", difficulty: "medium" },
+  ],
+  technical_quant: [
+    { question: "You flip a fair coin 10 times. What is the probability of getting exactly 7 heads?", category: "quant_probability", difficulty: "medium" },
+    { question: "Explain Bayes' theorem with a practical example.", category: "quant_probability", difficulty: "medium" },
+    { question: "Describe the Monty Hall problem and explain the correct strategy.", category: "quant_probability", difficulty: "medium" },
+    { question: "You have 100 coins in a dark room: 30 heads, 70 tails. Split into two piles with equal heads. You can flip coins.", category: "quant_probability", difficulty: "hard" },
+    { question: "What is the Central Limit Theorem and why is it important?", category: "quant_probability", difficulty: "medium" },
+    { question: "Explain Monte Carlo simulation and when you would use it.", category: "quant_probability", difficulty: "medium" },
+  ],
+  technical_credit: [
+    { question: "How do you assess a company's creditworthiness?", category: "credit_analysis", difficulty: "medium" },
+    { question: "What are the key credit ratios you would look at?", category: "credit_analysis", difficulty: "medium" },
+    { question: "Walk me through a capital structure analysis.", category: "credit_analysis", difficulty: "hard" },
+    { question: "What is a debt covenant and why does it matter?", category: "credit_analysis", difficulty: "medium" },
+    { question: "What is the difference between secured and unsecured debt?", category: "credit_analysis", difficulty: "easy" },
+    { question: "How does Chapter 11 differ from Chapter 7 bankruptcy?", category: "credit_analysis", difficulty: "easy" },
+  ],
 };
 
 /** Simple local answer evaluator matching the backend rules-based logic. */
@@ -205,6 +298,11 @@ function evaluateLocally(question: PrepQuestion, answer: string): PrepAnswer {
     ma: ["synergies", "accretion", "dilution", "premium", "eps", "purchase price", "goodwill"],
     lbo: ["leverage", "debt", "equity", "irr", "cash flow", "exit", "multiple", "sponsor"],
     market_awareness: ["interest rate", "fed", "gdp", "inflation", "sector", "valuation", "deal"],
+    pe_operations: ["lbo", "leverage", "operating", "portfolio company", "irr", "moic", "bolt-on", "ebitda", "due diligence"],
+    st_markets: ["greeks", "delta", "gamma", "options", "volatility", "yield curve", "duration", "market making", "spread"],
+    er_analysis: ["earnings model", "price target", "valuation", "catalyst", "sector", "initiating coverage", "revenue growth"],
+    quant_probability: ["probability", "expected value", "variance", "distribution", "bayes", "algorithm", "regression"],
+    credit_analysis: ["credit", "leverage", "covenant", "default", "recovery", "capital structure", "rating", "spread"],
   };
   const terms = keyTerms[question.category];
   if (terms) {
@@ -265,9 +363,13 @@ function SkeletonBlock() {
 export default function PrepPage() {
   const [view, setView] = useState<View>("dashboard");
   const [firms, setFirms] = useState<Firm[]>([]);
+  const [userProfile, setUserProfile] = useState<StudentProfile | null>(null);
   const [readinessScores, setReadinessScores] = useState<ReadinessScore[]>([]);
   const [overallReadiness, setOverallReadiness] = useState<number>(0);
   const [pastSessions, setPastSessions] = useState<PrepSession[]>([]);
+  const [expandedSessionId, setExpandedSessionId] = useState<string | null>(null);
+  const [expandedAnswers, setExpandedAnswers] = useState<PrepAnswer[]>([]);
+  const [loadingAnswers, setLoadingAnswers] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -286,6 +388,12 @@ export default function PrepPage() {
   const [currentFeedback, setCurrentFeedback] = useState<PrepAnswer | null>(null);
   const [sessionAnswers, setSessionAnswers] = useState<PrepAnswer[]>([]);
 
+  // Compute filtered session types based on user's target roles
+  const filteredSessionTypes = useMemo(
+    () => getSessionTypesForRoles(userProfile?.target_roles ?? []),
+    [userProfile],
+  );
+
   // Why this firm
   const [whyFirmId, setWhyFirmId] = useState<string>("");
   const [whyFirmLoading, setWhyFirmLoading] = useState(false);
@@ -298,45 +406,46 @@ export default function PrepPage() {
     setLoading(true);
     setError(null);
     try {
-      const [firmsResult, readinessResult, historyResult] = await Promise.allSettled([
+      const [firmsResult, readinessResult, historyResult, profileResult] = await Promise.allSettled([
         getAllFirms(),
         getPrepReadiness(),
         getPrepHistory(),
+        getProfile(),
       ]);
 
       const firmsOk = firmsResult.status === "fulfilled";
       const readinessOk = readinessResult.status === "fulfilled";
       const historyOk = historyResult.status === "fulfilled";
+      const profileOk = profileResult.status === "fulfilled";
 
-      // Use API data if available, otherwise fall back to presets
-      const firmsData = firmsOk ? firmsResult.value : SAMPLE_FIRMS;
+      if (profileOk && profileResult.value) {
+        setUserProfile(profileResult.value);
+      }
+
+      const firmsData = firmsOk ? firmsResult.value : [];
       setFirms(firmsData);
       if (firmsData.length > 0 && !selectedFirmId) setSelectedFirmId(firmsData[0].id);
       if (firmsData.length > 0 && !whyFirmId) setWhyFirmId(firmsData[0].id);
 
       if (readinessOk) {
-        setReadinessScores(readinessResult.value.scores);
-        setOverallReadiness(readinessResult.value.overall);
+        const rd = readinessResult.value;
+        setReadinessScores(rd.scores ?? rd.readiness_scores ?? []);
+        setOverallReadiness(rd.overall ?? 0);
       } else {
-        setReadinessScores(SAMPLE_READINESS);
-        const totalWeighted = SAMPLE_READINESS.reduce((s, r) => s + r.mastery_score, 0);
-        setOverallReadiness(Math.round((totalWeighted / SAMPLE_READINESS.length / 5) * 100));
+        setReadinessScores([]);
+        setOverallReadiness(0);
       }
 
       if (historyOk) {
         setPastSessions(historyResult.value.sessions);
       } else {
-        setPastSessions(SAMPLE_PAST_SESSIONS);
+        setPastSessions([]);
       }
     } catch {
-      // Full fallback to preset data
-      setFirms(SAMPLE_FIRMS);
-      if (!selectedFirmId) setSelectedFirmId(SAMPLE_FIRMS[0].id);
-      if (!whyFirmId) setWhyFirmId(SAMPLE_FIRMS[0].id);
-      setReadinessScores(SAMPLE_READINESS);
-      const totalWeighted = SAMPLE_READINESS.reduce((s, r) => s + r.mastery_score, 0);
-      setOverallReadiness(Math.round((totalWeighted / SAMPLE_READINESS.length / 5) * 100));
-      setPastSessions(SAMPLE_PAST_SESSIONS);
+      setFirms([]);
+      setReadinessScores([]);
+      setOverallReadiness(0);
+      setPastSessions([]);
     } finally {
       setLoading(false);
     }
@@ -454,6 +563,24 @@ export default function PrepPage() {
     setView("dashboard");
   };
 
+  const handleToggleSession = async (sessionId: string) => {
+    if (expandedSessionId === sessionId) {
+      setExpandedSessionId(null);
+      setExpandedAnswers([]);
+      return;
+    }
+    setExpandedSessionId(sessionId);
+    setLoadingAnswers(true);
+    try {
+      const data = await getSessionAnswers(sessionId);
+      setExpandedAnswers(data.answers);
+    } catch {
+      setExpandedAnswers([]);
+    } finally {
+      setLoadingAnswers(false);
+    }
+  };
+
   const handleWhyFirm = async () => {
     if (!whyFirmId) return;
     setWhyFirmLoading(true);
@@ -462,22 +589,7 @@ export default function PrepPage() {
       const result = await getWhyFirm(whyFirmId);
       setWhyFirmResult(result);
     } catch {
-      // Fallback: generate local talking points
-      const firm = firms.find((f) => f.id === whyFirmId);
-      const name = firm?.name || "this firm";
-      const tierPoints: Record<string, string> = {
-        bulge_bracket: `${name}'s global platform and deal flow provide unmatched exposure to large-scale, complex transactions across every industry vertical.`,
-        elite_boutique: `${name}'s lean deal teams give analysts significantly more responsibility and client exposure from day one compared to larger banks.`,
-        middle_market: `${name}'s middle-market focus offers the chance to work on deals end-to-end, from sourcing through close, building a well-rounded skill set.`,
-      };
-      const points = [
-        tierPoints[firm?.tier || "bulge_bracket"] || `${name} has a strong reputation for developing top-tier talent in the industry.`,
-        `${name}'s culture of mentorship and analyst development aligns with my goal of building a strong technical foundation early in my career.`,
-        `The caliber of transactions ${name} advises on — and the intellectual rigor required — is exactly the type of environment where I want to start my career.`,
-        `${name}'s presence in ${firm?.headquarters || "New York"} positions me in the center of the financial industry and provides access to a broad professional network.`,
-        `I have spoken with professionals at ${name} who consistently emphasize the collaborative team dynamic and the quality of the training program.`,
-      ];
-      setWhyFirmResult({ talking_points: points, firm_name: name });
+      setError("Failed to generate talking points. Please try again.");
     } finally {
       setWhyFirmLoading(false);
     }
@@ -498,6 +610,7 @@ export default function PrepPage() {
   if (view === "session" && activeSession && questions.length > 0) {
     const currentQuestion = questions[currentQuestionIndex];
     return (
+      <AuthGuard>
       <div className="min-h-screen flex flex-col">
         <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
           <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -643,12 +756,14 @@ export default function PrepPage() {
           </div>
         </main>
       </div>
+      </AuthGuard>
     );
   }
 
   // ── View: Session Complete ──
   if (view === "complete" && activeSession) {
     return (
+      <AuthGuard>
       <div className="min-h-screen flex flex-col">
         <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
           <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -761,11 +876,13 @@ export default function PrepPage() {
           </div>
         </main>
       </div>
+      </AuthGuard>
     );
   }
 
   // ── View: Dashboard (default) ──
   return (
+    <AuthGuard>
     <div className="min-h-screen flex flex-col">
       <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -904,7 +1021,7 @@ export default function PrepPage() {
                       onChange={(e) => setSelectedSessionType(e.target.value as SessionType)}
                       className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent cursor-pointer"
                     >
-                      {SESSION_TYPES.map((st) => (
+                      {filteredSessionTypes.map((st) => (
                         <option key={st} value={st}>
                           {SESSION_TYPE_LABELS[st]}
                         </option>
@@ -965,9 +1082,15 @@ export default function PrepPage() {
                         {pastSessions.map((session) => (
                           <tr
                             key={session.id}
-                            className="border-b border-surface-border last:border-b-0 hover:bg-surface-hover transition-colors"
+                            onClick={() => handleToggleSession(session.id)}
+                            className="border-b border-surface-border last:border-b-0 hover:bg-surface-hover transition-colors cursor-pointer"
                           >
-                            <td className="px-4 py-3 font-mono text-xs">
+                            <td className="px-4 py-3 font-mono text-xs flex items-center gap-2">
+                              {expandedSessionId === session.id ? (
+                                <CaretUp size={12} className="text-ink-secondary shrink-0" />
+                              ) : (
+                                <CaretDown size={12} className="text-ink-secondary shrink-0" />
+                              )}
                               {getFirmName(session.firm_id)}
                             </td>
                             <td className="px-4 py-3 text-ink-secondary">
@@ -994,6 +1117,101 @@ export default function PrepPage() {
                           </tr>
                         ))}
                       </tbody>
+
+                      {/* Expanded answer detail panel */}
+                      {expandedSessionId && (
+                        <tfoot>
+                          <tr>
+                            <td colSpan={4} className="p-0">
+                              <div className="border-t border-surface-border bg-[#F5F5F5] px-5 py-4 space-y-4">
+                                {loadingAnswers ? (
+                                  <p className="text-sm text-ink-secondary">Loading answers...</p>
+                                ) : expandedAnswers.length === 0 ? (
+                                  <p className="text-sm text-ink-secondary">No answers recorded for this session.</p>
+                                ) : (
+                                  expandedAnswers.map((answer, i) => (
+                                    <div
+                                      key={answer.id}
+                                      className="bg-surface border border-surface-border rounded-lg p-4 space-y-3"
+                                    >
+                                      <div className="flex items-start justify-between gap-4">
+                                        <div className="flex items-start gap-2 min-w-0">
+                                          <span className="font-mono text-xs text-ink-secondary mt-0.5 shrink-0">
+                                            {i + 1}.
+                                          </span>
+                                          <div className="min-w-0">
+                                            <p className="text-sm font-medium">{answer.question_text}</p>
+                                            <span className="inline-block mt-1 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded bg-surface-hover text-ink-secondary">
+                                              {answer.question_difficulty}
+                                            </span>
+                                          </div>
+                                        </div>
+                                        <span
+                                          className={`font-mono text-sm font-medium tabular-nums shrink-0 ${
+                                            answer.score >= 4
+                                              ? "text-green-700"
+                                              : answer.score >= 3
+                                              ? "text-blue-700"
+                                              : answer.score >= 2
+                                              ? "text-amber-700"
+                                              : "text-red-700"
+                                          }`}
+                                        >
+                                          {answer.score}/5
+                                        </span>
+                                      </div>
+
+                                      <div>
+                                        <EyebrowLabel>Your answer</EyebrowLabel>
+                                        <p className="text-sm text-ink-secondary mt-1 whitespace-pre-wrap">
+                                          {answer.user_answer}
+                                        </p>
+                                      </div>
+
+                                      {answer.feedback && (
+                                        <div>
+                                          <EyebrowLabel>Feedback</EyebrowLabel>
+                                          <p className="text-sm text-ink-secondary mt-1">
+                                            {answer.feedback}
+                                          </p>
+                                        </div>
+                                      )}
+
+                                      {answer.strengths && answer.strengths.length > 0 && (
+                                        <div>
+                                          <EyebrowLabel>Strengths</EyebrowLabel>
+                                          <ul className="mt-1 space-y-1">
+                                            {answer.strengths.map((s, si) => (
+                                              <li key={si} className="text-sm text-green-700 flex items-start gap-1.5">
+                                                <CheckCircle size={14} className="mt-0.5 shrink-0" />
+                                                {s}
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+
+                                      {answer.improvements && answer.improvements.length > 0 && (
+                                        <div>
+                                          <EyebrowLabel>Areas to improve</EyebrowLabel>
+                                          <ul className="mt-1 space-y-1">
+                                            {answer.improvements.map((imp, ii) => (
+                                              <li key={ii} className="text-sm text-amber-700 flex items-start gap-1.5">
+                                                <Warning size={14} className="mt-0.5 shrink-0" />
+                                                {imp}
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+                                    </div>
+                                  ))
+                                )}
+                              </div>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      )}
                     </table>
                   </div>
                 </div>
@@ -1057,5 +1275,6 @@ export default function PrepPage() {
         </div>
       </main>
     </div>
+    </AuthGuard>
   );
 }

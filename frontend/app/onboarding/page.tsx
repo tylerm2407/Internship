@@ -3,22 +3,49 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { X, Plus, PencilSimple, Check } from "@phosphor-icons/react";
+import { ArrowLeft, ArrowRight, X, Plus, PencilSimple, Check } from "@phosphor-icons/react";
 import { useUploadStore } from "../../lib/store";
 import { saveProfile } from "../../lib/api";
+import { AuthGuard } from "../../components/AuthGuard";
 import { Card } from "../../components/Card";
 import { EyebrowLabel } from "../../components/EyebrowLabel";
 import { PrimaryButton } from "../../components/PrimaryButton";
 import { SecondaryButton } from "../../components/SecondaryButton";
 import type { StudentProfile, PriorExperience } from "../../lib/types";
 
-const ROLE_OPTIONS = [
-  "Investment Banking",
-  "Sales & Trading",
-  "Private Equity",
-  "Quant Trading",
-  "Asset Management",
-  "Equity Research",
+const ROLE_GROUPS = [
+  {
+    label: "Investment Banking & Advisory",
+    roles: ["Investment Banking", "Capital Markets", "Restructuring"],
+  },
+  {
+    label: "Markets & Trading",
+    roles: ["Sales & Trading", "Quant"],
+  },
+  {
+    label: "Investing & Research",
+    roles: [
+      "Private Equity",
+      "Hedge Fund",
+      "Asset Management",
+      "Equity Research",
+      "Real Estate",
+      "Credit / Leveraged Finance",
+    ],
+  },
+  {
+    label: "Corporate & Risk",
+    roles: [
+      "Corporate Finance / FP&A",
+      "Risk Management",
+      "Compliance",
+      "Insurance",
+    ],
+  },
+  {
+    label: "Advisory",
+    roles: ["Wealth Management", "Consulting (Finance)"],
+  },
 ];
 
 const GEO_OPTIONS = [
@@ -26,9 +53,16 @@ const GEO_OPTIONS = [
   "Boston",
   "Chicago",
   "San Francisco",
+  "Houston",
   "Charlotte",
-  "Providence",
+  "Los Angeles",
   "Other",
+];
+
+const STEPS = [
+  { label: "Target Roles", number: 1 },
+  { label: "Geographies", number: 2 },
+  { label: "Confirm Details", number: 3 },
 ];
 
 // ── Chip Toggle ──
@@ -57,10 +91,10 @@ function ChipToggle({
             key={opt}
             type="button"
             onClick={() => toggle(opt)}
-            className={`px-3 py-1.5 rounded-md text-sm border transition-colors cursor-pointer ${
+            className={`px-4 py-2 rounded-md text-sm border transition-colors cursor-pointer ${
               active
                 ? "bg-accent text-white border-accent"
-                : "bg-surface text-ink-primary border-surface-border hover:bg-surface-hover"
+                : "bg-surface text-ink-secondary border-surface-border hover:bg-surface-hover"
             }`}
           >
             {opt}
@@ -255,6 +289,45 @@ function ExperienceCard({
   );
 }
 
+// ── Step Indicator ──
+function StepIndicator({ current }: { current: number }) {
+  return (
+    <div className="flex items-center gap-3">
+      {STEPS.map((step, i) => (
+        <div key={step.number} className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <span
+              className={`w-7 h-7 flex items-center justify-center rounded-md font-mono text-xs font-medium ${
+                current === step.number
+                  ? "bg-accent text-white"
+                  : current > step.number
+                    ? "bg-accent/10 text-accent"
+                    : "bg-surface-hover text-ink-tertiary"
+              }`}
+            >
+              {current > step.number ? (
+                <Check size={14} weight="bold" />
+              ) : (
+                step.number
+              )}
+            </span>
+            <span
+              className={`text-xs font-medium ${
+                current === step.number ? "text-ink-primary" : "text-ink-tertiary"
+              }`}
+            >
+              {step.label}
+            </span>
+          </div>
+          {i < STEPS.length - 1 && (
+            <div className="w-8 h-px bg-surface-border" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ── Main Page ──
 
 export default function OnboardingPage() {
@@ -262,6 +335,7 @@ export default function OnboardingPage() {
   const { parsedProfile, setParsedProfile, setSavedProfile } = useUploadStore();
   const [saving, setSaving] = useState(false);
   const [navigatingAway, setNavigatingAway] = useState(false);
+  const [step, setStep] = useState(1);
 
   // Local editable copy of the profile
   const [profile, setProfile] = useState<StudentProfile | null>(null);
@@ -317,6 +391,7 @@ export default function OnboardingPage() {
   if (!profile) return null;
 
   return (
+    <AuthGuard>
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="border-b border-surface-border">
@@ -341,242 +416,335 @@ export default function OnboardingPage() {
             </p>
           </div>
 
-          {/* ── Section 1: Basic Info ── */}
-          <Card>
-            <EyebrowLabel className="mb-4 block">Basic info</EyebrowLabel>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm text-ink-secondary mb-1">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  value={profile.name}
-                  onChange={(e) => updateField("name", e.target.value)}
-                  className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-ink-secondary mb-1">
-                  School
-                </label>
-                <input
-                  type="text"
-                  value={profile.school}
-                  onChange={(e) => updateField("school", e.target.value)}
-                  className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-ink-secondary mb-1">
-                  Major
-                </label>
-                <input
-                  type="text"
-                  value={profile.major}
-                  onChange={(e) => updateField("major", e.target.value)}
-                  className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-ink-secondary mb-1">
-                  Minor
-                </label>
-                <input
-                  type="text"
-                  value={profile.minor || ""}
-                  onChange={(e) =>
-                    updateField("minor", e.target.value || null)
-                  }
-                  className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-ink-secondary mb-1">
-                  GPA
-                </label>
-                <input
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  max="4.0"
-                  value={profile.gpa ?? ""}
-                  onChange={(e) =>
-                    updateField(
-                      "gpa",
-                      e.target.value ? parseFloat(e.target.value) : null
-                    )
-                  }
-                  className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-ink-secondary mb-1">
-                  Languages
-                </label>
-                <input
-                  type="text"
-                  value={profile.languages.join(", ")}
-                  onChange={(e) =>
-                    updateField(
-                      "languages",
-                      e.target.value
-                        .split(",")
-                        .map((s) => s.trim())
-                        .filter(Boolean)
-                    )
-                  }
-                  placeholder="e.g. English, Spanish"
-                  className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
-                />
-              </div>
-            </div>
-          </Card>
+          {/* Step indicator */}
+          <StepIndicator current={step} />
 
-          {/* ── Section 2: Target Roles ── */}
-          <Card>
-            <EyebrowLabel className="mb-4 block">Target roles</EyebrowLabel>
-            <ChipToggle
-              options={ROLE_OPTIONS}
-              selected={profile.target_roles}
-              onChange={(v) => updateField("target_roles", v)}
-            />
-          </Card>
-
-          {/* ── Section 3: Target Geographies ── */}
-          <Card>
-            <EyebrowLabel className="mb-4 block">
-              Target geographies
-            </EyebrowLabel>
-            <ChipToggle
-              options={GEO_OPTIONS}
-              selected={profile.target_geographies}
-              onChange={(v) => updateField("target_geographies", v)}
-            />
-          </Card>
-
-          {/* ── Section 4: Technical Skills ── */}
-          <Card>
-            <EyebrowLabel className="mb-4 block">
-              Technical skills
-            </EyebrowLabel>
-            <TagInput
-              tags={profile.technical_skills}
-              onChange={(v) => updateField("technical_skills", v)}
-              placeholder="e.g. Excel, DCF valuation, Bloomberg..."
-            />
-          </Card>
-
-          {/* ── Section 5: Coursework ── */}
-          <Card>
-            <EyebrowLabel className="mb-4 block">Coursework</EyebrowLabel>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <p className="text-sm text-ink-secondary mb-2">Completed</p>
-                <TagInput
-                  tags={profile.coursework_completed}
-                  onChange={(v) => updateField("coursework_completed", v)}
-                  placeholder="Add completed course..."
-                />
+          {/* ── Step 1: Target Roles ── */}
+          {step === 1 && (
+            <Card>
+              <EyebrowLabel className="mb-2 block">Step 1 of 3</EyebrowLabel>
+              <h2 className="font-serif text-2xl tracking-tight mb-1">
+                Target roles
+              </h2>
+              <p className="text-sm text-ink-secondary mb-5">
+                Select the roles you are recruiting for. You can choose multiple.
+              </p>
+              <div className="space-y-5">
+                {ROLE_GROUPS.map((group) => (
+                  <div key={group.label}>
+                    <p className="text-xs font-medium text-ink-tertiary uppercase tracking-wider mb-2">
+                      {group.label}
+                    </p>
+                    <ChipToggle
+                      options={group.roles}
+                      selected={profile.target_roles}
+                      onChange={(v) => updateField("target_roles", v)}
+                    />
+                  </div>
+                ))}
               </div>
-              <div>
-                <p className="text-sm text-ink-secondary mb-2">In progress</p>
-                <TagInput
-                  tags={profile.coursework_in_progress}
-                  onChange={(v) => updateField("coursework_in_progress", v)}
-                  placeholder="Add current course..."
-                />
+              <div className="flex items-center gap-3 mt-6">
+                <PrimaryButton
+                  onClick={() => setStep(2)}
+                  disabled={profile.target_roles.length === 0}
+                  className={profile.target_roles.length === 0 ? "opacity-50 cursor-not-allowed" : ""}
+                  icon={<ArrowRight size={16} weight="regular" />}
+                >
+                  Next
+                </PrimaryButton>
+                <SecondaryButton onClick={handleStartOver}>
+                  Start over
+                </SecondaryButton>
               </div>
-            </div>
-          </Card>
+            </Card>
+          )}
 
-          {/* ── Section 6: Clubs & Certifications ── */}
-          <Card>
-            <EyebrowLabel className="mb-4 block">
-              Clubs & certifications
-            </EyebrowLabel>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <p className="text-sm text-ink-secondary mb-2">Clubs</p>
-                <TagInput
-                  tags={profile.clubs}
-                  onChange={(v) => updateField("clubs", v)}
-                  placeholder="Add club..."
-                />
+          {/* ── Step 2: Target Geographies ── */}
+          {step === 2 && (
+            <Card>
+              <EyebrowLabel className="mb-2 block">Step 2 of 3</EyebrowLabel>
+              <h2 className="font-serif text-2xl tracking-tight mb-1">
+                Target geographies
+              </h2>
+              <p className="text-sm text-ink-secondary mb-5">
+                Where do you want to work? Select all that apply.
+              </p>
+              <ChipToggle
+                options={GEO_OPTIONS}
+                selected={profile.target_geographies}
+                onChange={(v) => updateField("target_geographies", v)}
+              />
+              <div className="flex items-center gap-3 mt-6">
+                <SecondaryButton
+                  onClick={() => setStep(1)}
+                  className="inline-flex items-center gap-1"
+                >
+                  <ArrowLeft size={16} weight="regular" />
+                  Back
+                </SecondaryButton>
+                <PrimaryButton
+                  onClick={() => setStep(3)}
+                  disabled={profile.target_geographies.length === 0}
+                  className={profile.target_geographies.length === 0 ? "opacity-50 cursor-not-allowed" : ""}
+                  icon={<ArrowRight size={16} weight="regular" />}
+                >
+                  Next
+                </PrimaryButton>
               </div>
-              <div>
-                <p className="text-sm text-ink-secondary mb-2">
-                  Certifications
+            </Card>
+          )}
+
+          {/* ── Step 3: Confirm Details ── */}
+          {step === 3 && (
+            <div className="space-y-6">
+              <Card>
+                <EyebrowLabel className="mb-2 block">Step 3 of 3</EyebrowLabel>
+                <h2 className="font-serif text-2xl tracking-tight mb-1">
+                  Confirm your details
+                </h2>
+                <p className="text-sm text-ink-secondary mb-5">
+                  Verify the information below before saving your profile.
                 </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-ink-secondary mb-1">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      value={profile.name}
+                      onChange={(e) => updateField("name", e.target.value)}
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-ink-secondary mb-1">
+                      School
+                    </label>
+                    <input
+                      type="text"
+                      value={profile.school}
+                      onChange={(e) => updateField("school", e.target.value)}
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-ink-secondary mb-1">
+                      Major
+                    </label>
+                    <input
+                      type="text"
+                      value={profile.major}
+                      onChange={(e) => updateField("major", e.target.value)}
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-ink-secondary mb-1">
+                      GPA
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      max="4.0"
+                      value={profile.gpa ?? ""}
+                      onChange={(e) =>
+                        updateField(
+                          "gpa",
+                          e.target.value ? parseFloat(e.target.value) : null
+                        )
+                      }
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-ink-secondary mb-1">
+                      Minor
+                    </label>
+                    <input
+                      type="text"
+                      value={profile.minor || ""}
+                      onChange={(e) =>
+                        updateField("minor", e.target.value || null)
+                      }
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-ink-secondary mb-1">
+                      Languages
+                    </label>
+                    <input
+                      type="text"
+                      value={profile.languages.join(", ")}
+                      onChange={(e) =>
+                        updateField(
+                          "languages",
+                          e.target.value
+                            .split(",")
+                            .map((s) => s.trim())
+                            .filter(Boolean)
+                        )
+                      }
+                      placeholder="e.g. English, Spanish"
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                </div>
+              </Card>
+
+              {/* Summary of selections */}
+              <Card>
+                <EyebrowLabel className="mb-3 block">Your selections</EyebrowLabel>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className="text-ink-secondary">Target roles</p>
+                    <p className="font-medium mt-0.5">
+                      {profile.target_roles.length > 0
+                        ? profile.target_roles.join(", ")
+                        : "None selected"}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-ink-secondary">Target geographies</p>
+                    <p className="font-medium mt-0.5">
+                      {profile.target_geographies.length > 0
+                        ? profile.target_geographies.join(", ")
+                        : "None selected"}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Technical Skills */}
+              <Card>
+                <EyebrowLabel className="mb-4 block">
+                  Technical skills
+                </EyebrowLabel>
                 <TagInput
-                  tags={profile.certifications}
-                  onChange={(v) => updateField("certifications", v)}
-                  placeholder="Add certification..."
+                  tags={profile.technical_skills}
+                  onChange={(v) => updateField("technical_skills", v)}
+                  placeholder="e.g. Excel, DCF valuation, Bloomberg..."
                 />
+              </Card>
+
+              {/* Coursework */}
+              <Card>
+                <EyebrowLabel className="mb-4 block">Coursework</EyebrowLabel>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <p className="text-sm text-ink-secondary mb-2">Completed</p>
+                    <TagInput
+                      tags={profile.coursework_completed}
+                      onChange={(v) => updateField("coursework_completed", v)}
+                      placeholder="Add completed course..."
+                    />
+                  </div>
+                  <div>
+                    <p className="text-sm text-ink-secondary mb-2">In progress</p>
+                    <TagInput
+                      tags={profile.coursework_in_progress}
+                      onChange={(v) => updateField("coursework_in_progress", v)}
+                      placeholder="Add current course..."
+                    />
+                  </div>
+                </div>
+              </Card>
+
+              {/* Clubs & Certifications */}
+              <Card>
+                <EyebrowLabel className="mb-4 block">
+                  Clubs & certifications
+                </EyebrowLabel>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <p className="text-sm text-ink-secondary mb-2">Clubs</p>
+                    <TagInput
+                      tags={profile.clubs}
+                      onChange={(v) => updateField("clubs", v)}
+                      placeholder="Add club..."
+                    />
+                  </div>
+                  <div>
+                    <p className="text-sm text-ink-secondary mb-2">
+                      Certifications
+                    </p>
+                    <TagInput
+                      tags={profile.certifications}
+                      onChange={(v) => updateField("certifications", v)}
+                      placeholder="Add certification..."
+                    />
+                  </div>
+                </div>
+              </Card>
+
+              {/* Prior Experience */}
+              <Card>
+                <EyebrowLabel className="mb-4 block">
+                  Prior experience
+                </EyebrowLabel>
+                <div className="space-y-3">
+                  {profile.prior_experience.map((exp, i) => (
+                    <ExperienceCard
+                      key={i}
+                      exp={exp}
+                      onUpdate={(updated) => {
+                        const copy = [...profile.prior_experience];
+                        copy[i] = updated;
+                        updateField("prior_experience", copy);
+                      }}
+                      onRemove={() => {
+                        const copy = profile.prior_experience.filter(
+                          (_, j) => j !== i
+                        );
+                        updateField("prior_experience", copy);
+                      }}
+                    />
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      updateField("prior_experience", [
+                        ...profile.prior_experience,
+                        {
+                          role: "",
+                          organization: "",
+                          summary: "",
+                          dates: "",
+                          bullets: [],
+                        },
+                      ])
+                    }
+                    className="inline-flex items-center gap-1 text-sm text-accent hover:underline cursor-pointer"
+                  >
+                    <Plus size={14} weight="bold" /> Add experience
+                  </button>
+                </div>
+              </Card>
+
+              {/* Actions */}
+              <div className="flex items-center gap-3 pt-4 pb-8">
+                <SecondaryButton
+                  onClick={() => setStep(2)}
+                  className="inline-flex items-center gap-1"
+                >
+                  <ArrowLeft size={16} weight="regular" />
+                  Back
+                </SecondaryButton>
+                <PrimaryButton onClick={handleSave} disabled={saving}>
+                  {saving ? "Saving..." : "Go to Dashboard"}
+                  {!saving && (
+                    <ArrowRight size={16} weight="regular" />
+                  )}
+                </PrimaryButton>
               </div>
             </div>
-          </Card>
-
-          {/* ── Section 7: Prior Experience ── */}
-          <Card>
-            <EyebrowLabel className="mb-4 block">
-              Prior experience
-            </EyebrowLabel>
-            <div className="space-y-3">
-              {profile.prior_experience.map((exp, i) => (
-                <ExperienceCard
-                  key={i}
-                  exp={exp}
-                  onUpdate={(updated) => {
-                    const copy = [...profile.prior_experience];
-                    copy[i] = updated;
-                    updateField("prior_experience", copy);
-                  }}
-                  onRemove={() => {
-                    const copy = profile.prior_experience.filter(
-                      (_, j) => j !== i
-                    );
-                    updateField("prior_experience", copy);
-                  }}
-                />
-              ))}
-              <button
-                type="button"
-                onClick={() =>
-                  updateField("prior_experience", [
-                    ...profile.prior_experience,
-                    {
-                      role: "",
-                      organization: "",
-                      summary: "",
-                      dates: "",
-                      bullets: [],
-                    },
-                  ])
-                }
-                className="inline-flex items-center gap-1 text-sm text-accent hover:underline cursor-pointer"
-              >
-                <Plus size={14} weight="bold" /> Add experience
-              </button>
-            </div>
-          </Card>
-
-          {/* ── Actions ── */}
-          <div className="flex items-center gap-4 pt-4 pb-8">
-            <PrimaryButton onClick={handleSave} disabled={saving}>
-              {saving ? "Saving..." : "Save profile and see opportunities"}
-              {!saving && (
-                <span aria-hidden="true" className="ml-1">
-                  &rarr;
-                </span>
-              )}
-            </PrimaryButton>
-            <SecondaryButton onClick={handleStartOver} disabled={saving}>
-              Start over with a different resume
-            </SecondaryButton>
-          </div>
+          )}
         </div>
       </main>
     </div>
+    </AuthGuard>
   );
 }

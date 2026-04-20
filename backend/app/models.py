@@ -18,6 +18,20 @@ from uuid import UUID
 from pydantic import BaseModel, Field
 
 
+class Institution(BaseModel):
+    """A partner institution (university) in the InternshipMatch system.
+
+    Supports multi-tenant deployment where each school has its own
+    configuration, user pool, and admin visibility.
+    """
+
+    id: UUID
+    name: str = Field(description="e.g. 'Bryant University'")
+    domain: str = Field(description="Email domain, e.g. 'bryant.edu'")
+    config: dict = Field(default_factory=dict, description="Institution-specific JSON config")
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
 class User(BaseModel):
     """Authenticated user account. One row per user in the `users` table.
 
@@ -33,6 +47,11 @@ class User(BaseModel):
     graduation_year: int = Field(description="Expected graduation year, e.g. 2029")
     current_class_year: Literal["freshman", "sophomore", "junior", "senior"]
     onboarding_complete: bool = False
+    institution_id: UUID | None = Field(default=None, description="FK to institutions table")
+    role: Literal["user", "admin", "institution_admin"] = Field(
+        default="user",
+        description="User role for access control",
+    )
 
 
 class PriorExperience(BaseModel):
@@ -182,7 +201,23 @@ class FitScore(BaseModel):
     rationale: str = Field(description="Claude-generated 2-3 sentence explanation")
     strengths: list[str] = Field(description="2-3 bullet points of what matches well")
     gaps: list[str] = Field(description="2-3 bullet points of what's missing or weak")
+    breakdown: "ScoreBreakdown | None" = Field(default=None, description="Per-factor score breakdown")
     computed_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class ScoreBreakdown(BaseModel):
+    """Per-factor score breakdown for a fit score.
+
+    Each factor is scored as points earned out of the factor's max weight.
+    Helps users understand exactly why they scored where they did.
+    """
+
+    gpa: int = Field(ge=0, le=25, description="GPA fit score out of 25")
+    class_year: int = Field(ge=0, le=20, description="Class year eligibility out of 20")
+    role_match: int = Field(ge=0, le=20, description="Role match score out of 20")
+    coursework: int = Field(ge=0, le=15, description="Coursework progression out of 15")
+    geography: int = Field(ge=0, le=10, description="Geographic fit out of 10")
+    experience: int = Field(ge=0, le=10, description="Experience relevance out of 10")
 
 
 class OpportunityResponse(BaseModel):
@@ -291,9 +326,8 @@ class StatusChange(BaseModel):
 class Alumnus(BaseModel):
     """A known alumni contact at a target firm.
 
-    Privacy-safe: NO email addresses or LinkedIn URLs stored in the database.
-    Only name, firm, role, graduation year, and connection hooks (shared clubs,
-    major, professors, etc.). Students find actual contact methods themselves.
+    Stores optional email and LinkedIn URL when provided by users via CSV
+    import or manual entry. Seed alumni may not have contact info.
     """
 
     id: UUID
@@ -308,7 +342,49 @@ class Alumnus(BaseModel):
         default_factory=list,
         description="Shared connections, e.g. ['SMIF member', 'Finance major', 'Prof. Johnson class']",
     )
+    email: str | None = None
+    linkedin_url: str | None = None
+    current_company: str | None = None
+    city: str | None = None
+    added_by: UUID | None = None
+    source: Literal["seed", "csv_import", "manual"] = "seed"
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class AlumniSearchParams(BaseModel):
+    """Query parameters for searching alumni."""
+
+    school: str | None = None
+    company: str | None = None
+    name: str | None = None
+    graduation_year: int | None = None
+    limit: int = Field(default=50, le=100)
+    offset: int = Field(default=0, ge=0)
+
+
+class AlumniCSVRow(BaseModel):
+    """A single row from an alumni CSV import file."""
+
+    name: str
+    school: str = "Bryant University"
+    graduation_year: int
+    current_role: str = ""
+    current_company: str = ""
+    firm_id: str | None = None
+    division: str | None = None
+    major: str | None = None
+    email: str | None = None
+    linkedin_url: str | None = None
+    city: str | None = None
+    connection_hooks: list[str] = Field(default_factory=list)
+
+
+class AlumniImportResult(BaseModel):
+    """Result summary from a CSV alumni import."""
+
+    imported: int
+    skipped: int
+    errors: list[str]
 
 
 class NetworkingContact(BaseModel):
@@ -398,6 +474,9 @@ class PrepSession(BaseModel):
     session_type: Literal[
         "technical_accounting", "technical_valuation", "technical_ma",
         "technical_lbo", "behavioral", "firm_specific", "market_awareness",
+        "brain_teaser", "market_sizing", "pitch_a_stock", "restructuring",
+        "technical_pe", "technical_st_markets", "technical_er",
+        "technical_quant", "technical_credit",
     ]
     questions_asked: int = 0
     questions_correct: int = 0
@@ -424,6 +503,9 @@ class PrepAnswer(BaseModel):
     question_category: Literal[
         "accounting", "valuation", "ma", "lbo", "behavioral",
         "firm_specific", "market_awareness", "brain_teaser",
+        "market_sizing", "pitch_a_stock", "restructuring",
+        "pe_operations", "st_markets", "er_analysis",
+        "quant_probability", "credit_analysis",
     ]
     question_difficulty: Literal["easy", "medium", "hard"]
     user_answer: str
@@ -445,6 +527,9 @@ class ReadinessScore(BaseModel):
     category: Literal[
         "accounting", "valuation", "ma", "lbo", "behavioral",
         "firm_specific", "market_awareness", "brain_teaser",
+        "market_sizing", "pitch_a_stock", "restructuring",
+        "pe_operations", "st_markets", "er_analysis",
+        "quant_probability", "credit_analysis",
     ]
     mastery_score: float = Field(
         default=0.0, ge=0.0, le=5.0,
@@ -463,6 +548,9 @@ class PrepSessionStart(BaseModel):
     session_type: Literal[
         "technical_accounting", "technical_valuation", "technical_ma",
         "technical_lbo", "behavioral", "firm_specific", "market_awareness",
+        "brain_teaser", "market_sizing", "pitch_a_stock", "restructuring",
+        "technical_pe", "technical_st_markets", "technical_er",
+        "technical_quant", "technical_credit",
     ] = "behavioral"
     question_count: int = Field(default=5, ge=1, le=20)
 
@@ -475,6 +563,9 @@ class PrepAnswerSubmit(BaseModel):
     question_category: Literal[
         "accounting", "valuation", "ma", "lbo", "behavioral",
         "firm_specific", "market_awareness", "brain_teaser",
+        "market_sizing", "pitch_a_stock", "restructuring",
+        "pe_operations", "st_markets", "er_analysis",
+        "quant_probability", "credit_analysis",
     ]
     question_difficulty: Literal["easy", "medium", "hard"]
     user_answer: str
@@ -552,3 +643,28 @@ class WeeklySummary(BaseModel):
         default_factory=dict,
         description="Summary stats: applications_submitted, contacts_made, prep_sessions_completed",
     )
+
+
+# ============================================================
+# Notifications
+# ============================================================
+
+
+class Notification(BaseModel):
+    """A pending notification/action item for a user.
+
+    Aggregated from application deadlines, stale networking contacts,
+    outstanding thank-you notes, and prep reminders. Not persisted —
+    computed on the fly from existing data.
+    """
+
+    id: str
+    notification_type: Literal[
+        "deadline_approaching", "stale_contact", "thank_you_needed",
+        "new_match", "prep_reminder",
+    ]
+    title: str
+    description: str
+    priority: Literal["critical", "high", "medium", "low"] = "medium"
+    related_id: str | None = Field(default=None, description="ID of related entity (application, contact, posting)")
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

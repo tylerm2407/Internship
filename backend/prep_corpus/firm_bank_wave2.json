@@ -1,0 +1,303 @@
+{
+  "HSBC": {
+    "firm_specific": [
+      {"q": "Why HSBC?", "d": "easy", "tags": ["why_hsbc"]},
+      {"q": "HSBC is the largest bank in Europe by assets. How does that scale benefit its investment banking clients?", "d": "medium", "tags": ["scale"]},
+      {"q": "Walk me through HSBC's geographic revenue breakdown. Where does the bank make most of its money?", "d": "medium", "tags": ["geography"]},
+      {"q": "HSBC has been restructuring to focus on Asia. What's your view on that strategic pivot?", "d": "hard", "tags": ["strategy"]},
+      {"q": "How does HSBC's presence in Hong Kong and mainland China differentiate it from other bulge brackets?", "d": "medium", "tags": ["china"]},
+      {"q": "What's the role of HSBC's Global Banking & Markets division versus Commercial Banking?", "d": "medium", "tags": ["structure"]},
+      {"q": "HSBC sold its US retail operations. Why, and what does that signal about the firm's direction?", "d": "hard", "tags": ["divestitures"]},
+      {"q": "How would you pitch HSBC's cross-border capabilities to a European company looking to expand into Asia?", "d": "hard", "tags": ["pitch"]},
+      {"q": "HSBC faces criticism from both Western regulators and Chinese authorities. How does the bank navigate that?", "d": "hard", "tags": ["geopolitics"]},
+      {"q": "What recent HSBC-advised deal caught your attention and why?", "d": "medium", "tags": ["deals"]}
+    ],
+    "behavioral": [
+      {"q": "HSBC operates across 60+ countries. Tell me about a time you worked effectively with people from different cultural backgrounds.", "d": "medium", "tags": ["culture"]},
+      {"q": "HSBC values long-term client relationships over transaction volume. Describe a time you prioritized a relationship over a short-term win.", "d": "medium", "tags": ["relationships"]}
+    ],
+    "market_awareness": [
+      {"q": "How are rising interest rates in Asia affecting HSBC's net interest income differently than US-focused banks?", "d": "hard", "tags": ["rates"]},
+      {"q": "What's happening in the Hong Kong IPO market and how does that affect HSBC's capital markets business?", "d": "hard", "tags": ["hk_ipo"]},
+      {"q": "How has HSBC positioned itself in the ESG and sustainable finance space in Asia?", "d": "medium", "tags": ["esg"]},
+      {"q": "What impact has the AUKUS alliance and US-China tensions had on cross-border deal flow for HSBC?", "d": "hard", "tags": ["geopolitics"]}
+    ],
+    "technical_ma": [
+      {"q": "A European industrials company wants to acquire a manufacturing target in Vietnam. Walk me through how HSBC would advise this cross-border deal.", "d": "hard", "tags": ["cross_border"]},
+      {"q": "How do FX considerations affect cross-border M&A valuations for HSBC's clients?", "d": "hard", "tags": ["fx"]},
+      {"q": "What regulatory approvals would a Chinese company need to acquire a UK target? How would HSBC navigate that?", "d": "hard", "tags": ["regulation"]}
+    ],
+    "technical_valuation": [
+      {"q": "How would you value an Asian conglomerate with operations across 5 countries and 3 currencies?", "d": "hard", "tags": ["conglomerate"]}
+    ]
+  },
+  "TPG": {
+    "firm_specific": [
+      {"q": "Why TPG?", "d": "easy", "tags": ["why_tpg"]},
+      {"q": "TPG went public in 2022. How has being a public company changed the firm's strategy and incentives?", "d": "hard", "tags": ["ipo"]},
+      {"q": "Walk me through TPG's different platforms — Capital, Growth, Impact, Rise. How do they differ?", "d": "medium", "tags": ["platforms"]},
+      {"q": "TPG Rise is one of the largest impact investing platforms. Why does impact matter in PE, and is it real or marketing?", "d": "hard", "tags": ["impact"]},
+      {"q": "How does TPG Growth differ from traditional buyout PE?", "d": "medium", "tags": ["growth_equity"]},
+      {"q": "What's TPG's history with companies like Uber, Spotify, and Airbnb? What does that tell you about the firm's strategy?", "d": "medium", "tags": ["portfolio"]},
+      {"q": "How has Jon Winkelried shaped TPG since becoming CEO?", "d": "hard", "tags": ["leadership"]},
+      {"q": "Compare TPG's sector focus to KKR's. Where do they overlap and where do they diverge?", "d": "hard", "tags": ["competitors"]},
+      {"q": "Why TPG over Blackstone or Apollo?", "d": "medium", "tags": ["differentiation"]},
+      {"q": "What recent TPG deal stood out to you and why?", "d": "medium", "tags": ["deals"]}
+    ],
+    "technical_lbo": [
+      {"q": "TPG acquired a healthcare services company for 12x EBITDA. Walk me through how you'd underwrite that deal.", "d": "hard", "tags": ["healthcare_lbo"]},
+      {"q": "How do you think about leverage capacity differently for a software company vs a healthcare services company in TPG's portfolio?", "d": "hard", "tags": ["leverage"]},
+      {"q": "What are the three primary value creation levers TPG would pursue in a take-private of a mid-cap tech company?", "d": "medium", "tags": ["value_creation"]},
+      {"q": "Walk me through a 100-day plan for a TPG Growth investment in a B2B SaaS company.", "d": "hard", "tags": ["100_day"]},
+      {"q": "How does TPG structure management incentives differently for a growth equity deal vs a traditional buyout?", "d": "hard", "tags": ["incentives"]}
+    ],
+    "behavioral": [
+      {"q": "TPG emphasizes intellectual curiosity. Tell me about a time you went deep on a topic nobody asked you to learn.", "d": "medium", "tags": ["curiosity"]},
+      {"q": "At TPG you'll work across sectors. Describe a time you had to quickly get up to speed on an unfamiliar industry.", "d": "medium", "tags": ["learning"]},
+      {"q": "TPG values collaborative deal teams. Tell me about a time you disagreed with a team member on an important decision.", "d": "medium", "tags": ["collaboration"]}
+    ],
+    "pitch_a_stock": [
+      {"q": "Pitch me a public company TPG should take private. Why is it a good LBO candidate?", "d": "hard", "tags": ["ptp"]},
+      {"q": "Pitch me a growth-stage company that would fit TPG Growth's portfolio.", "d": "hard", "tags": ["growth"]}
+    ]
+  },
+  "Warburg Pincus": {
+    "firm_specific": [
+      {"q": "Why Warburg Pincus?", "d": "easy", "tags": ["why_wp"]},
+      {"q": "Warburg Pincus has been doing growth investing for 50+ years. What distinguishes their approach from newer growth equity firms?", "d": "medium", "tags": ["history"]},
+      {"q": "How does Warburg's single-fund model differ from firms with multiple fund strategies, and what are the tradeoffs?", "d": "hard", "tags": ["fund_structure"]},
+      {"q": "Warburg has deep roots in India, China, and Southeast Asia. How does their emerging markets strategy create edge?", "d": "hard", "tags": ["emerging_markets"]},
+      {"q": "Walk me through Warburg's sector focus areas. Which interests you most and why?", "d": "medium", "tags": ["sectors"]},
+      {"q": "How has Chip Kaye's leadership shaped Warburg Pincus?", "d": "medium", "tags": ["leadership"]},
+      {"q": "Compare Warburg's growth investing approach to General Atlantic's.", "d": "hard", "tags": ["competitors"]},
+      {"q": "Warburg is known for backing companies early and holding them for long periods. How does that affect returns vs traditional PE?", "d": "hard", "tags": ["hold_period"]},
+      {"q": "Why Warburg Pincus over a traditional buyout shop?", "d": "medium", "tags": ["differentiation"]},
+      {"q": "Name a recent Warburg portfolio company and explain the investment thesis.", "d": "medium", "tags": ["portfolio"]}
+    ],
+    "technical_lbo": [
+      {"q": "Warburg takes minority stakes in growth companies. How does the return math differ from a controlling buyout?", "d": "hard", "tags": ["minority_stakes"]},
+      {"q": "Walk me through how you'd model a growth equity investment where revenue is growing 40% but the company is EBITDA-negative.", "d": "hard", "tags": ["growth_model"]},
+      {"q": "How does Warburg protect downside in a minority growth investment without control?", "d": "hard", "tags": ["downside_protection"]},
+      {"q": "What governance rights matter most in a minority investment, and how do they compare to a control deal?", "d": "medium", "tags": ["governance"]}
+    ],
+    "behavioral": [
+      {"q": "Warburg Pincus invests globally. Tell me about a time you had to make a decision with incomplete information.", "d": "medium", "tags": ["ambiguity"]},
+      {"q": "Growth investing requires strong conviction. Tell me about a time you backed an unpopular idea that turned out right.", "d": "medium", "tags": ["conviction"]},
+      {"q": "Warburg analysts often interact with portfolio company management. Tell me about a time you built trust with a senior stakeholder.", "d": "medium", "tags": ["stakeholders"]}
+    ],
+    "pitch_a_stock": [
+      {"q": "Pitch me a high-growth private company in fintech that Warburg should invest in.", "d": "hard", "tags": ["fintech"]},
+      {"q": "Pitch me an emerging market company with strong unit economics that fits Warburg's thesis.", "d": "hard", "tags": ["em_thesis"]},
+      {"q": "You found a healthcare company growing 30% YoY but burning cash. Walk me through the investment decision.", "d": "hard", "tags": ["healthcare"]}
+    ]
+  },
+  "General Atlantic": {
+    "firm_specific": [
+      {"q": "Why General Atlantic?", "d": "easy", "tags": ["why_ga"]},
+      {"q": "GA focuses on growth equity. How does that differ from traditional PE in terms of deal structure and risk profile?", "d": "medium", "tags": ["growth_equity"]},
+      {"q": "Walk me through GA's core sectors — technology, healthcare, financial services, consumer. Which interests you most?", "d": "medium", "tags": ["sectors"]},
+      {"q": "General Atlantic is known for its operational value-add playbook. What does that look like in practice for a growth-stage tech company?", "d": "hard", "tags": ["value_add"]},
+      {"q": "How has GA's global platform across the US, Europe, and Asia shaped its deal sourcing?", "d": "medium", "tags": ["global"]},
+      {"q": "GA invested early in companies like Airbnb, Uber, and ByteDance. What pattern do you see in those bets?", "d": "hard", "tags": ["portfolio"]},
+      {"q": "How does GA think about entry valuation vs growth trajectory tradeoffs?", "d": "hard", "tags": ["valuation"]},
+      {"q": "Compare General Atlantic to Tiger Global or Coatue in the growth equity space.", "d": "hard", "tags": ["competitors"]},
+      {"q": "Why GA over a late-stage VC fund?", "d": "medium", "tags": ["differentiation"]},
+      {"q": "What recent GA deal caught your attention?", "d": "medium", "tags": ["deals"]}
+    ],
+    "technical_lbo": [
+      {"q": "GA takes a $200M minority stake in a SaaS company at 15x ARR. Walk me through the return math to hit 3x MOIC.", "d": "hard", "tags": ["return_math"]},
+      {"q": "How do you project revenue growth for a B2B SaaS company? What metrics drive the model?", "d": "medium", "tags": ["saas_metrics"]},
+      {"q": "What's the Rule of 40 and how does GA use it to evaluate growth companies?", "d": "medium", "tags": ["rule_of_40"]},
+      {"q": "Walk me through a net dollar retention analysis and why it matters for a growth equity investment.", "d": "hard", "tags": ["ndr"]}
+    ],
+    "behavioral": [
+      {"q": "GA looks for self-starters who can work independently. Tell me about a project you initiated without being asked.", "d": "medium", "tags": ["initiative"]},
+      {"q": "Growth equity deals move fast. Describe a time you had to deliver high-quality work under a tight deadline.", "d": "medium", "tags": ["deadline"]},
+      {"q": "GA analysts often conduct customer reference calls. How would you prepare for and run a reference call with a portfolio company's top customer?", "d": "medium", "tags": ["references"]}
+    ],
+    "pitch_a_stock": [
+      {"q": "Pitch me a public SaaS company that's undervalued relative to its growth trajectory.", "d": "hard", "tags": ["saas"]},
+      {"q": "Pitch me a fintech company in an emerging market that GA should look at.", "d": "hard", "tags": ["em_fintech"]},
+      {"q": "Walk me through a healthcare IT company you think GA should invest in.", "d": "hard", "tags": ["healthtech"]}
+    ]
+  },
+  "Ares Management": {
+    "firm_specific": [
+      {"q": "Why Ares Management?", "d": "easy", "tags": ["why_ares"]},
+      {"q": "Ares is one of the largest alternative credit managers. Walk me through the difference between direct lending and syndicated loans.", "d": "medium", "tags": ["credit"]},
+      {"q": "How does Ares' credit platform interact with its private equity business?", "d": "hard", "tags": ["cross_platform"]},
+      {"q": "Ares has grown rapidly through acquisitions of other asset managers. What's the strategy there?", "d": "hard", "tags": ["m_and_a"]},
+      {"q": "Walk me through Ares' three main business segments: Credit, PE, and Real Assets.", "d": "medium", "tags": ["structure"]},
+      {"q": "How has the rise of private credit benefited Ares relative to traditional bank lending?", "d": "hard", "tags": ["private_credit"]},
+      {"q": "What's Ares' competitive advantage in middle-market direct lending?", "d": "medium", "tags": ["direct_lending"]},
+      {"q": "Compare Ares' approach to credit investing vs Apollo's.", "d": "hard", "tags": ["competitors"]},
+      {"q": "Why Ares over Blackstone or Apollo?", "d": "medium", "tags": ["differentiation"]},
+      {"q": "What recent Ares deal or fund caught your attention?", "d": "medium", "tags": ["deals"]}
+    ],
+    "technical_lbo": [
+      {"q": "You're an Ares credit analyst underwriting a $500M term loan for an LBO. Walk me through your credit analysis.", "d": "hard", "tags": ["credit_analysis"]},
+      {"q": "What covenants would Ares negotiate in a unitranche financing for a middle-market buyout?", "d": "hard", "tags": ["covenants"]},
+      {"q": "How does Ares think about recovery rates in different parts of the capital structure?", "d": "medium", "tags": ["recovery"]},
+      {"q": "Walk me through how private credit funds like Ares price risk differently than public bond markets.", "d": "hard", "tags": ["pricing"]}
+    ],
+    "behavioral": [
+      {"q": "Ares manages $400B+ in AUM. How do you stay detail-oriented when dealing with large-scale operations?", "d": "medium", "tags": ["attention_to_detail"]},
+      {"q": "Credit investing requires saying no more often than yes. Tell me about a time you had to push back on something everyone else supported.", "d": "medium", "tags": ["pushback"]}
+    ],
+    "technical_valuation": [
+      {"q": "How do you value a direct lending portfolio? What metrics matter most?", "d": "hard", "tags": ["portfolio_valuation"]},
+      {"q": "Walk me through the key differences in valuing a credit-focused alternative manager vs a traditional asset manager.", "d": "hard", "tags": ["alt_valuation"]}
+    ],
+    "market_awareness": [
+      {"q": "How has the banking crisis and tighter bank regulations accelerated the shift to private credit? What does that mean for Ares?", "d": "hard", "tags": ["private_credit_shift"]},
+      {"q": "What's happening with default rates in leveraged loans, and how does that affect Ares' credit portfolio?", "d": "hard", "tags": ["defaults"]}
+    ]
+  },
+  "Elliott Management": {
+    "firm_specific": [
+      {"q": "Why Elliott Management?", "d": "easy", "tags": ["why_elliott"]},
+      {"q": "Elliott is one of the most prominent activist investors. What makes their approach different from other activists like Pershing Square or Trian?", "d": "hard", "tags": ["activism"]},
+      {"q": "Walk me through Elliott's multi-strategy approach. How does the firm combine activism, private equity, distressed debt, and macro?", "d": "hard", "tags": ["multi_strategy"]},
+      {"q": "Paul Singer founded Elliott in 1977. What's unique about the firm's culture and investment philosophy?", "d": "medium", "tags": ["culture"]},
+      {"q": "Elliott has been involved in sovereign debt disputes (Argentina, Peru). How does sovereign activism work?", "d": "hard", "tags": ["sovereign"]},
+      {"q": "Walk me through a recent Elliott activist campaign. What was the thesis and what happened?", "d": "medium", "tags": ["campaigns"]},
+      {"q": "How does Elliott source its activist ideas?", "d": "medium", "tags": ["sourcing"]},
+      {"q": "What's Elliott's typical holding period and exit strategy for an activist position?", "d": "medium", "tags": ["holding_period"]},
+      {"q": "Compare Elliott's approach to Carl Icahn's style of activism.", "d": "hard", "tags": ["competitors"]},
+      {"q": "Why activist investing at Elliott vs long/short equity at a hedge fund like Viking or Lone Pine?", "d": "medium", "tags": ["differentiation"]}
+    ],
+    "technical_valuation": [
+      {"q": "You're building a sum-of-the-parts valuation for an Elliott activist target. The market values the conglomerate at $10B but SOTP says $15B. Walk me through the analysis.", "d": "hard", "tags": ["sotp"]},
+      {"q": "How do you quantify the value of operational improvements Elliott would push for in a target company?", "d": "hard", "tags": ["operational"]},
+      {"q": "Walk me through how you'd value a company's real estate assets separately from its operating business in an activist thesis.", "d": "hard", "tags": ["hidden_assets"]}
+    ],
+    "behavioral": [
+      {"q": "Elliott's work is often adversarial — boards don't welcome activists. Describe a time you handled a confrontational or high-pressure situation.", "d": "medium", "tags": ["pressure"]},
+      {"q": "Activist investing requires deep conviction and patience. Tell me about a time you stuck with a position when others doubted you.", "d": "medium", "tags": ["conviction"]},
+      {"q": "Elliott analysts need to write persuasive letters to boards. Tell me about a time you had to persuade someone senior to change their mind.", "d": "medium", "tags": ["persuasion"]}
+    ],
+    "market_awareness": [
+      {"q": "What's the current regulatory environment for activist investors? Any recent changes that affect Elliott's strategy?", "d": "hard", "tags": ["regulation"]},
+      {"q": "Universal proxy rules changed the game for activists. How, and what does that mean for Elliott?", "d": "hard", "tags": ["universal_proxy"]}
+    ],
+    "pitch_a_stock": [
+      {"q": "Pitch me a public company where you'd launch an activist campaign. What's broken and how would you fix it?", "d": "hard", "tags": ["activist_pitch"]},
+      {"q": "Identify a conglomerate trading at a discount. What breakup or restructuring would unlock value?", "d": "hard", "tags": ["breakup"]}
+    ]
+  },
+  "Oaktree Capital": {
+    "firm_specific": [
+      {"q": "Why Oaktree Capital?", "d": "easy", "tags": ["why_oaktree"]},
+      {"q": "Howard Marks is famous for his investment memos. What's a key lesson from his writing that resonates with you?", "d": "medium", "tags": ["howard_marks"]},
+      {"q": "Oaktree is known for distressed debt investing. Walk me through how distressed investing works at a high level.", "d": "medium", "tags": ["distressed"]},
+      {"q": "How does Oaktree's philosophy of 'risk control, not risk avoidance' translate into actual investment decisions?", "d": "hard", "tags": ["philosophy"]},
+      {"q": "Walk me through Oaktree's different strategies — distressed, corporate credit, real estate, PE. How do they fit together?", "d": "medium", "tags": ["strategies"]},
+      {"q": "Brookfield acquired a majority stake in Oaktree. How has that changed the firm?", "d": "hard", "tags": ["brookfield"]},
+      {"q": "What's the difference between Oaktree's approach to credit and Ares' approach?", "d": "hard", "tags": ["competitors"]},
+      {"q": "Oaktree's motto is 'if we avoid the losers, the winners take care of themselves.' How does that shape their underwriting?", "d": "hard", "tags": ["underwriting"]},
+      {"q": "Why Oaktree over a traditional PE firm?", "d": "medium", "tags": ["differentiation"]},
+      {"q": "What current market conditions make distressed investing attractive or unattractive right now?", "d": "hard", "tags": ["market"]}
+    ],
+    "technical_valuation": [
+      {"q": "How do you value a company in financial distress? What adjustments do you make to a standard DCF?", "d": "hard", "tags": ["distressed_dcf"]},
+      {"q": "Walk me through a recovery analysis for a company with $1B in senior debt, $500M in subordinated notes, and enterprise value of $900M.", "d": "hard", "tags": ["waterfall"]},
+      {"q": "How do you determine the fulcrum security in a capital structure?", "d": "hard", "tags": ["fulcrum"]}
+    ],
+    "restructuring": [
+      {"q": "Walk me through Chapter 11 from the perspective of a distressed debt investor like Oaktree.", "d": "hard", "tags": ["chapter_11"]},
+      {"q": "What's the difference between a loan-to-own strategy and a DIP financing strategy?", "d": "hard", "tags": ["loan_to_own"]},
+      {"q": "How does Oaktree analyze a company's liquidity runway to determine the right entry point for distressed debt?", "d": "hard", "tags": ["liquidity"]},
+      {"q": "Walk me through how an exchange offer works and when Oaktree might prefer it over a formal restructuring.", "d": "hard", "tags": ["exchange_offer"]}
+    ],
+    "behavioral": [
+      {"q": "Oaktree invests in distressed situations where emotions run high. Tell me about a time you made a rational decision when others were panicking.", "d": "medium", "tags": ["composure"]},
+      {"q": "Howard Marks emphasizes 'second-level thinking.' Give me an example of when you thought beyond the obvious to reach a better conclusion.", "d": "medium", "tags": ["second_level"]},
+      {"q": "Distressed investing requires patience — sometimes years. Describe a long-term project where you had to stay disciplined.", "d": "medium", "tags": ["patience"]}
+    ]
+  },
+  "Citadel Securities": {
+    "firm_specific": [
+      {"q": "Why Citadel Securities?", "d": "easy", "tags": ["why_cs"]},
+      {"q": "How is Citadel Securities different from Citadel the hedge fund? Walk me through the legal and operational separation.", "d": "medium", "tags": ["separation"]},
+      {"q": "Citadel Securities is the largest designated market maker on the NYSE. What does that role entail?", "d": "medium", "tags": ["dmm"]},
+      {"q": "Walk me through how PFOF (payment for order flow) works and why Citadel Securities has been at the center of that debate.", "d": "hard", "tags": ["pfof"]},
+      {"q": "How does Citadel Securities make money as a market maker? Walk me through the economics.", "d": "medium", "tags": ["economics"]},
+      {"q": "Citadel Securities is expanding into fixed income and crypto market making. What's the strategy?", "d": "hard", "tags": ["expansion"]},
+      {"q": "How do you think about the difference between latency arbitrage and fundamental market making?", "d": "hard", "tags": ["latency"]},
+      {"q": "What technology infrastructure does Citadel Securities need to operate at its scale?", "d": "medium", "tags": ["tech"]},
+      {"q": "Compare Citadel Securities to Virtu Financial. What are the key differences?", "d": "hard", "tags": ["competitors"]},
+      {"q": "Why market making at Citadel Securities over prop trading at Jane Street?", "d": "medium", "tags": ["differentiation"]}
+    ],
+    "brain_teaser": [
+      {"q": "You have a market where the bid is $100 and the ask is $100.02. You execute 1 million trades per day with a 50% fill rate. What's your expected daily PnL before costs?", "d": "hard", "tags": ["market_making_math"]},
+      {"q": "An option has a delta of 0.5. If the underlying moves up $1, what happens to your delta-hedged position?", "d": "medium", "tags": ["options"]},
+      {"q": "You're quoting a two-sided market. A large buyer comes in. How do you adjust your quotes and why?", "d": "hard", "tags": ["adverse_selection"]},
+      {"q": "If I give you a biased coin with P(heads)=0.6, what's the optimal Kelly bet size?", "d": "hard", "tags": ["kelly"]},
+      {"q": "Walk me through how you'd build an order book simulator.", "d": "hard", "tags": ["simulation"]},
+      {"q": "You observe that a stock's bid-ask spread widens before earnings. Why, and how would you model this?", "d": "hard", "tags": ["spread_dynamics"]}
+    ],
+    "behavioral": [
+      {"q": "Market making requires split-second decisions with real money on the line. Describe a time you made a high-stakes decision quickly.", "d": "medium", "tags": ["speed"]},
+      {"q": "Citadel Securities values intellectual honesty. Tell me about a time you were wrong about something and how you handled it.", "d": "medium", "tags": ["honesty"]},
+      {"q": "How do you handle stress when multiple things are going wrong simultaneously?", "d": "medium", "tags": ["stress"]}
+    ]
+  },
+  "Hudson River Trading": {
+    "firm_specific": [
+      {"q": "Why Hudson River Trading?", "d": "easy", "tags": ["why_hrt"]},
+      {"q": "HRT is known for its flat organizational structure. How does that affect how work gets done?", "d": "medium", "tags": ["culture"]},
+      {"q": "Walk me through how a quantitative trading firm like HRT develops and deploys a trading strategy.", "d": "hard", "tags": ["strategy_dev"]},
+      {"q": "HRT trades across equities, futures, options, and crypto. How do different asset classes require different market-making approaches?", "d": "hard", "tags": ["asset_classes"]},
+      {"q": "What's the role of a quantitative researcher at HRT vs a software engineer?", "d": "medium", "tags": ["roles"]},
+      {"q": "HRT emphasizes open collaboration over siloed teams. Why is that important in quantitative trading?", "d": "medium", "tags": ["collaboration"]},
+      {"q": "How does HRT's approach to technology differ from firms like Two Sigma or Citadel?", "d": "hard", "tags": ["competitors"]},
+      {"q": "Why HRT over Jane Street or Jump Trading?", "d": "medium", "tags": ["differentiation"]},
+      {"q": "HRT has expanded beyond the US into European and Asian markets. What challenges come with that expansion?", "d": "hard", "tags": ["global"]}
+    ],
+    "brain_teaser": [
+      {"q": "You have 100 coins in a row. You flip every coin. Then you flip every 2nd coin. Then every 3rd. Continue through every 100th. Which coins end up heads?", "d": "hard", "tags": ["number_theory"]},
+      {"q": "Two trains are 100 miles apart heading toward each other, each at 50 mph. A fly starts at one train and flies back and forth at 75 mph until crushed. How far does the fly travel?", "d": "medium", "tags": ["classic"]},
+      {"q": "You have a fair 6-sided die. What's the expected number of rolls to see all 6 faces?", "d": "hard", "tags": ["coupon_collector"]},
+      {"q": "Design an algorithm to find the kth largest element in an unsorted array in expected O(n) time.", "d": "hard", "tags": ["algorithms"]},
+      {"q": "You're given a stream of numbers arriving one at a time. Design a data structure that supports O(1) median queries.", "d": "hard", "tags": ["data_structures"]},
+      {"q": "Explain Bayes' theorem with a real-world example relevant to trading.", "d": "medium", "tags": ["bayes"]},
+      {"q": "I'm thinking of two numbers between 1 and 100. You can ask one yes/no question. What do you ask to maximize information gained?", "d": "hard", "tags": ["information_theory"]},
+      {"q": "A roulette wheel has 38 slots. You bet $1 on red each spin. What's your expected value after 1000 spins, and what's the standard deviation?", "d": "medium", "tags": ["ev_variance"]},
+      {"q": "You have 12 balls, one weighs differently. You have a balance scale and 3 weighings. Find the odd ball and determine if it's heavier or lighter.", "d": "hard", "tags": ["logic"]}
+    ],
+    "behavioral": [
+      {"q": "HRT values creative problem solvers. Tell me about the most creative solution you've come up with for a technical problem.", "d": "medium", "tags": ["creativity"]},
+      {"q": "Quantitative trading requires continuous learning. How do you stay current with new research and techniques?", "d": "medium", "tags": ["learning"]}
+    ]
+  },
+  "Susquehanna International Group": {
+    "firm_specific": [
+      {"q": "Why SIG?", "d": "easy", "tags": ["why_sig"]},
+      {"q": "SIG is famous for its game theory and poker culture. How does game theory apply to trading and market making?", "d": "hard", "tags": ["game_theory"]},
+      {"q": "Walk me through SIG's history and how it grew from options market making to a global quantitative firm.", "d": "medium", "tags": ["history"]},
+      {"q": "SIG teaches new hires competitive poker. Why? What does it teach about trading?", "d": "hard", "tags": ["poker"]},
+      {"q": "How does SIG's approach to options market making differ from Citadel Securities' approach?", "d": "hard", "tags": ["competitors"]},
+      {"q": "SIG has been a major player in the ETF market making space. Walk me through how ETF authorized participant creation/redemption works.", "d": "hard", "tags": ["etf"]},
+      {"q": "What role does SIG play in the options market? Why is options market making profitable?", "d": "medium", "tags": ["options_mm"]},
+      {"q": "SIG is known for its educational training program for new traders. What would you hope to learn?", "d": "medium", "tags": ["training"]},
+      {"q": "Compare SIG's culture to other quant firms like Jane Street or HRT.", "d": "medium", "tags": ["culture"]},
+      {"q": "Why trading at SIG over software engineering at a tech company?", "d": "medium", "tags": ["differentiation"]}
+    ],
+    "brain_teaser": [
+      {"q": "You're in a Texas Hold'em tournament. You have pocket aces. The flop is K-Q-J all spades, and you don't have a spade. What's the probability someone has a flush?", "d": "hard", "tags": ["poker_prob"]},
+      {"q": "I offer you a game: flip a fair coin. Heads you get $150, tails you pay $100. How much would you pay to play?", "d": "medium", "tags": ["ev_game"]},
+      {"q": "You have 3 envelopes. One has $100, the others are empty. You pick one. I open another showing it's empty. Should you switch?", "d": "medium", "tags": ["monty_hall"]},
+      {"q": "What's the expected number of coin flips to get two consecutive heads?", "d": "medium", "tags": ["expected_value"]},
+      {"q": "A European call option has a strike of $100, the stock is at $105, risk-free rate is 5%, time to expiry is 1 year. Without a formula, should this call be worth more or less than $5?", "d": "hard", "tags": ["options_intuition"]},
+      {"q": "You're playing a game where you roll a die and get paid the amount shown. You can re-roll once. What's your expected payout?", "d": "medium", "tags": ["optimal_stopping"]},
+      {"q": "Two players alternate removing 1-3 stones from a pile of 15. Last player to remove wins. What's the optimal strategy?", "d": "hard", "tags": ["game_theory"]},
+      {"q": "You have a jar with 100 red and 100 blue balls. You remove 2 at a time: if same color, replace with a blue ball. If different, replace with a red ball. What color is the last ball?", "d": "hard", "tags": ["invariant"]},
+      {"q": "Market makers quote bid and ask prices. If the true price is $50 and your spread is $0.05, but 30% of incoming orders are informed traders, what should your spread be to break even?", "d": "hard", "tags": ["adverse_selection"]}
+    ],
+    "behavioral": [
+      {"q": "SIG values expected value thinking in everyday decisions. Give me an example of when you used probabilistic thinking outside of math or finance.", "d": "medium", "tags": ["ev_thinking"]},
+      {"q": "SIG traders must manage risk under uncertainty. Describe a time you had to make a decision with very limited information.", "d": "medium", "tags": ["uncertainty"]},
+      {"q": "SIG's culture is competitive but collaborative. Tell me about a time you competed with teammates while still helping them succeed.", "d": "medium", "tags": ["competitive"]}
+    ]
+  }
+}

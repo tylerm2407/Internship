@@ -10,19 +10,30 @@ import {
   Check,
   BellRinging,
   CaretDown,
+  CaretUp,
+  Plus,
   GraduationCap,
   Briefcase,
   MagnifyingGlass,
+  Envelope,
+  LinkedinLogo,
+  UploadSimple,
+  X,
+  FileText,
 } from "@phosphor-icons/react";
 import {
   getAllFirms,
   getAlumni,
+  searchAlumni,
+  importAlumniCSV,
+  createAlumnus,
   getNetworkingContacts,
   createNetworkingContact,
   updateNetworkingContact,
   draftOutreach,
   getNetworkingNudges,
 } from "../../lib/api";
+import { AuthGuard } from "../../components/AuthGuard";
 import { Card } from "../../components/Card";
 import { EyebrowLabel } from "../../components/EyebrowLabel";
 import { PrimaryButton } from "../../components/PrimaryButton";
@@ -30,11 +41,23 @@ import { SecondaryButton } from "../../components/SecondaryButton";
 import type {
   Firm,
   Alumnus,
+  AlumniImportResult,
   NetworkingContact,
+  NetworkingContactCreate,
   OutreachDraftResponse,
   OutreachStatus,
+  ConnectionType,
   NetworkingNudge,
 } from "../../lib/types";
+
+// ── Connection type labels ───────────────────────────────────
+
+const CONNECTION_TYPE_OPTIONS: { value: ConnectionType; label: string }[] = [
+  { value: "alumni", label: "Alumni" },
+  { value: "referral", label: "Referral" },
+  { value: "cold_outreach", label: "Cold outreach" },
+  { value: "other", label: "Other" },
+];
 
 // ── Status display config ──────────────────────────────────────
 
@@ -68,51 +91,6 @@ const ALL_STATUSES: OutreachStatus[] = [
   "thank_you_sent",
 ];
 
-// ── Sample data for demo ──────────────────────────────────────
-
-const SAMPLE_FIRMS: Firm[] = [
-  { id: "f1", name: "Goldman Sachs", tier: "bulge_bracket", roles_offered: ["Investment Banking", "Sales & Trading"], headquarters: "New York, NY", offices: ["New York", "San Francisco", "London"], gpa_floor_estimated: 3.7, recruiting_profile: "Top-tier talent from target schools with strong technical skills", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-  { id: "f2", name: "Morgan Stanley", tier: "bulge_bracket", roles_offered: ["Investment Banking", "Wealth Management"], headquarters: "New York, NY", offices: ["New York", "Houston", "London"], gpa_floor_estimated: 3.6, recruiting_profile: "Well-rounded candidates with leadership and analytical abilities", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-  { id: "f3", name: "Evercore", tier: "elite_boutique", roles_offered: ["Investment Banking Advisory"], headquarters: "New York, NY", offices: ["New York", "Houston", "London"], gpa_floor_estimated: 3.7, recruiting_profile: "Candidates with strong attention to detail and deal passion", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-  { id: "f4", name: "Jefferies", tier: "middle_market", roles_offered: ["Investment Banking", "Equity Research"], headquarters: "New York, NY", offices: ["New York", "Los Angeles", "Chicago"], gpa_floor_estimated: 3.4, recruiting_profile: "Entrepreneurial mindset with strong work ethic", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-  { id: "f5", name: "Lazard", tier: "elite_boutique", roles_offered: ["Financial Advisory", "Asset Management"], headquarters: "New York, NY", offices: ["New York", "Chicago", "Paris"], gpa_floor_estimated: 3.7, recruiting_profile: "Intellectually curious candidates with global perspective", careers_url: "", scraper_adapter: null, last_scraped_at: null },
-];
-
-const SAMPLE_ALUMNI: Record<string, Alumnus[]> = {
-  f1: [
-    { id: "a1", name: "Michael Chen", firm_id: "f1", current_role: "Analyst", division: "TMT Group", graduation_year: 2024, school: "Bryant University", major: "Finance", connection_hooks: ["Finance Society", "Same major"], created_at: "2025-09-15" },
-    { id: "a2", name: "Sarah Thompson", firm_id: "f1", current_role: "Associate", division: "Healthcare", graduation_year: 2022, school: "Bryant University", major: "Accounting", connection_hooks: ["Bryant Honors", "Study abroad — London"], created_at: "2025-09-15" },
-    { id: "a3", name: "David Park", firm_id: "f1", current_role: "VP", division: "Leveraged Finance", graduation_year: 2018, school: "Bryant University", major: "Finance", connection_hooks: ["Finance Society president", "Korean Student Association"], created_at: "2025-09-15" },
-  ],
-  f2: [
-    { id: "a4", name: "Jessica Rivera", firm_id: "f2", current_role: "Analyst", division: "M&A", graduation_year: 2024, school: "Bryant University", major: "Finance", connection_hooks: ["Investment Club", "Women in Business"], created_at: "2025-09-15" },
-    { id: "a5", name: "Ryan O'Brien", firm_id: "f2", current_role: "Associate", division: "Wealth Management", graduation_year: 2023, school: "Bryant University", major: "Financial Services", connection_hooks: ["Same fraternity", "Finance Society"], created_at: "2025-09-15" },
-  ],
-  f3: [
-    { id: "a6", name: "Amanda Liu", firm_id: "f3", current_role: "Analyst", division: "Advisory", graduation_year: 2025, school: "Bryant University", major: "Finance", connection_hooks: ["Finance Society VP", "Same professor — Dr. Louton"], created_at: "2025-09-15" },
-    { id: "a7", name: "Christopher Walsh", firm_id: "f3", current_role: "Associate", division: "Restructuring", graduation_year: 2021, school: "Bryant University", major: "Accounting", connection_hooks: ["Bryant Honors", "Accounting Association"], created_at: "2025-09-15" },
-  ],
-  f4: [
-    { id: "a8", name: "Nicole Patel", firm_id: "f4", current_role: "Analyst", division: "Industrials", graduation_year: 2024, school: "Bryant University", major: "Finance", connection_hooks: ["Finance Society", "Dean's List"], created_at: "2025-09-15" },
-  ],
-  f5: [
-    { id: "a9", name: "James McCarthy", firm_id: "f5", current_role: "Analyst", division: "Financial Advisory", graduation_year: 2025, school: "Bryant University", major: "Finance", connection_hooks: ["Study abroad — Paris", "Finance Society"], created_at: "2025-09-15" },
-    { id: "a10", name: "Emily Nguyen", firm_id: "f5", current_role: "VP", division: "Asset Management", graduation_year: 2017, school: "Bryant University", major: "Applied Mathematics", connection_hooks: ["Math department", "First-gen scholarship"], created_at: "2025-09-15" },
-  ],
-};
-
-const SAMPLE_CONTACTS: NetworkingContact[] = [
-  { id: "c1", user_id: "u1", alumni_id: "a1", firm_id: "f1", contact_name: "Michael Chen", contact_role: "Analyst", contact_division: "TMT Group", connection_type: "alumni", referred_by_id: null, outreach_status: "message_sent", outreach_date: "2026-03-20", follow_up_date: "2026-03-27", call_date: null, call_notes: null, thank_you_sent_at: null, next_action: "Follow up if no response", next_action_date: "2026-03-27", created_at: "2026-03-18", updated_at: "2026-03-20" },
-  { id: "c2", user_id: "u1", alumni_id: "a4", firm_id: "f2", contact_name: "Jessica Rivera", contact_role: "Analyst", contact_division: "M&A", connection_type: "alumni", referred_by_id: null, outreach_status: "call_completed", outreach_date: "2026-02-15", follow_up_date: null, call_date: "2026-03-01", call_notes: "Great call — discussed day-to-day as an analyst. She recommended reaching out to her staffer for summer recruiting info.", thank_you_sent_at: "2026-03-01", next_action: "Connect with her staffer", next_action_date: "2026-03-10", created_at: "2026-02-10", updated_at: "2026-03-01" },
-  { id: "c3", user_id: "u1", alumni_id: "a6", firm_id: "f3", contact_name: "Amanda Liu", contact_role: "Analyst", contact_division: "Advisory", connection_type: "alumni", referred_by_id: null, outreach_status: "responded", outreach_date: "2026-03-25", follow_up_date: null, call_date: null, call_notes: null, thank_you_sent_at: null, next_action: "Schedule call this week", next_action_date: "2026-04-05", created_at: "2026-03-22", updated_at: "2026-03-28" },
-  { id: "c4", user_id: "u1", alumni_id: null, firm_id: "f4", contact_name: "Tom Bradley", contact_role: "Managing Director", contact_division: "Healthcare", connection_type: "career_fair", referred_by_id: null, outreach_status: "followed_up", outreach_date: "2026-03-10", follow_up_date: "2026-03-24", call_date: null, call_notes: null, thank_you_sent_at: null, next_action: "Wait for response", next_action_date: "2026-04-01", created_at: "2026-03-08", updated_at: "2026-03-24" },
-  { id: "c5", user_id: "u1", alumni_id: "a9", firm_id: "f5", contact_name: "James McCarthy", contact_role: "Analyst", contact_division: "Financial Advisory", connection_type: "alumni", referred_by_id: null, outreach_status: "not_contacted", outreach_date: null, follow_up_date: null, call_date: null, call_notes: null, thank_you_sent_at: null, next_action: "Send initial outreach email", next_action_date: "2026-04-10", created_at: "2026-04-01", updated_at: "2026-04-01" },
-];
-
-const SAMPLE_NUDGES: NetworkingNudge[] = [
-  { contact_id: "c1", contact_name: "Michael Chen", firm_id: "f1", days_since_outreach: 19, message: "It's been 19 days since you messaged Michael Chen at Goldman Sachs. Send a polite follow-up." },
-  { contact_id: "c3", contact_name: "Amanda Liu", firm_id: "f3", message: "Amanda Liu at Evercore responded — schedule a call before she forgets." },
-];
 
 // ── Skeleton loaders ───────────────────────────────────────────
 
@@ -152,6 +130,101 @@ function ContactsSkeleton() {
   );
 }
 
+// ── Interaction timeline ──────────────────────────────────────
+
+function InteractionTimeline({ contact }: { contact: NetworkingContact }) {
+  const currentIndex = ALL_STATUSES.indexOf(contact.outreach_status);
+
+  function getDateForStatus(status: OutreachStatus): string | null {
+    switch (status) {
+      case "not_contacted":
+        return contact.created_at;
+      case "message_sent":
+        return contact.outreach_date;
+      case "followed_up":
+        return contact.follow_up_date ?? null;
+      case "responded":
+        return null;
+      case "call_scheduled":
+        return contact.call_date;
+      case "call_completed":
+        return contact.call_date;
+      case "thank_you_sent":
+        return contact.thank_you_sent_at;
+      default:
+        return null;
+    }
+  }
+
+  return (
+    <div className="pl-8 pr-5 pb-4 pt-1">
+      <div className="relative">
+        {ALL_STATUSES.map((status, idx) => {
+          const isCompleted = idx <= currentIndex;
+          const isPending = idx === currentIndex + 1;
+          const isFuture = idx > currentIndex + 1;
+          const date = getDateForStatus(status);
+          const isLast = idx === ALL_STATUSES.length - 1;
+
+          if (isFuture && !isPending) return null;
+
+          return (
+            <div key={status} className="relative flex items-start gap-3 pb-4 last:pb-0">
+              {/* Vertical connecting line */}
+              {!isLast && (idx <= currentIndex || isPending) && (
+                <div
+                  className="absolute left-[7px] top-[18px] w-[2px] h-[calc(100%-6px)]"
+                  style={{
+                    backgroundColor: isCompleted && idx < currentIndex ? "#0B2545" : "#E5E5E5",
+                  }}
+                />
+              )}
+              {/* Dot */}
+              <div className="relative z-10 mt-0.5 shrink-0">
+                {isCompleted ? (
+                  <div
+                    className="w-4 h-4 rounded-full border-2"
+                    style={{ backgroundColor: "#0B2545", borderColor: "#0B2545" }}
+                  />
+                ) : (
+                  <div
+                    className="w-4 h-4 rounded-full border-2 bg-white"
+                    style={{ borderColor: "#D4D4D4" }}
+                  />
+                )}
+              </div>
+              {/* Label and date */}
+              <div className="flex items-baseline gap-2 min-w-0">
+                <span
+                  className={`font-mono text-xs ${
+                    isCompleted ? "text-ink-primary font-medium" : "text-ink-tertiary"
+                  }`}
+                >
+                  {STATUS_LABELS[status]}
+                </span>
+                {date && isCompleted && (
+                  <span className="font-mono text-[11px] text-ink-tertiary">
+                    {new Date(date).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </span>
+                )}
+                {isPending && (
+                  <span className="font-mono text-[11px] text-ink-tertiary italic">
+                    pending
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Main page ──────────────────────────────────────────────────
 
 export default function AlumniPage() {
@@ -180,6 +253,50 @@ export default function AlumniPage() {
   // Adding contact feedback
   const [addingContact, setAddingContact] = useState<Record<string, boolean>>({});
 
+  // Expanded contact rows (for interaction timeline)
+  const [expandedContactIds, setExpandedContactIds] = useState<Set<string>>(new Set());
+
+  // Search state
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchSchool, setSearchSchool] = useState("");
+  const [searchYear, setSearchYear] = useState("");
+  const [searchResults, setSearchResults] = useState<Alumnus[]>([]);
+  const [searchTotal, setSearchTotal] = useState(0);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [isSearchMode, setIsSearchMode] = useState(false);
+
+  // CSV import
+  const [showImportModal, setShowImportModal] = useState(false);
+  const [importFile, setImportFile] = useState<File | null>(null);
+  const [importLoading, setImportLoading] = useState(false);
+  const [importResult, setImportResult] = useState<AlumniImportResult | null>(null);
+
+  // Add alumni form
+  const [showAddAlumniForm, setShowAddAlumniForm] = useState(false);
+  const [addAlumniSubmitting, setAddAlumniSubmitting] = useState(false);
+  const [addAlumniForm, setAddAlumniForm] = useState({
+    name: "",
+    school: "Bryant University",
+    graduation_year: "",
+    current_role: "",
+    current_company: "",
+    email: "",
+    linkedin_url: "",
+    city: "",
+    firm_id: "",
+  });
+
+  // Manual contact form
+  const [showManualForm, setShowManualForm] = useState(false);
+  const [manualFormSubmitting, setManualFormSubmitting] = useState(false);
+  const [manualForm, setManualForm] = useState({
+    contact_name: "",
+    firm_id: "",
+    contact_role: "",
+    contact_division: "",
+    connection_type: "alumni" as ConnectionType,
+  });
+
   // ── Initial load ─────────────────────────────────────────────
 
   const loadInitial = useCallback(async () => {
@@ -198,21 +315,11 @@ export default function AlumniPage() {
         setFollowUpNudges(nudgesResult.value.follow_up_nudges);
         setThankYouNudges(nudgesResult.value.thank_you_nudges);
       }
-      // If API calls fail, load sample data for demo
-      if (firmsResult.status === "rejected" || contactsResult.status === "rejected") {
-        if (firmsResult.status === "rejected") setFirms(SAMPLE_FIRMS);
-        if (contactsResult.status === "rejected") setContacts(SAMPLE_CONTACTS);
-        if (nudgesResult.status === "rejected") {
-          setFollowUpNudges(SAMPLE_NUDGES.filter((n) => n.days_since_outreach));
-          setThankYouNudges(SAMPLE_NUDGES.filter((n) => !n.days_since_outreach));
-        }
-      }
     } catch {
-      // Fallback to sample data
-      setFirms(SAMPLE_FIRMS);
-      setContacts(SAMPLE_CONTACTS);
-      setFollowUpNudges(SAMPLE_NUDGES.filter((n) => n.days_since_outreach));
-      setThankYouNudges(SAMPLE_NUDGES.filter((n) => !n.days_since_outreach));
+      setFirms([]);
+      setContacts([]);
+      setFollowUpNudges([]);
+      setThankYouNudges([]);
     } finally {
       setFirmsLoading(false);
       setContactsLoading(false);
@@ -237,11 +344,8 @@ export default function AlumniPage() {
       setAlumni(data.alumni);
       setSelectedFirm(data.firm);
     } catch {
-      // Fallback to sample data for demo
-      const sampleAlum = SAMPLE_ALUMNI[firmId] || [];
-      const sampleFirm = SAMPLE_FIRMS.find((f) => f.id === firmId) || null;
-      setAlumni(sampleAlum);
-      setSelectedFirm(sampleFirm);
+      setAlumni([]);
+      setSelectedFirm(null);
     } finally {
       setAlumniLoading(false);
     }
@@ -271,29 +375,7 @@ export default function AlumniPage() {
       });
       setContacts((prev) => [newContact, ...prev]);
     } catch {
-      // Fallback: create local-only contact for demo
-      const localContact: NetworkingContact = {
-        id: `local-${Date.now()}`,
-        user_id: "demo",
-        alumni_id: alum.id,
-        firm_id: alum.firm_id,
-        contact_name: alum.name,
-        contact_role: alum.current_role,
-        contact_division: alum.division,
-        connection_type: "alumni",
-        referred_by_id: null,
-        outreach_status: "not_contacted",
-        outreach_date: null,
-        follow_up_date: null,
-        call_date: null,
-        call_notes: null,
-        thank_you_sent_at: null,
-        next_action: "Send initial outreach email",
-        next_action_date: null,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-      };
-      setContacts((prev) => [localContact, ...prev]);
+      setError("Failed to add contact. Please try again.");
     } finally {
       setAddingContact((prev) => ({ ...prev, [alum.id]: false }));
     }
@@ -315,19 +397,7 @@ export default function AlumniPage() {
       const result = await draftOutreach(contactId, "professional");
       setDrafts((prev) => ({ ...prev, [alum.id]: result }));
     } catch {
-      // Fallback: generate sample outreach draft locally
-      const firmName = SAMPLE_FIRMS.find((f) => f.id === alum.firm_id)?.name || "the firm";
-      const hooks = alum.connection_hooks.length > 0 ? alum.connection_hooks : ["Bryant University"];
-      const localDraft: OutreachDraftResponse = {
-        contact_name: alum.name,
-        firm_name: firmName,
-        connection_hooks_used: hooks,
-        drafts: [
-          `Hi ${alum.name.split(" ")[0]},\n\nMy name is Owen Ash and I'm a sophomore Finance major at Bryant University. I came across your profile and was excited to see a fellow Bulldog at ${firmName}${alum.division ? ` in the ${alum.division} group` : ""}.\n\n${hooks.includes("Finance Society") ? "I'm currently involved in the Finance Society at Bryant and " : "I'm "}very interested in learning more about your experience${alum.division ? ` in ${alum.division}` : ""} and any advice you might have for someone recruiting for similar roles.\n\nWould you have 15-20 minutes in the coming weeks for a brief call? I'd really appreciate any insight you could share.\n\nBest regards,\nOwen Ash\nBryant University '29`,
-          `Dear ${alum.name.split(" ")[0]},\n\nI hope this message finds you well. I'm Owen Ash, a Finance major at Bryant University (Class of 2029), and I noticed we share a connection through ${hooks[0]}.\n\nI'm currently exploring opportunities in ${alum.division || "investment banking"} and would love to hear about your path from Bryant to ${firmName}. Your experience as ${alum.current_role} is exactly the kind of career trajectory I'm aiming for.\n\nIf you have any availability for a brief informational call, I would be very grateful for your time.\n\nThank you,\nOwen Ash`,
-        ],
-      };
-      setDrafts((prev) => ({ ...prev, [alum.id]: localDraft }));
+      setError("Failed to generate outreach draft. Please try again.");
     } finally {
       setDraftLoading((prev) => ({ ...prev, [alum.id]: false }));
     }
@@ -342,14 +412,7 @@ export default function AlumniPage() {
         prev.map((c) => (c.id === contactId ? updated : c))
       );
     } catch {
-      // Fallback: update locally for demo
-      setContacts((prev) =>
-        prev.map((c) =>
-          c.id === contactId
-            ? { ...c, outreach_status: newStatus, updated_at: new Date().toISOString() }
-            : c
-        )
-      );
+      setError("Failed to update contact status. Please try again.");
     }
   }
 
@@ -357,6 +420,182 @@ export default function AlumniPage() {
     navigator.clipboard.writeText(draftText);
     setCopiedDraftKey(key);
     setTimeout(() => setCopiedDraftKey(null), 2000);
+  }
+
+  function toggleContactExpanded(contactId: string) {
+    setExpandedContactIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(contactId)) {
+        next.delete(contactId);
+      } else {
+        next.add(contactId);
+      }
+      return next;
+    });
+  }
+
+  async function handleManualContactSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!manualForm.contact_name.trim() || !manualForm.firm_id) return;
+
+    setManualFormSubmitting(true);
+    try {
+      const body: NetworkingContactCreate = {
+        contact_name: manualForm.contact_name.trim(),
+        firm_id: manualForm.firm_id,
+        connection_type: manualForm.connection_type,
+      };
+      if (manualForm.contact_role.trim()) {
+        body.contact_role = manualForm.contact_role.trim();
+      }
+      if (manualForm.contact_division.trim()) {
+        body.contact_division = manualForm.contact_division.trim();
+      }
+      const newContact = await createNetworkingContact(body);
+      setContacts((prev) => [newContact, ...prev]);
+      setShowManualForm(false);
+      setManualForm({
+        contact_name: "",
+        firm_id: "",
+        contact_role: "",
+        contact_division: "",
+        connection_type: "alumni",
+      });
+    } catch {
+      setError("Failed to add contact. Please try again.");
+    } finally {
+      setManualFormSubmitting(false);
+    }
+  }
+
+  // ── Search handler (debounced) ─────────────────────────────
+
+  useEffect(() => {
+    const hasFilters = searchQuery.trim() || searchSchool.trim() || searchYear.trim();
+    if (!hasFilters) {
+      setIsSearchMode(false);
+      setSearchResults([]);
+      setSearchTotal(0);
+      return;
+    }
+
+    setIsSearchMode(true);
+    setSearchLoading(true);
+
+    const timeout = setTimeout(async () => {
+      try {
+        const params: Record<string, string | number> = { limit: 50, offset: 0 };
+        // Use searchQuery as name filter, and also try company
+        if (searchQuery.trim()) {
+          params.name = searchQuery.trim();
+          params.company = searchQuery.trim();
+        }
+        if (searchSchool.trim()) params.school = searchSchool.trim();
+        if (searchYear.trim()) params.graduation_year = parseInt(searchYear, 10);
+
+        // Search by name first, then company as fallback
+        const nameResult = await searchAlumni({
+          name: searchQuery.trim() || undefined,
+          school: searchSchool.trim() || undefined,
+          graduation_year: searchYear ? parseInt(searchYear, 10) : undefined,
+          limit: 50,
+        });
+
+        let combined = nameResult.alumni;
+        let total = nameResult.total;
+
+        // Also search by company if query provided
+        if (searchQuery.trim()) {
+          const companyResult = await searchAlumni({
+            company: searchQuery.trim(),
+            school: searchSchool.trim() || undefined,
+            graduation_year: searchYear ? parseInt(searchYear, 10) : undefined,
+            limit: 50,
+          });
+          // Merge results, deduplicate by id
+          const seenIds = new Set(combined.map((a) => a.id));
+          for (const alum of companyResult.alumni) {
+            if (!seenIds.has(alum.id)) {
+              combined.push(alum);
+              seenIds.add(alum.id);
+            }
+          }
+          total = combined.length;
+        }
+
+        setSearchResults(combined);
+        setSearchTotal(total);
+      } catch {
+        setSearchResults([]);
+        setSearchTotal(0);
+      } finally {
+        setSearchLoading(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [searchQuery, searchSchool, searchYear]);
+
+  // ── CSV import handler ─────────────────────────────────────
+
+  async function handleCSVImport() {
+    if (!importFile) return;
+    setImportLoading(true);
+    setImportResult(null);
+    try {
+      const result = await importAlumniCSV(importFile);
+      setImportResult(result);
+      // Refresh alumni if we're in a firm view
+      if (selectedFirmId) {
+        loadAlumni(selectedFirmId);
+      }
+    } catch {
+      setError("Failed to import CSV. Check the file format and try again.");
+    } finally {
+      setImportLoading(false);
+    }
+  }
+
+  // ── Add alumni handler ─────────────────────────────────────
+
+  async function handleAddAlumniSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!addAlumniForm.name.trim() || !addAlumniForm.graduation_year) return;
+
+    setAddAlumniSubmitting(true);
+    try {
+      await createAlumnus({
+        name: addAlumniForm.name.trim(),
+        school: addAlumniForm.school.trim() || "Bryant University",
+        graduation_year: parseInt(addAlumniForm.graduation_year, 10),
+        current_role: addAlumniForm.current_role.trim() || "",
+        current_company: addAlumniForm.current_company.trim() || undefined,
+        email: addAlumniForm.email.trim() || undefined,
+        linkedin_url: addAlumniForm.linkedin_url.trim() || undefined,
+        city: addAlumniForm.city.trim() || undefined,
+        firm_id: addAlumniForm.firm_id || undefined,
+      });
+      setShowAddAlumniForm(false);
+      setAddAlumniForm({
+        name: "",
+        school: "Bryant University",
+        graduation_year: "",
+        current_role: "",
+        current_company: "",
+        email: "",
+        linkedin_url: "",
+        city: "",
+        firm_id: "",
+      });
+      // Refresh alumni if viewing a firm
+      if (selectedFirmId) {
+        loadAlumni(selectedFirmId);
+      }
+    } catch {
+      setError("Failed to add alumnus. Please try again.");
+    } finally {
+      setAddAlumniSubmitting(false);
+    }
   }
 
   // ── Helpers ──────────────────────────────────────────────────
@@ -375,6 +614,7 @@ export default function AlumniPage() {
   // ── Render ───────────────────────────────────────────────────
 
   return (
+    <AuthGuard>
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
@@ -458,50 +698,313 @@ export default function AlumniPage() {
             </Card>
           )}
 
-          {/* ── Firm selector ── */}
-          <div>
-            <EyebrowLabel>Select a firm</EyebrowLabel>
-            <div className="mt-3 relative max-w-md">
-              <select
-                value={selectedFirmId}
-                onChange={(e) => setSelectedFirmId(e.target.value)}
-                disabled={firmsLoading}
-                className="w-full bg-surface border border-surface-border rounded-md px-4 py-2.5 text-sm font-sans appearance-none focus:outline-none focus:border-accent cursor-pointer pr-10"
-              >
-                <option value="">
-                  {firmsLoading ? "Loading firms..." : "Choose a firm to view alumni"}
-                </option>
-                {firms.map((firm) => (
-                  <option key={firm.id} value={firm.id}>
-                    {firm.name}
-                  </option>
-                ))}
-              </select>
-              <CaretDown
-                size={16}
-                weight="regular"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-secondary pointer-events-none"
+          {/* ── Search bar + filters ── */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 flex-wrap">
+              {/* Search input */}
+              <div className="relative flex-1 min-w-[240px]">
+                <MagnifyingGlass
+                  size={16}
+                  weight="regular"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-tertiary"
+                />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search by name or company..."
+                  className="w-full bg-surface border border-surface-border rounded-md pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:border-accent"
+                />
+              </div>
+
+              {/* School filter */}
+              <input
+                type="text"
+                value={searchSchool}
+                onChange={(e) => setSearchSchool(e.target.value)}
+                placeholder="School"
+                className="bg-surface border border-surface-border rounded-md px-3 py-2.5 text-sm focus:outline-none focus:border-accent w-40"
               />
+
+              {/* Year filter */}
+              <input
+                type="number"
+                value={searchYear}
+                onChange={(e) => setSearchYear(e.target.value)}
+                placeholder="Grad year"
+                className="bg-surface border border-surface-border rounded-md px-3 py-2.5 text-sm focus:outline-none focus:border-accent w-28"
+              />
+
+              {/* Action buttons */}
+              <SecondaryButton
+                onClick={() => setShowImportModal(true)}
+                className="text-xs px-3 py-2"
+              >
+                <UploadSimple size={14} weight="regular" />
+                Import CSV
+              </SecondaryButton>
+              <SecondaryButton
+                onClick={() => setShowAddAlumniForm((prev) => !prev)}
+                className="text-xs px-3 py-2"
+              >
+                <Plus size={14} weight="regular" />
+                Add alumni
+              </SecondaryButton>
+            </div>
+
+            {/* Firm dropdown (secondary filter) */}
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-mono text-ink-tertiary uppercase tracking-wider">Or browse by firm</span>
+              <div className="relative max-w-xs">
+                <select
+                  value={selectedFirmId}
+                  onChange={(e) => {
+                    setSelectedFirmId(e.target.value);
+                    // Clear search when switching to firm browse
+                    if (e.target.value) {
+                      setSearchQuery("");
+                      setSearchSchool("");
+                      setSearchYear("");
+                    }
+                  }}
+                  disabled={firmsLoading}
+                  className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm font-sans appearance-none focus:outline-none focus:border-accent cursor-pointer pr-8"
+                >
+                  <option value="">
+                    {firmsLoading ? "Loading firms..." : "All firms"}
+                  </option>
+                  {firms.map((firm) => (
+                    <option key={firm.id} value={firm.id}>
+                      {firm.name}
+                    </option>
+                  ))}
+                </select>
+                <CaretDown
+                  size={14}
+                  weight="regular"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-ink-secondary pointer-events-none"
+                />
+              </div>
             </div>
           </div>
+
+          {/* ── CSV Import Modal ── */}
+          {showImportModal && (
+            <Card>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <EyebrowLabel>Import alumni from CSV</EyebrowLabel>
+                  <button
+                    onClick={() => {
+                      setShowImportModal(false);
+                      setImportFile(null);
+                      setImportResult(null);
+                    }}
+                    className="text-ink-tertiary hover:text-ink-primary"
+                  >
+                    <X size={16} weight="regular" />
+                  </button>
+                </div>
+
+                <div className="bg-surface-hover border border-dashed border-surface-border rounded-lg p-6 text-center space-y-3">
+                  <FileText size={28} weight="regular" className="text-ink-tertiary mx-auto" />
+                  <p className="text-sm text-ink-secondary">
+                    Upload a CSV with columns: name, school, graduation_year, current_role, current_company, division, major, email, linkedin_url, city, connection_hooks
+                  </p>
+                  <p className="text-xs text-ink-tertiary">
+                    connection_hooks should be semicolon-separated (e.g. &quot;Finance Society;Same major&quot;)
+                  </p>
+                  <input
+                    type="file"
+                    accept=".csv"
+                    onChange={(e) => setImportFile(e.target.files?.[0] || null)}
+                    className="text-sm text-ink-secondary file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border file:border-surface-border file:text-xs file:bg-surface file:text-ink-primary file:cursor-pointer hover:file:bg-surface-hover"
+                  />
+                </div>
+
+                {importResult && (
+                  <div className={`rounded-md p-3 text-sm ${importResult.errors.length > 0 ? "bg-amber-50 border border-amber-200" : "bg-green-50 border border-green-200"}`}>
+                    <p className="font-medium">
+                      {importResult.imported} imported, {importResult.skipped} skipped
+                    </p>
+                    {importResult.errors.length > 0 && (
+                      <ul className="mt-1 text-xs text-amber-700 space-y-0.5">
+                        {importResult.errors.slice(0, 5).map((err, i) => (
+                          <li key={i}>{err}</li>
+                        ))}
+                        {importResult.errors.length > 5 && (
+                          <li>...and {importResult.errors.length - 5} more errors</li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                )}
+
+                <div className="flex gap-2">
+                  <PrimaryButton
+                    onClick={handleCSVImport}
+                    disabled={!importFile || importLoading}
+                    className="text-xs px-4 py-2"
+                  >
+                    <UploadSimple size={14} weight="regular" />
+                    {importLoading ? "Importing..." : "Upload and import"}
+                  </PrimaryButton>
+                  <a
+                    href="/api/alumni/template"
+                    download="alumni_template.csv"
+                    className="inline-flex items-center gap-1.5 text-xs text-accent hover:underline px-2 py-2"
+                  >
+                    <FileText size={14} weight="regular" />
+                    Download template
+                  </a>
+                </div>
+              </div>
+            </Card>
+          )}
+
+          {/* ── Add alumni form ── */}
+          {showAddAlumniForm && (
+            <Card>
+              <form onSubmit={handleAddAlumniSubmit} className="space-y-4">
+                <EyebrowLabel>Add alumnus</EyebrowLabel>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-mono text-ink-secondary mb-1">Name *</label>
+                    <input
+                      type="text"
+                      required
+                      value={addAlumniForm.name}
+                      onChange={(e) => setAddAlumniForm((prev) => ({ ...prev, name: e.target.value }))}
+                      placeholder="John Doe"
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono text-ink-secondary mb-1">School</label>
+                    <input
+                      type="text"
+                      value={addAlumniForm.school}
+                      onChange={(e) => setAddAlumniForm((prev) => ({ ...prev, school: e.target.value }))}
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono text-ink-secondary mb-1">Grad year *</label>
+                    <input
+                      type="number"
+                      required
+                      value={addAlumniForm.graduation_year}
+                      onChange={(e) => setAddAlumniForm((prev) => ({ ...prev, graduation_year: e.target.value }))}
+                      placeholder="2024"
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono text-ink-secondary mb-1">Role</label>
+                    <input
+                      type="text"
+                      value={addAlumniForm.current_role}
+                      onChange={(e) => setAddAlumniForm((prev) => ({ ...prev, current_role: e.target.value }))}
+                      placeholder="Analyst"
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono text-ink-secondary mb-1">Company</label>
+                    <input
+                      type="text"
+                      value={addAlumniForm.current_company}
+                      onChange={(e) => setAddAlumniForm((prev) => ({ ...prev, current_company: e.target.value }))}
+                      placeholder="Goldman Sachs"
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono text-ink-secondary mb-1">Firm</label>
+                    <div className="relative">
+                      <select
+                        value={addAlumniForm.firm_id}
+                        onChange={(e) => setAddAlumniForm((prev) => ({ ...prev, firm_id: e.target.value }))}
+                        className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm appearance-none focus:outline-none focus:border-accent pr-8"
+                      >
+                        <option value="">Optional</option>
+                        {firms.map((firm) => (
+                          <option key={firm.id} value={firm.id}>{firm.name}</option>
+                        ))}
+                      </select>
+                      <CaretDown size={14} weight="regular" className="absolute right-2.5 top-1/2 -translate-y-1/2 text-ink-secondary pointer-events-none" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono text-ink-secondary mb-1">Email</label>
+                    <input
+                      type="email"
+                      value={addAlumniForm.email}
+                      onChange={(e) => setAddAlumniForm((prev) => ({ ...prev, email: e.target.value }))}
+                      placeholder="john@example.com"
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono text-ink-secondary mb-1">LinkedIn URL</label>
+                    <input
+                      type="url"
+                      value={addAlumniForm.linkedin_url}
+                      onChange={(e) => setAddAlumniForm((prev) => ({ ...prev, linkedin_url: e.target.value }))}
+                      placeholder="https://linkedin.com/in/..."
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono text-ink-secondary mb-1">City</label>
+                    <input
+                      type="text"
+                      value={addAlumniForm.city}
+                      onChange={(e) => setAddAlumniForm((prev) => ({ ...prev, city: e.target.value }))}
+                      placeholder="New York"
+                      className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <PrimaryButton
+                    type="submit"
+                    disabled={addAlumniSubmitting || !addAlumniForm.name.trim() || !addAlumniForm.graduation_year}
+                    className="text-xs px-4 py-2"
+                  >
+                    {addAlumniSubmitting ? "Adding..." : "Add alumnus"}
+                  </PrimaryButton>
+                  <SecondaryButton
+                    type="button"
+                    onClick={() => setShowAddAlumniForm(false)}
+                    className="text-xs px-4 py-2"
+                  >
+                    Cancel
+                  </SecondaryButton>
+                </div>
+              </form>
+            </Card>
+          )}
 
           {/* ── Alumni grid ── */}
           <div>
             <div className="flex items-center justify-between mb-4">
               <EyebrowLabel>
-                {selectedFirm
-                  ? `Alumni at ${selectedFirm.name}`
-                  : "Alumni"}
+                {isSearchMode
+                  ? "Search results"
+                  : selectedFirm
+                    ? `Alumni at ${selectedFirm.name}`
+                    : "Alumni"}
               </EyebrowLabel>
-              {alumni.length > 0 && (
+              {(isSearchMode ? searchResults.length : alumni.length) > 0 && (
                 <span className="font-mono text-sm text-ink-secondary">
-                  {alumni.length} found
+                  {isSearchMode ? searchTotal : alumni.length} found
                 </span>
               )}
             </div>
 
             {/* Loading */}
-            {alumniLoading && (
+            {(alumniLoading || searchLoading) && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <AlumniSkeleton key={i} />
@@ -509,18 +1012,28 @@ export default function AlumniPage() {
               </div>
             )}
 
-            {/* Empty — no firm selected */}
-            {!selectedFirmId && !alumniLoading && (
+            {/* Empty — no search and no firm selected */}
+            {!isSearchMode && !selectedFirmId && !alumniLoading && (
               <div className="bg-surface border border-surface-border rounded-lg p-12 text-center space-y-3">
                 <MagnifyingGlass size={32} weight="regular" className="text-ink-tertiary mx-auto" />
                 <p className="text-sm text-ink-secondary">
-                  Select a firm above to see alumni connections.
+                  Search by name, company, or school above -- or select a firm to browse.
+                </p>
+              </div>
+            )}
+
+            {/* Empty — search active but no results */}
+            {isSearchMode && !searchLoading && searchResults.length === 0 && (
+              <div className="bg-surface border border-surface-border rounded-lg p-12 text-center space-y-3">
+                <Users size={32} weight="regular" className="text-ink-tertiary mx-auto" />
+                <p className="text-sm text-ink-secondary">
+                  No alumni match your search. Try adjusting your filters or import new alumni.
                 </p>
               </div>
             )}
 
             {/* Empty — firm selected but no alumni */}
-            {selectedFirmId && !alumniLoading && alumni.length === 0 && (
+            {!isSearchMode && selectedFirmId && !alumniLoading && alumni.length === 0 && (
               <div className="bg-surface border border-surface-border rounded-lg p-12 text-center space-y-3">
                 <Users size={32} weight="regular" className="text-ink-tertiary mx-auto" />
                 <p className="text-sm text-ink-secondary">
@@ -533,137 +1046,314 @@ export default function AlumniPage() {
             )}
 
             {/* Alumni cards */}
-            {!alumniLoading && alumni.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {alumni.map((alum) => (
-                  <div key={alum.id} className="space-y-3">
-                    <div className="bg-surface border border-surface-border rounded-lg p-5 space-y-3">
-                      {/* Name and role */}
-                      <div>
-                        <h3 className="font-sans text-sm font-semibold text-ink-primary">
-                          {alum.name}
-                        </h3>
-                        <p className="text-sm text-ink-secondary mt-0.5">
-                          {alum.current_role}
-                          {alum.division && (
-                            <span className="text-ink-tertiary"> / {alum.division}</span>
+            {(() => {
+              const displayAlumni = isSearchMode ? searchResults : alumni;
+              const isLoading = isSearchMode ? searchLoading : alumniLoading;
+              if (isLoading || displayAlumni.length === 0) return null;
+
+              return (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {displayAlumni.map((alum) => (
+                    <div key={alum.id} className="space-y-3">
+                      <div className="bg-surface border border-surface-border rounded-lg p-5 space-y-3">
+                        {/* Name and role */}
+                        <div>
+                          <h3 className="font-sans text-sm font-semibold text-ink-primary">
+                            {alum.name}
+                          </h3>
+                          <p className="text-sm text-ink-secondary mt-0.5">
+                            {alum.current_role}
+                            {alum.division && (
+                              <span className="text-ink-tertiary"> / {alum.division}</span>
+                            )}
+                          </p>
+                          {alum.current_company && (
+                            <p className="text-xs text-ink-tertiary mt-0.5">
+                              {alum.current_company}
+                              {alum.city && <span> -- {alum.city}</span>}
+                            </p>
                           )}
-                        </p>
-                      </div>
-
-                      {/* Details */}
-                      <div className="flex items-center gap-4 text-xs text-ink-secondary">
-                        <span className="inline-flex items-center gap-1">
-                          <GraduationCap size={14} weight="regular" />
-                          {alum.school} &apos;{String(alum.graduation_year).slice(-2)}
-                        </span>
-                        {alum.major && (
-                          <span className="inline-flex items-center gap-1">
-                            <Briefcase size={14} weight="regular" />
-                            {alum.major}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Connection hooks */}
-                      {alum.connection_hooks.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5">
-                          {alum.connection_hooks.map((hook) => (
-                            <span
-                              key={hook}
-                              className="bg-surface-hover text-ink-secondary text-xs px-2 py-0.5 rounded border border-surface-border"
-                            >
-                              {hook}
-                            </span>
-                          ))}
                         </div>
-                      )}
 
-                      {/* Actions */}
-                      <div className="flex gap-2 pt-1">
-                        {isAlreadyContact(alum.id) ? (
-                          <span className="inline-flex items-center gap-1 text-xs text-green-700 font-mono">
-                            <Check size={14} weight="regular" />
-                            In contacts
+                        {/* Details */}
+                        <div className="flex items-center gap-4 text-xs text-ink-secondary">
+                          <span className="inline-flex items-center gap-1">
+                            <GraduationCap size={14} weight="regular" />
+                            {alum.school} &apos;{String(alum.graduation_year).slice(-2)}
                           </span>
-                        ) : (
-                          <SecondaryButton
-                            onClick={() => handleAddContact(alum)}
-                            disabled={addingContact[alum.id]}
-                            className="text-xs px-3 py-1.5"
-                          >
-                            <UserPlus size={14} weight="regular" />
-                            {addingContact[alum.id] ? "Adding..." : "Add to contacts"}
-                          </SecondaryButton>
-                        )}
-                        <PrimaryButton
-                          onClick={() => handleDraftOutreach(alum)}
-                          disabled={draftLoading[alum.id]}
-                          className="text-xs px-3 py-1.5"
-                        >
-                          <PaperPlaneTilt size={14} weight="regular" />
-                          {draftLoading[alum.id] ? "Drafting..." : "Draft outreach"}
-                        </PrimaryButton>
-                      </div>
-                    </div>
+                          {alum.major && (
+                            <span className="inline-flex items-center gap-1">
+                              <Briefcase size={14} weight="regular" />
+                              {alum.major}
+                            </span>
+                          )}
+                        </div>
 
-                    {/* Outreach drafts — shown below the alumni card */}
-                    {drafts[alum.id] && (
-                      <Card className="border-accent/20">
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between">
-                            <EyebrowLabel>
-                              Draft outreach to {drafts[alum.id].contact_name}
-                            </EyebrowLabel>
-                            {drafts[alum.id].connection_hooks_used.length > 0 && (
-                              <span className="text-[10px] font-mono text-ink-tertiary">
-                                Hooks: {drafts[alum.id].connection_hooks_used.join(", ")}
+                        {/* Connection hooks */}
+                        {alum.connection_hooks.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5">
+                            {alum.connection_hooks.map((hook) => (
+                              <span
+                                key={hook}
+                                className="bg-surface-hover text-ink-secondary text-xs px-2 py-0.5 rounded border border-surface-border"
+                              >
+                                {hook}
                               </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Deep link actions (email + LinkedIn) */}
+                        {(alum.email || alum.linkedin_url) && (
+                          <div className="flex gap-2">
+                            {alum.email && (
+                              <a
+                                href={`mailto:${alum.email}`}
+                                className="inline-flex items-center gap-1.5 text-xs font-medium text-accent bg-accent/5 border border-accent/20 rounded-md px-3 py-1.5 hover:bg-accent/10 transition-colors"
+                              >
+                                <Envelope size={14} weight="regular" />
+                                Email
+                              </a>
+                            )}
+                            {alum.linkedin_url && (
+                              <a
+                                href={alum.linkedin_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#0A66C2] bg-[#0A66C2]/5 border border-[#0A66C2]/20 rounded-md px-3 py-1.5 hover:bg-[#0A66C2]/10 transition-colors"
+                              >
+                                <LinkedinLogo size={14} weight="regular" />
+                                LinkedIn
+                              </a>
                             )}
                           </div>
-                          {drafts[alum.id].drafts.map((draft, idx) => {
-                            const draftKey = `${alum.id}-${idx}`;
-                            return (
-                              <div
-                                key={idx}
-                                className="bg-surface-hover border border-surface-border rounded-md p-4 relative group"
-                              >
-                                <p className="text-sm text-ink-primary whitespace-pre-wrap leading-relaxed">
-                                  {draft}
-                                </p>
-                                <button
-                                  onClick={() => handleCopyDraft(draft, draftKey)}
-                                  className="absolute top-2 right-2 p-1.5 rounded-md bg-surface border border-surface-border opacity-0 group-hover:opacity-100 transition-opacity hover:bg-surface-hover"
-                                  title="Copy to clipboard"
-                                >
-                                  {copiedDraftKey === draftKey ? (
-                                    <Check size={14} weight="regular" className="text-green-600" />
-                                  ) : (
-                                    <Copy size={14} weight="regular" className="text-ink-secondary" />
-                                  )}
-                                </button>
-                              </div>
-                            );
-                          })}
+                        )}
+
+                        {/* Actions */}
+                        <div className="flex gap-2 pt-1">
+                          {isAlreadyContact(alum.id) ? (
+                            <span className="inline-flex items-center gap-1 text-xs text-green-700 font-mono">
+                              <Check size={14} weight="regular" />
+                              In contacts
+                            </span>
+                          ) : (
+                            <SecondaryButton
+                              onClick={() => handleAddContact(alum)}
+                              disabled={addingContact[alum.id]}
+                              className="text-xs px-3 py-1.5"
+                            >
+                              <UserPlus size={14} weight="regular" />
+                              {addingContact[alum.id] ? "Adding..." : "Add to contacts"}
+                            </SecondaryButton>
+                          )}
+                          <PrimaryButton
+                            onClick={() => handleDraftOutreach(alum)}
+                            disabled={draftLoading[alum.id]}
+                            className="text-xs px-3 py-1.5"
+                          >
+                            <PaperPlaneTilt size={14} weight="regular" />
+                            {draftLoading[alum.id] ? "Drafting..." : "Draft outreach"}
+                          </PrimaryButton>
                         </div>
-                      </Card>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
+                      </div>
+
+                      {/* Outreach drafts — shown below the alumni card */}
+                      {drafts[alum.id] && (
+                        <Card className="border-accent/20">
+                          <div className="space-y-3">
+                            <div className="flex items-center justify-between">
+                              <EyebrowLabel>
+                                Draft outreach to {drafts[alum.id].contact_name}
+                              </EyebrowLabel>
+                              {drafts[alum.id].connection_hooks_used.length > 0 && (
+                                <span className="text-[10px] font-mono text-ink-tertiary">
+                                  Hooks: {drafts[alum.id].connection_hooks_used.join(", ")}
+                                </span>
+                              )}
+                            </div>
+                            {drafts[alum.id].drafts.map((draft, idx) => {
+                              const draftKey = `${alum.id}-${idx}`;
+                              return (
+                                <div
+                                  key={idx}
+                                  className="bg-surface-hover border border-surface-border rounded-md p-4 relative group"
+                                >
+                                  <p className="text-sm text-ink-primary whitespace-pre-wrap leading-relaxed">
+                                    {draft}
+                                  </p>
+                                  <button
+                                    onClick={() => handleCopyDraft(draft, draftKey)}
+                                    className="absolute top-2 right-2 p-1.5 rounded-md bg-surface border border-surface-border opacity-0 group-hover:opacity-100 transition-opacity hover:bg-surface-hover"
+                                    title="Copy to clipboard"
+                                  >
+                                    {copiedDraftKey === draftKey ? (
+                                      <Check size={14} weight="regular" className="text-green-600" />
+                                    ) : (
+                                      <Copy size={14} weight="regular" className="text-ink-secondary" />
+                                    )}
+                                  </button>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </Card>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
           </div>
 
           {/* ── Your contacts ── */}
           <div>
             <div className="flex items-center justify-between mb-4">
               <EyebrowLabel>Your contacts</EyebrowLabel>
-              {contacts.length > 0 && (
-                <span className="font-mono text-sm text-ink-secondary">
-                  {contacts.length} contact{contacts.length !== 1 ? "s" : ""}
-                </span>
-              )}
+              <div className="flex items-center gap-3">
+                {contacts.length > 0 && (
+                  <span className="font-mono text-sm text-ink-secondary">
+                    {contacts.length} contact{contacts.length !== 1 ? "s" : ""}
+                  </span>
+                )}
+                <SecondaryButton
+                  onClick={() => setShowManualForm((prev) => !prev)}
+                  className="text-xs px-3 py-1.5"
+                >
+                  <Plus size={14} weight="regular" />
+                  Add contact manually
+                </SecondaryButton>
+              </div>
             </div>
+
+            {/* Manual contact form */}
+            {showManualForm && (
+              <Card className="mb-4">
+                <form onSubmit={handleManualContactSubmit} className="space-y-4">
+                  <EyebrowLabel>New contact</EyebrowLabel>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {/* Contact name */}
+                    <div>
+                      <label className="block text-xs font-mono text-ink-secondary mb-1">
+                        Contact name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={manualForm.contact_name}
+                        onChange={(e) =>
+                          setManualForm((prev) => ({ ...prev, contact_name: e.target.value }))
+                        }
+                        placeholder="Jane Smith"
+                        className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                    {/* Firm */}
+                    <div>
+                      <label className="block text-xs font-mono text-ink-secondary mb-1">
+                        Firm *
+                      </label>
+                      <div className="relative">
+                        <select
+                          required
+                          value={manualForm.firm_id}
+                          onChange={(e) =>
+                            setManualForm((prev) => ({ ...prev, firm_id: e.target.value }))
+                          }
+                          className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm appearance-none focus:outline-none focus:border-accent pr-8"
+                        >
+                          <option value="">Select a firm</option>
+                          {firms.map((firm) => (
+                            <option key={firm.id} value={firm.id}>
+                              {firm.name}
+                            </option>
+                          ))}
+                        </select>
+                        <CaretDown
+                          size={14}
+                          weight="regular"
+                          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-ink-secondary pointer-events-none"
+                        />
+                      </div>
+                    </div>
+                    {/* Role */}
+                    <div>
+                      <label className="block text-xs font-mono text-ink-secondary mb-1">
+                        Role
+                      </label>
+                      <input
+                        type="text"
+                        value={manualForm.contact_role}
+                        onChange={(e) =>
+                          setManualForm((prev) => ({ ...prev, contact_role: e.target.value }))
+                        }
+                        placeholder="Analyst"
+                        className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                    {/* Division */}
+                    <div>
+                      <label className="block text-xs font-mono text-ink-secondary mb-1">
+                        Division
+                      </label>
+                      <input
+                        type="text"
+                        value={manualForm.contact_division}
+                        onChange={(e) =>
+                          setManualForm((prev) => ({ ...prev, contact_division: e.target.value }))
+                        }
+                        placeholder="M&A"
+                        className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-accent"
+                      />
+                    </div>
+                    {/* Connection type */}
+                    <div>
+                      <label className="block text-xs font-mono text-ink-secondary mb-1">
+                        Connection type
+                      </label>
+                      <div className="relative">
+                        <select
+                          value={manualForm.connection_type}
+                          onChange={(e) =>
+                            setManualForm((prev) => ({
+                              ...prev,
+                              connection_type: e.target.value as ConnectionType,
+                            }))
+                          }
+                          className="w-full bg-surface border border-surface-border rounded-md px-3 py-2 text-sm appearance-none focus:outline-none focus:border-accent pr-8"
+                        >
+                          {CONNECTION_TYPE_OPTIONS.map((opt) => (
+                            <option key={opt.value} value={opt.value}>
+                              {opt.label}
+                            </option>
+                          ))}
+                        </select>
+                        <CaretDown
+                          size={14}
+                          weight="regular"
+                          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-ink-secondary pointer-events-none"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <PrimaryButton
+                      type="submit"
+                      disabled={manualFormSubmitting || !manualForm.contact_name.trim() || !manualForm.firm_id}
+                      className="text-xs px-4 py-2"
+                    >
+                      {manualFormSubmitting ? "Adding..." : "Add contact"}
+                    </PrimaryButton>
+                    <SecondaryButton
+                      type="button"
+                      onClick={() => setShowManualForm(false)}
+                      className="text-xs px-4 py-2"
+                    >
+                      Cancel
+                    </SecondaryButton>
+                  </div>
+                </form>
+              </Card>
+            )}
 
             {/* Loading */}
             {contactsLoading && <ContactsSkeleton />}
@@ -690,78 +1380,101 @@ export default function AlumniPage() {
                   <div className="col-span-3">Next action</div>
                 </div>
 
-                {contacts.map((contact) => (
-                  <div
-                    key={contact.id}
-                    className="bg-surface border border-surface-border rounded-lg grid grid-cols-12 gap-3 px-5 py-3 items-center text-sm hover:bg-surface-hover transition-colors"
-                  >
-                    {/* Name */}
-                    <div className="col-span-3">
-                      <p className="font-sans font-medium text-ink-primary truncate">
-                        {contact.contact_name}
-                      </p>
-                      {contact.contact_division && (
-                        <p className="text-xs text-ink-tertiary truncate">
-                          {contact.contact_division}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Firm */}
-                    <div className="col-span-2 font-mono text-xs text-ink-secondary truncate">
-                      {getFirmName(contact.firm_id)}
-                    </div>
-
-                    {/* Role */}
-                    <div className="col-span-2 text-xs text-ink-secondary truncate">
-                      {contact.contact_role || "--"}
-                    </div>
-
-                    {/* Status dropdown */}
-                    <div className="col-span-2">
-                      <select
-                        value={contact.outreach_status}
-                        onChange={(e) =>
-                          handleStatusChange(
-                            contact.id,
-                            e.target.value as OutreachStatus
-                          )
-                        }
-                        className={`text-xs font-medium px-2 py-1 rounded-md border-0 cursor-pointer focus:outline-none focus:ring-1 focus:ring-accent ${STATUS_STYLES[contact.outreach_status]}`}
+                {contacts.map((contact) => {
+                  const isExpanded = expandedContactIds.has(contact.id);
+                  return (
+                    <div
+                      key={contact.id}
+                      className="bg-surface border border-surface-border rounded-lg overflow-hidden"
+                    >
+                      <div
+                        onClick={() => toggleContactExpanded(contact.id)}
+                        className="grid grid-cols-12 gap-3 px-5 py-3 items-center text-sm hover:bg-surface-hover transition-colors cursor-pointer select-none"
                       >
-                        {ALL_STATUSES.map((status) => (
-                          <option key={status} value={status}>
-                            {STATUS_LABELS[status]}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Next action */}
-                    <div className="col-span-3 text-xs text-ink-secondary truncate">
-                      {contact.next_action ? (
-                        <span>
-                          {contact.next_action}
-                          {contact.next_action_date && (
-                            <span className="font-mono text-ink-tertiary ml-1">
-                              ({new Date(contact.next_action_date).toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                              })})
-                            </span>
+                        {/* Name */}
+                        <div className="col-span-3 flex items-center gap-2">
+                          {isExpanded ? (
+                            <CaretUp size={14} weight="regular" className="text-ink-tertiary shrink-0" />
+                          ) : (
+                            <CaretDown size={14} weight="regular" className="text-ink-tertiary shrink-0" />
                           )}
-                        </span>
-                      ) : (
-                        <span className="text-ink-tertiary">--</span>
+                          <div className="min-w-0">
+                            <p className="font-sans font-medium text-ink-primary truncate">
+                              {contact.contact_name}
+                            </p>
+                            {contact.contact_division && (
+                              <p className="text-xs text-ink-tertiary truncate">
+                                {contact.contact_division}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Firm */}
+                        <div className="col-span-2 font-mono text-xs text-ink-secondary truncate">
+                          {getFirmName(contact.firm_id)}
+                        </div>
+
+                        {/* Role */}
+                        <div className="col-span-2 text-xs text-ink-secondary truncate">
+                          {contact.contact_role || "--"}
+                        </div>
+
+                        {/* Status dropdown */}
+                        <div className="col-span-2" onClick={(e) => e.stopPropagation()}>
+                          <select
+                            value={contact.outreach_status}
+                            onChange={(e) =>
+                              handleStatusChange(
+                                contact.id,
+                                e.target.value as OutreachStatus
+                              )
+                            }
+                            className={`text-xs font-medium px-2 py-1 rounded-md border-0 cursor-pointer focus:outline-none focus:ring-1 focus:ring-accent ${STATUS_STYLES[contact.outreach_status]}`}
+                          >
+                            {ALL_STATUSES.map((status) => (
+                              <option key={status} value={status}>
+                                {STATUS_LABELS[status]}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        {/* Next action */}
+                        <div className="col-span-3 text-xs text-ink-secondary truncate">
+                          {contact.next_action ? (
+                            <span>
+                              {contact.next_action}
+                              {contact.next_action_date && (
+                                <span className="font-mono text-ink-tertiary ml-1">
+                                  ({new Date(contact.next_action_date).toLocaleDateString("en-US", {
+                                    month: "short",
+                                    day: "numeric",
+                                  })})
+                                </span>
+                              )}
+                            </span>
+                          ) : (
+                            <span className="text-ink-tertiary">--</span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Expanded interaction timeline */}
+                      {isExpanded && (
+                        <div className="border-t border-surface-border bg-[#FAFAFA]">
+                          <InteractionTimeline contact={contact} />
+                        </div>
                       )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
         </div>
       </main>
     </div>
+    </AuthGuard>
   );
 }
