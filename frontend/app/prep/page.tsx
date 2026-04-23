@@ -16,6 +16,7 @@ import {
   ArrowLeft,
   Lightbulb,
 } from "@phosphor-icons/react";
+import { Wordmark } from "../../components/Wordmark";
 import {
   getAllFirms,
   getProfile,
@@ -612,10 +613,10 @@ export default function PrepPage() {
     return (
       <AuthGuard>
       <div className="min-h-screen flex flex-col">
-        <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
+        <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border bryant-stripe">
           <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <Link href="/" className="font-serif text-xl font-medium text-accent">
-              InternshipMatch
+            <Link href="/" aria-label="InternshipMatch home">
+              <Wordmark />
             </Link>
             <nav className="flex items-center gap-6 text-sm text-ink-secondary">
               <Link href="/dashboard" className="hover:text-ink-primary transition-colors">
@@ -765,10 +766,10 @@ export default function PrepPage() {
     return (
       <AuthGuard>
       <div className="min-h-screen flex flex-col">
-        <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
+        <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border bryant-stripe">
           <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <Link href="/" className="font-serif text-xl font-medium text-accent">
-              InternshipMatch
+            <Link href="/" aria-label="InternshipMatch home">
+              <Wordmark />
             </Link>
             <nav className="flex items-center gap-6 text-sm text-ink-secondary">
               <Link href="/dashboard" className="hover:text-ink-primary transition-colors">
@@ -884,7 +885,7 @@ export default function PrepPage() {
   return (
     <AuthGuard>
     <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
+      <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border bryant-stripe">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="font-serif text-xl font-medium text-accent">
             InternshipMatch

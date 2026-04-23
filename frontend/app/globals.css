@@ -1,15 +1,37 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Bryant University theme
+   - Gold (#B4975B) is the decorative/accent color: wordmark, links, focus,
+     eyebrow highlights, tier chips. Not a background color (fails AA on
+     white).
+   - Warm black (#222020) is the primary ink + button background. This is
+     what Bryant's brand guide calls "Print Black" — softer than true #000
+     for large surfaces.
+   - Background warms slightly (#FAF8F3) to play off the gold.
+   Source: Bryant Creative Brand Guidelines (2024).
+   ========================================================================== */
+
 :root {
-  --background: #FAFAFA;
-  --foreground: #0A0A0A;
-  --ink-secondary: #6B6B6B;
-  --ink-tertiary: #9CA3AF;
-  --accent: #0B2545;
-  --accent-hover: #0A1F3A;
+  /* Surfaces */
+  --background: #FAF8F3;       /* warm off-white */
+  --foreground: #222020;       /* Bryant "Print Black" — warm near-black */
   --surface: #FFFFFF;
-  --surface-hover: #F5F5F5;
-  --surface-border: #E5E5E5;
+  --surface-hover: #F3EFE6;    /* warm tint on hover */
+  --surface-border: #E4DECE;   /* warm border, reads as "paper edge" */
+
+  /* Ink hierarchy */
+  --ink-secondary: #5A5754;
+  --ink-tertiary: #8F8B86;
+
+  /* Brand */
+  --accent: #B4975B;           /* Bryant Gold */
+  --accent-hover: #9A7F45;     /* deeper gold for hover / pressed */
+  --accent-soft: #EFE6D0;      /* muted gold for tints/backgrounds */
+
+  /* CTA — dark, Bryant-black first, gold accents second */
+  --brand: #222020;
+  --brand-hover: #0E0D0D;
 }
 
 @theme inline {
@@ -21,6 +43,9 @@
   --color-ink-tertiary: var(--ink-tertiary);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-surface-border: var(--surface-border);
@@ -38,4 +63,16 @@ body {
 /* Institutional transition easing */
 .ease-institutional {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Bryant athletics gold stripe — applied to the top of the sticky header
+   via className="bryant-stripe" if you want the signature ribbon look. */
+.bryant-stripe {
+  box-shadow: inset 0 3px 0 0 var(--accent);
+}
+
+/* Selection uses the gold tint so highlighted text doesn't clash with brand */
+::selection {
+  background: var(--accent-soft);
+  color: var(--foreground);
 }

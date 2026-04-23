@@ -15,6 +15,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 
 from app import db
 from app.auth import get_current_user_id
+from app.rate_limit import ADMIN_LIMIT, limiter
 
 logger = logging.getLogger(__name__)
 
@@ -54,6 +55,7 @@ def _get_admin_context(user_id: UUID) -> dict:
 
 
 @router.get("/users")
+@limiter.limit(ADMIN_LIMIT)
 async def list_institution_users(
     request: Request,
     user_id: UUID = Depends(get_current_user_id),
@@ -82,6 +84,7 @@ async def list_institution_users(
 
 
 @router.get("/stats")
+@limiter.limit(ADMIN_LIMIT)
 async def get_institution_stats(
     request: Request,
     user_id: UUID = Depends(get_current_user_id),
@@ -110,6 +113,7 @@ async def get_institution_stats(
 
 
 @router.get("/export")
+@limiter.limit("10/minute")
 async def export_institution_data(
     request: Request,
     user_id: UUID = Depends(get_current_user_id),

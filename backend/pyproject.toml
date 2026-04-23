@@ -1,0 +1,52 @@
+# Project-level tooling config for the backend package.
+# Dependencies live in requirements.txt; this file is for tool configuration.
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["seed", "prep_corpus"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+    "N",    # pep8-naming
+    "SIM",  # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long — handled by formatter
+    "B008",  # function-call-in-default-argument (FastAPI uses Depends() this way)
+    "N802",  # function name lowercase (we have some legacy PascalCase)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]  # allow `assert False` in tests
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+]
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning:pydantic.*",
+    "ignore::DeprecationWarning:httpx.*",
+]
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["*/tests/*", "*/seed/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]

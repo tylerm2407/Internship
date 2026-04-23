@@ -1,0 +1,7 @@
+<!-- PLACEHOLDER: replace with the official Bryant seal-only asset. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Bryant seal placeholder">
+  <circle cx="32" cy="32" r="30" fill="#FAF8F3" stroke="#B4975B" stroke-width="2" stroke-dasharray="4 3"/>
+  <circle cx="32" cy="32" r="20" fill="none" stroke="#222020" stroke-width="1"/>
+  <text x="32" y="38" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="500" fill="#B4975B">B</text>
+  <text x="32" y="54" text-anchor="middle" font-family="system-ui, sans-serif" font-size="5" fill="#5A5754">seal placeholder</text>
+</svg>

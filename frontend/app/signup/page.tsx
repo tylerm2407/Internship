@@ -15,9 +15,19 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  const ALLOWED_EMAIL_DOMAIN = "bryant.edu";
+
   async function handleSignup(e: FormEvent) {
     e.preventDefault();
     setError(null);
+
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail.endsWith(`@${ALLOWED_EMAIL_DOMAIN}`)) {
+      setError(
+        `Accounts are limited to @${ALLOWED_EMAIL_DOMAIN} addresses during the pilot. Use your school email to continue.`,
+      );
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
@@ -33,7 +43,7 @@ export default function SignupPage() {
 
     const supabase = getSupabaseBrowserClient();
     const { error: authError } = await supabase.auth.signUp({
-      email,
+      email: normalizedEmail,
       password,
     });
 
@@ -51,9 +61,12 @@ export default function SignupPage() {
     <div className="min-h-screen bg-bg flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="font-serif text-2xl font-medium text-ink-primary mb-2">
+          <h1 className="font-serif text-2xl font-medium text-accent mb-1">
             InternshipMatch
           </h1>
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-secondary mb-3">
+            Bryant University
+          </p>
           <p className="text-ink-secondary text-sm">
             Create your account
           </p>
@@ -90,9 +103,13 @@ export default function SignupPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@university.edu"
+                  placeholder="you@bryant.edu"
+                  aria-describedby={error ? "signup-error" : undefined}
                   className="w-full px-3 py-2 text-sm border border-surface-border rounded-md bg-bg text-ink-primary placeholder:text-ink-tertiary focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
                 />
+                <p className="mt-1 text-xs text-ink-tertiary">
+                  Pilot is limited to @bryant.edu email addresses.
+                </p>
               </div>
 
               <div>
@@ -132,7 +149,9 @@ export default function SignupPage() {
               </div>
 
               {error && (
-                <p className="text-sm text-red-600">{error}</p>
+                <p id="signup-error" role="alert" className="text-sm text-red-600">
+                  {error}
+                </p>
               )}
 
               <PrimaryButton

@@ -68,7 +68,7 @@ A ranked opportunity list, a personalized timeline, and a prep plan
 User (web + mobile)
         │
         ▼
-Next.js 15 frontend (TypeScript, Tailwind, shadcn/ui)
+Next.js 16 frontend (TypeScript, Tailwind, shadcn/ui)
         │ REST + SSE
         ▼
 FastAPI backend (Python 3.12)
@@ -80,7 +80,7 @@ FastAPI backend (Python 3.12)
   └── Prep Coach          → firm-specific interview questions from WSO/Glassdoor corpus
         │
         ▼
-Anthropic Claude (claude-sonnet-4-5)
+Anthropic Claude (claude-sonnet-4)
         │
         ▼
 Supabase (Postgres + Auth + Storage)
@@ -134,10 +134,10 @@ Why this split: a pure LLM scoring system would be slow, expensive, and inconsis
 
 | Layer | Technology |
 |-------|-----------|
-| Web app | Next.js 15 (App Router), TypeScript, Tailwind CSS, shadcn/ui |
+| Web app | Next.js 16 (App Router), TypeScript, Tailwind CSS, shadcn/ui |
 | Mobile app (Phase 2) | Expo React Native, Expo Router, NativeWind |
 | Backend | FastAPI, Python 3.12, Pydantic v2 |
-| AI | Anthropic Claude (claude-sonnet-4-5) |
+| AI | Anthropic Claude (claude-sonnet-4) |
 | Database | Supabase (Postgres + Auth + Storage) |
 | Scraping | Firecrawl MCP for curated firm career pages, Playwright for dynamic sites |
 | Deployment | Vercel (frontend), Railway (backend), Supabase (data) |

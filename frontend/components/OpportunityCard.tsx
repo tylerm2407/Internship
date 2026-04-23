@@ -143,6 +143,12 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
             <button
               type="button"
               onClick={handleScoreClick}
+              aria-label={
+                hasBreakdown
+                  ? `${expanded ? "Hide" : "Show"} fit score breakdown (${fit_score.score} of 100)`
+                  : `Fit score ${fit_score.score} of 100`
+              }
+              aria-expanded={hasBreakdown ? expanded : undefined}
               className={`flex items-center gap-1 ${hasBreakdown ? "cursor-pointer" : "cursor-default"}`}
             >
               <span className="font-mono text-5xl tabular-nums font-medium text-accent leading-none">
@@ -150,9 +156,9 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
               </span>
               {hasBreakdown && (
                 expanded ? (
-                  <CaretUp size={16} weight="regular" className="text-ink-tertiary mt-1" />
+                  <CaretUp size={16} weight="regular" aria-hidden="true" className="text-ink-tertiary mt-1" />
                 ) : (
-                  <CaretDown size={16} weight="regular" className="text-ink-tertiary mt-1" />
+                  <CaretDown size={16} weight="regular" aria-hidden="true" className="text-ink-tertiary mt-1" />
                 )
               )}
             </button>

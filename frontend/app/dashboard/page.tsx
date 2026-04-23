@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ChartBar,
@@ -14,6 +14,7 @@ import { getOpportunities, getProfile } from "../../lib/api";
 import { AuthGuard } from "../../components/AuthGuard";
 import { OpportunityCard } from "../../components/OpportunityCard";
 import { NotificationBell } from "../../components/NotificationBell";
+import { Wordmark } from "../../components/Wordmark";
 import { Card } from "../../components/Card";
 import { EyebrowLabel } from "../../components/EyebrowLabel";
 import { PrimaryButton } from "../../components/PrimaryButton";
@@ -127,44 +128,52 @@ export default function DashboardPage() {
     load();
   }, [load]);
 
-  const tierCounts = opportunities.reduce(
-    (acc, o) => {
-      acc[o.fit_score.tier] = (acc[o.fit_score.tier] || 0) + 1;
-      return acc;
-    },
-    {} as Record<string, number>
+  const tierCounts = useMemo(
+    () =>
+      opportunities.reduce(
+        (acc, o) => {
+          acc[o.fit_score.tier] = (acc[o.fit_score.tier] || 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>,
+      ),
+    [opportunities],
   );
 
-  const uniqueRoles = [
-    ...new Set(opportunities.map((o) => o.posting.role_type)),
-  ].sort();
-  const uniqueLocations = [
-    ...new Set(opportunities.map((o) => o.posting.location)),
-  ].sort();
+  const uniqueRoles = useMemo(
+    () => [...new Set(opportunities.map((o) => o.posting.role_type))].sort(),
+    [opportunities],
+  );
+  const uniqueLocations = useMemo(
+    () => [...new Set(opportunities.map((o) => o.posting.location))].sort(),
+    [opportunities],
+  );
 
-  const filtered = opportunities
-    .filter((o) => {
-      if (tierFilter !== "all" && o.fit_score.tier !== tierFilter) return false;
-      if (roleFilter !== "all" && o.posting.role_type !== roleFilter) return false;
-      if (locationFilter !== "all" && o.posting.location !== locationFilter) return false;
-      if (searchQuery.trim()) {
-        const q = searchQuery.trim().toLowerCase();
-        const matchesFirm = o.firm.name.toLowerCase().includes(q);
-        const matchesTitle = o.posting.title.toLowerCase().includes(q);
-        if (!matchesFirm && !matchesTitle) return false;
-      }
-      return true;
-    })
-    .sort((a, b) => {
-      if (sortBy === "score_desc") return b.fit_score.score - a.fit_score.score;
-      if (sortBy === "firm_az") return a.firm.name.localeCompare(b.firm.name);
-      if (sortBy === "deadline_asc") {
-        const deadlineA = a.posting.deadline ? new Date(a.posting.deadline).getTime() : Infinity;
-        const deadlineB = b.posting.deadline ? new Date(b.posting.deadline).getTime() : Infinity;
-        return deadlineA - deadlineB;
-      }
-      return 0;
-    });
+  const filtered = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return opportunities
+      .filter((o) => {
+        if (tierFilter !== "all" && o.fit_score.tier !== tierFilter) return false;
+        if (roleFilter !== "all" && o.posting.role_type !== roleFilter) return false;
+        if (locationFilter !== "all" && o.posting.location !== locationFilter) return false;
+        if (q) {
+          const matchesFirm = o.firm.name.toLowerCase().includes(q);
+          const matchesTitle = o.posting.title.toLowerCase().includes(q);
+          if (!matchesFirm && !matchesTitle) return false;
+        }
+        return true;
+      })
+      .sort((a, b) => {
+        if (sortBy === "score_desc") return b.fit_score.score - a.fit_score.score;
+        if (sortBy === "firm_az") return a.firm.name.localeCompare(b.firm.name);
+        if (sortBy === "deadline_asc") {
+          const deadlineA = a.posting.deadline ? new Date(a.posting.deadline).getTime() : Infinity;
+          const deadlineB = b.posting.deadline ? new Date(b.posting.deadline).getTime() : Infinity;
+          return deadlineA - deadlineB;
+        }
+        return 0;
+      });
+  }, [opportunities, tierFilter, roleFilter, locationFilter, searchQuery, sortBy]);
 
   const topScore = opportunities.length > 0 ? opportunities[0].fit_score.score : 0;
 
@@ -172,10 +181,10 @@ export default function DashboardPage() {
     <AuthGuard>
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
+      <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border bryant-stripe">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="font-serif text-xl font-medium text-accent">
-            InternshipMatch
+          <Link href="/" aria-label="InternshipMatch home">
+            <Wordmark />
           </Link>
           <div className="flex items-center gap-4">
             <NotificationBell />

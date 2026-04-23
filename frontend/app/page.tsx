@@ -3,6 +3,7 @@ import { Card } from "../components/Card";
 import { PrimaryButton } from "../components/PrimaryButton";
 import { SecondaryButton } from "../components/SecondaryButton";
 import { EyebrowLabel } from "../components/EyebrowLabel";
+import { BryantLogo } from "../components/BryantLogo";
 
 const HOW_IT_WORKS = [
   {
@@ -44,11 +45,17 @@ export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* ── Header ── */}
-      <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
+      <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border bryant-stripe">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-serif text-xl font-medium text-accent">
-            InternshipMatch
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="font-serif text-xl font-medium text-accent">
+              InternshipMatch
+            </span>
+            <span className="hidden sm:inline-block h-5 w-px bg-surface-border" aria-hidden="true" />
+            <span className="hidden sm:inline-block font-mono text-[10px] uppercase tracking-[0.18em] text-ink-secondary">
+              Bryant University
+            </span>
+          </div>
 
           <nav className="hidden md:flex items-center gap-8 text-sm text-ink-secondary">
             <a
@@ -78,7 +85,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 py-24 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left — copy */}
           <div className="lg:col-span-7 space-y-6">
-            <EyebrowLabel>AI recruiting agent for finance students</EyebrowLabel>
+            <EyebrowLabel>Built for Bryant University finance students</EyebrowLabel>
 
             <h1 className="font-serif text-5xl md:text-6xl leading-[1.1] tracking-tight">
               Break into finance
@@ -352,13 +359,21 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 pt-6 border-t border-surface-border flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-ink-tertiary">
-              &copy; {new Date().getFullYear()} InternshipMatch. All rights
-              reserved.
-            </p>
-            <p className="text-xs text-ink-tertiary">
-              Built by Owen Ash at Bryant University.
-            </p>
+            <div className="flex items-center gap-3">
+              <BryantLogo variant="primary" height={28} />
+              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-tertiary">
+                Official partner
+              </span>
+            </div>
+            <div className="text-center sm:text-right space-y-1">
+              <p className="text-xs text-ink-tertiary">
+                &copy; {new Date().getFullYear()} InternshipMatch. All rights
+                reserved.
+              </p>
+              <p className="text-xs text-ink-tertiary">
+                Built by Owen Ash at Bryant University.
+              </p>
+            </div>
           </div>
         </div>
       </footer>

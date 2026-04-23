@@ -11,6 +11,7 @@ import { Card } from "../../components/Card";
 import { EyebrowLabel } from "../../components/EyebrowLabel";
 import { PrimaryButton } from "../../components/PrimaryButton";
 import { SecondaryButton } from "../../components/SecondaryButton";
+import { Wordmark } from "../../components/Wordmark";
 import type { StudentProfile, PriorExperience } from "../../lib/types";
 
 const ROLE_GROUPS = [
@@ -396,8 +397,8 @@ export default function OnboardingPage() {
       {/* Header */}
       <header className="border-b border-surface-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center">
-          <a href="/" className="font-serif text-xl font-medium text-accent">
-            InternshipMatch
+          <a href="/" aria-label="InternshipMatch home">
+            <Wordmark />
           </a>
         </div>
       </header>

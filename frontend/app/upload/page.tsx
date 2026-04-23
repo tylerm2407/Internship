@@ -6,6 +6,7 @@ import { uploadResume } from "../../lib/api";
 import { UploadZone } from "../../components/UploadZone";
 import { PrimaryButton } from "../../components/PrimaryButton";
 import { AuthGuard } from "../../components/AuthGuard";
+import { Wordmark } from "../../components/Wordmark";
 
 export default function UploadPage() {
   const router = useRouter();
@@ -35,8 +36,8 @@ export default function UploadPage() {
       {/* Header bar */}
       <header className="border-b border-surface-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center">
-          <a href="/" className="font-serif text-xl font-medium text-accent">
-            InternshipMatch
+          <a href="/" aria-label="InternshipMatch home">
+            <Wordmark />
           </a>
         </div>
       </header>

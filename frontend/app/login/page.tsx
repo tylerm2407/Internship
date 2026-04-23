@@ -72,9 +72,12 @@ export default function LoginPage() {
     <div className="min-h-screen bg-bg flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="font-serif text-2xl font-medium text-ink-primary mb-2">
+          <h1 className="font-serif text-2xl font-medium text-accent mb-1">
             InternshipMatch
           </h1>
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-secondary mb-3">
+            Bryant University
+          </p>
           <p className="text-ink-secondary text-sm">
             Sign in to your account
           </p>
@@ -109,7 +112,8 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@university.edu"
+                  placeholder="you@bryant.edu"
+                  aria-describedby={error ? "login-error" : undefined}
                   className="w-full px-3 py-2 text-sm border border-surface-border rounded-md bg-bg text-ink-primary placeholder:text-ink-tertiary focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
                 />
               </div>
@@ -133,7 +137,9 @@ export default function LoginPage() {
               </div>
 
               {error && (
-                <p className="text-sm text-red-600">{error}</p>
+                <p id="login-error" role="alert" className="text-sm text-red-600">
+                  {error}
+                </p>
               )}
 
               <PrimaryButton

@@ -1,0 +1,8 @@
+<!-- PLACEHOLDER: replace with the official Bryant reversed (dark-bg) lockup. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" role="img" aria-label="Bryant University reversed logo placeholder">
+  <rect x="1" y="1" width="238" height="46" rx="4" fill="#222020" stroke="#B4975B" stroke-width="2" stroke-dasharray="4 3"/>
+  <circle cx="24" cy="24" r="12" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="24" y="28" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="500" fill="#B4975B">B</text>
+  <text x="48" y="22" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">bryant logo (reverse)</text>
+  <text x="48" y="35" font-family="system-ui, sans-serif" font-size="8" fill="#C9BB8C">public/brand/ — placeholder</text>
+</svg>

@@ -5,6 +5,36 @@ Never inline prompts in business logic. This file is the single place to
 audit, version, and improve all LLM interactions.
 """
 
+from __future__ import annotations
+
+import re
+
+
+_INJECTION_MARKERS = re.compile(
+    r"(ignore (?:all |the |previous )?(?:instructions|prompts)|"
+    r"disregard (?:all |the |previous )?(?:instructions|prompts)|"
+    r"system\s*:|assistant\s*:|</?\s*(?:system|assistant|user)\s*>)",
+    re.IGNORECASE,
+)
+
+
+def sanitize_for_prompt(value: str | None, max_len: int = 200) -> str:
+    """Sanitize a user-controlled string before interpolating into a Claude prompt.
+
+    Strips backticks, collapses whitespace, removes obvious prompt-injection
+    markers, and truncates. Not a full defense (no sanitizer is) — pair with
+    clear prompt instructions about treating interpolated fields as untrusted.
+    """
+    if not value:
+        return ""
+    text = str(value)
+    text = _INJECTION_MARKERS.sub("[redacted]", text)
+    text = text.replace("```", "'''").replace("\r", " ").replace("\n", " ")
+    text = re.sub(r"\s+", " ", text).strip()
+    if len(text) > max_len:
+        text = text[: max_len - 1].rstrip() + "…"
+    return text
+
 RESUME_PARSER_PROMPT = """You are a resume parser for InternshipMatch, a recruiting tool for undergraduate finance students. Your job is to extract structured data from a finance student's resume PDF.
 
 Return a JSON object matching this exact schema. Do NOT include any text outside the JSON object.

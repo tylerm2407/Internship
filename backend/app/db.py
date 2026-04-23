@@ -468,18 +468,29 @@ def get_alumni_by_firm(firm_id: str, token: str) -> list[Any]:
         raise
 
 
-def get_all_alumni(token: str) -> list[Any]:
-    """Fetch all alumni records.
+MAX_ALUMNI_FETCH = 500
+
+
+def get_all_alumni(token: str, limit: int = MAX_ALUMNI_FETCH) -> list[Any]:
+    """Fetch alumni records, capped to prevent unbounded payloads.
 
     Args:
         token: The user's JWT bearer token.
+        limit: Max rows to return (default 500, hard cap enforced).
 
     Returns:
-        List of all alumni data dicts.
+        List of alumni data dicts.
     """
+    capped = min(max(1, limit), MAX_ALUMNI_FETCH)
     try:
         client = _get_user_client(token)
-        result = client.table("alumni").select("*").order("name").execute()
+        result = (
+            client.table("alumni")
+            .select("*")
+            .order("name")
+            .limit(capped)
+            .execute()
+        )
         return result.data
     except Exception as e:
         logger.error("db.alumni.get_all.failed", extra={"error": str(e)})
@@ -636,29 +647,39 @@ def create_networking_contact(contact_data: dict, token: str) -> Any:
         raise
 
 
-def update_networking_contact(contact_id: str, updates: dict, token: str) -> Any:
-    """Update an existing networking contact.
+def update_networking_contact(contact_id: str, user_id: str, updates: dict, token: str) -> Any:
+    """Update an existing networking contact owned by the user.
 
     Args:
         contact_id: The contact's UUID as a string.
-        updates: Dictionary of fields to update.
+        user_id: The authenticated user's UUID — enforced in the WHERE clause
+            as defense in depth alongside RLS.
+        updates: Dictionary of fields to update. user_id/id are stripped.
         token: The user's JWT bearer token.
 
     Returns:
         The updated contact data dict.
+
+    Raises:
+        ValueError: If no row matches (contact doesn't exist or isn't owned by user).
     """
+    updates.pop("id", None)
+    updates.pop("user_id", None)
     try:
         client = _get_user_client(token)
         result = (
             client.table("networking_contacts")
             .update(updates)
             .eq("id", contact_id)
+            .eq("user_id", user_id)
             .execute()
         )
+        if not result.data:
+            raise ValueError("contact_not_found_or_not_owned")
         logger.info("db.networking_contact.updated", extra={"contact_id": contact_id})
-        if result.data:
-            return result.data[0]
-        return updates
+        return result.data[0]
+    except ValueError:
+        raise
     except Exception as e:
         logger.error("db.networking_contact.update.failed", extra={"contact_id": contact_id, "error": str(e)})
         raise
@@ -841,17 +862,28 @@ def upsert_readiness_score(score_data: dict, token: str) -> None:
 # ============================================================
 
 
-def get_timeline_events(user_id: str, token: str, upcoming_only: bool = False) -> list[Any]:
+MAX_TIMELINE_EVENTS = 500
+
+
+def get_timeline_events(
+    user_id: str,
+    token: str,
+    upcoming_only: bool = False,
+    limit: int = MAX_TIMELINE_EVENTS,
+) -> list[Any]:
     """Fetch timeline events for a user.
 
     Args:
         user_id: The user's UUID as a string.
         token: The user's JWT bearer token.
         upcoming_only: If True, only return events with event_date >= now.
+        limit: Max rows (hard-capped at 500 to prevent unbounded payloads
+            for power users with long histories).
 
     Returns:
         List of timeline event data dicts ordered by event_date ascending.
     """
+    capped = min(max(1, limit), MAX_TIMELINE_EVENTS)
     try:
         client = _get_user_client(token)
         query = (
@@ -862,7 +894,7 @@ def get_timeline_events(user_id: str, token: str, upcoming_only: bool = False) -
         if upcoming_only:
             now = datetime.now(timezone.utc).isoformat()
             query = query.gte("event_date", now)
-        result = query.order("event_date").execute()
+        result = query.order("event_date").limit(capped).execute()
         return result.data
     except Exception as e:
         logger.error("db.timeline_events.get.failed", extra={"user_id": user_id, "error": str(e)})
@@ -1073,15 +1105,6 @@ def get_institution_stats(institution_id: str) -> dict:
     """
     client = get_service_client()
 
-    users = (
-        client.table("users")
-        .select("id", count="exact")
-        .eq("institution_id", institution_id)
-        .execute()
-    )
-    user_count = users.count or 0
-
-    # Get user IDs for this institution to query related tables
     user_rows = (
         client.table("users")
         .select("id")
@@ -1089,34 +1112,42 @@ def get_institution_stats(institution_id: str) -> dict:
         .execute()
     )
     user_ids = [u["id"] for u in (user_rows.data or [])]
+    user_count = len(user_ids)
 
-    profile_count = 0
-    application_count = 0
-    prep_session_count = 0
+    if not user_ids:
+        return {
+            "total_users": 0,
+            "profiles_created": 0,
+            "applications_tracked": 0,
+            "prep_sessions_completed": 0,
+        }
 
-    if user_ids:
-        for uid in user_ids:
-            try:
-                profiles = client.table("student_profiles").select("user_id", count="exact").eq("user_id", uid).execute()
-                profile_count += profiles.count or 0
-            except Exception:
-                pass
-            try:
-                apps = client.table("applications").select("id", count="exact").eq("user_id", uid).execute()
-                application_count += apps.count or 0
-            except Exception:
-                pass
-            try:
-                sessions = client.table("prep_sessions").select("id", count="exact").eq("user_id", uid).execute()
-                prep_session_count += sessions.count or 0
-            except Exception:
-                pass
+    def _count_for_users(table: str) -> int:
+        """Count rows in `table` owned by any of this institution's users.
+
+        Collapses what used to be one round-trip per user into a single
+        IN query.
+        """
+        try:
+            result = (
+                client.table(table)
+                .select("user_id", count="exact")
+                .in_("user_id", user_ids)
+                .execute()
+            )
+            return result.count or 0
+        except Exception as exc:
+            logger.warning(
+                "db.institution_stats.count_failed",
+                extra={"table": table, "error": str(exc)},
+            )
+            return 0
 
     return {
         "total_users": user_count,
-        "profiles_created": profile_count,
-        "applications_tracked": application_count,
-        "prep_sessions_completed": prep_session_count,
+        "profiles_created": _count_for_users("student_profiles"),
+        "applications_tracked": _count_for_users("applications"),
+        "prep_sessions_completed": _count_for_users("prep_sessions"),
     }
 
 

@@ -25,6 +25,7 @@ import { Card } from "../../components/Card";
 import { EyebrowLabel } from "../../components/EyebrowLabel";
 import { PrimaryButton } from "../../components/PrimaryButton";
 import { SecondaryButton } from "../../components/SecondaryButton";
+import { Wordmark } from "../../components/Wordmark";
 import type {
   Application,
   ApplicationCreate,
@@ -451,10 +452,10 @@ export default function ApplicationsPage() {
     <AuthGuard>
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border">
+      <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-surface-border bryant-stripe">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="font-serif text-xl font-medium text-accent">
-            InternshipMatch
+          <Link href="/" aria-label="InternshipMatch home">
+            <Wordmark />
           </Link>
           <nav className="flex items-center gap-6">
             <Link

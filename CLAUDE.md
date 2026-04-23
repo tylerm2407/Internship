@@ -28,9 +28,9 @@ The competitive edge is **vertical depth**, not horizontal breadth. Never add ma
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | Next.js 15 (App Router), TypeScript, Tailwind CSS, shadcn/ui |
+| Frontend | Next.js 16 (App Router), TypeScript, Tailwind CSS, shadcn/ui |
 | Backend | FastAPI, Python 3.12, Pydantic v2 |
-| AI | Anthropic Claude (claude-sonnet-4-5) via the official Python SDK |
+| AI | Anthropic Claude (claude-sonnet-4) via the official Python SDK |
 | Database | Supabase — Postgres, Auth, Storage |
 | Scraping | Firecrawl MCP for most firms, Playwright for JS-heavy career pages |
 | Deployment | Vercel (frontend), Railway (backend), Supabase (data layer) |
@@ -55,7 +55,7 @@ This is a multi-day build, not a single hackathon sprint. Follow this order and 
 6. **Build the deterministic fit scoring engine.** Six-factor weighted model from ARCHITECTURE.md. Unit tests against known profiles.
 7. **Build the Claude qualitative pass.** Only runs on the top 30 base scores. Prompts live in `prompts.py`. Caches results in the `fit_scores` table.
 8. **Build the FastAPI routes.** `/api/resume/upload`, `/api/opportunities`, `/api/firms/{id}`, `/api/applications`. Real auth via Supabase.
-9. **Build the frontend shell.** Next.js 15 app router, Supabase Auth integration, shadcn/ui base components.
+9. **Build the frontend shell.** Next.js 16 app router, Supabase Auth integration, shadcn/ui base components.
 10. **Build the homepage and resume upload flow.** Clean, direct — one CTA, one upload zone.
 11. **Build the dashboard page.** Ranked opportunity list with fit scores, rationale, and apply buttons.
 

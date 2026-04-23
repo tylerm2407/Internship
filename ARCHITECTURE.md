@@ -10,58 +10,93 @@ InternshipMatch is a three-tier application with a clean separation between lang
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Frontend — Next.js 15 (browser)                                │
+│  Frontend — Next.js 16 (browser)                                │
 │                                                                 │
-│  /                    Homepage + resume upload                  │
+│  /                    Homepage                                  │
+│  /signup /login       Supabase Auth (email-restricted pilot)    │
+│  /upload              Resume upload + review                    │
+│  /onboarding          Profile confirmation                      │
 │  /dashboard           Ranked opportunity list                   │
+│  /opportunity/[id]    Single posting deep dive + apply button   │
+│  /applications        Application tracker                       │
 │  /timeline            Personalized recruiting calendar          │
-│  /firm/[id]           Single firm deep dive + apply button      │
-│  /alumni              Alumni network map with outreach tools    │
+│  /alumni              Alumni network + outreach drafts          │
 │  /prep                Interview prep coach                      │
 └──────────────────────────────┬──────────────────────────────────┘
-                               │ REST + SSE (for streaming)
+                               │ REST (Supabase Auth JWT in Authorization header)
                                ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  Backend — FastAPI (Python 3.12)                                │
 │                                                                 │
-│  Auth                                                           │
-│  POST /api/auth/login       Supabase Auth proxy                 │
+│  Users                                                          │
+│  DELETE /api/users/me          Delete account + cascade data    │
 │                                                                 │
 │  Resume                                                         │
-│  POST /api/resume/upload    Parse PDF → structured profile      │
-│  GET  /api/resume           Get the user's current profile      │
+│  POST /api/resume/upload       Parse PDF → structured profile   │
+│  POST /api/resume/confirm      Persist confirmed profile        │
+│  GET  /api/resume              Get the user's current profile   │
 │                                                                 │
 │  Opportunities                                                  │
-│  GET  /api/opportunities    Ranked firm list with fit scores    │
-│  GET  /api/firms/{id}       Single firm details                 │
-│                                                                 │
-│  Timeline                                                       │
-│  GET  /api/timeline         Personalized calendar               │
+│  GET  /api/opportunities       Ranked postings with fit scores  │
+│  GET  /api/firms               All firms                        │
+│  GET  /api/firms/{id}          Single firm + its postings       │
 │                                                                 │
 │  Applications                                                   │
-│  POST /api/applications     Log a new application               │
+│  GET   /api/applications       List user applications           │
+│  POST  /api/applications       Log a new application            │
 │  PATCH /api/applications/{id}  Update status                    │
+│  GET   /api/applications/stats Counts + funnel                  │
+│  GET   /api/applications/upcoming                               │
 │                                                                 │
-│  Alumni                                                         │
-│  GET  /api/alumni/{firm_id}    Bryant alumni at a firm          │
-│  POST /api/alumni/draft        Generate outreach message        │
+│  Alumni + Networking                                            │
+│  GET  /api/alumni/search                    Search alumni       │
+│  GET  /api/alumni/{firm_id}                 Alumni at a firm    │
+│  POST /api/alumni                           Add one alumnus     │
+│  POST /api/alumni/import-csv                Bulk CSV import     │
+│  GET  /api/networking/contacts              User's contacts     │
+│  POST /api/networking/contacts              Log a contact       │
+│  PATCH /api/networking/contacts/{id}        Update contact      │
+│  POST /api/networking/draft-outreach        AI-drafted messages │
+│  GET  /api/networking/nudges                Follow-up reminders │
 │                                                                 │
 │  Prep                                                           │
-│  POST /api/prep/session     Start a prep session for a firm     │
-│  POST /api/prep/evaluate    Evaluate a practice answer          │
+│  POST /api/prep/start                       Start prep session  │
+│  POST /api/prep/answer                      Evaluate an answer  │
+│  POST /api/prep/why-firm                    Firm-specific prep  │
+│  GET  /api/prep/readiness                   Mastery scores      │
+│  GET  /api/prep/history                     Past sessions       │
+│  GET  /api/prep/session/{id}/answers                            │
+│                                                                 │
+│  Timeline                                                       │
+│  GET    /api/timeline                       Personalized cal    │
+│  GET    /api/timeline/weekly                Weekly summary      │
+│  POST   /api/timeline/events                Create event        │
+│  PATCH  /api/timeline/events/{id}           Update event        │
+│  DELETE /api/timeline/events/{id}           Delete event        │
+│  POST   /api/timeline/generate              Regenerate from     │
+│                                             profile             │
+│                                                                 │
+│  Admin (requires institution_admin role)                        │
+│  GET /api/admin/users                       Institution users   │
+│  GET /api/admin/stats                       Institution usage   │
+│  GET /api/admin/export                      Anonymized CSV      │
+│                                                                 │
+│  Infrastructure                                                 │
+│  GET /api/health                            Health check        │
+│  GET /api/notifications                     User notifications  │
 └──────────────────────────────┬──────────────────────────────────┘
                                │
              ┌─────────────────┼─────────────────┬──────────────────┐
              ▼                 ▼                 ▼                  ▼
-┌─────────────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────────┐
-│  Anthropic API      │ │  Supabase    │ │  Firecrawl   │ │  Playwright      │
-│  claude-sonnet-4-5  │ │              │ │  MCP         │ │  (dynamic pages) │
-│                     │ │  Postgres    │ │              │ │                  │
-│  - Resume parsing   │ │  Auth        │ │  Nightly     │ │  For firms that  │
-│  - Qualitative fit  │ │  Storage     │ │  scraping    │ │  require JS      │
-│  - Outreach drafts  │ │              │ │  of ~200     │ │  rendering       │
-│  - Prep evaluation  │ │              │ │  firm pages  │ │                  │
-└─────────────────────┘ └──────────────┘ └──────────────┘ └──────────────────┘
+┌─────────────────────────┐ ┌──────────────┐ ┌──────────────┐ ┌────────────────┐
+│  Anthropic API          │ │  Supabase    │ │  Firecrawl   │ │  JSearch       │
+│  claude-sonnet-4        │ │              │ │              │ │                │
+│                         │ │  Postgres    │ │  Generic     │ │  Aggregator    │
+│  - Resume parsing       │ │  Auth        │ │  scraping    │ │  adapter       │
+│  - Qualitative fit      │ │  Storage     │ │  of firm     │ │                │
+│  - Outreach drafts      │ │  RLS         │ │  careers     │ │                │
+│  - Prep evaluation      │ │              │ │  pages       │ │                │
+└─────────────────────────┘ └──────────────┘ └──────────────┘ └────────────────┘
 ```
 
 ---
@@ -370,11 +405,13 @@ Request: `{"posting_id": "...", "status": "planned"}`
 
 Response: the created `Application` object. The frontend updates the opportunity card to show the application state.
 
-### POST /api/prep/evaluate
+### POST /api/prep/answer
 
-Request: `{"session_id": "...", "question_index": 0, "answer_audio_base64": "..."}`
+Request: `{"session_id": "...", "question_id": "...", "answer_text": "..."}`
 
-Response: streaming SSE with Claude's evaluation. Technical questions return a numerical score; behavioral questions return STAR-framework feedback; firm-specific questions return an alignment score with the firm's current strategy.
+Response: Claude's evaluation of the answer — a 0-100 score, written feedback, lists of strengths and improvements, and an updated mastery score for the relevant category. Technical questions return a numerical score; behavioral questions return STAR-framework feedback; firm-specific questions return an alignment score with the firm's current strategy.
+
+Rate-limited to 10 requests / minute / IP — each call invokes Claude.
 
 ---
 
@@ -388,37 +425,43 @@ internshipmatch/
 ├── ROADMAP.md
 │
 ├── docs/
-│   ├── data-model.md
-│   ├── api.md
-│   └── adr/
-│       ├── 0001-supabase-as-source-of-truth.md
-│       ├── 0002-scrape-vs-api-integration.md
-│       ├── 0003-hybrid-fit-scoring.md
-│       ├── 0004-vertical-focus-over-breadth.md
-│       └── 0005-honest-scoring-with-explanations.md
+│   ├── adr/
+│   │   ├── 0001-resume-upload-claude-vision-parsing.md
+│   │   ├── 0002-curated-firm-database-nightly-scraping.md
+│   │   ├── 0003-hybrid-fit-scoring.md
+│   │   ├── 0004-personalized-recruiting-timeline.md
+│   │   ├── 0005-application-tracker-status-sync.md
+│   │   ├── 0006-networking-events-radar-phase1.md
+│   │   └── 0009-networking-events-phase2-three-source.md
+│   └── aie/
+│       └── INDEX.md + per-feature folders
 │
 ├── backend/
 │   ├── app/
-│   │   ├── main.py                     FastAPI routes
+│   │   ├── main.py                     FastAPI routes (monolithic today;
+│   │   │                               splitting into routers is tracked
+│   │   │                               as a follow-up refactor)
 │   │   ├── models.py                   Pydantic data models
+│   │   ├── admin.py                    Admin endpoints (role-gated)
 │   │   ├── auth.py                     Supabase Auth middleware
+│   │   ├── rate_limit.py               slowapi limiter + named limits
 │   │   ├── resume_parser.py            Claude Vision resume extraction
 │   │   ├── fit_scorer.py               Hybrid scoring engine
 │   │   ├── timeline_builder.py         Personalized calendar generation
 │   │   ├── alumni_finder.py            Alumni lookup + outreach draft
 │   │   ├── prep_coach.py               Interview prep session logic
-│   │   ├── prompts.py                  All Claude prompt strings
+│   │   ├── prompts.py                  All Claude prompt strings +
+│   │   │                               input sanitizer
 │   │   ├── claude_client.py            Anthropic SDK wrapper
 │   │   └── db.py                       Supabase Python client
 │   ├── scrapers/
-│   │   ├── firm_registry.py            The master list of 200+ firms
-│   │   ├── base.py                     FirmScraper protocol
+│   │   ├── base.py                     Scraper protocol
+│   │   ├── normalizer.py               Posting normalization
+│   │   ├── firm_matcher.py             Match postings to firm registry
+│   │   ├── diff_engine.py              New/updated/closed diffing
 │   │   ├── adapters/
-│   │   │   ├── goldman_sachs.py
-│   │   │   ├── jpmorgan.py
-│   │   │   ├── william_blair.py
-│   │   │   ├── ... (one per firm)
-│   │   │   └── adventis_mirror.py
+│   │   │   ├── firecrawl_generic.py    Generic Firecrawl-backed adapter
+│   │   │   └── jsearch_adapter.py      JSearch API aggregator
 │   │   └── run_nightly.py              Orchestration script
 │   ├── prep_corpus/
 │   │   ├── wso_ingest.py               Ingestion from WSO interview reports
