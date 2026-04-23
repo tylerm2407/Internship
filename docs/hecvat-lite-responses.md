@@ -31,13 +31,13 @@ For detailed supporting documentation, refer to:
 | Primary contact email | security@internshipmatch.app |
 | Company headquarters location | Bryant University, Smithfield, RI, USA |
 | Year founded | 2026 |
-| Number of employees | 1 (solo founder; see note below) |
+| Number of employees | 2 (co-founders; see note below) |
 | Product/service name | InternshipMatch |
 | Product description | AI-powered recruiting agent for undergraduate business students targeting finance internships. Provides resume parsing, opportunity matching, fit scoring, timeline planning, application tracking, alumni networking, and interview preparation. |
 | Does the product handle regulated data (FERPA, HIPAA, PCI, etc.)? | Yes -- FERPA-covered student education records (GPA, coursework, academic history). See `privacy-and-ferpa-alignment.md`. |
 | Is the product hosted or on-premises? | Hosted (SaaS). No on-premises deployment option. |
 
-**Note on company size:** InternshipMatch is an early-stage product built by a solo founder. Institutional partners should factor this into their risk assessment. The technical architecture compensates by relying on mature, SOC 2-certified infrastructure providers (Supabase, Vercel, Railway, Anthropic) rather than self-managed systems.
+**Note on company size:** InternshipMatch is an early-stage product built by two co-founders. Institutional partners should factor this into their risk assessment. The technical architecture compensates by relying entirely on mature, SOC 2-certified managed infrastructure providers (Supabase, Vercel, Railway, Anthropic) rather than self-managed servers, which significantly reduces operational bus-factor risk.
 
 ---
 
@@ -61,7 +61,7 @@ For detailed supporting documentation, refer to:
 | Question | Response |
 |----------|----------|
 | How are users authenticated? | Supabase Auth (GoTrue) issuing signed JWTs. Email/password with bcrypt hashing. SAML SSO integration available for institutional deployments. |
-| Do you support Single Sign-On (SSO)? | Yes. SAML 2.0 via Supabase Auth. Configuration is part of pilot setup (see `pilot-implementation-plan.md`). |
+| Do you support Single Sign-On (SSO)? | Yes. SAML 2.0 is supported via Supabase Auth. SSO integration is configured during the pilot setup phase (Phase 1, weeks 1-2) in coordination with the institution's IdP team. See `pilot-implementation-plan.md`. |
 | Do you support Multi-Factor Authentication (MFA)? | Supabase Auth supports TOTP-based MFA. MFA can be enabled per institution. |
 | How is authorization enforced? | Row-Level Security (RLS) on all user-owned PostgreSQL tables. Users can only access their own data. No cross-user data access is possible through the API. |
 | How are administrative accounts managed? | Service role keys are stored as encrypted environment variables on Railway. They are never exposed to the frontend. Admin database access is restricted to the founder via Supabase dashboard with MFA enabled. |

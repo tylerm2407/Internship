@@ -380,6 +380,6 @@ export async function getUpcomingApplications(days?: number): Promise<Applicatio
   if (days) params.set("days", String(days));
   const query = params.toString();
   const path = `/api/applications/upcoming${query ? `?${query}` : ""}`;
-  const data = await apiFetch<{ applications: Application[] }>(path);
-  return data.applications;
+  const data = await apiFetch<{ upcoming: Application[] }>(path);
+  return data.upcoming;
 }

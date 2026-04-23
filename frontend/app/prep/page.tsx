@@ -429,7 +429,7 @@ export default function PrepPage() {
 
       if (readinessOk) {
         const rd = readinessResult.value;
-        setReadinessScores(rd.scores ?? rd.readiness_scores ?? []);
+        setReadinessScores(rd.scores ?? []);
         setOverallReadiness(rd.overall ?? 0);
       } else {
         setReadinessScores([]);

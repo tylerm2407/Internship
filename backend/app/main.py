@@ -610,6 +610,45 @@ async def get_firm(firm_id: UUID) -> dict:
 
 
 # ================================================================
+# POSTINGS
+# ================================================================
+
+
+@app.get("/api/postings/{posting_id}")
+async def get_posting(posting_id: UUID) -> dict:
+    """Return a single posting with its parent firm.
+
+    Args:
+        posting_id: The posting's UUID.
+
+    Returns:
+        Dictionary with posting and firm details.
+
+    Raises:
+        HTTPException: 404 if the posting is not found.
+    """
+    try:
+        posting = db.get_posting_by_id(str(posting_id))
+        if posting is None:
+            raise HTTPException(status_code=404, detail="Posting not found")
+
+        firm = db.get_firm_by_id(str(posting["firm_id"]))
+        if firm is None:
+            raise HTTPException(status_code=404, detail="Associated firm not found")
+
+        return {
+            "posting": posting,
+            "firm": firm,
+        }
+
+    except HTTPException:
+        raise
+    except Exception:
+        logger.error("postings.get.error", extra={"traceback": traceback.format_exc()})
+        raise HTTPException(status_code=500, detail="Failed to retrieve posting")
+
+
+# ================================================================
 # APPLICATIONS
 # ================================================================
 

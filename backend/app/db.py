@@ -155,6 +155,31 @@ def get_open_postings() -> list[Any]:
         raise
 
 
+def get_posting_by_id(posting_id: str) -> dict | None:
+    """Fetch a single posting by its UUID.
+
+    Args:
+        posting_id: The posting's UUID as a string.
+
+    Returns:
+        Posting data dict, or None if not found.
+    """
+    try:
+        client = get_service_client()
+        result = (
+            client.table("postings")
+            .select("*")
+            .eq("id", posting_id)
+            .execute()
+        )
+        if result.data:
+            return result.data[0]
+        return None
+    except Exception as e:
+        logger.error("db.postings.get_by_id.failed", extra={"posting_id": posting_id, "error": str(e)})
+        raise
+
+
 def get_postings_by_firm(firm_id: str) -> list[Any]:
     """Fetch all postings for a specific firm.
 
