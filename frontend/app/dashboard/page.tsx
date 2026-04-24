@@ -2,12 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ChartBar,
   CalendarBlank,
   Users,
   Target,
   FileText,
+  Sparkle,
   ArrowRight,
 } from "@phosphor-icons/react";
 import { getOpportunities, getProfile } from "../../lib/api";
@@ -85,6 +87,13 @@ const FEATURES = [
     available: true,
     href: "/prep",
   },
+  {
+    icon: Sparkle,
+    title: "Resume Coach",
+    description: "AI critique of your resume with per-bullet rewrites. Scored the way recruiters do.",
+    available: true,
+    href: "/resume-coach",
+  },
 ];
 
 export default function DashboardPage() {
@@ -100,6 +109,8 @@ export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortOption>("score_desc");
 
+  const router = useRouter();
+
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -108,11 +119,20 @@ export default function DashboardPage() {
         getProfile(),
         getOpportunities({ limit: 50 }),
       ]);
-      setProfile(
+      const fetchedProfile =
         profileResult.status === "fulfilled" && profileResult.value
           ? profileResult.value
-          : null
-      );
+          : null;
+
+      // No profile → dashboard can't render meaningfully ("Welcome back,
+      // undefined" problem + fake "your profile is saved" empty state).
+      // Route the user into the upload flow where they actually belong.
+      if (!fetchedProfile) {
+        router.replace("/upload");
+        return;
+      }
+
+      setProfile(fetchedProfile);
       setOpportunities(
         oppResult.status === "fulfilled" ? oppResult.value : []
       );
@@ -122,7 +142,7 @@ export default function DashboardPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     load();
@@ -204,7 +224,9 @@ export default function DashboardPage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <h1 className="font-serif text-4xl tracking-tight">
-                {profile ? `Welcome back, ${profile.name.split(" ")[0]}` : "Your dashboard"}
+                {profile?.name
+                  ? `Welcome back, ${profile.name.trim().split(/\s+/)[0]}`
+                  : "Your dashboard"}
               </h1>
               {profile && (
                 <p className="text-base text-ink-secondary mt-1">

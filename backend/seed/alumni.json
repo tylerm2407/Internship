@@ -8,7 +8,11 @@
     "graduation_year": 2021,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Finance Society", "SMIF member", "Dean's List"]
+    "connection_hooks": [
+      "Finance Society",
+      "SMIF member",
+      "Dean's List"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000002",
@@ -19,7 +23,10 @@
     "graduation_year": 2024,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Finance Society", "Archway Investment Fund"]
+    "connection_hooks": [
+      "Finance Society",
+      "Archway Investment Fund"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000003",
@@ -30,7 +37,10 @@
     "graduation_year": 2022,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Women in Business", "Finance Society"]
+    "connection_hooks": [
+      "Women in Business",
+      "Finance Society"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000004",
@@ -41,7 +51,10 @@
     "graduation_year": 2025,
     "school": "Bryant University",
     "major": "Applied Mathematics",
-    "connection_hooks": ["SMIF member", "Math Club"]
+    "connection_hooks": [
+      "SMIF member",
+      "Math Club"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000005",
@@ -52,7 +65,11 @@
     "graduation_year": 2021,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Finance Society", "Dean's List", "Hispanic Business Association"]
+    "connection_hooks": [
+      "Finance Society",
+      "Dean's List",
+      "Hispanic Business Association"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000006",
@@ -63,7 +80,11 @@
     "graduation_year": 2019,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["SMIF member", "Finance Society", "Korean Student Association"]
+    "connection_hooks": [
+      "SMIF member",
+      "Finance Society",
+      "Korean Student Association"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000007",
@@ -74,7 +95,10 @@
     "graduation_year": 2024,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Women in Business", "Archway Investment Fund"]
+    "connection_hooks": [
+      "Women in Business",
+      "Archway Investment Fund"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000008",
@@ -85,7 +109,10 @@
     "graduation_year": 2024,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Finance Society", "Case Competition Team"]
+    "connection_hooks": [
+      "Finance Society",
+      "Case Competition Team"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000009",
@@ -96,7 +123,10 @@
     "graduation_year": 2022,
     "school": "Bryant University",
     "major": "Accounting",
-    "connection_hooks": ["Accounting Association", "Finance Society"]
+    "connection_hooks": [
+      "Accounting Association",
+      "Finance Society"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000010",
@@ -107,7 +137,10 @@
     "graduation_year": 2025,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["SMIF member", "South Asian Student Association"]
+    "connection_hooks": [
+      "SMIF member",
+      "South Asian Student Association"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000011",
@@ -118,7 +151,11 @@
     "graduation_year": 2020,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Finance Society", "Women in Business", "Dean's List"]
+    "connection_hooks": [
+      "Finance Society",
+      "Women in Business",
+      "Dean's List"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000012",
@@ -129,7 +166,11 @@
     "graduation_year": 2025,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Finance Society", "Archway Investment Fund", "Club Baseball"]
+    "connection_hooks": [
+      "Finance Society",
+      "Archway Investment Fund",
+      "Club Baseball"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000013",
@@ -140,7 +181,11 @@
     "graduation_year": 2023,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Women in Business", "Pre-Med Club", "Finance Society"]
+    "connection_hooks": [
+      "Women in Business",
+      "Pre-Med Club",
+      "Finance Society"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000014",
@@ -151,7 +196,10 @@
     "graduation_year": 2024,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Finance Society", "Intramural Basketball"]
+    "connection_hooks": [
+      "Finance Society",
+      "Intramural Basketball"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000015",
@@ -162,7 +210,11 @@
     "graduation_year": 2022,
     "school": "Bryant University",
     "major": "Accounting",
-    "connection_hooks": ["Accounting Association", "Case Competition Team", "Dean's List"]
+    "connection_hooks": [
+      "Accounting Association",
+      "Case Competition Team",
+      "Dean's List"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000016",
@@ -173,7 +225,11 @@
     "graduation_year": 2018,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["SMIF member", "Finance Society", "Asian Student Union"]
+    "connection_hooks": [
+      "SMIF member",
+      "Finance Society",
+      "Asian Student Union"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000017",
@@ -184,7 +240,10 @@
     "graduation_year": 2025,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Women in Business", "Finance Society"]
+    "connection_hooks": [
+      "Women in Business",
+      "Finance Society"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000018",
@@ -195,7 +254,10 @@
     "graduation_year": 2024,
     "school": "Bryant University",
     "major": "Finance",
-    "connection_hooks": ["Archway Investment Fund", "Club Hockey"]
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Club Hockey"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000019",
@@ -206,7 +268,11 @@
     "graduation_year": 2023,
     "school": "Bryant University",
     "major": "Applied Mathematics",
-    "connection_hooks": ["Math Club", "SMIF member", "Black Student Union"]
+    "connection_hooks": [
+      "Math Club",
+      "SMIF member",
+      "Black Student Union"
+    ]
   },
   {
     "id": "20000000-0000-4000-a000-000000000020",
@@ -217,6 +283,1636 @@
     "graduation_year": 2025,
     "school": "Bryant University",
     "major": "Applied Mathematics",
-    "connection_hooks": ["Math Club", "Coding Club", "SMIF member"]
+    "connection_hooks": [
+      "Math Club",
+      "Coding Club",
+      "SMIF member"
+    ]
+  },
+  {
+    "id": "4a043c77-587a-4d43-abdd-57586217fb2b",
+    "name": "Camila Kowalski",
+    "firm_id": "00000000-0000-4000-a000-000000000067",
+    "current_role": "Senior Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Prof. Taylor (Corporate Finance)",
+      "Peer Mentor"
+    ],
+    "email": "camila.kowalski24@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/camila-kowalski",
+    "current_company": "FT Partners",
+    "city": "San Francisco, CA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "ee83cdee-52b5-45e9-a287-c7bfd2ce2d8a",
+    "name": "Gabriel Zhang",
+    "firm_id": "00000000-0000-4000-a000-000000000194",
+    "current_role": "Associate",
+    "division": "Equity Capital Markets",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance and Political Science",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Kappa Delta Pi"
+    ],
+    "email": "gabriel.zhang22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/gabriel-zhang",
+    "current_company": "Cowen Prime Brokerage",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "1402d861-3788-4a67-acc1-ce646861839d",
+    "name": "Elijah Johnson",
+    "firm_id": "00000000-0000-4000-a000-000000000102",
+    "current_role": "Analyst",
+    "division": "Private Equity",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Wall Street Club",
+      "Sigma Phi Epsilon"
+    ],
+    "email": "elijah.johnson22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/elijah-johnson",
+    "current_company": "Sculptor Capital",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "81bb8c96-c6cc-4030-a424-73f14232d173",
+    "name": "Zoe Nguyen",
+    "firm_id": "00000000-0000-4000-a000-000000000196",
+    "current_role": "Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2016,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Honors Program"
+    ],
+    "email": "zoe.nguyen16@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/zoe-nguyen",
+    "current_company": "Loop Capital Markets",
+    "city": "Chicago, IL",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "c0c8ab1b-7150-422f-a028-289d09a98e62",
+    "name": "Brandon Davis",
+    "firm_id": "00000000-0000-4000-a000-000000000112",
+    "current_role": "Associate",
+    "division": "Client Coverage",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": [
+      "Bryant Bulldogs track & field",
+      "Kappa Delta Pi",
+      "Veteran / ROTC"
+    ],
+    "email": "brandon.davis22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/brandon-davis",
+    "current_company": "Advent International",
+    "city": "Boston, MA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "c75515b4-7f06-43d2-a6e2-7196d031b889",
+    "name": "Aria Lee",
+    "firm_id": "00000000-0000-4000-a000-000000000122",
+    "current_role": "Portfolio Analyst",
+    "division": "Multi-Asset",
+    "graduation_year": 2017,
+    "school": "Bryant University",
+    "major": "Finance & Economics",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Prof. Johnson capstone",
+      "Prof. Taylor (Corporate Finance)"
+    ],
+    "email": "aria.lee17@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/aria-lee",
+    "current_company": "Wedbush Securities",
+    "city": "Los Angeles, CA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "b8754305-1c32-4e66-a208-3c6b97149ae8",
+    "name": "Omar Kowalski",
+    "firm_id": "00000000-0000-4000-a000-000000000014",
+    "current_role": "Analyst",
+    "division": "Industrials Coverage",
+    "graduation_year": 2016,
+    "school": "Bryant University",
+    "major": "Finance & Economics",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "First-gen college student"
+    ],
+    "email": "omar.kowalski16@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/omar-kowalski",
+    "current_company": "Houlihan Lokey",
+    "city": "Los Angeles, CA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "d84824c7-bcfb-40ec-a0c9-d1e0b8ae75a6",
+    "name": "Sophia Singh",
+    "firm_id": "00000000-0000-4000-a000-000000000003",
+    "current_role": "Associate",
+    "division": "Equity Capital Markets",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Bulldogs track & field",
+      "Beta Alpha Psi honors society",
+      "Prof. Taylor (Corporate Finance)"
+    ],
+    "email": "sophia.singh19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/sophia-singh",
+    "current_company": "Morgan Stanley",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "b12b6090-f4f0-414c-a2f9-21824d37ca60",
+    "name": "Dylan O'Connor",
+    "firm_id": "00000000-0000-4000-a000-000000000065",
+    "current_role": "Vice President",
+    "division": "Investment Banking",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Finance & Economics",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Wall Street Club"
+    ],
+    "email": "dylan.oconnor19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/dylan-o-connor",
+    "current_company": "Credit Agricole",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "0caf75fd-8d4d-4c2b-a5a0-009077a486b8",
+    "name": "Camila Patel",
+    "firm_id": "00000000-0000-4000-a000-000000000045",
+    "current_role": "Associate",
+    "division": "Client Coverage",
+    "graduation_year": 2017,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Studied abroad — LSE"
+    ],
+    "email": "camila.patel17@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/camila-patel",
+    "current_company": "Point72",
+    "city": "Stamford, CT",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "777be668-0864-48a8-a905-9575cb574f5a",
+    "name": "Mason Morales",
+    "firm_id": "00000000-0000-4000-a000-000000000137",
+    "current_role": "Equity Research Associate",
+    "division": "Consumer",
+    "graduation_year": 2016,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": [
+      "Bryant Finance Society (former president)",
+      "Prof. Taylor (Corporate Finance)"
+    ],
+    "email": "mason.morales16@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/mason-morales",
+    "current_company": "BNY Mellon",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "36272b2e-d209-4ccc-a705-0d4c48064903",
+    "name": "Omar Ng",
+    "firm_id": "00000000-0000-4000-a000-000000000172",
+    "current_role": "Analyst",
+    "division": "Healthcare",
+    "graduation_year": 2021,
+    "school": "Bryant University",
+    "major": "Finance and Political Science",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Honors Program"
+    ],
+    "email": "omar.ng21@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/omar-ng",
+    "current_company": "Gilman Ciocia",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "1c9412ad-76f4-45e7-a8aa-14599a480bc4",
+    "name": "Priya Reilly",
+    "firm_id": "00000000-0000-4000-a000-000000000129",
+    "current_role": "Analyst",
+    "division": "Hedge Fund — Long/Short Equity",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Private Equity Club",
+      "Wall Street Club",
+      "Resident Assistant"
+    ],
+    "email": "priya.reilly24@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/priya-reilly",
+    "current_company": "Lazard Asset Management",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "fc3c289f-0bda-430d-a00b-94d1f8858c48",
+    "name": "Emma Foster",
+    "firm_id": "00000000-0000-4000-a000-000000000077",
+    "current_role": "Portfolio Analyst",
+    "division": "Multi-Asset",
+    "graduation_year": 2018,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Presidential Scholarship recipient",
+      "Beta Alpha Psi honors society"
+    ],
+    "email": "emma.foster18@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/emma-foster",
+    "current_company": "Truist Securities",
+    "city": "Atlanta, GA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "746e055e-c322-442f-a2de-e57f2979a342",
+    "name": "Alina Nguyen",
+    "firm_id": "00000000-0000-4000-a000-000000000160",
+    "current_role": "Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2023,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Resident Assistant"
+    ],
+    "email": "alina.nguyen23@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/alina-nguyen",
+    "current_company": "Wolfe Research",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "322304d3-dbb2-4b9a-a314-7b053e125b56",
+    "name": "Samuel Shapiro",
+    "firm_id": "00000000-0000-4000-a000-000000000169",
+    "current_role": "Senior Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2016,
+    "school": "Bryant University",
+    "major": "Finance & Economics",
+    "connection_hooks": [
+      "Bryant Private Equity Club",
+      "Honors Program"
+    ],
+    "email": "samuel.shapiro16@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/samuel-shapiro",
+    "current_company": "Centerview Partners London",
+    "city": "London, UK",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "da48a865-a0d8-4e7f-a2e5-67bfecbfe4cd",
+    "name": "Sienna Baker",
+    "firm_id": "00000000-0000-4000-a000-000000000046",
+    "current_role": "Analyst",
+    "division": "Hedge Fund — Long/Short Equity",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Beta Alpha Psi honors society"
+    ],
+    "email": "sienna.baker20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/sienna-baker",
+    "current_company": "BlackRock",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "13f58318-c6a8-48e1-a362-ee5e2ec865ef",
+    "name": "Mateo Romero",
+    "firm_id": "00000000-0000-4000-a000-000000000131",
+    "current_role": "Associate",
+    "division": "Client Coverage",
+    "graduation_year": 2021,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Finance Society (former president)",
+      "Studied abroad — LSE"
+    ],
+    "email": "mateo.romero21@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/mateo-romero",
+    "current_company": "AllianceBernstein",
+    "city": "Nashville, TN",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "e6da40ff-9ede-48fa-a37c-246ba9e13ed4",
+    "name": "Riya Chen",
+    "firm_id": "00000000-0000-4000-a000-000000000031",
+    "current_role": "Analyst",
+    "division": "Financial Sponsors",
+    "graduation_year": 2017,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Beta Alpha Psi honors society",
+      "Prof. Johnson capstone"
+    ],
+    "email": "riya.chen17@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/riya-chen",
+    "current_company": "Rothschild & Co",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "7582750e-b4ca-4e16-a7b2-8b05c6bf53a2",
+    "name": "Caleb Sullivan",
+    "firm_id": "00000000-0000-4000-a000-000000000004",
+    "current_role": "Vice President",
+    "division": "Investment Banking",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Resident Assistant"
+    ],
+    "email": "caleb.sullivan20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/caleb-sullivan",
+    "current_company": "Bank of America",
+    "city": "Charlotte, NC",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "c6a048f9-676c-4cf7-a5a7-6e6da94c7cae",
+    "name": "Mateo Foster",
+    "firm_id": "00000000-0000-4000-a000-000000000161",
+    "current_role": "Associate",
+    "division": "Restructuring",
+    "graduation_year": 2016,
+    "school": "Bryant University",
+    "major": "Finance and Mathematics",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Beta Alpha Psi honors society",
+      "Honors Program"
+    ],
+    "email": "mateo.foster16@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/mateo-foster",
+    "current_company": "Bernstein Research",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "bd8b295f-9e43-4b14-a4d3-33f1a9ee88c3",
+    "name": "Sophia Vasquez",
+    "firm_id": "00000000-0000-4000-a000-000000000016",
+    "current_role": "Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Resident Assistant"
+    ],
+    "email": "sophia.vasquez22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/sophia-vasquez",
+    "current_company": "Baird",
+    "city": "Milwaukee, WI",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "5d49b92c-1a6a-4f29-a750-7cf206d67209",
+    "name": "Nikhil Hughes",
+    "firm_id": "00000000-0000-4000-a000-000000000043",
+    "current_role": "Quantitative Trader",
+    "division": "Options Market Making",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Finance and Mathematics",
+    "connection_hooks": [
+      "Bryant Bulldogs track & field",
+      "Honors Program",
+      "Presidential Scholarship recipient"
+    ],
+    "email": "nikhil.hughes19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/nikhil-hughes",
+    "current_company": "Renaissance Technologies",
+    "city": "East Setauket, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "31a1cb72-d02c-43e2-a52a-81b7f2ed2a76",
+    "name": "Aiden Park",
+    "firm_id": "00000000-0000-4000-a000-000000000127",
+    "current_role": "Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2021,
+    "school": "Bryant University",
+    "major": "Finance and Mathematics",
+    "connection_hooks": [
+      "Bryant Finance Society (former president)",
+      "Prof. Johnson capstone"
+    ],
+    "email": "aiden.park21@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/aiden-park",
+    "current_company": "Sandler ONeill (now Piper Sandler)",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "491ef158-5590-4b8f-aa14-e438e420733a",
+    "name": "Maya Park",
+    "firm_id": "00000000-0000-4000-a000-000000000188",
+    "current_role": "Associate",
+    "division": "Restructuring",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": [
+      "Bryant Bulldogs track & field",
+      "Studied abroad — Madrid",
+      "First-gen college student"
+    ],
+    "email": "maya.park20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/maya-park",
+    "current_company": "Atlas Merchant Capital",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "c0541990-d81e-448c-ae32-2416ff4980a0",
+    "name": "Xavier Patel",
+    "firm_id": "00000000-0000-4000-a000-000000000202",
+    "current_role": "Analyst",
+    "division": "Industrials Coverage",
+    "graduation_year": 2017,
+    "school": "Bryant University",
+    "major": "Finance & Economics",
+    "connection_hooks": [
+      "SMIF (Student Managed Investment Fund)",
+      "Studied abroad — Madrid",
+      "Wall Street Club"
+    ],
+    "email": "xavier.patel17@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/xavier-patel",
+    "current_company": "Rothschild Restructuring",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "86c776aa-4f19-4524-a53b-1f8f2fc3bd00",
+    "name": "Samuel Mendez",
+    "firm_id": "00000000-0000-4000-a000-000000000048",
+    "current_role": "Associate",
+    "division": "Growth Equity",
+    "graduation_year": 2018,
+    "school": "Bryant University",
+    "major": "International Business",
+    "connection_hooks": [
+      "Bryant Finance Society (former president)",
+      "Honors Program"
+    ],
+    "email": "samuel.mendez18@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/samuel-mendez",
+    "current_company": "Fidelity Investments",
+    "city": "Boston, MA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "534dac36-d2aa-4765-a081-e70bdf472e57",
+    "name": "Marcus Bennett",
+    "firm_id": "00000000-0000-4000-a000-000000000111",
+    "current_role": "Associate",
+    "division": "Growth Equity",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Prof. Johnson capstone",
+      "Veteran / ROTC"
+    ],
+    "email": "marcus.bennett19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/marcus-bennett",
+    "current_company": "Hellman & Friedman",
+    "city": "San Francisco, CA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "300bae07-f841-4a1e-a7a9-37b75adb5d5f",
+    "name": "Aria Diaz",
+    "firm_id": "00000000-0000-4000-a000-000000000006",
+    "current_role": "Analyst",
+    "division": "Healthcare",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": [
+      "SMIF (Student Managed Investment Fund)",
+      "Veteran / ROTC"
+    ],
+    "email": "aria.diaz24@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/aria-diaz",
+    "current_company": "Evercore",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "1879f2d0-852c-481f-aab4-0a8f1f64cb62",
+    "name": "Aria Johnson",
+    "firm_id": "00000000-0000-4000-a000-000000000197",
+    "current_role": "Associate",
+    "division": "M&A",
+    "graduation_year": 2018,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Honors Program"
+    ],
+    "email": "aria.johnson18@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/aria-johnson",
+    "current_company": "Sievert Larsen & Associates",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "77d83c6f-7348-4b2b-a0f1-bfd7698c7e50",
+    "name": "Madeline Chen",
+    "firm_id": "00000000-0000-4000-a000-000000000038",
+    "current_role": "Vice President",
+    "division": "Private Equity",
+    "graduation_year": 2021,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Kappa Delta Pi"
+    ],
+    "email": "madeline.chen21@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/madeline-chen",
+    "current_company": "Warburg Pincus",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "f9102964-3b74-4bb0-ad53-ad3ed1b29336",
+    "name": "Harper Romero",
+    "firm_id": "00000000-0000-4000-a000-000000000123",
+    "current_role": "Equity Research Associate",
+    "division": "Financials",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Prof. Taylor (Corporate Finance)"
+    ],
+    "email": "harper.romero19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/harper-romero",
+    "current_company": "Craig-Hallum Capital Group",
+    "city": "Minneapolis, MN",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "98c65bad-b4de-40d4-a5cc-ae6c2e599d57",
+    "name": "Dylan Nguyen",
+    "firm_id": "00000000-0000-4000-a000-000000000013",
+    "current_role": "Associate",
+    "division": "M&A",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Peer Mentor",
+      "Presidential Scholarship recipient"
+    ],
+    "email": "dylan.nguyen20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/dylan-nguyen",
+    "current_company": "Qatalyst Partners",
+    "city": "San Francisco, CA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "2c896e07-bdd8-4014-af5e-2afb8d6fc08a",
+    "name": "Elijah Johnson",
+    "firm_id": "00000000-0000-4000-a000-000000000037",
+    "current_role": "Equity Research Associate",
+    "division": "Financials",
+    "graduation_year": 2017,
+    "school": "Bryant University",
+    "major": "Finance and Mathematics",
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Wall Street Club"
+    ],
+    "email": "elijah.johnson17@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/elijah-johnson",
+    "current_company": "Silver Lake",
+    "city": "Menlo Park, CA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "82a68d28-7cca-4426-a911-0ed3bef79944",
+    "name": "Alina Kapoor",
+    "firm_id": "00000000-0000-4000-a000-000000000154",
+    "current_role": "Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Prof. Taylor (Corporate Finance)"
+    ],
+    "email": "alina.kapoor20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/alina-kapoor",
+    "current_company": "Mizuho Securities",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "fc435578-ced4-483d-a025-07109344493e",
+    "name": "Ava Wilson",
+    "firm_id": "00000000-0000-4000-a000-000000000070",
+    "current_role": "Analyst",
+    "division": "Financial Sponsors",
+    "graduation_year": 2016,
+    "school": "Bryant University",
+    "major": "International Business",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Prof. Johnson capstone"
+    ],
+    "email": "ava.wilson16@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/ava-wilson",
+    "current_company": "Ducera Partners",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "2b8128ed-197f-434b-af76-94c0f1b09fe6",
+    "name": "Jordan Khan",
+    "firm_id": "00000000-0000-4000-a000-000000000062",
+    "current_role": "Analyst",
+    "division": "Industrials Coverage",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "First-gen college student",
+      "Honors Program"
+    ],
+    "email": "jordan.khan20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/jordan-khan",
+    "current_company": "Mizuho",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "af0f97f4-b42b-47be-ab62-58853c4c3627",
+    "name": "Ryan Khan",
+    "firm_id": "00000000-0000-4000-a000-000000000198",
+    "current_role": "Analyst",
+    "division": "Healthcare",
+    "graduation_year": 2021,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Studied abroad — Madrid"
+    ],
+    "email": "ryan.khan21@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/ryan-khan",
+    "current_company": "Houlihan Lokey Financial Restructuring",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "bd25d2db-8865-4842-a1ae-c1ab624ed294",
+    "name": "Ava Murphy",
+    "firm_id": "00000000-0000-4000-a000-000000000033",
+    "current_role": "Vice President",
+    "division": "Private Equity",
+    "graduation_year": 2023,
+    "school": "Bryant University",
+    "major": "International Business",
+    "connection_hooks": [
+      "SMIF (Student Managed Investment Fund)",
+      "Resident Assistant",
+      "Honors Program"
+    ],
+    "email": "ava.murphy23@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/ava-murphy",
+    "current_company": "KKR",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "00442d17-c31d-456b-aa62-9b44786c63b9",
+    "name": "Xavier Patel",
+    "firm_id": "00000000-0000-4000-a000-000000000192",
+    "current_role": "Associate",
+    "division": "Restructuring",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance and Mathematics",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Veteran / ROTC"
+    ],
+    "email": "xavier.patel20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/xavier-patel",
+    "current_company": "Barclays Investment Bank",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "15c99d59-2c4c-45a7-a68f-c219f05721f2",
+    "name": "Alina DeLuca",
+    "firm_id": "00000000-0000-4000-a000-000000000173",
+    "current_role": "Portfolio Analyst",
+    "division": "Multi-Asset",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance and Political Science",
+    "connection_hooks": [
+      "Bryant Bulldogs track & field",
+      "Peer Mentor"
+    ],
+    "email": "alina.deluca20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/alina-deluca",
+    "current_company": "Brookfield Asset Management",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "7f0b98dd-83b9-4099-a966-58da0a7a6780",
+    "name": "Emma Das",
+    "firm_id": "00000000-0000-4000-a000-000000000061",
+    "current_role": "Senior Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Honors Program",
+      "Studied abroad — Madrid"
+    ],
+    "email": "emma.das24@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/emma-das",
+    "current_company": "Nomura",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "a15a8538-505b-461f-a6ce-3c4bcbbf89dc",
+    "name": "Imani Diaz",
+    "firm_id": "00000000-0000-4000-a000-000000000011",
+    "current_role": "Associate",
+    "division": "Equity Capital Markets",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance & Economics",
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Kappa Delta Pi"
+    ],
+    "email": "imani.diaz20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/imani-diaz",
+    "current_company": "PJT Partners",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "e605bc96-c412-4901-a5ae-0aee81616fc2",
+    "name": "Lucas Johnson",
+    "firm_id": "00000000-0000-4000-a000-000000000145",
+    "current_role": "Analyst",
+    "division": "Hedge Fund — Long/Short Equity",
+    "graduation_year": 2016,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Studied abroad — LSE"
+    ],
+    "email": "lucas.johnson16@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/lucas-johnson",
+    "current_company": "Roark Capital",
+    "city": "Atlanta, GA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "da1015ca-c0e1-4299-ae5d-9d606345347b",
+    "name": "Imani Tran",
+    "firm_id": "00000000-0000-4000-a000-000000000162",
+    "current_role": "Analyst",
+    "division": "Special Situations",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "International Business",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Kappa Delta Pi"
+    ],
+    "email": "imani.tran19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/imani-tran",
+    "current_company": "Morningstar",
+    "city": "Chicago, IL",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "6bc0e692-25ef-4f91-ac4f-db52a2fd8229",
+    "name": "Mateo Akinyi",
+    "firm_id": "00000000-0000-4000-a000-000000000053",
+    "current_role": "Vice President",
+    "division": "Investment Banking",
+    "graduation_year": 2016,
+    "school": "Bryant University",
+    "major": "Finance & Economics",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Beta Alpha Psi honors society"
+    ],
+    "email": "mateo.akinyi16@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/mateo-akinyi",
+    "current_company": "RBC Capital Markets",
+    "city": "Toronto, ON",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "fef6ab23-c358-4695-a294-0ce1fc99b167",
+    "name": "Omar Garcia",
+    "firm_id": "00000000-0000-4000-a000-000000000126",
+    "current_role": "Associate",
+    "division": "Client Coverage",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Bulldogs track & field",
+      "Beta Alpha Psi honors society"
+    ],
+    "email": "omar.garcia22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/omar-garcia",
+    "current_company": "Janney Montgomery Scott",
+    "city": "Philadelphia, PA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "e4d1a056-5e6c-41d8-af32-f97b8971225d",
+    "name": "Sienna Foster",
+    "firm_id": "00000000-0000-4000-a000-000000000107",
+    "current_role": "Equity Research Associate",
+    "division": "Consumer",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Presidential Scholarship recipient"
+    ],
+    "email": "sienna.foster22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/sienna-foster",
+    "current_company": "Coatue Management",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "188a0e15-b6da-4e00-a3e7-8499d745c8fd",
+    "name": "Leah Okafor",
+    "firm_id": "00000000-0000-4000-a000-000000000074",
+    "current_role": "Analyst",
+    "division": "Healthcare",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Finance and Political Science",
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Veteran / ROTC"
+    ],
+    "email": "leah.okafor24@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/leah-okafor",
+    "current_company": "Ladenburg Thalmann",
+    "city": "Miami, FL",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "f4377113-de4e-4f3d-acf0-aa4238303a59",
+    "name": "Imani Cohen",
+    "firm_id": "00000000-0000-4000-a000-000000000114",
+    "current_role": "Analyst",
+    "division": "Hedge Fund — Long/Short Equity",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance and Political Science",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Honors Program",
+      "Studied abroad — LSE"
+    ],
+    "email": "imani.cohen22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/imani-cohen",
+    "current_company": "Apax Partners",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "23deb622-7c36-448c-aee8-46c8ec3fc3af",
+    "name": "Nikhil Ng",
+    "firm_id": "00000000-0000-4000-a000-000000000106",
+    "current_role": "Analyst",
+    "division": "Private Equity",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Finance and Mathematics",
+    "connection_hooks": [
+      "Bryant Private Equity Club",
+      "Studied abroad — Madrid"
+    ],
+    "email": "nikhil.ng19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/nikhil-ng",
+    "current_company": "Lone Pine Capital",
+    "city": "Greenwich, CT",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "0846b135-03a5-42f2-acfd-718d2118a8c9",
+    "name": "Maya Martinez",
+    "firm_id": "00000000-0000-4000-a000-000000000096",
+    "current_role": "Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "International Business",
+    "connection_hooks": [
+      "SMIF (Student Managed Investment Fund)",
+      "First-gen college student",
+      "Kappa Delta Pi"
+    ],
+    "email": "maya.martinez19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/maya-martinez",
+    "current_company": "Guggenheim Securities",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "da87163a-4d9c-4bbd-a0ce-6a261b691fe0",
+    "name": "Aria Murphy",
+    "firm_id": "00000000-0000-4000-a000-000000000104",
+    "current_role": "Analyst",
+    "division": "Private Equity",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance and Political Science",
+    "connection_hooks": [
+      "Bryant Finance Society (former president)",
+      "Kappa Delta Pi"
+    ],
+    "email": "aria.murphy20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/aria-murphy",
+    "current_company": "Third Point",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "137a7dd3-821e-41e9-a31a-1a1a0e3513a4",
+    "name": "Chloe Reilly",
+    "firm_id": "00000000-0000-4000-a000-000000000146",
+    "current_role": "Quantitative Developer",
+    "division": "Research Platform",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Studied abroad — LSE",
+      "Wall Street Club"
+    ],
+    "email": "chloe.reilly24@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/chloe-reilly",
+    "current_company": "Susquehanna International Group",
+    "city": "Bala Cynwyd, PA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "302c9a47-88fa-453b-a81d-2c5d10bad144",
+    "name": "Ryan Goldberg",
+    "firm_id": "00000000-0000-4000-a000-000000000044",
+    "current_role": "Software Engineer",
+    "division": "Trading Systems",
+    "graduation_year": 2021,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Honors Program"
+    ],
+    "email": "ryan.goldberg21@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/ryan-goldberg",
+    "current_company": "Millennium Management",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "ae5e5c8c-d592-49d0-abba-23644fbbf1c7",
+    "name": "Brandon Johnson",
+    "firm_id": "00000000-0000-4000-a000-000000000001",
+    "current_role": "Analyst",
+    "division": "Equity Sales",
+    "graduation_year": 2021,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "First-gen college student",
+      "Beta Alpha Psi honors society"
+    ],
+    "email": "brandon.johnson21@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/brandon-johnson",
+    "current_company": "Goldman Sachs",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "4d4cb613-804c-4e16-ad00-1b510a41bd36",
+    "name": "Maya Diaz",
+    "firm_id": "00000000-0000-4000-a000-000000000163",
+    "current_role": "Analyst",
+    "division": "TMT",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Finance Society (former president)",
+      "Sigma Phi Epsilon"
+    ],
+    "email": "maya.diaz22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/maya-diaz",
+    "current_company": "Lazard Growth Acquisition Corp",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "b1092f01-0e60-47db-a4ce-696289405a6e",
+    "name": "Maya O'Connor",
+    "firm_id": "00000000-0000-4000-a000-000000000195",
+    "current_role": "Equity Research Associate",
+    "division": "Consumer",
+    "graduation_year": 2018,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Prof. Johnson capstone"
+    ],
+    "email": "maya.oconnor18@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/maya-o-connor",
+    "current_company": "Drexel Hamilton",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "072770d4-6107-466c-a62a-20494c9d5c77",
+    "name": "Omar Silva",
+    "firm_id": "00000000-0000-4000-a000-000000000017",
+    "current_role": "Senior Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "International Business",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Honors Program"
+    ],
+    "email": "omar.silva20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/omar-silva",
+    "current_company": "Jefferies",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "cc839aa3-2d43-4c1f-a36d-13c82f609e87",
+    "name": "Natalie Johnson",
+    "firm_id": "00000000-0000-4000-a000-000000000081",
+    "current_role": "Analyst",
+    "division": "Private Equity",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Peer Mentor"
+    ],
+    "email": "natalie.johnson24@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/natalie-johnson",
+    "current_company": "Bridgewater Associates",
+    "city": "Westport, CT",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "a809e7fb-0daa-478b-a3f9-c5bff7ba4470",
+    "name": "Kenji DeLuca",
+    "firm_id": "00000000-0000-4000-a000-000000000103",
+    "current_role": "Analyst",
+    "division": "Private Equity",
+    "graduation_year": 2016,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Presidential Scholarship recipient"
+    ],
+    "email": "kenji.deluca16@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/kenji-deluca",
+    "current_company": "Pershing Square Capital",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "6ff7c269-83e1-4880-a3fd-945cc1dbcc06",
+    "name": "Victor Martinez",
+    "firm_id": "00000000-0000-4000-a000-000000000039",
+    "current_role": "Associate",
+    "division": "Private Equity",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Resident Assistant"
+    ],
+    "email": "victor.martinez19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/victor-martinez",
+    "current_company": "TPG",
+    "city": "San Francisco, CA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "76b3adc5-03c3-4e43-a6c2-5e0ee9c7704c",
+    "name": "Omar Akinyi",
+    "firm_id": "00000000-0000-4000-a000-000000000158",
+    "current_role": "Senior Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Finance Society",
+      "Veteran / ROTC"
+    ],
+    "email": "omar.akinyi20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/omar-akinyi",
+    "current_company": "Standard Chartered",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "001cca44-0436-4180-a401-9ed1a77e54e6",
+    "name": "Ryan Chen",
+    "firm_id": "00000000-0000-4000-a000-000000000178",
+    "current_role": "Vice President",
+    "division": "Private Equity",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Prof. Taylor (Corporate Finance)"
+    ],
+    "email": "ryan.chen22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/ryan-chen",
+    "current_company": "HIG Capital",
+    "city": "Miami, FL",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "7003bbbf-dbfa-453c-a584-becd2648c645",
+    "name": "Jordan Reilly",
+    "firm_id": "00000000-0000-4000-a000-000000000136",
+    "current_role": "Analyst",
+    "division": "Hedge Fund — Long/Short Equity",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Archway Investment Fund",
+      "Presidential Scholarship recipient"
+    ],
+    "email": "jordan.reilly24@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/jordan-reilly",
+    "current_company": "Northern Trust",
+    "city": "Chicago, IL",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "bf021f4e-1331-469d-ae0b-4e311a90892c",
+    "name": "Alina Rivera",
+    "firm_id": "00000000-0000-4000-a000-000000000079",
+    "current_role": "Associate",
+    "division": "Equity Capital Markets",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Peer Mentor"
+    ],
+    "email": "alina.rivera22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/alina-rivera",
+    "current_company": "MUFG Securities",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "1bd8abee-5c61-418c-a086-3c0ef4e7c405",
+    "name": "Jordan Shah",
+    "firm_id": "00000000-0000-4000-a000-000000000116",
+    "current_role": "Associate",
+    "division": "Growth Equity",
+    "graduation_year": 2023,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Presidential Scholarship recipient"
+    ],
+    "email": "jordan.shah23@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/jordan-shah",
+    "current_company": "Clayton Dubilier & Rice",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "51202746-e35d-4391-aa9c-66e54d37648a",
+    "name": "Sophia Kapoor",
+    "firm_id": "00000000-0000-4000-a000-000000000020",
+    "current_role": "Analyst",
+    "division": "TMT",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance and Political Science",
+    "connection_hooks": [
+      "SMIF (Student Managed Investment Fund)",
+      "Prof. Taylor (Corporate Finance)",
+      "Beta Alpha Psi honors society"
+    ],
+    "email": "sophia.kapoor20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/sophia-kapoor",
+    "current_company": "Harris Williams",
+    "city": "Richmond, VA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "df1faa5f-8f37-490a-a3ea-2c9455f6301c",
+    "name": "Theo DeLuca",
+    "firm_id": "00000000-0000-4000-a000-000000000015",
+    "current_role": "Analyst",
+    "division": "Debt Capital Markets",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance and Political Science",
+    "connection_hooks": [
+      "Bryant Bulldogs D1 lacrosse",
+      "Presidential Scholarship recipient"
+    ],
+    "email": "theo.deluca20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/theo-deluca",
+    "current_company": "William Blair",
+    "city": "Chicago, IL",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "15602bff-b7d1-4333-afce-1f19b2afd1f0",
+    "name": "Dylan Silva",
+    "firm_id": "00000000-0000-4000-a000-000000000179",
+    "current_role": "Portfolio Analyst",
+    "division": "Multi-Asset",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Finance & Economics",
+    "connection_hooks": [
+      "Bryant Bulldogs track & field",
+      "Kappa Delta Pi"
+    ],
+    "email": "dylan.silva19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/dylan-silva",
+    "current_company": "American Securities",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "1a59c89d-21cd-41ce-ace5-af51ad4711ae",
+    "name": "Riya Diaz",
+    "firm_id": "00000000-0000-4000-a000-000000000147",
+    "current_role": "Quantitative Developer",
+    "division": "Research Platform",
+    "graduation_year": 2023,
+    "school": "Bryant University",
+    "major": "International Business",
+    "connection_hooks": [
+      "Bryant Finance Society (former president)",
+      "Studied abroad — LSE"
+    ],
+    "email": "riya.diaz23@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/riya-diaz",
+    "current_company": "Virtu Financial",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "c6891a87-f683-45f7-a6d2-a8f349f4c673",
+    "name": "Noah Carter",
+    "firm_id": "00000000-0000-4000-a000-000000000181",
+    "current_role": "Associate",
+    "division": "Growth Equity",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Private Equity Club",
+      "Honors Program"
+    ],
+    "email": "noah.carter19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/noah-carter",
+    "current_company": "Stone Point Capital",
+    "city": "Greenwich, CT",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "d54c3fa6-2723-4d3f-a298-1fcb2cb7ad1b",
+    "name": "Madeline Cohen",
+    "firm_id": "00000000-0000-4000-a000-000000000066",
+    "current_role": "Analyst",
+    "division": "Financial Sponsors",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Sigma Phi Epsilon",
+      "Kappa Delta Pi"
+    ],
+    "email": "madeline.cohen22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/madeline-cohen",
+    "current_company": "Macquarie",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "3494a0e8-3038-4fb2-a724-685ae86d0024",
+    "name": "Brandon Mendez",
+    "firm_id": "00000000-0000-4000-a000-000000000085",
+    "current_role": "Analyst",
+    "division": "Special Situations",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "Finance and Political Science",
+    "connection_hooks": [
+      "Bryant Bulldogs track & field",
+      "Studied abroad — LSE",
+      "Veteran / ROTC"
+    ],
+    "email": "brandon.mendez19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/brandon-mendez",
+    "current_company": "Tiger Global Management",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "9c990621-6028-4012-afd6-70dfe444dacd",
+    "name": "Aiden Ng",
+    "firm_id": "00000000-0000-4000-a000-000000000176",
+    "current_role": "Associate",
+    "division": "Private Equity",
+    "graduation_year": 2019,
+    "school": "Bryant University",
+    "major": "International Business",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Honors Program",
+      "Peer Mentor"
+    ],
+    "email": "aiden.ng19@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/aiden-ng",
+    "current_company": "Angelo Gordon",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "715fb900-52c6-438c-a6b9-1e5b1755780f",
+    "name": "Gabriel Das",
+    "firm_id": "00000000-0000-4000-a000-000000000047",
+    "current_role": "Portfolio Analyst",
+    "division": "Multi-Asset",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance and Data Science",
+    "connection_hooks": [
+      "Bryant Private Equity Club",
+      "Prof. Johnson capstone"
+    ],
+    "email": "gabriel.das22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/gabriel-das",
+    "current_company": "Vanguard",
+    "city": "Malvern, PA",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "587ec560-3588-4612-abd7-d95898b22382",
+    "name": "Dylan Romero",
+    "firm_id": "00000000-0000-4000-a000-000000000105",
+    "current_role": "Equity Research Associate",
+    "division": "Consumer",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Applied Economics",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Prof. Johnson capstone"
+    ],
+    "email": "dylan.romero20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/dylan-romero",
+    "current_company": "Viking Global Investors",
+    "city": "Greenwich, CT",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "a11c9fa9-71aa-4d9c-a550-1e03638d76cf",
+    "name": "Liam Jiang",
+    "firm_id": "00000000-0000-4000-a000-000000000080",
+    "current_role": "Associate",
+    "division": "Investment Banking",
+    "graduation_year": 2024,
+    "school": "Bryant University",
+    "major": "Accounting",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "First-gen college student"
+    ],
+    "email": "liam.jiang24@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/liam-jiang",
+    "current_company": "Solomon Partners",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "1f8bf229-1fbd-4172-a491-c80e1565fa6f",
+    "name": "Dylan Kowalski",
+    "firm_id": "00000000-0000-4000-a000-000000000055",
+    "current_role": "Analyst",
+    "division": "TMT",
+    "graduation_year": 2022,
+    "school": "Bryant University",
+    "major": "Finance and Mathematics",
+    "connection_hooks": [
+      "Bryant Consulting Group",
+      "Honors Program"
+    ],
+    "email": "dylan.kowalski22@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/dylan-kowalski",
+    "current_company": "CIBC Capital Markets",
+    "city": "Toronto, ON",
+    "added_by": null,
+    "source": "seed"
+  },
+  {
+    "id": "84eaf170-032e-4e8d-a806-4168e51e8cd6",
+    "name": "Gabriel Brown",
+    "firm_id": "00000000-0000-4000-a000-000000000175",
+    "current_role": "Analyst",
+    "division": "Hedge Fund — Long/Short Equity",
+    "graduation_year": 2020,
+    "school": "Bryant University",
+    "major": "Finance",
+    "connection_hooks": [
+      "SMIF (Student Managed Investment Fund)",
+      "Honors Program",
+      "Wall Street Club"
+    ],
+    "email": "gabriel.brown20@bryant.edu",
+    "linkedin_url": "https://www.linkedin.com/in/gabriel-brown",
+    "current_company": "Fortress Investment Group",
+    "city": "New York, NY",
+    "added_by": null,
+    "source": "seed"
   }
 ]

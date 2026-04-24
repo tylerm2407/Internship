@@ -298,6 +298,8 @@ def score_fit_qualitative(
     profile: StudentProfile,
     posting: Posting,
     base_score: int,
+    current_class_year: str | None = None,
+    graduation_year: int | None = None,
 ) -> dict[str, Any]:
     """Run the Claude qualitative pass on a (profile, posting) pair.
 
@@ -308,6 +310,10 @@ def score_fit_qualitative(
         profile: The student's parsed profile.
         posting: The job posting to score against.
         base_score: The deterministic base score (0-100).
+        current_class_year: The student's current class year (freshman/sophomore/
+            junior/senior). Passed explicitly so Claude uses ground truth rather
+            than inferring from resume experience dates.
+        graduation_year: Student's expected graduation year, also ground truth.
 
     Returns:
         Dict with ``adjustment`` (int -15 to +15), ``tier`` (str),
@@ -317,13 +323,38 @@ def score_fit_qualitative(
         ValueError: If Claude returns unparseable JSON after retry.
         anthropic.APIError: If the API call fails.
     """
+    from datetime import date
+
     client = _get_client()
+
+    today = date.today().isoformat()
+    cy = current_class_year or "unknown"
+    gy = str(graduation_year) if graduation_year is not None else "unknown"
+    posting_cy = posting.class_year_target
+
+    if current_class_year and posting_cy == current_class_year:
+        eligibility_note = (
+            f"Posting targets '{posting_cy}' and student IS currently '{cy}'. "
+            "Student IS eligible. Do not invent a class-year mismatch."
+        )
+    elif current_class_year and posting_cy != current_class_year:
+        eligibility_note = (
+            f"Posting targets '{posting_cy}' but student is currently '{cy}'. "
+            "Mismatch is real; factor it in."
+        )
+    else:
+        eligibility_note = "Class year data missing; do not penalize on this axis."
 
     prompt = (
         FIT_SCORE_QUALITATIVE_PROMPT
         .replace("{profile_json}", profile.model_dump_json(indent=2))
         .replace("{posting_json}", posting.model_dump_json(indent=2))
         .replace("{base_score}", str(base_score))
+        .replace("{today}", today)
+        .replace("{current_class_year}", cy)
+        .replace("{graduation_year}", gy)
+        .replace("{posting_class_year}", posting_cy)
+        .replace("{eligibility_note}", eligibility_note)
     )
 
     for attempt in range(2):

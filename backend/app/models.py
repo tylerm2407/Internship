@@ -668,3 +668,53 @@ class Notification(BaseModel):
     priority: Literal["critical", "high", "medium", "low"] = "medium"
     related_id: str | None = Field(default=None, description="ID of related entity (application, contact, posting)")
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+# ============================================================
+# Resume Coach
+# ============================================================
+
+
+class BulletFeedback(BaseModel):
+    """Per-bullet critique from the resume coach.
+
+    `rewrite` must remain truthful — the prompt instructs Claude to never
+    invent metrics the student didn't provide.
+    """
+
+    original: str
+    experience_org: str = Field(description="Which organization/role this bullet belongs to")
+    verdict: Literal["strong", "acceptable", "weak"]
+    issue: str | None = Field(default=None, description="What's holding the bullet back; null if strong")
+    rewrite: str | None = Field(default=None, description="Suggested rewrite; null if strong")
+
+
+class ResumeCategoryScores(BaseModel):
+    """Weighted sub-scores that sum into the overall resume score."""
+
+    bullet_impact: int = Field(ge=0, le=30)
+    finance_specificity: int = Field(ge=0, le=20)
+    metrics: int = Field(ge=0, le=15)
+    technical_signals: int = Field(ge=0, le=15)
+    clubs_and_leadership: int = Field(ge=0, le=10)
+    formatting_and_polish: int = Field(ge=0, le=10)
+
+
+class ResumeCritique(BaseModel):
+    """AI critique of a student's resume, keyed on the current StudentProfile.
+
+    Generated on demand via `/api/resume/critique` and cached in the
+    `resume_critiques` table keyed by user_id. A fresh critique replaces the
+    previous one (we keep only the latest per user to bound storage).
+    """
+
+    id: UUID
+    user_id: UUID
+    overall_score: int = Field(ge=0, le=100)
+    tier: Literal["strong", "competitive", "needs_work", "major_gaps"]
+    headline: str = Field(max_length=200)
+    category_scores: ResumeCategoryScores
+    priorities: list[str] = Field(default_factory=list)
+    bullet_feedback: list[BulletFeedback] = Field(default_factory=list)
+    strengths: list[str] = Field(default_factory=list)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

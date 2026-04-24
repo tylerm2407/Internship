@@ -305,16 +305,27 @@ export default function AlumniPage() {
     setContactsLoading(true);
     setError(null);
     try {
-      const [firmsResult, contactsResult, nudgesResult] = await Promise.allSettled([
-        getAllFirms(),
-        getNetworkingContacts(),
-        getNetworkingNudges(),
-      ]);
+      // Fetch firms, contacts, nudges, and a default alumni list in parallel.
+      // The default alumni search (no filters) populates the Alumni panel on
+      // first load — otherwise the page just shows a "select a firm" empty
+      // state even though the DB has 100+ alumni ready to browse.
+      const [firmsResult, contactsResult, nudgesResult, defaultAlumniResult] =
+        await Promise.allSettled([
+          getAllFirms(),
+          getNetworkingContacts(),
+          getNetworkingNudges(),
+          searchAlumni({ limit: 50 }),
+        ]);
       if (firmsResult.status === "fulfilled") setFirms(firmsResult.value);
       if (contactsResult.status === "fulfilled") setContacts(contactsResult.value);
       if (nudgesResult.status === "fulfilled") {
         setFollowUpNudges(nudgesResult.value.follow_up_nudges);
         setThankYouNudges(nudgesResult.value.thank_you_nudges);
+      }
+      if (defaultAlumniResult.status === "fulfilled") {
+        setSearchResults(defaultAlumniResult.value.alumni);
+        setSearchTotal(defaultAlumniResult.value.total);
+        setIsSearchMode(true);
       }
     } catch {
       setFirms([]);
@@ -472,29 +483,17 @@ export default function AlumniPage() {
   // ── Search handler (debounced) ─────────────────────────────
 
   useEffect(() => {
-    const hasFilters = searchQuery.trim() || searchSchool.trim() || searchYear.trim();
-    if (!hasFilters) {
-      setIsSearchMode(false);
-      setSearchResults([]);
-      setSearchTotal(0);
-      return;
-    }
+    // Search + default-listing are unified: with no filters we just fetch the
+    // first 50 alumni so the panel is never blank when alumni exist in the DB.
+    const hasFilters = Boolean(
+      searchQuery.trim() || searchSchool.trim() || searchYear.trim(),
+    );
 
     setIsSearchMode(true);
     setSearchLoading(true);
 
     const timeout = setTimeout(async () => {
       try {
-        const params: Record<string, string | number> = { limit: 50, offset: 0 };
-        // Use searchQuery as name filter, and also try company
-        if (searchQuery.trim()) {
-          params.name = searchQuery.trim();
-          params.company = searchQuery.trim();
-        }
-        if (searchSchool.trim()) params.school = searchSchool.trim();
-        if (searchYear.trim()) params.graduation_year = parseInt(searchYear, 10);
-
-        // Search by name first, then company as fallback
         const nameResult = await searchAlumni({
           name: searchQuery.trim() || undefined,
           school: searchSchool.trim() || undefined,
@@ -505,15 +504,16 @@ export default function AlumniPage() {
         let combined = nameResult.alumni;
         let total = nameResult.total;
 
-        // Also search by company if query provided
-        if (searchQuery.trim()) {
+        // If the user typed a term, also look it up as a company filter and
+        // merge results — "Goldman" should return both alumni named Goldman
+        // and alumni at Goldman Sachs.
+        if (hasFilters && searchQuery.trim()) {
           const companyResult = await searchAlumni({
             company: searchQuery.trim(),
             school: searchSchool.trim() || undefined,
             graduation_year: searchYear ? parseInt(searchYear, 10) : undefined,
             limit: 50,
           });
-          // Merge results, deduplicate by id
           const seenIds = new Set(combined.map((a) => a.id));
           for (const alum of companyResult.alumni) {
             if (!seenIds.has(alum.id)) {
@@ -532,7 +532,7 @@ export default function AlumniPage() {
       } finally {
         setSearchLoading(false);
       }
-    }, 300);
+    }, hasFilters ? 300 : 0);
 
     return () => clearTimeout(timeout);
   }, [searchQuery, searchSchool, searchYear]);

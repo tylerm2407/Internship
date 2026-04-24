@@ -23,8 +23,10 @@ import type {
   TimelineEventCreate,
   WeeklySummary,
   Notification,
+  ResumeCritique,
 } from "./types";
 import { getSupabaseBrowserClient } from "./supabase";
+import { cached, invalidate } from "./cache";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -63,10 +65,34 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
 
     if (!res.ok) {
       const body = await res.json().catch(() => ({ detail: res.statusText }));
-      throw new Error(body.detail || `API error: ${res.status}`);
+      // Humanize the common failure modes so the UI doesn't show raw
+      // HTTP-speak. Each branch still surfaces the server's detail if it
+      // provided something specific.
+      if (res.status === 429) {
+        throw new Error(
+          body.detail ||
+            "You're going a little too fast — wait a moment and try again.",
+        );
+      }
+      if (res.status === 401 || res.status === 403) {
+        throw new Error(body.detail || "Session expired — please sign in again.");
+      }
+      if (res.status >= 500) {
+        throw new Error(
+          body.detail || "Our server hit an error. Try again in a moment.",
+        );
+      }
+      throw new Error(body.detail || `Request failed (${res.status}).`);
     }
 
     return res.json();
+  } catch (err) {
+    if (err instanceof DOMException && err.name === "AbortError") {
+      throw new Error(
+        "That took too long to respond. Check your connection and retry.",
+      );
+    }
+    throw err;
   } finally {
     clearTimeout(timeout);
   }
@@ -83,8 +109,10 @@ export async function uploadResume(
     throw new Error("Please sign in before uploading your resume.");
   }
 
+  // 90s — Claude Vision + PDF parsing has long tails; 60s was tripping on
+  // moderately complex resumes during live demos.
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 60000); // 60s for resume parsing
+  const timeout = setTimeout(() => controller.abort(), 90000);
 
   try {
     const res = await fetch(`${API_BASE}/api/resume/upload`, {
@@ -98,10 +126,22 @@ export async function uploadResume(
 
     if (!res.ok) {
       const body = await res.json().catch(() => ({ detail: res.statusText }));
+      if (res.status === 429) {
+        throw new Error(
+          "Too many uploads in a short window — wait a minute and retry.",
+        );
+      }
       throw new Error(body.detail || `Upload failed: ${res.status}`);
     }
 
     return res.json();
+  } catch (err) {
+    if (err instanceof DOMException && err.name === "AbortError") {
+      throw new Error(
+        "Resume parsing took longer than 90 seconds. Try a smaller PDF or check your connection, then retry.",
+      );
+    }
+    throw err;
   } finally {
     clearTimeout(timeout);
   }
@@ -110,10 +150,14 @@ export async function uploadResume(
 export async function saveProfile(
   profile: StudentProfile
 ): Promise<{ profile: StudentProfile; message: string }> {
-  return apiFetch("/api/resume/confirm", {
-    method: "POST",
-    body: JSON.stringify(profile),
-  });
+  const result = await apiFetch<{ profile: StudentProfile; message: string }>(
+    "/api/resume/confirm",
+    { method: "POST", body: JSON.stringify(profile) },
+  );
+  // Profile change invalidates fit rankings and the cached profile itself.
+  invalidate("profile");
+  invalidate("opportunities:", true);
+  return result;
 }
 
 export async function getProfile(): Promise<StudentProfile | null> {
@@ -136,8 +180,25 @@ export async function getOpportunities(params?: {
   const query = searchParams.toString();
   const path = `/api/opportunities${query ? `?${query}` : ""}`;
 
-  const data = await apiFetch<{ opportunities: OpportunityResponse[] }>(path);
-  return data.opportunities;
+  // Cached for 60s so dashboard → detail → dashboard reuses the response.
+  // invalidateOpportunitiesCache() below clears it after any mutation that
+  // would change rankings (new application, profile update, etc.).
+  return cached(
+    `opportunities:${query}`,
+    async () => {
+      const data = await apiFetch<{ opportunities: OpportunityResponse[] }>(path);
+      return data.opportunities;
+    },
+    60_000,
+  );
+}
+
+export function invalidateOpportunitiesCache() {
+  invalidate("opportunities:", true);
+}
+
+export async function getProfileCached(): Promise<StudentProfile | null> {
+  return cached("profile", () => getProfile(), 120_000);
 }
 
 export async function getFirm(
@@ -166,6 +227,8 @@ export async function createApplication(body: ApplicationCreate): Promise<Applic
     method: "POST",
     body: JSON.stringify(body),
   });
+  // A new application changes opportunity "already applied" state.
+  invalidate("opportunities:", true);
   return data.application;
 }
 
@@ -382,4 +445,20 @@ export async function getUpcomingApplications(days?: number): Promise<Applicatio
   const path = `/api/applications/upcoming${query ? `?${query}` : ""}`;
   const data = await apiFetch<{ upcoming: Application[] }>(path);
   return data.upcoming;
+}
+
+// ============================================================
+// Resume Coach
+// ============================================================
+
+export async function getResumeCritique(): Promise<ResumeCritique | null> {
+  const data = await apiFetch<{ critique: ResumeCritique | null }>("/api/resume/critique");
+  return data.critique;
+}
+
+export async function createResumeCritique(): Promise<ResumeCritique> {
+  const data = await apiFetch<{ critique: ResumeCritique }>("/api/resume/critique", {
+    method: "POST",
+  });
+  return data.critique;
 }

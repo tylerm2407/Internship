@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
+import { getProfile } from "@/lib/api";
 import { useAuthStore } from "@/lib/store";
 import { Card } from "@/components/Card";
 import { PrimaryButton } from "@/components/PrimaryButton";
@@ -38,7 +39,15 @@ export default function LoginPage() {
     if (data.session) {
       setSession(data.session);
       setUser(data.session.user);
-      router.replace("/dashboard");
+      // Returning users with a saved profile go straight to the dashboard;
+      // first-timers go through upload. Profile lookup failures (network etc.)
+      // default to dashboard — it handles the "no profile yet" state fine.
+      try {
+        const profile = await getProfile();
+        router.replace(profile ? "/dashboard" : "/upload");
+      } catch {
+        router.replace("/dashboard");
+      }
     }
 
     setLoading(false);
@@ -119,12 +128,20 @@ export default function LoginPage() {
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-ink-primary mb-1"
-                >
-                  Password
-                </label>
+                <div className="flex items-center justify-between mb-1">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-ink-primary"
+                  >
+                    Password
+                  </label>
+                  <Link
+                    href="/forgot-password"
+                    className="text-xs text-accent font-medium hover:underline"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
                 <input
                   id="password"
                   type="password"

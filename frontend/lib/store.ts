@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { User, Session } from "@supabase/supabase-js";
 import type { StudentProfile } from "./types";
+import { clearCache } from "./cache";
 
 // ============================================================
 // Auth Store
@@ -28,7 +29,10 @@ export const useAuthStore = create<AuthStore>()((set) => ({
   setUser: (user) => set({ user }),
   setSession: (session) => set({ session }),
   setLoading: (loading) => set({ loading }),
-  signOut: () => set({ user: null, session: null, loading: false }),
+  signOut: () => {
+    clearCache();
+    set({ user: null, session: null, loading: false });
+  },
 }));
 
 // ============================================================

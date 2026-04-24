@@ -447,3 +447,43 @@ export interface Notification {
   related_id: string | null;
   created_at: string;
 }
+
+// ============================================================
+// Resume Coach
+// ============================================================
+
+export type ResumeCritiqueTier =
+  | "strong"
+  | "competitive"
+  | "needs_work"
+  | "major_gaps";
+
+export interface ResumeCategoryScores {
+  bullet_impact: number;
+  finance_specificity: number;
+  metrics: number;
+  technical_signals: number;
+  clubs_and_leadership: number;
+  formatting_and_polish: number;
+}
+
+export interface BulletFeedback {
+  original: string;
+  experience_org: string;
+  verdict: "strong" | "acceptable" | "weak";
+  issue: string | null;
+  rewrite: string | null;
+}
+
+export interface ResumeCritique {
+  id: string;
+  user_id: string;
+  overall_score: number;
+  tier: ResumeCritiqueTier;
+  headline: string;
+  category_scores: ResumeCategoryScores;
+  priorities: string[];
+  bullet_feedback: BulletFeedback[];
+  strengths: string[];
+  created_at: string;
+}

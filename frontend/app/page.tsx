@@ -95,7 +95,7 @@ export default function HomePage() {
 
             <p className="text-lg text-ink-secondary max-w-xl leading-relaxed">
               Upload your resume. Get a ranked list of every open internship at
-              200 finance firms — scored, explained, and sorted by how well you
+              200+ finance firms — scored, explained, and sorted by how well you
               fit.
             </p>
 
@@ -108,7 +108,9 @@ export default function HomePage() {
                   </span>
                 </PrimaryButton>
               </Link>
-              <SecondaryButton>See a demo</SecondaryButton>
+              <Link href="/login">
+                <SecondaryButton>Sign in</SecondaryButton>
+              </Link>
             </div>
           </div>
 

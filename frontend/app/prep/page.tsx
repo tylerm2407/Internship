@@ -338,7 +338,7 @@ function evaluateLocally(question: PrepQuestion, answer: string): PrepAnswer {
   return {
     id: `local-${Date.now()}`,
     session_id: "local",
-    user_id: "demo",
+    user_id: "local-fallback",
     question_text: question.question,
     question_category: question.category,
     question_difficulty: question.difficulty,
@@ -488,7 +488,8 @@ export default function PrepPage() {
 
       const localSession: PrepSession = {
         id: `local-${Date.now()}`,
-        user_id: "demo",
+        // Local-only fallback object — never sent to server, never rendered.
+        user_id: "local-fallback",
         firm_id: selectedFirmId,
         role_type: "investment_banking",
         session_type: selectedSessionType,

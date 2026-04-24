@@ -20,7 +20,7 @@ const SYSTEM_FONT_STACK = {
 export const metadata: Metadata = {
   title: "InternshipMatch — Bryant University finance recruiting",
   description:
-    "Built for Bryant University students. An AI recruiting agent that reads your resume, knows the top 200 finance firms, and tells you exactly where to apply.",
+    "Built for Bryant University students. An AI recruiting agent that reads your resume, knows 200+ top finance firms, and tells you exactly where to apply.",
   icons: {
     icon: [
       { url: "/brand/bryant-favicon.svg", type: "image/svg+xml" },

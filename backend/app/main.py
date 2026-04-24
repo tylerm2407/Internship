@@ -399,6 +399,106 @@ async def get_resume(
 
 
 # ================================================================
+# RESUME COACH
+# ================================================================
+
+
+@app.post("/api/resume/critique")
+@limiter.limit(SENSITIVE_LIMIT)
+async def create_resume_critique(
+    request: Request,
+    user_id: UUID = Depends(get_current_user_id),
+) -> dict:
+    """Generate a fresh AI critique of the user's current resume/profile.
+
+    Requires the user to have a parsed profile already. Calls Claude, then
+    replaces any prior critique in `resume_critiques` (one row per user).
+
+    Returns:
+        Dictionary with the new critique.
+    """
+    from app.models import StudentProfile, PriorExperience
+    from app.resume_coach import critique_resume, _critique_to_row
+
+    try:
+        token = _extract_token(request)
+        profile_row = db.get_profile(str(user_id), token)
+        if profile_row is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Upload a resume first — no profile to critique.",
+            )
+
+        # Rehydrate Pydantic StudentProfile from the stored dict
+        prior = [
+            PriorExperience(
+                role=e.get("role", ""),
+                organization=e.get("organization", ""),
+                summary=e.get("summary", ""),
+                dates=e.get("dates", ""),
+                bullets=e.get("bullets", []) or [],
+            )
+            for e in profile_row.get("prior_experience", []) or []
+        ]
+        profile = StudentProfile(
+            user_id=user_id,
+            name=profile_row.get("name") or "",
+            school=profile_row.get("school") or "",
+            major=profile_row.get("major") or "",
+            minor=profile_row.get("minor"),
+            gpa=profile_row.get("gpa"),
+            target_roles=profile_row.get("target_roles") or [],
+            target_geographies=profile_row.get("target_geographies") or [],
+            technical_skills=profile_row.get("technical_skills") or [],
+            coursework_completed=profile_row.get("coursework_completed") or [],
+            coursework_in_progress=profile_row.get("coursework_in_progress") or [],
+            clubs=profile_row.get("clubs") or [],
+            certifications=profile_row.get("certifications") or [],
+            prior_experience=prior,
+            diversity_status=profile_row.get("diversity_status"),
+            languages=profile_row.get("languages") or [],
+        )
+
+        critique = critique_resume(profile)
+        saved = db.upsert_resume_critique(_critique_to_row(critique), token)
+        logger.info(
+            "resume.critique.saved",
+            extra={"user_id": str(user_id), "score": critique.overall_score},
+        )
+        return {"critique": saved}
+    except HTTPException:
+        raise
+    except RuntimeError as exc:
+        logger.error("resume.critique.claude_error", extra={"error": str(exc)})
+        raise HTTPException(
+            status_code=502,
+            detail="AI couldn't produce a valid critique this time. Try again in a moment.",
+        )
+    except Exception:
+        logger.error("resume.critique.error", extra={"traceback": traceback.format_exc()})
+        raise HTTPException(status_code=500, detail="Failed to generate resume critique")
+
+
+@app.get("/api/resume/critique")
+async def get_resume_critique(
+    request: Request,
+    user_id: UUID = Depends(get_current_user_id),
+) -> dict:
+    """Return the user's latest cached resume critique, if any.
+
+    Returns:
+        Dict with "critique" (null if the user hasn't run one yet).
+    """
+    try:
+        token = _extract_token(request)
+        critique = db.get_resume_critique(str(user_id), token)
+        return {"critique": critique}
+    except Exception:
+        logger.error("resume.critique.get.error", extra={"traceback": traceback.format_exc()})
+        raise HTTPException(status_code=500, detail="Failed to retrieve resume critique")
+
+
+# ================================================================
 # OPPORTUNITIES
 # ================================================================
 
@@ -439,8 +539,14 @@ async def get_opportunities(
         )
     profile = StudentProfile(**profile_data)
 
-    # Determine class year from the users table or profile
-    user_class_year = profile_data.get("current_class_year", "sophomore")
+    # Pull class year + graduation year from the users table (ground truth).
+    # These live on users, NOT on student_profiles — earlier the code was
+    # reading from profile_data and defaulting to "sophomore", which meant
+    # Claude had to guess class year from experience dates. That's what was
+    # producing fake "class-year mismatch" rationales on every opportunity.
+    user_row = db.get_user(str(user_id)) or {}
+    user_class_year = user_row.get("current_class_year") or "sophomore"
+    user_graduation_year = user_row.get("graduation_year")
 
     # Check for cached scores
     try:
@@ -516,7 +622,13 @@ async def get_opportunities(
 
     # Phase 2: Claude qualitative pass on top 30
     try:
-        fit_scores = apply_qualitative_pass(profile, scored, limit=min(30, len(scored)))
+        fit_scores = apply_qualitative_pass(
+            profile,
+            scored,
+            limit=min(30, len(scored)),
+            current_class_year=user_class_year,
+            graduation_year=user_graduation_year,
+        )
     except Exception as e:
         logger.error("opportunities.qualitative_pass.error", extra={"error": str(e)})
         fit_scores = []
@@ -1267,7 +1379,7 @@ async def create_alumnus(
         }
 
         result = db.insert_alumnus(alumnus_data, token)
-        logger.info("alumni.created", extra={"name": body["name"]})
+        logger.info("alumni.created", extra={"alumnus_name": body["name"]})
         return {"alumnus": result}
 
     except KeyError as e:
@@ -1776,7 +1888,21 @@ Return ONLY the JSON object."""
             lines = text.split("\n")
             lines = [line for line in lines[1:] if line.strip() != "```"]
             text = "\n".join(lines)
-        evaluation = json.loads(text)
+        try:
+            evaluation = json.loads(text)
+        except json.JSONDecodeError:
+            logger.warning(
+                "prep.answer.malformed_json",
+                extra={"user_id": str(user_id), "raw_preview": text[:200]},
+            )
+            # Give the user a useful answer back rather than a 500. Save
+            # what we can so the session counter still advances.
+            evaluation = {
+                "score": 0,
+                "feedback": "We couldn't score this answer automatically — AI response was malformed. Your answer was saved. Try submitting again or move to the next question.",
+                "strengths": [],
+                "improvements": [],
+            }
 
         # Save answer record
         answer_data = {

@@ -77,7 +77,9 @@ GEO_PROXIMITY: dict[str, set[str]] = {
     "NYC": {"New York", "Manhattan", "Brooklyn", "Jersey City", "Stamford", "Greenwich"},
     "Boston": {"Cambridge", "Back Bay"},
     "Chicago": {"Evanston"},
-    "Providence": {"Smithfield"},
+    # Bryant University is in Smithfield, RI — ~15 min from Providence, RI.
+    "Providence": {"Smithfield", "Providence, RI"},
+    "Rhode Island": {"Providence", "Smithfield", "Warwick"},
     "San Francisco": {"Palo Alto", "Menlo Park", "Mountain View"},
     "Charlotte": {"Raleigh", "Durham"},
     "Houston": {"Dallas", "Austin"},
@@ -478,6 +480,8 @@ def apply_qualitative_pass(
     profile: StudentProfile,
     top_postings: list[tuple[Posting, Firm, int, ScoreBreakdown]],
     limit: int = 30,
+    current_class_year: str | None = None,
+    graduation_year: int | None = None,
 ) -> list[FitScore]:
     """Apply Claude's qualitative scoring pass to the top N deterministic matches.
 
@@ -489,6 +493,10 @@ def apply_qualitative_pass(
         profile: The student's parsed profile.
         top_postings: List of (Posting, Firm, base_score, ScoreBreakdown) tuples, pre-sorted.
         limit: Number of top postings to run through Claude. Default 30.
+        current_class_year: The student's current class year, sourced from the
+            users table. Passed through to Claude as ground truth so the model
+            can't misinfer it from experience dates.
+        graduation_year: The student's graduation year, same treatment.
 
     Returns:
         List of FitScore objects with Claude-enhanced scoring and breakdowns.
@@ -498,7 +506,13 @@ def apply_qualitative_pass(
 
     for posting, firm, base_score, breakdown in postings_to_score:
         try:
-            result = score_fit_qualitative(profile, posting, base_score)
+            result = score_fit_qualitative(
+                profile,
+                posting,
+                base_score,
+                current_class_year=current_class_year,
+                graduation_year=graduation_year,
+            )
 
             adjustment = max(-15, min(15, result.get("adjustment", 0)))
             final_score = max(0, min(100, base_score + adjustment))

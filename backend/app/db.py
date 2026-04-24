@@ -520,9 +520,14 @@ def search_alumni(
     Returns:
         Tuple of (alumni list, total count).
     """
+    # We previously used .select("*", count="exact") + .range() but in
+    # supabase-py 2.25 that combination throws on user-token responses (the
+    # service client works fine — likely a Content-Range header parsing edge
+    # case). The exact total is only shown as a hint in the UI, so we drop
+    # it and derive a "≥ N" count from the returned page instead.
     try:
         client = _get_user_client(token)
-        query = client.table("alumni").select("*", count="exact")
+        query = client.table("alumni").select("*")
 
         if school:
             query = query.ilike("school", f"%{school}%")
@@ -540,13 +545,22 @@ def search_alumni(
             .execute()
         )
 
+        data = result.data or []
+        # Cheap "at least N" — if we got a full page, there may be more.
+        total = offset + len(data) + (1 if len(data) == limit else 0)
+
+        # Note: avoid "name", "message", "filename" etc. in `extra` — they're
+        # reserved by Python's LogRecord and raise KeyError at log time.
         logger.info("db.alumni.search", extra={
-            "school": school, "company": company, "name": name,
-            "results": len(result.data), "total": result.count,
+            "school": school, "company": company, "search_name": name,
+            "results": len(data), "total_estimate": total,
         })
-        return result.data, result.count or 0
+        return data, total
     except Exception as e:
-        logger.error("db.alumni.search.failed", extra={"error": str(e)})
+        logger.exception(
+            "db.alumni.search.failed: school=%s company=%s name=%s err=%s",
+            school, company, name, e,
+        )
         raise
 
 
@@ -591,7 +605,7 @@ def insert_alumnus(alumnus_data: dict, token: str) -> Any:
     try:
         client = _get_user_client(token)
         result = client.table("alumni").insert(alumnus_data).execute()
-        logger.info("db.alumnus.created", extra={"name": alumnus_data.get("name")})
+        logger.info("db.alumnus.created", extra={"alumnus_name": alumnus_data.get("name")})
         if result.data:
             return result.data[0]
         return alumnus_data
@@ -1070,6 +1084,29 @@ def delete_all_user_data(user_id: str) -> dict:
 # ============================================================
 
 
+def get_user(user_id: str) -> dict | None:
+    """Fetch a user row by id (current_class_year, graduation_year, etc.).
+
+    Uses the service client so the caller doesn't need a JWT for simple
+    field lookups. RLS still protects the users table from public reads.
+
+    Args:
+        user_id: The user's UUID as a string.
+
+    Returns:
+        The users row as a dict, or None if not found.
+    """
+    try:
+        client = get_service_client()
+        result = client.table("users").select("*").eq("id", user_id).limit(1).execute()
+        if result.data:
+            return result.data[0]
+        return None
+    except Exception as e:
+        logger.error("db.users.get.failed", extra={"user_id": user_id, "error": str(e)})
+        raise
+
+
 def get_users_by_institution(institution_id: str) -> list[Any]:
     """Fetch all users belonging to an institution.
 
@@ -1149,6 +1186,76 @@ def get_institution_stats(institution_id: str) -> dict:
         "applications_tracked": _count_for_users("applications"),
         "prep_sessions_completed": _count_for_users("prep_sessions"),
     }
+
+
+# ============================================================
+# Resume Coach
+# ============================================================
+
+
+def upsert_resume_critique(row: dict, token: str) -> Any:
+    """Insert or replace the user's resume critique.
+
+    Uses `on_conflict="user_id"` since the table has a UNIQUE constraint on
+    user_id — we only ever keep the latest critique per user.
+
+    Args:
+        row: Critique row from resume_coach._critique_to_row().
+        token: The user's JWT bearer token.
+
+    Returns:
+        The inserted/updated row.
+    """
+    try:
+        client = _get_user_client(token)
+        result = (
+            client.table("resume_critiques")
+            .upsert(row, on_conflict="user_id")
+            .execute()
+        )
+        logger.info(
+            "db.resume_critique.upserted",
+            extra={"user_id": row.get("user_id"), "score": row.get("overall_score")},
+        )
+        if result.data:
+            return result.data[0]
+        return row
+    except Exception as e:
+        logger.error(
+            "db.resume_critique.upsert.failed",
+            extra={"user_id": row.get("user_id"), "error": str(e)},
+        )
+        raise
+
+
+def get_resume_critique(user_id: str, token: str) -> dict | None:
+    """Fetch the user's latest resume critique, if one exists.
+
+    Args:
+        user_id: The user's UUID as a string.
+        token: The user's JWT bearer token.
+
+    Returns:
+        The critique row as a dict, or None if the user hasn't run a critique yet.
+    """
+    try:
+        client = _get_user_client(token)
+        result = (
+            client.table("resume_critiques")
+            .select("*")
+            .eq("user_id", user_id)
+            .limit(1)
+            .execute()
+        )
+        if result.data:
+            return result.data[0]
+        return None
+    except Exception as e:
+        logger.error(
+            "db.resume_critique.get.failed",
+            extra={"user_id": user_id, "error": str(e)},
+        )
+        raise
 
 
 # ============================================================
